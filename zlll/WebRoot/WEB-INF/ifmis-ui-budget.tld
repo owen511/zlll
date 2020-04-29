@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by shangtao (tjhq) -->
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+ "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!-- a tag library descriptor -->
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>IFMIS-UI-BUDGET</shortname>
+	<uri />
+	<info>系统界面控制标签库</info>
+	<!-- 表格组件 -->
+	<tag>
+		<name>TableView</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.TableViewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>rowId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+	<tag>
+		<name>TableColumn</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.TableColumnTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>format</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- 树组件 -->
+	<tag>
+		<name>TreeView</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.TreeViewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>checkeds</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>checkbox</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>disabled</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>onlyCheckLeaf</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>preRendering</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>expandLevel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lazy</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<!-- 多选框树组件 -->
+	<tag>
+		<name>CheckedTreeView</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.CheckedTreeViewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>checkbox</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>onlyCheckLeaf</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>preRendering</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>expandLevel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>lazy</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<!-- Toolbar组件 -->
+	<tag>
+		<name>ToolbarView</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.ToolbarViewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+	<tag>
+		<name>ToolbarButton</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.ToolbarButtonTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>clazz</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>text</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<!-- 分页组件 -->
+
+	<tag>
+		<name>Pageable</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.PageableTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>pageBean</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+	</tag>
+
+	<!-- 转指标动态生成 -->
+	<tag>
+		<name>BdgAttribute</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.BdgAttributeTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- 转指标动态生成2 -->
+	<tag>
+		<name>BdgAttribute2</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.BdgAttributeTag2</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- 生成option -->
+	<tag>
+		<name>GenerateOption</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.GenerateOption</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 测试 -->
+	<tag>
+		<name>SheetView</name>
+		<tagclass>gov.mof.fasp.ifmis.budget.common.ui.SheetViewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+
+		<attribute>
+			<name>data</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

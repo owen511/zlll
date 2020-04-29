@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+	<!-- 生成验证码 -->
+	<action path="/common/verifycode" type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="getVerifyCode">
+	</action>
+	<!-- 待办 -->
+	<action path="/bba/index" type="com.zlll.bba.waittask.action.BBAWaitTaskAction"
+			parameter="showWaitTaskAction">
+			<forward name="success" path="/bba/index"></forward>
+	</action>
+	<!-- 收款账号 -->
+	<action path="/bba/common/showgatheraccountno"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="showGatherAccountNoAction">
+		<forward name="success" path="/bba/common/gatheraccountno" />
+	</action>
+	
+	<action path="/bba/common/findAccount"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="findAccountAction">
+	</action>
+	<!-- 基础信息  begin-->
+	<action path="/bba/baseinfo/user/index"
+		type="com.zlll.bba.baseinfo.action.BBAInfoAction"
+		parameter="findUserMacAction">
+		<forward name="success" path="/bba/baseinfo/user/index" />
+	</action>
+	<action path="/bba/baseinfo/projcompare/index"
+		type="com.zlll.bba.baseinfo.action.BBAInfoAction"
+		parameter="findProjCompareAction">
+		<forward name="success" path="/bba/baseinfo/projcompare/index" />
+	</action>
+	<action path="/bba/baseinfo/proj/index"
+		type="com.zlll.bba.baseinfo.action.BBAInfoAction"
+		parameter="findProjInfoAction">
+		<forward name="success" path="/bba/baseinfo/proj/index" />
+	</action>
+	<!-- 基础信息  end-->
+	<!--  收入结转 begin    -->
+	<!-- 录入 -->
+    <action path="/bba/plandown/manage/index"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plandown/index" />
+	</action>
+	<!-- 新增 -->
+	<action path="/bba/plandown/manage/add"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="addAction">
+		<forward name="success" path="/bba/plandown/manage/add" />
+	</action>
+	<!-- 新增 保存-->
+	<action path="/bba/plandown/manage/ajaxAddSave"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="ajaxAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 修改-->
+	<action path="/bba/plandown/manage/modify"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="modifyAction">
+		<forward name="success" path="/bba/plandown/manage/modify" />
+	</action>
+	<!-- 修改保存-->
+	<action path="/bba/plandown/manage/ajaxModifySave"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="ajaxModifySaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 删除 -->
+	<action path="/bba/plandown/manage/delete"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="deleteAction">
+	</action>
+	<!-- 送审 -->
+	<action path="/bba/plandown/manage/audit"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="auditAction">
+	</action>
+	<!-- 审核-->
+	<action path="/bba/plandown/audit/index"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plandown/audit/index" />
+	</action>
+	<action path="/bba/plandown/audit/audit"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="auditAction">
+	</action>
+	<action path="/bba/plandown/audit/tabquery"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="auditTabListAction">
+	</action>
+	<!-- 查询-->
+	<action path="/bba/plandown/query/index"
+		type="com.zlll.bba.plandown.action.BBAPlanDownAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plandown/index" />
+	</action>
+	<!--  收入结转   end  -->
+	
+	<!--  收入额度（计划） begin    -->
+	<!-- 录入 -->
+    <action path="/bba/plan/manage/index"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plan/index" />
+	</action>
+	<!-- 新增 -->
+	<action path="/bba/plan/manage/add"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="addAction">
+		<forward name="success" path="/bba/plan/manage/add" />
+	</action>
+	<!-- 新增 保存-->
+	<action path="/bba/plan/manage/ajaxAddSave"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="ajaxAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 修改-->
+	<action path="/bba/plan/manage/modify"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="modifyAction">
+		<forward name="success" path="/bba/plan/manage/modify" />
+	</action>
+	<!-- 修改保存-->
+	<action path="/bba/plan/manage/ajaxModifySave"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="ajaxModifySaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 删除 -->
+	<action path="/bba/plan/manage/delete"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="deleteAction">
+	</action>
+	<!-- 送审 -->
+	<action path="/bba/plan/manage/audit"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="auditAction">
+	</action>
+	<!-- 审核-->
+	<action path="/bba/plan/audit/index"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plan/audit/index" />
+	</action>
+	<action path="/bba/plan/audit/audit"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="auditAction">
+	</action>
+	<action path="/bba/plan/audit/tabquery"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="auditTabListAction">
+	</action>
+	<!-- 查询-->
+	<action path="/bba/plan/query/index"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/plan/index" />
+	</action>
+	<!-- 生成 -->
+	<!-- 生成查询 -->
+	<action path="/bba/plan/generate/index"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="generateIndexAction">
+		<forward name="success" path="/bba/plan/generate/index" />
+	</action>
+	<!-- 生成 新增-->
+	<action path="/bba/plan/generate/add"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="generateAddAction">
+		<forward name="success" path="/bba/plan/generate/add" />
+	</action>
+	<!-- 生成 删除 -->
+	<action path="/bba/plan/generate/delete"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="generateDeleteAction">
+	</action>
+	<!-- 生成 新增保存 -->
+	<action path="/bba/plan/generate/ajaxAddSave"
+		type="com.zlll.bba.plan.action.BBAPlanAction"
+		parameter="ajaxGenerateAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!--  收入额度（计划）   end  -->
+	
+	<!--  支出凭证（支出） begin    -->
+	<!-- 录入 -->
+    <action path="/bba/pay/manage/index"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/pay/index" />
+	</action>
+	<!-- 新增 -->
+	<action path="/bba/pay/manage/add"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="addAction">
+		<forward name="success" path="/bba/pay/manage/add" />
+	</action>
+	<!-- 新增 保存-->
+	<action path="/bba/pay/manage/ajaxAddSave"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="ajaxAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 修改-->
+	<action path="/bba/pay/manage/modify"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="modifyAction">
+		<forward name="success" path="/bba/pay/manage/modify" />
+	</action>
+	<!-- 修改保存-->
+	<action path="/bba/pay/manage/ajaxModifySave"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="ajaxModifySaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 删除 -->
+	<action path="/bba/pay/manage/delete"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="deleteAction">
+	</action>
+	<!-- 送审 -->
+	<action path="/bba/pay/manage/audit"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="auditAction">
+	</action>
+	<!-- 审核-->
+	<action path="/bba/pay/audit/index"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/pay/audit/index" />
+	</action>
+	<action path="/bba/pay/audit/audit"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="auditAction">
+	</action>
+	<action path="/bba/pay/audit/tabquery"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="auditTabListAction">
+	</action>
+	<!-- 查询-->
+	<action path="/bba/pay/query/index"
+		type="com.zlll.bba.pay.action.BBAPayAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/pay/index" />
+	</action>
+	<!--  支出凭证（支出）   end  -->
+	
+	<!--  收入调账  begin    -->
+	<!-- 录入 -->
+    <action path="/bba/planadjust/manage/index"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/planadjust/index" />
+	</action>
+	<!-- 新增 -->
+	<action path="/bba/planadjust/manage/add"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="addAction">
+		<forward name="success" path="/bba/planadjust/manage/add" />
+	</action>
+	<!-- 新增 保存-->
+	<action path="/bba/planadjust/manage/ajaxAddSave"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="ajaxAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 修改-->
+	<action path="/bba/planadjust/manage/modify"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="modifyAction">
+		<forward name="success" path="/bba/planadjust/manage/modify" />
+	</action>
+	<!-- 修改保存-->
+	<action path="/bba/planadjust/manage/ajaxModifySave"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="ajaxModifySaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 删除 -->
+	<action path="/bba/planadjust/manage/delete"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="deleteAction">
+	</action>
+	<!-- 送审 -->
+	<action path="/bba/planadjust/manage/audit"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="auditAction">
+	</action>
+	<!-- 审核-->
+	<action path="/bba/planadjust/audit/index"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/planadjust/audit/index" />
+	</action>
+	<action path="/bba/planadjust/audit/audit"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="auditAction">
+	</action>
+	<action path="/bba/planadjust/audit/tabquery"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="auditTabListAction">
+	</action>
+	<!-- 查询-->
+	<action path="/bba/planadjust/query/index"
+		type="com.zlll.bba.planadjust.action.BBAPlanAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/planadjust/index" />
+	</action>
+	<!--  收入额度（计划）   end  -->
+	
+	<!--  支出调账（支出） begin    -->
+	<action path="/bba/payadjust/manage/findctrl"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="findCtrlAction">
+		<forward name="success" path="/bba/payadjust/findctrl" />
+	</action>
+	<action path="/bba/payadjust/manage/findAdjustTarget"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="findAdjustTargetAction">
+	</action>
+	<!-- 录入 -->
+    <action path="/bba/payadjust/manage/index"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/payadjust/index" />
+	</action>
+	<!-- 新增 -->
+	<action path="/bba/payadjust/manage/add"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="addAction">
+		<forward name="success" path="/bba/payadjust/manage/add" />
+	</action>
+	<!-- 新增 保存-->
+	<action path="/bba/payadjust/manage/ajaxAddSave"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="ajaxAddSaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 修改-->
+	<action path="/bba/payadjust/manage/modify"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="modifyAction">
+		<forward name="success" path="/bba/payadjust/manage/modify" />
+	</action>
+	<!-- 修改保存-->
+	<action path="/bba/payadjust/manage/ajaxModifySave"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="ajaxModifySaveAction">
+		<forward name="success" path="/bba/common/ajaxresult.jsp" />
+	</action>
+	<!-- 删除 -->
+	<action path="/bba/payadjust/manage/delete"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="deleteAction">
+	</action>
+	<!-- 送审 -->
+	<action path="/bba/payadjust/manage/audit"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="auditAction">
+	</action>
+	<!-- 审核-->
+	<action path="/bba/payadjust/audit/index"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/payadjust/audit/index" />
+	</action>
+	<action path="/bba/payadjust/audit/audit"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="auditAction">
+	</action>
+	<action path="/bba/payadjust/audit/tabquery"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="auditTabListAction">
+	</action>
+	<!-- 查询-->
+	<action path="/bba/payadjust/query/index"
+		type="com.zlll.bba.payadjust.action.BBAPayAdjustAction"
+		parameter="listVoucherAction">
+		<forward name="success" path="/bba/payadjust/index" />
+	</action>
+	<!--  支出调账（支出）   end  -->
+	</action-mappings>
+</struts-config>

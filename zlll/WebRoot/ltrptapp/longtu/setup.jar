@@ -1,0 +1,4 @@
+mkdir %systemdrive%\webstart
+mkdir "%systemdrive%\webstart\v3117"
+copy "%~dp0webstart.ocx" "%systemdrive%\webstart\v3117"
+regsvr32 /s "%systemdrive%\webstart\v3117\webstart.ocx"

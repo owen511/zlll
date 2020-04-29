@@ -1,0 +1,144 @@
+
+function op() {
+}
+USETEXTLINKS = 1;
+STARTALLOPEN = 0;
+ICONPATH = "/images/tree/";
+USEFRAMES = 0;
+PRESERVESTATE = 1;
+HIGHLIGHT = 1;
+
+//-----------------------------------------
+var clickedStr = "";// '<%=submenu%>';
+function getSubNode(curnode) {
+	if (!curnode.nChildren) {
+		return;
+	}
+	for (var i = 0; i < curnode.nChildren; i++) {
+		var subnode = curnode.children[i];
+		if (subnode.isOpen) {
+			subnode.setState(false);
+		}
+		if (subnode.nChildren > 0) {   //父级节点
+			getSubNode(subnode);
+		} else {
+			if (subnode.nChildren == 0) {  //末级节点
+				var sublink = subnode.link;
+				if (sublink) {
+					var curstr = sublink.substring(sublink.indexOf("&submenu=") + 9, sublink.length);
+					if (curstr == clickedStr) {
+						expendParentNode(subnode);
+						highlightObjLink(findObj(subnode.getID()));
+					}
+				}
+			}
+		}
+	}
+}
+
+//展开相关父级节点
+function expendParentNode(cnode) {
+	var parent = new Array();
+	var parentNode = cnode;
+    //将父节点封装到数组
+	for (var i = 0; i < cnode.level - 1; i++) {
+		parentNode = parentNode.parentObj;
+		parent.push(parentNode);
+	}
+	//按顺序展开数组
+	for (var j = parent.length; j > -1; j--) {
+		if (!parent[j]) {
+			continue;
+		}
+		if (!parent[j].isOpen) {
+			parent[j].setState(true);
+		}
+		expendParentNode(parent[j]);
+	}
+}
+
+
+//Ext.lt.portal.component.common.IfmisDefaultTitle
+if (Ext.lt.portal.component == null) {
+	Ext.lt.portal.component = {};
+}
+Ext.lt.portal.component.submenu = new function () {
+	this.IfmisDefaultLeve2Menu = function () {
+		var retmenupanel = new Ext.Panel({id:"systemleve2menu", html:"11111111111111<div id=submenutree><noscript>11111111</noscript></div>"});
+		Ext.lt.portal.RCP.call("defaultsubmenuservice", "loadSubmenu", "['" + main_menuid + "']", function (resp) {
+			var menuinfo = eval("[" + resp.responseText + "]")[0];
+			foldersTree = gFld("<b>" + menuinfo.mainmenu.name + "</b>", "");
+			foldersTree.treeID = menuinfo.mainmenu.menuid + "";
+			foldersTree.iconSrc = ICONPATH + "home_contract.gif";
+			foldersTree.iconSrcClosed = ICONPATH + "home_expand.gif";
+			var map = new Object();
+			for (var i = 0; i < menuinfo.treemenus.length; i++) {
+				var menu = menuinfo.treemenus[i];
+				var targetFlag = "T";
+				if (menu.param4 != null && menu.param4 == "B") {
+					targetFlag = "B";
+				} else {
+					targetFlag = "T";
+				}
+				if (menu.isleaf == 0) {
+			// 不是末级节点 aux1 = insFld(foldersTree, gFld("总指标加载", "javascript:parent.op()"));
+					var varName = map.getAttribute(menu.parentid + "");
+					if (varName == null) {
+						varName = "foldersTree";
+					}
+			//modified by xyq,实现多层菜单树
+					out.println("aux_" + menu.getMenuid() + " = insFld(" + varName + ", gFld(\"" + menu.getName() + "\", \"\"));");
+			//out.println("aux_"+menu.getMenuid()+" = insFld(foldersTree, gFld(""+menu.getName()+"", ""));");
+					map.setAttribute(menu.menuid + "", "aux_" + menu.menuid);
+				} else {
+			// 末级节点 insDoc(aux1, gLnk("T", "录入", "../../indi/totalindiload/totalindiload_index.html"));
+					var varName = null;//map.getAttribute(menu.parentid + "");
+					if (varName == null) {
+						varName = "foldersTree";
+					}
+					if (menuinfo.mainmenu == null) {
+						if (menu.clientmodule != null && menu.clientmodule.indexOf("?") > 0) {
+							insDoc(varName, gLnk(targetFlag, menu.name, menu.clientmodule + "&submenu=" + menu.menuid));
+						} else {
+							insDoc(varName, gLnk(targetFlag, menu.name, menu.clientmodule + "?submenu=" + menu.menuid));
+						}
+					} else {
+						if (menu.clientmodule != null && menu.clientmodule.indexOf("?") > 0) {
+							if (menu.clientmodule.indexOf("javascript:openReport('") == 0) {
+								insDoc(varName, gLnk(targetFlag, menu.name, "javascript:openReport('" + menu.clientmodule.substring(23) + "&mainmenu=" + mainmenu.menuid + "&submenu=" + menu.menuid + "')"));
+							} else {
+								insDoc(varName, gLnk(targetFlag, menu.name, "javascript:openReport('" + menu.clientmodule + "&mainmenu=" + mainmenu.menuid + "&submenu=" + menu.menuid + "')"));
+							}
+						} else {
+						debugger;
+							insDoc(varName, gLnk(targetFlag, menu.name, menu.clientmodule + "?submenu=" + menu.menuid + "&submenu=" + menu.menuid));
+						}
+					}
+				}
+			}
+			//由“代办事项”点击，链接过来定位 
+			if (menuinfo.clickedStr == null) {
+				menuinfo.clickedStr = "";
+			}
+			clickedStr = menuinfo.clickedStr;
+			getSubNode(foldersTree);
+			var leftbody = Ext.lt.template.currenttemplate.get("centermain").get("leftbody");
+    		// 让页头重新计算布局
+			leftbody.doLayout();
+			if (tempconfig.left.length > 0) {
+				var width = 1;
+				for (var i = 0; i < tempconfig.left.length; i++) {
+					width += tempconfig.left[i].getWidth();
+				}
+				leftbody.setWidth(300);
+			} else {
+				leftbody.setWidth(300);
+			}
+			Ext.lt.template.currenttemplate.get("centermain").doLayout();
+    		// 重新计算整个页面的布局
+			Ext.lt.template.currenttemplate.doLayout();
+		});
+		return retmenupanel;
+	};
+};
+

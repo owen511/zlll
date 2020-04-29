@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+		<action path="/common/portallogin"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.PortalLoginAction"
+			parameter="portalLoginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="fails" path="/default.do" />
+		</action>
+		<action path="/common/ssoportallogin"
+			type="gov.mof.fasp.ifmis.portal.login.SSOPortalLoginAction"
+			parameter="portalLoginAction">
+		</action>
+		<action path="/common/pendingtasklogin"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.PendingtaskLoginAction"
+			parameter="pendingtaskLoginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="fails" path="/default.do" />
+		</action>
+		<action path="/common/applocation"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.AppLocationAction"
+			parameter="findLocationAction">
+			<forward name="success"
+				path="/portal/portalmanage/userprogramset/applocation.jsp" />
+		</action>
+		<action path="/common/loadgroupprivilege"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.GroupPrivilegeAction"
+			parameter="findGroupPrivilegeAction">
+			<forward name="success" path="/common/loadgroupprivilege" />
+		</action>
+		<action path="/portal/group/addGroup"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveUserGroupAction"
+			parameter="addGroup">
+			<forward name="success" path="/portal/group/addGroup" />
+		</action>
+		<action path="/portal/group/modGroup"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveUserGroupAction"
+			parameter="modGroup">
+			<forward name="success" path="/portal/group/modGroup" />
+		</action>
+		<action path="/common/deleteGroupUser"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.DeleteGroupUserAction"
+			parameter="findDeleteGroupUserAction">
+			<forward name="success" path="/common/deleteGroupUser" />
+		</action>
+		<action path="/common/SaveGroup"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveUserGroupAction"
+			parameter="findSaveUserGroupAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/loadprogramprivilege"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.UserPrivilegeAction"
+			parameter="findProgramPrivilegeAction">
+			<forward name="success" path="/common/loadprogramprivilege" />
+		</action>
+		<action path="/common/loaduserprivilege"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.UserPrivilegeAction"
+			parameter="findUserPrivilegeAction">
+			<forward name="success" path="/common/loaduserprivilege" />
+		</action>
+		<action path="/common/UnifiedGroupProgram"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.UnifiedGroupProgramAction"
+			parameter="findUnifiedGroupProgramAction">
+			<forward name="success" path="/common/UnifiedGroupProgram" />
+		</action>
+		<action path="/common/UnifiedGroupUser"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.UnifiedGroupUserAction"
+			parameter="findUnifiedGroupUserAction">
+			<forward name="success" path="/common/UnifiedGroupUser" />
+		</action>
+		<action path="/common/addProgramConfig"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="addprogram">
+			<forward name="success" path="/common/addProgramConfig" />
+		</action>
+		<action path="/common/addProgramParas"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="addprogramParas">
+			<forward name="success" path="/common/addProgramParas" />
+		</action>
+		<action path="/common/addProgramDatabase"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="addprogramDatabase">
+			<forward name="success" path="/common/addProgramDatabase" />
+		</action>
+		<action path="/common/loadProgramConfig"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findProgramConfigAction">
+			<forward name="success" path="/common/loadProgramConfig" />
+		</action>
+		<action path="/common/SaveProgram"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveProgramAction"
+			parameter="findSaveProgramAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/UpdateProgram"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.UpdateProgramAction"
+			parameter="findUpdateProgramAction">
+			<forward name="success" path="/common/UpdateProgram" />
+		</action>
+		<action path="/common/LoadParameter"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.LoadParameterAction"
+			parameter="findLoadParameterAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/SaveParameter"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveParameterAction"
+			parameter="findSaveParameterAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/DeleteParameter"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.DeleteParameterAction"
+			parameter="findDeleteParameterAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/LoadDBInfo"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.LoadDBInfoAction"
+			parameter="findLoadDBInfoAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/SaveDBInfo"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.SaveDBInfoAction"
+			parameter="findSaveDBInfoAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/DeleteDBInfo"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.DeleteDBInfoAction"
+			parameter="findDeleteDBInfoAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/DeleteProgram"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.DeleteProgramAction"
+			parameter="findDeleteProgramAction">
+			<forward name="success" path="/common/DeleteProgram" />
+		</action>
+		<action path="/common/csLogs"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.DeleteDBInfoAction"
+			parameter="findDeleteDBInfoAction">
+			<forward name="success" path="/common/DeleteDBInfo" />
+		</action>
+		<action path="/common/pendingtask"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="findWaitOperateAction">
+			<forward name="success" path="/common/index" />
+		</action>
+		<action path="/template/commons/modifypwd"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="modifyPassword">
+			<forward name="success" path="/portal/login/modpwdok.jsp"></forward>
+		</action>
+		<action path="/template/commons/modifytz"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="modifyTZPassword">
+			<forward name="success" path="/portal/login/mod_password.jsp"></forward>
+		</action>
+		<action path="/template/mainmenu"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getMainMenuAction">
+			<forward name="success" path="/portal/login/mainmenu.jsp" />
+		</action>
+		<action path="/template/navigation"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getNavigationAction">
+			<forward name="success" path="/portal/login/navigation.jsp" />
+		</action>
+		<action path="/template/treemenu" type="gov.mof.fasp.ifmis.template.TemplateAction"
+			parameter="getTreeMenuAction">
+			<forward name="success" path="/portal/login/treemenu.jsp" />
+		</action>
+		<action path="/default"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getLoginYearsAction">
+		</action>
+		<action path="/init_default"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getLoginYearsAction">
+		</action>
+		<action path="/calogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="caloginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/common/index.do" />
+			<forward name="fails" path="/init_default.do" />
+		</action>
+		<action path="/login"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="loginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/common/index.do" />
+			<forward name="fails" path="/init_default.do" />
+		</action>
+		<action path="/bank"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getLoginYearsBankAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/init_default.do" />
+		</action>
+		<action path="/login2Area"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="login2AreaAction">
+			<forward name="success" path="/init_default.do" />
+		</action>
+		<action path="/random" type="gov.mof.fasp.ifmis.portal.login.RandomAction"
+			parameter="getRandomAction">
+			<forward name="success" path="/portal/login/login.jsp" />
+		</action>
+		<action path="/authen" type="gov.mof.fasp.ifmis.portal.login.AuthenAction"
+			parameter="getAuthenAction">
+			<forward name="success" path="/calogin.do" />
+		</action>
+		<action path="/glauthen" type="gov.mof.fasp.ifmis.portal.login.GLAuthenAction"
+			parameter="getAuthenAction">
+			<forward name="success" path="/calogin.do" />
+		</action>
+		<action path="/common/index"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getMainMenuAction">
+			<forward name="success" path="/common/index" />
+		</action>
+		<action path="/loginByAcc"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="loginByAccAction">
+			<forward name="success" path="/common/index.do" />
+		</action>
+		<action path="/logout"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="logoutAction">
+			<forward name="success" path="/default.do" />
+		</action>
+		<action path="/common/post/preview"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="loadAction">
+			<forward name="success" path="/portal/portlets/post/post_preview.jsp" />
+		</action>
+		<action path="/common/post/showload"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="showloadAction">
+			<forward name="success" path="/portal/portlets/post/post_showpublic.jsp" />
+		</action>
+		<action path="/common/post/tanchupublicload"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="isShowPublicAction">
+			<forward name="success" path="/portal/portlets/post/post_causerpublic.jsp" />
+		</action>
+		<action path="/portal2/index_showWaitTask"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="showWaitTaskAction">
+			<forward name="success" path="/portal2/index_showWaitTask" />
+		</action>
+		<action path="/common/post/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="listAction">
+			<forward name="success" path="/common/post/index" />
+		</action>
+		<action path="/portal/userInforCollection/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="collectingUserInfo_listAction">
+			<forward name="success" path="/portal/bdgagency/index" />
+		</action>
+		<action path="/portal/userInforCollection/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="addTopageAction">
+			<forward name="success" path="/portal/bdgagency/add" />
+		</action>
+		<action path="/portal/userInforCollection/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/userInforCollection/index.do" />
+		</action>
+		<action path="/portal/userInforCollection/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/userInforCollection/index.do" />
+		</action>
+		<action path="/portal/userInforCollection/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/bdgagency/mod" />
+		</action>
+		<action path="/portal/userInforCollection/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="modSaveAction">
+			<forward name="success" path="/portal/userInforCollection/index.do" />
+		</action>
+		<action path="/portal/userInforCollection/check"
+			type="gov.mof.fasp.ifmis.portal.portlets.ahSMSplatform.CollectingUserInfoAction"
+			parameter="preview">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/post/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="delAction">
+			<forward name="success" path="/common/post/index.do?add=1" />
+		</action>
+		<action path="/common/post/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="addAction">
+			<forward name="success" path="/common/post/add" />
+		</action>
+		<action path="/common/post/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="modAction">
+			<forward name="success" path="/common/post/mod" />
+		</action>
+		<action path="/common/post/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="saveAction">
+			<forward name="success" path="/common/post/index.do?add=1" />
+		</action>
+		<action path="/common/postqh/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.postqh.PostAction"
+			parameter="listAction">
+			<forward name="success" path="/common/postqh/index" />
+		</action>
+		<action path="/common/postqh/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.postqh.PostAction"
+			parameter="delAction">
+			<forward name="success" path="/common/postqh/index.do?add=1" />
+		</action>
+		<action path="/common/postqh/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.postqh.PostAction"
+			parameter="addAction">
+			<forward name="success" path="/common/postqh/add" />
+		</action>
+		<action path="/common/postqh/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.postqh.PostAction"
+			parameter="modAction">
+			<forward name="success" path="/common/postqh/mod" />
+		</action>
+		<action path="/common/postqh/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.postqh.PostAction"
+			parameter="saveAction">
+			<forward name="success" path="/common/postqh/index.do?add=1" />
+		</action>
+		<action path="/common/post/classfy"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="specifyAction">
+		</action>
+		<action path="/common/post/canclePost"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="cancleAction">
+		</action>
+		<action path="/common/index_showWaitTask"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="showWaitTaskAction">
+			<forward name="success" path="/common/index_showWaitTask" />
+		</action>
+		<action path="/portal/pendingtask/index"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.pendingtaskset.PendingtaskAction"
+			parameter="pendingtaskset">
+			<forward name="success" path='/portal/pendingtask/main' />
+		</action>
+		<action path="/pendingtask/query"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.pendingtaskset.PendingtaskAction"
+			parameter="query">
+			<forward name="success" path='/portal/pendingtask/main' />
+		</action>
+		<action path="/pendingtask/save"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.pendingtaskset.PendingtaskAction"
+			parameter="save">
+			<forward name="success" path='/portal/pendingtask/main' />
+		</action>
+		<action path="/portal/portalset/index"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.portalset.PortalsetAction"
+			parameter="portalset">
+			<forward name="success" path='/portal/portalset/main' />
+		</action>
+		<action path="/portal/portalset/save"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.portalset.PortalsetAction"
+			parameter="save">
+			<forward name="success"
+				path='/portal/portalset/index.do?mainmenu=42000000&amp;submenu=42000050'
+				redirect="true" />
+		</action>
+		<action path="/ifmislogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="ifmisloginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/common/index.do" />
+			<forward name="fails" path="/init_default.do" />
+		</action>
+		<action path="/portal/area/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="findAreaAction">
+			<forward name="success" path="/portal/area/areaConfig" />
+		</action>
+		<action path="/portal/area/addArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="addArea">
+			<forward name="success" path="/portal/area/addArea" />
+		</action>
+		<action path="/portal/area/SaveCheckArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="checkAreaAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/area/UpdateCheckArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="checkUpdateAreaAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/area/SaveArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="saveAreaAction">
+			<forward name="success" path="/portal/area/index.do" />
+		</action>
+		<action path="/portal/area/Update"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="updateAction">
+			<forward name="success" path="/portal/area/Update" />
+		</action>
+		<action path="/portal/area/UpdateArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="updateAreaAction">
+			<forward name="success" path="/portal/area/index.do" />
+		</action>
+		<action path="/portal/area/DeleteArea"
+			type="gov.mof.fasp.ifmis.portal.portlets.area.AreaAction" parameter="deleteAreaAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/gzlogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="gzloginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/common/index.do" />
+			<forward name="fails" path="/init_default.do" />
+		</action>
+		<action path="/portal/glca/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glListAction">
+			<forward name="success" path="/portal/glca/index" />
+		</action>
+		<action path="/portal/glca/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glAddTopageAction">
+			<forward name="success" path="/portal/glca/add" />
+		</action>
+		<action path="/portal/glca/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glSaveAction">
+			<forward name="success" path="/portal/glca/index.do" />
+		</action>
+		<action path="/portal/glca/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glModAction">
+			<forward name="success" path="/portal/glca/mod" />
+		</action>
+		<action path="/portal/glca/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glModsaveAction">
+			<forward name="success" path="/portal/glca/index.do" />
+		</action>
+		<action path="/portal/glca/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.glca.GLCAManageAction"
+			parameter="glDelAction">
+			<forward name="success" path="/portal/glca/index.do" />
+		</action>
+		<action path="/portal/ca/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="listAction">
+			<forward name="success" path="/portal/ca/index" />
+		</action>
+		<action path="/portal/ca/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="addTopageAction">
+			<forward name="success" path="/portal/ca/add" />
+		</action>
+		<action path="/portal/ca/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/ca/index.do" />
+		</action>
+		<action path="/portal/ca/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/ca/mod" />
+		</action>
+		<action path="/portal/ca/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="modsaveAction">
+			<forward name="success" path="/portal/ca/index.do" />
+		</action>
+		<action path="/portal/ca/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.ca.CAManageAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/ca/index.do" />
+		</action>
+		<action path="/portal/boflash/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="listAction">
+			<forward name="success" path="/portal/boflash/index" />
+		</action>
+		<action path="/portal/boflash/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="addTopageAction">
+			<forward name="success" path="/portal/boflash/add" />
+		</action>
+		<action path="/portal/boflash/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/boflash/index.do" />
+		</action>
+		<action path="/portal/boflash/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/boflash/mod" />
+		</action>
+		<action path="/portal/boflash/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="modsaveAction">
+			<forward name="success" path="/portal/boflash/index.do" />
+		</action>
+		<action path="/portal/boflash/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/boflash/index.do" />
+		</action>
+		<action path="/portal/boflash/uploadFile"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="uploadAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/boflash/preview"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="loadAction">
+			<forward name="success" path="/portal/portlets/boflash/boflash_preview.jsp" />
+		</action>
+		<action path="/showflash"
+			type="gov.mof.fasp.ifmis.portal.portlets.boflash.BOflashManageAction"
+			parameter="showFlash">
+		</action>
+		<action path="/portal/loginlog/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.log.LoginLogManageAction"
+			parameter="listAction">
+			<forward name="success" path="/portal/loginlog/index" />
+		</action>
+		<action path="/common/post/uploadFile"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="uploadAction_new">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/post/uploadImgFile"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="uploadAction_img">
+			<forward name="success" path="/portal/portlets/post/imgupload.jsp" />
+		</action>
+		<action path="/common/post/causer"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="showCauser">
+			<forward name="success" path="/portal/portlets/post/post_showcauser.jsp" />
+		</action>
+		<action path="/common/post/deleteFile"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="deleteFileAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/downLoad"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="downLoad">
+		</action>
+		<action path="/postimage"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="showImage">
+		</action>
+		<action path="/portal/portalpendingtask/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="manageUserIndexAction">
+			<forward name="success" path="/portal/portalpendingtask/index" />
+		</action>
+		<action path="/portal/portalpendingtask/saveUsermanage"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="saveUsersManageAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/portalpendingtask/cleanUsermanage"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="cleanUsersManageAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/portalpendingtask/queryUsersmanage"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="queryUsersAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/portalpendingtask/underlinglist"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="queryUnderlingAction">
+			<forward name="success" path="/portal/portalpendingtask/underlinglist" />
+		</action>
+		<action path="/portal/portalpendingtask/pendingtask"
+			type="gov.mof.fasp.ifmis.portal.portlets.portalpendingtask.PengdingtaskAction"
+			parameter="findWaitOperateAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/hlj_default"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getHLJLoginYearsAction">
+		</action>
+		<action path="/portal/report/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.report.ReportMaintenanceAction"
+			parameter="listAction">
+			<forward name="success" path="/portal/report/index" />
+		</action>
+		<action path="/portal/report/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.report.ReportMaintenanceAction"
+			parameter="addAction">
+			<forward name="success" path="/portal/report/add" />
+		</action>
+		<action path="/portal/report/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.report.ReportMaintenanceAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/report/index.do" />
+		</action>
+		<action path="/portal/report/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.report.ReportMaintenanceAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/report/mod" />
+		</action>
+		<action path="/portal/report/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.report.ReportMaintenanceAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/report/index.do" />
+		</action>
+		<action path="/common/tree/openTree"
+			type="gov.mof.fasp.ifmis.portal.portlets.tree.TreeAction" parameter="openTreeAction">
+			<forward name="success" path="/common/elementtree.jsp" />
+		</action>
+		<action path="/common/tree/openTreeUser"
+			type="gov.mof.fasp.ifmis.portal.portlets.tree.TreeAction" parameter="openTreeAllUserAction">
+			<forward name="success" path="/common/mutlelementtree.jsp" />
+		</action>
+		<action path="/portal/ssouser/getssouser"
+			type="gov.mof.fasp.ifmis.portal.portlets.sso.SSOUserAction"
+			parameter="getSSOUserAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/userinfo"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="queryAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/queryRoleByUser"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="queryRoleByUser">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/queryDataRight"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="queryDataRight">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/userinfo/runsearchDataRight"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="runsearchDataRight">
+			<forward name="success"
+				path='/portal/portalmanage/userinfo/showDataRight.jsp' />
+		</action>
+		<action path="/portal/userinfo/index"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="indexAction">
+			<forward name="success" path='/portal/portalmanage/userinfo/main' />
+		</action>
+		<action path="/portal/userinfo/runsearch"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userinfo.action.UserInfoAction"
+			parameter="runsearch">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/tree/openAreaTree"
+			type="gov.mof.fasp.ifmis.portal.portlets.tree.TreeAction" parameter="areaTreeAction">
+			<forward name="success" path="/common/elementtree.jsp" />
+		</action>
+		<action path="/testlogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="testLogin">
+		</action>
+		<!-- 获取session -->
+		<action path="/getsession"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="getSessionAction">
+			<forward name="success" path="/common/index.do" />
+		</action>
+		<action path="/portal/userinfo/query"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="query">
+			<forward name="success" path='/portal/userinfo/main' />
+		</action>
+		<action path="/portal/userinfo/queryRoleByUser"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="queryRoleByUser">
+			<forward name="success" path='/common/ajaxresult.jsp' />
+		</action>
+		<action path="/portal/userinfo/queryDataRight"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="queryDataRight">
+			<forward name="success" path='/portal/userinfo/showDataRight.jsp' />
+		</action>
+		<action path="/portal/userinfo/turnToSave"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="turnToSave">
+			<forward name="success" path='/portal/userinfo/add' />
+		</action>
+		<action path="/portal/userinfo/elementtree"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="showElementTree">
+			<forward name="success" path='/common/elementtree.jsp' />
+		</action>
+		<action path="/portal/userinfo/selectUserCls"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="showUserClsTree">
+			<forward name="success" path='/common/elementtree.jsp' />
+		</action>
+		<action path="/portal/userinfo/checkUserCode"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="checkUserCode">
+		</action>
+		<action path="/portal/userinfo/save"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			input="/portal/userinfo/turnToSave.do" parameter="save">
+			<forward name="success" path='/portal/userinfo/query.do' />
+		</action>
+		<action path="/portal/userinfo/saveContinue"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			input="/portal/userinfo/turnToSave.do" parameter="save">
+			<forward name="success" path='/portal/userinfo/turnToSave.do' />
+		</action>
+		<action path="/portal/userinfo/turnToModify"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="turnToModify">
+			<forward name="success" path='/portal/userinfo/change' />
+		</action>
+		<action path="/portal/userinfo/update"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			input="/portal/userinfo/turnToModify.do" parameter="update">
+			<forward name="success" path='/portal/userinfo/query.do' />
+		</action>
+		<action path="/portal/userinfo/delete"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="delete">
+			<forward name="success" path='/portal/userinfo/query.do' />
+		</action>
+		<action path="/portal/userinfo/turnToCopy"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="turnToCopy">
+			<forward name="success" path='/portal/userinfo/copyUserInfo.jsp' />
+		</action>
+		<action path="/portal/userinfo/copy"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="copy" input="/portal/userinfo/turnToCopy.do">
+			<forward name="success" path='/portal/userinfo/copySuccess.jsp' />
+		</action>
+		<action path="/portal/userinfo/modifylogintype"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="modifyLoginType">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/accredit/query"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="queryAccredit">
+			<forward name="success" path='/portal/accredit/main' />
+		</action>
+		<action path="/portal/accredit/turnToSave"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="turnToSave">
+			<forward name="success" path='/portal/accredit/add' />
+		</action>
+		<action path="/portal/accredit/save"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="save" input="/portal/accredit/turnToSave.do">
+			<forward name="success" path='/portal/accredit/query.do' />
+		</action>
+		<action path="/portal/accredit/turnToModify"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="turnToModify">
+			<forward name="success" path='/portal/accredit/change' />
+		</action>
+		<action path="/portal/accredit/update"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="update" input="/portal/accredit/turnToModify.do">
+			<forward name="success" path='/portal/accredit/query.do' />
+		</action>
+		<action path="/portal/accredited/query"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="queryAccredited">
+			<forward name="success" path='/portal/accredited/main' />
+		</action>
+		<action path="/portal/accredit/delete"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="delete">
+			<forward name="success" path='/portal/accredit/query.do' />
+		</action>
+		<action path="/portal/accredit/getBack"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="getBack">
+			<forward name="success" path='/portal/accredit/query.do' />
+		</action>
+		<action path="/portal/accredit/turnToQuery"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="turnToQuery">
+			<forward name="success" path='/portal/accredit/add' />
+		</action>
+		<action path="/portal/dataright/query"
+			type="gov.mof.fasp.ifmis.portal.dataright.action.ViewDataRightAction"
+			parameter="query">
+			<forward name="success" path='/portal/dataright/main' />
+		</action>
+		<action path="/portal/dataright/searchUser"
+			type="gov.mof.fasp.ifmis.portal.dataright.action.ViewDataRightAction"
+			parameter="searchUser">
+			<forward name="success" path='/portal/dataright/searchUser.jsp' />
+		</action>
+		<action path="/portal/user/query" type="gov.mof.fasp.ifmis.onlinehelp.action.UserAction"
+			parameter="queryQuestion">
+			<forward name="success" path="/portal/user/query" />
+		</action>
+		<action path="/portal/admin/query" type="gov.mof.fasp.ifmis.onlinehelp.action.AdminAction"
+			parameter="queryQuestion">
+			<forward name="success" path="/portal/admin/query" />
+		</action>
+		<action path="/portal/superadmin/query"
+			type="gov.mof.fasp.ifmis.onlinehelp.action.SuperAdminAction"
+			parameter="queryQuestion">
+			<forward name="success" path="/portal/superadmin/query" />
+		</action>
+		<action path="/portal/busoffice/query"
+			type="gov.mof.fasp.ifmis.onlinehelp.action.BusOfficeAction"
+			parameter="queryQuestion">
+			<forward name="success" path="/portal/busoffice/query" />
+		</action>
+		<action path="/portal/search" type="gov.mof.fasp.ifmis.onlinehelp.action.UserAction"
+			parameter="search">
+			<forward name="success" path="/portal/search" />
+		</action>
+		<action path="/portal/pending" type="gov.mof.fasp.ifmis.onlinehelp.action.UserAction"
+			parameter="pending">
+			<forward name="success" path="/portal/pending" />
+		</action>
+		<action path="/portal/rolemanage" type="gov.mof.fasp.ifmis.onlinehelp.action.AdminAction"
+			parameter="roleManage">
+			<forward name="success" path="/portal/rolemanage" />
+		</action>
+		<action path="/portal/clear" type="gov.mof.fasp.ifmis.onlinehelp.action.AdminAction"
+			parameter="clear">
+			<forward name="success" path="/portal/clear" />
+		</action>
+		<action path="/portal/statistic" type="gov.mof.fasp.ifmis.onlinehelp.action.AdminAction"
+			parameter="statistic">
+			<forward name="success" path="/portal/statistic" />
+		</action>
+		<action path="/portal/comment" type="gov.mof.fasp.ifmis.onlinehelp.action.AdminAction"
+			parameter="comment">
+			<forward name="success" path="/portal/comment" />
+		</action>
+		<action path="/portal/smsLogQuery/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.smslogquery.SmsLogQueryAction"
+			parameter="smsLogQuery_listAction">
+			<forward name="success" path="/portal/smsLog/index" />
+		</action>
+		<action path="/portal/com/showImg"
+			type="com.longtu.businessframework.common.captuerscreen.CaptuerScreenAction"
+			parameter="showImg">
+		</action>
+		<action path="/portal/com/saveScreen"
+			type="com.longtu.businessframework.common.captuerscreen.CaptuerScreenAction"
+			parameter="saveScreen">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/onlineuser/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.onlineuser.OnlineuserAction"
+			parameter="getOnlineUser">
+			<forward name="success" path="/portal/onlineuser" />
+		</action>
+		<action path="/portal/userCompare/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="userComparelistAction">
+			<forward name="success" path="/portal/userCompare/index" />
+		</action>
+		<action path="/portal/userCompare/index1"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="userReturnComparelistAction">
+			<forward name="success" path="/portal/userCompare/index" />
+		</action>
+		<action path="/portal/userCompare/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="addUserCompareAction">
+			<forward name="success" path="/portal/userCompare/add" />
+		</action>
+		<action path="/portal/userCompare/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/userCompare/index1.do" />
+		</action>
+		<action path="/portal/userCompare/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/userCompare/index1.do" />
+		</action>
+		<action path="/portal/userCompare/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/userCompare/mod" />
+		</action>
+		<action path="/portal/userCompare/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="modSaveAction">
+			<forward name="success" path="/portal/userCompare/index1.do" />
+		</action>
+		<action path="/portal/userCompare/savecontinue"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.UserCompareAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/userCompare/savecontinue" />
+		</action>
+		<action path="/portal/keyuserCompare/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="keyuserComparelistAction">
+			<forward name="success" path="/portal/keyuserCompare/index" />
+		</action>
+		<action path="/portal/keyuserCompare/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="addKeyUserCompareAction">
+			<forward name="success" path="/portal/keyuserCompare/add" />
+		</action>
+		<action path="/portal/keyuserCompare/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/keyuserCompare/index.do" />
+		</action>
+		<action path="/portal/keyuserCompare/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="delAction">
+			<forward name="success" path="/portal/keyuserCompare/index.do" />
+		</action>
+		<action path="/portal/keyuserCompare/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="modAction">
+			<forward name="success" path="/portal/keyuserCompare/mod" />
+		</action>
+		<action path="/portal/keyuserCompare/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="modSaveAction">
+			<forward name="success" path="/portal/keyuserCompare/index.do" />
+		</action>
+		<action path="/portal/keyuserCompare/savecontinue"
+			type="gov.mof.fasp.ifmis.portal.portlets.usercompare.KeyUserCompareAction"
+			parameter="saveAction">
+			<forward name="success" path="/portal/keyuserCompare/savecontinue" />
+		</action>
+		<action path="/portal/accreditrole/query"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="queryAccredit">
+			<forward name="success" path='/portal/accreditrole/main' />
+		</action>
+		<action path="/portal/accreditrole/turnToSave"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="turnToSave">
+			<forward name="success" path='/portal/accreditrole/add' />
+		</action>
+		<action path="/portal/accreditrole/save"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="save" input="/portal/accreditrole/turnToSave.do">
+			<forward name="success" path='/portal/accreditrole/query.do' />
+		</action>
+		<action path="/portal/accreditrole/checkuser"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="checkuser">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/accreditrole/checkModuser"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="checkModuser">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/accreditrole/turnToModify"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="turnToModify">
+			<forward name="success" path='/portal/accreditrole/change' />
+		</action>
+		<action path="/portal/accreditrole/update"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="update" input="/portal/accreditrole/turnToModify.do">
+			<forward name="success" path='/portal/accreditrole/query.do' />
+		</action>
+		<action path="/portal/accreditrole/delete"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="delete">
+			<forward name="success" path='/portal/accreditrole/query.do' />
+		</action>
+		<action path="/portal/accreditrole/getBack"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="getBack">
+			<forward name="success" path='/portal/accreditrole/query.do' />
+		</action>
+		<action path="/portal/accreditrole/turnToQuery"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="turnToQuery">
+			<forward name="success" path='/portal/accreditrole/add' />
+		</action>
+		<action path="/portal/userprogramset/updateprogramconfig"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="updateProgramConfigAction">
+			<forward name="success" path='/portal/userprogramset/update' />
+		</action>
+		<action path="/portal/userprogramset/updateprogramconfigset"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findUpdateProgramAction">
+			<forward name="success" path="/common/loadProgramConfig" />
+		</action>
+		<action path="/portal/userprogramset/addprogramconfigmain"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findSaveProgramAction">
+			<forward name="success" path="/common/loadProgramConfig" />
+		</action>
+		<action path="/portal/userprogramset/addprogramconfigback"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findSaveProgramActionBack">
+			<forward name="success" path="/common/loadProgramConfig" />
+		</action>
+		<action path="/portal/userprogramset/showprogramparams"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findLoadParameterAction">
+			<forward name="success" path="/common/addProgramParas" />
+		</action>
+		<action path="/portal/userprogramset/addprogramparams"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findSaveParameterAction">
+			<forward name="success" path="/common/addProgramParas" />
+		</action>
+		<action path="/portal/userprogramset/updateprogramparams"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="updateParameterAction">
+			<forward name="success" path="/common/addProgramParas" />
+		</action>
+		<action path="/portal/userprogramset/delprogramparams"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="delParameterAction">
+			<forward name="success" path="/common/addProgramParas" />
+		</action>
+		<action path="/portal/userprogramset/showprogramdb"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findLoadDBInfoAction">
+			<forward name="success" path="/common/addProgramDatabase" />
+		</action>
+		<action path="/portal/userprogramset/saveprogramdb"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findSaveDBInfoAction">
+			<forward name="success" path="/common/addProgramDatabase" />
+		</action>
+		<action path="/portal/userprogramset/delprogramdb"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="findDeleteDBInfoAction">
+			<forward name="success" path="/common/addProgramDatabase" />
+		</action>
+		<action path="/portal/userprogramset/updateprogramdb"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="updateDBInfoAction">
+			<forward name="success" path="/common/addProgramDatabase" />
+		</action>
+		<action path="/getloginarea"
+			type="gov.mof.fasp.ifmis.portal2.component.login.sclogin.LoginAction"
+			parameter="getLoginAreaAction">
+			<forward name="success" path="/portal/login/loginsc.jsp" />
+		</action>
+		<action path="/logincommon"
+			type="gov.mof.fasp.ifmis.portal2.component.login.sclogin.LoginAction"
+			parameter="getLoginAreaAction">
+			<forward name="success" path="/portal/login/loginsc.jsp" />
+		</action>
+		<action path="/template/topmenu" type="gov.mof.fasp.ifmis.template.TemplateAction"
+			parameter="getTopMenuAction">
+			<forward name="success" path="/portal/login/topmenu.jsp" />
+		</action>
+		<action path="/portal/caAdd/query"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="cachanggeAction">
+			<forward name="success" path='/portal/caAdd/query' />
+		</action>
+		<action path="/portal/caAdd/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caaddAction">
+			<forward name="success" path='/portal/caAdd/add' />
+		</action>
+		<action path="/portal/caAdd/addcheck"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caaddcheckAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/caAdd/addsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caaddsaveAction">
+			<forward name="success" path='/portal/caAdd/query.do' />
+		</action>
+		<action path="/portal/caAdd/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="camodAction">
+			<forward name="success" path='/portal/caAdd/mod' />
+		</action>
+		<action path="/portal/caAdd/modcheck"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="camodcheckAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/caAdd/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="camodsaveAction">
+			<forward name="success" path='/portal/caAdd/query.do' />
+		</action>
+		<action path="/portal/caAdd/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="delAction">
+			<forward name="success" path='/portal/caAdd/query.do' />
+		</action>
+		<action path="/portal/caAudit/query"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caauditchangeAction">
+			<forward name="success" path='/portal/caAudit/query' />
+		</action>
+		<action path="/portal/caAudit/audit"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caauditAction">
+			<forward name="success" path='/portal/caAudit/query.do' />
+		</action>
+		<action path="/portal/caAudit/auditcancle"
+			type="gov.mof.fasp.ifmis.portal.portlets.cachange.CaChangeAction"
+			parameter="caauditcancleAction">
+			<forward name="success" path='/portal/caAudit/query.do' />
+		</action>
+		<action path="/common/progaramcheck"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="checkUrl">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/testifmislogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="queryAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/hyperlink/index"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="queryAction">
+			<forward name="success" path="/portal/hyperlink/index" />
+		</action>
+		<action path="/portal/hyperlink/add"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="turnToAdd">
+			<forward name="success" path='/portal/hyperlink/add' />
+		</action>
+		<action path="/portal/hyperlink/addsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="saveAction">
+			<forward name="success" path='/portal/hyperlink/index.do' />
+		</action>
+		<action path="/portal/hyperlink/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="turnToMod">
+			<forward name="success" path='/portal/hyperlink/mod' />
+		</action>
+		<action path="/portal/hyperlink/modsave"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="saveAction">
+			<forward name="success" path='/portal/hyperlink/index.do' />
+		</action>
+		<action path="/portal/hyperlink/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.hyperlink.HyperlinkAction"
+			parameter="delAction">
+			<forward name="success" path='/portal/hyperlink/index.do' />
+		</action>
+		<action path="/tree/openQTreeUser"
+			type="gov.mof.fasp.ifmis.portal.portlets.tree.TreeAction" parameter="openQTreeUserAction">
+			<forward name="success" path="/common/tree/mutlQtree.jsp" />
+		</action>
+		<action path="/portal/userinfo/checkroledataRightisrepeat"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="checkRoleDataRightIsRepeatRight">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/portallogin"
+			type="gov.mof.fasp.ifmis.portal.login.SSOPortalLoginAction"
+			parameter="portallogin">
+		</action>
+		<action path="/portal/festival/turnToFestival"
+			type="gov.mof.fasp.ifmis.portal.portlets.festivalSet.FestivalSetAction"
+			parameter="turnToFestival">
+			<forward name="success" path="/portal/festival/turnToFestival" />
+		</action>
+		<action path="/portal/festival/save"
+			type="gov.mof.fasp.ifmis.portal.portlets.festivalSet.FestivalSetAction"
+			parameter="save">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/checkProgramCode"
+			type="gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.add.ProgramConfigAction"
+			parameter="checkProgramCode">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/usergroup/query"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="queryAction">
+			<forward name="success" path="/portal/usergroup/query" />
+		</action>
+		<action path="/portal/usergroup/turnToAdd"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="turnToAdd">
+			<forward name="success" path="/portal/usergroup/turnToAdd" />
+		</action>
+		<action path="/portal/usergroup/addContinue"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="save">
+			<forward name="success" path="/portal/usergroup/turnToAdd.do" />
+		</action>
+		<action path="/portal/usergroup/addSave"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="save">
+			<forward name="success" path="/portal/usergroup/query.do" />
+		</action>
+		<action path="/portal/usergroup/turnToMod"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="turnToMod">
+			<forward name="success" path="/portal/usergroup/turnToMod" />
+		</action>
+		<action path="/portal/usergroup/mod"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="mod">
+			<forward name="success" path="/portal/usergroup/query.do" />
+		</action>
+		<action path="/portal/usergroup/check"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="check">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/usergroup/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="del">
+			<forward name="success" path="/portal/usergroup/query.do" />
+		</action>
+		<action path="/portal/usergroup/designuser"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="designuser">
+			<forward name="success" path="/portal/usergroup/designuser" />
+		</action>
+		<action path="/portal/usergroup/designusersave"
+			type="gov.mof.fasp.ifmis.portal.portlets.usergroup.UserGroupAction"
+			parameter="designusersave">
+			<forward name="success" path="/portal/usergroup/query.do" />
+		</action>
+		<action path="/portal/message/messagequery"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="queryAction">
+			<forward name="success" path="/portal/message/messagequery" />
+		</action>
+		<action path="/portal/message/turnToAdd"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="turnToAdd">
+			<forward name="success" path="/portal/message/turnToAdd" />
+		</action>
+		<action path="/portal/message/saveContinue"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="save">
+			<forward name="success" path="/portal/message/turnToAdd.do" />
+		</action>
+		<action path="/portal/message/saveExit"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="save">
+			<forward name="success" path="/portal/message/messagequery.do" />
+		</action>
+		<action path="/portal/message/turnToMod"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="turnToMod">
+			<forward name="success" path="/portal/message/turnToMod" />
+		</action>
+		<action path="/portal/message/update"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="update">
+			<forward name="success" path="/portal/message/messagequery.do" />
+		</action>
+		<action path="/portal/message/del"
+			type="gov.mof.fasp.ifmis.portal.portlets.whmessage.WhMessageAction"
+			parameter="del">
+			<forward name="success" path="/portal/message/messagequery.do" />
+		</action>
+		<action path="/portal/userinfo/changelogintype/query"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="findAllUser">
+			<forward name="success" path="/portal/userinfo/changelogintype/query" />
+		</action>
+		<action path="/portal/userinfo/changelogintype/change"
+			type="gov.mof.fasp.ifmis.portal.userInfo.action.UserInfoAction"
+			parameter="changeLoginType">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/sxcalogin"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="sxcaloginAction">
+			<forward name="accuser" path="/accuser.jsp" />
+			<forward name="success" path="/common/index.do" />
+			<forward name="fails" path="/init_default.do" />
+		</action>
+		<action path="/template/commons/modifyInit"
+			type="gov.mof.fasp.ifmis.portal.login.PortalTemplateAction"
+			parameter="modifyPasswordInit">
+			<forward name="success" path="/portal/login/modpwdok.jsp"></forward>
+		</action>
+		<action path="/portal/accreditrole/serchRole"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="serchRole">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/portal/accredit/savecontinue"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="gssave" input="/portal/accredit/gsturnToSave.do">
+			<forward name="success" path='/portal/accredit/gsturnToSave.do' />
+		</action>
+		<action path="/portal/accredit/gsturnToSave"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="gsturnToSave">
+			<forward name="success" path='/portal/accredit/gsadd' />
+		</action>
+		<action path="/portal/accredit/gssave"
+			type="gov.mof.fasp.ifmis.portal.accredit.action.AccreditAction"
+			parameter="gssave" input="/portal/accredit/gsturnToSave.do">
+			<forward name="success" path='/portal/accredit/query.do' />
+		</action>
+		<action path="/portal/accreditrole/checkuserGs"
+			type="gov.mof.fasp.ifmis.portal.accreditrole.action.AccreditAction"
+			parameter="checkuserGs">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/photosx/uploadFile"
+			type="gov.mof.fasp.ifmis.portal.portlets.post.PostAction" parameter="sxphotouploadAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

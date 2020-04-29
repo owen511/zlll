@@ -1,0 +1,19 @@
+/**弹出窗口兼容ie6，title图标和关闭窗口按钮**/
+.wnd_ifmis .wnd_icon
+{
+	width:20px;
+	background-image:none;
+	background-attachment: scroll;
+	background-repeat:no-repeat;
+	background-position-x: left;
+	background-position-y: bottom;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image:url(./images/wnd_ifmis/wnd_icon_ifmis6.png);
+}
+
+.wnd_ifmis .btn_close{background-image: url("./images/wnd_ifmis/closewin_ifmis6.png");background-position-y:top;background-color: transparent;width:35px;height:20px;border:0px;}
+.wnd_ifmis .btn_close_over
+{background-image: url("./images/wnd_ifmis/closewin_ifmis6.png");background-position-y:-20px;background-color: transparent;width:35px;height:20px;border:0px;}

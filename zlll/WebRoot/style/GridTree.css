@@ -1,0 +1,289 @@
+.divClass {
+	height: 250px;
+	width: 100%;
+	overflow: auto;
+}
+
+td {
+	color:#000000;
+	padding:2px;
+	height:23px;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	overflow:hidden;
+	font-size:14px;
+}
+
+.msgdiv{
+	display:none;
+	position:absolute;
+	background-color:#FFFF00;
+	font-size:12px;
+	height:16px;
+	color:#000;
+}
+
+.resizeDivClass{
+	text-align:right;
+	width:1px;
+	position:relative;     
+    z-index:1;    
+	margin:0;
+	background:none;
+	border:0px;
+	float:left;
+	left:expression(this.parentElement.offsetWidth - 3);   
+	cursor:e-resize;
+} 
+.tablehead {	
+	background-color:#e7ebf7;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	color:#000;
+	font-weight:bolder;
+	height:23px;
+	text-align:center;
+	overflow:visible;
+	font-size:13px;	
+	border:1px #8ba3da solid;
+}
+
+.pagebarbtn {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 0px #dddddd none;
+	width:45px;
+	height: 21px;
+	cursor: pointer;
+	vertical-align: -2px;
+}
+
+.checkCell{
+	text-align:center;
+	border:1px #8ba3da solid;
+}
+
+.jumpPage {
+	background-image: url(../ifmis_images/actions/tz.gif);
+}
+
+.firstPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/first.gif);
+}
+
+.prevPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/pre.gif);
+}
+
+.nextPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/next.gif);
+}
+
+.lastPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/end.gif);
+}
+.book{
+	background-image: url(../ifmis_images/actions/share_icon.gif);
+}
+.pageNavigationTool {
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	width:25px;
+}
+
+.pageNavigationNearPageTool {
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	padding-top:3px;
+	text-align:center;
+}
+
+.pageSizeTool {
+	padding-top:2px;
+	width:120px;
+	text-align:left;
+}
+
+.pageNavigationNearPageTool A {
+	width:12px;
+	text-decoration : none;
+}
+
+.pageNavigationNearPageTool B {
+	width:12px;
+	color: #999999;
+}
+
+.pageJumpTool {
+	width:95px;
+}
+
+.separatorTool {
+	font-size:1px;	
+}
+
+.disFirstPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/first_un.gif);
+}
+
+.disPrevPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/pre_un.gif);
+}
+
+.disNextPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/next_un.gif);
+}
+
+.disLastPage {
+	width:15px;
+	background-image: url(../ifmis_images/actions/end_un.gif);
+}
+
+.pageBar{
+	font-size:12px;	
+}
+
+.pageBar select {
+	width:50px;
+	font-size:11px;
+	font-family: Verdana;
+}
+
+.pagebartd {
+}
+
+.pagebartable {
+}
+
+.pagebartable td {
+}
+
+.tablehead , .tableRegion .tablehead td {
+	/*background-image:url(../images/gridTree/ecimg/table/headerBg.gif);*/
+	background-color:#e7ebf7;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	color:#000;
+	font-weight:bolder;
+	height:23px;
+	text-align:center;
+	overflow:visible;
+
+}
+
+.tableRegion {
+	/*border:1px #d6d6d6 solid;*/
+	padding:0px;
+	margin:0px;
+	border-collapse: collapse;
+	table-layout:fixed;
+
+}
+
+.tableRegion td table td {
+	color:#000000;
+	border:0px #8ba3da solid;
+	padding:2px;
+	height:23px;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	overflow:hidden;
+}
+
+
+.TrOdd td{
+	background-color: #FFFFFF;
+}
+
+.TrEven td{
+	background-color: #f3f4f3;
+}
+
+.selectlight td {
+	background-color: #CBDAF2;	
+}
+
+.tableRegion {
+	margin: 0;
+	padding: 0;
+}
+
+.toolbarTable{
+	border:0px red solid;
+	width:100%;
+}
+
+.toolbarTable td {
+	border:0px none red;
+}
+
+.statusTool {
+	border:0px solid red;
+	padding-top:2px;
+	text-align: right;
+	white-space:nowrap;word-break:keep-all;word-wrap:normal;
+	font-size:12px;
+}
+
+tr{
+	 border-bottom:1px solid black;
+     border-right:1px solid black;
+     cursor:default;
+}
+.highlight td{
+	background-color: #ddeeff;	
+}
+
+.highlight{
+	background-color: #ddeeff;
+}
+
+.menuContentDiv{
+	cursor:pointer;
+}
+/** 右键菜单的主要的外面的大的div的样式 */
+.menuDiv{
+	position:absolute;
+	font-family:Tahoma;
+	font-size:12px;
+	padding:2px;
+	visibility:hidden;
+	width:100px;
+	height:100px;
+	background-color: white;
+	z-index:2;
+	border:1px solid green;
+	
+}
+
+.menuTable{
+	border:0px;
+	cellpadding:0px;
+	cellspacing:0px;
+	background-color:#cecece;
+	font-family:Tahoma;
+	font-size:12px;
+	width:100px;
+}
+.countCell{
+	text-align:center;
+	border:1px #8ba3da solid;
+	font-size:12px;
+}
+.content{
+	width:15%;
+	border:1px #8ba3da solid;
+	nowrap:nowrap;
+}
+.FixedTitleRow{
+    position: relative; 
+    top: expression(this.offsetParent.scrollTop); 
+    z-index: 10;
+}
+.FixedTitleColumn{
+    position: relative; 
+    left: expression(this.parentElement.offsetParent.scrollLeft);
+}
+input{height:20px;}     

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Image</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+*{
+  font-size:12px;
+}
+body{
+  padding:10px;
+  margin:0px;
+}
+
+form{
+  margin:0;
+}
+
+p{
+  margin:5px;
+}
+
+#preview{
+  height:180px;
+  overflow:auto;
+}
+
+-->
+</style>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+<!--
+var selected;
+$(document).ready(function(){
+  var editorObj = window.dialog.context;
+  
+  selected = editorObj.getSelected();
+  
+  if(selected && selected.tagName && selected.tagName.toLowerCase()=="img" && selected.className!="math"){
+    var img = $(selected);
+    $("#imgurl").val(selected.src);
+    if(img.attr("alt") && img.attr("alt")!=""){
+      $("#imgtitle").val(img.attr("alt"));
+    }
+    if(img.css("vertical-align") && img.css("vertical-align")!=""){
+      $("#imgalign").val(img.css("vertical-align"));
+    }
+    if(img.attr("width") && img.attr("width")!=""){
+      $("#imgwidth").val(img.attr("width"));
+    }
+    if(img.attr("height") && img.attr("height")!=""){
+      $("#imgheight").val(img.attr("height"));
+    }
+    previewImage();
+  }
+  
+  $("#serverCfgName").val(editorObj.cfg.serverCfgName);
+  document.forms["uploadImgForm"].action = editorObj.cfg["uploadUrl"];
+});
+
+function upload(){
+  if($("#file").val()==""){
+    alert("请选择上传文件");
+  }else{
+    document.forms["uploadImgForm"].submit();
+  }
+}
+
+function previewImage(){
+  var url = $("#imgurl").val();
+  if(url!=""){
+    var title = $("#imgtitle").val()!=""?$("#imgtitle").val():null;
+    var valign = $("#imgalign").val()!=""?$("#imgalign").val():null;
+    var width = $("#imgwidth").val()!=""?$("#imgwidth").val():null;
+    var height = $("#imgheight").val()!=""?$("#imgheight").val():null;
+    var html = "<img src=\""+url+"\"";
+    if(title){
+      html += " alt=\""+title+"\"";
+    }
+    if(width){
+      html += " width=\""+width+"\"";
+    }
+    if(height){
+      html += " height=\""+height+"\"";
+    }
+    if(valign){
+      html += " style=\"vertical-align:"+valign+";\"";
+    }
+    html +=" />";
+    $("#preview_div").empty();
+    $("#preview_div").append(html);
+  }
+}
+
+function insertImage(){
+  var url = $("#imgurl").val();
+  if(url == ""){
+    alert("请输入图片的URL");
+    $("#imgurl").focus();
+    return;
+  }
+  var title = $("#imgtitle").val()!=""?$("#imgtitle").val():null;
+  var valign = $("#imgalign").val()!=""?$("#imgalign").val():null;
+  var width = $("#imgwidth").val()!=""?$("#imgwidth").val():null;
+  var height = $("#imgheight").val()!=""?$("#imgheight").val():null;
+  
+  
+  
+  var html = "<img src=\""+url+"\"";
+  if(title && title!=""){
+    html += " title=\""+title+"\"";
+  }
+  if(width){
+    html += " width=\""+width+"\"";
+  }
+  if(height){
+    html += " height=\""+height+"\"";
+  }
+  if(valign){
+    html += " style=\"vertical-align:"+valign+";\"";
+  }
+  html +=" />";
+  
+  dialog.context.insertHtml(html);
+  dialog.close();
+}
+
+function uploadComplete(url){
+  $("#file").remove();
+  $("#img_input").append("<input type=\"file\" name=\"file\" id=\"file\" />");
+  $("#imgurl").val(url);
+  $("#imgalign").val("");
+  $("#imgwidth").val("");
+  $("#imgheight").val("");
+  previewImage();
+}
+-->
+</script>
+</head>
+<body>
+
+<fieldset>
+  <legend>上传图片</legend>
+  <form id="uploadImgForm" name="uploadImgForm" method="post" target="uploadIfr" enctype="multipart/form-data" action="../upload.do">
+  <input type="hidden" name="uploadType" value="Image" />
+  <input type="hidden" id="serverCfgName" name="serverCfgName" value="Default" />
+  <div id="img_input"><input type="file" name="file" id="file" /><button type="button" onclick="upload()">上传</button></div>
+  </form>
+  <iframe id="uploadIfr" name="uploadIfr" style="display:none;"></iframe>
+</fieldset>
+
+<fieldset>
+  <legend>图片属性</legend>
+  <p>
+    <label for="imgurl">图片URL</label>
+    <input type="text" id="imgurl" style="width:200px;" onchange="previewImage()" />
+  </p>
+  <p>
+    <label for="imgtitle">图片标题</label>
+    <input type="text" id="imgtitle" style="width:200px;" onchange="previewImage()" />
+  </p>
+  <p>
+    <label for="imgalign">对齐方式</label>
+    <select id="imgalign" onchange="previewImage()">
+      <option value="">默认</option>
+      <option value="baseline">基线</option>
+      <option value="top">顶部</option>
+      <option value="middle">中间</option>
+      <option value="bottom">底部</option>
+    </select>
+  </p>
+  <label>图片大小</label>
+  <input type="text" id="imgwidth" style="width:30px;" onchange="previewImage()" />
+  x
+  <input type="text" id="imgheight" style="width:30px;" onchange="previewImage()" />
+</fieldset>
+
+<fieldset id="preview">
+  <legend>图片预览</legend>
+  <div id="preview_div"></div>
+</fieldset>
+<p>
+<button type="button" onclick="insertImage()" id="">确定</button>
+<button type="button" onclick="dialog.close()">取消</button>
+</p>
+</body>
+</html>

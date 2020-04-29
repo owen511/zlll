@@ -1,0 +1,240 @@
+//检查命名空间
+if(Ext.lt.perspective==null){
+    Ext.lt.perspective={component:{}}
+};
+Ext.lt.perspective.modeconfig=function(config,service){
+	var dt=null;
+	var cols=[];
+	var coltree=null;
+	var col=[];
+	var rs=new Ext.lt.recordset();
+	rs.addData({});
+	var yulanwin=null;
+	var yulandt=null;
+	
+	function _buildButtons(div){
+		var yulan=document.createElement("button");
+		yulan.innerText="预览";
+		yulan.onclick=function(){
+			if(yulanwin==null){
+				var d=document.createElement("div");
+				document.body.appendChild(d);
+				d.style.width='780px';
+				d.style.height='580px';
+				yulanwin=new Ext.lt.window({title:"预览", w:800, h:600,close:true,pop:true,mark:true});
+				yulanwin.draw(d);
+				yulandt=new Ext.lt.datatable(datatable_data);
+				yulandt.templatetype=32;
+				col.push(dt.columns.seq);
+				//col.push({alias:'A',datatype:'S',name:'A'});
+				yulandt.setCols(col);
+				/*********设置样式*************/
+				
+				yulandt.headsort(false);
+				yulandt.setAllowClock(false);
+				yulandt.setClassName('dttheme_ifmis');
+				yulandt.setMouselight('#CFF6FF');
+				yulandt.mousedrag(false);
+				yulandt.draw(d);
+				
+			}
+			
+			yulanwin.show();
+			var b_cols=buildCols2Datatable();
+			redrawDt(yulandt,b_cols);
+			
+		}
+		div.appendChild(yulan);
+		var save=document.createElement("button");
+		save.innerText="保存";
+		div.appendChild(save);
+		save.onclick=function(){
+			if(inp.value==null||inp.value.length==0){
+				alert("请填写模版名称！");
+			}else{
+				alert("保存成功！");
+			}
+		}
+//		var assave=document.createElement("button");
+//		assave.innerText="另存为";
+//		div.appendChild(assave);
+//		assave.onclick=function(){alert('保存成功！')}
+		var _break=document.createElement("button");
+		_break.innerText="返回";
+		div.appendChild(_break);
+		_break.onclick=function(){window.location='./tabconfig.html'}
+		var inp=document.createElement("input");
+		div.appendChild(document.createTextNode("  模版名称："));
+		div.appendChild(inp);
+	}
+	
+	function _buildDatatable(div){
+		dt=new Ext.lt.datatable(rs);
+		
+		col.push(dt.columns.seq);
+		//col.push({alias:'A',datatype:'S',name:'A'});
+		dt.setCols(col);
+		/*********设置样式*************/
+		
+		dt.headsort(false);
+		dt.setAllowClock(false);
+		dt.setClassName('dttheme_ifmis');
+		dt.setMouselight('#CFF6FF');
+		dt.mousedrag(false);
+		dt.draw(div);
+	}
+	
+	function _buildColumn(div){
+		var _html=['<div layout="{h:{fit:-220},w:{fit:true}}"><div  layout="{h:{fit:20},w:{fit:true}}">选择需要添加的字段：</div><div layout="{h:{fit:-20},w:{fit:true}}"></div></div>'];
+		_html.push('<div layout="{h:{fit:200},w:{fit:true}}">');
+		_html.push('<table width=100% height=200px>');
+		_html.push('<tr height=10px><td>统计口径</td><td>统计数据</td></tr>');
+		_html.push('<tr height=85px align="center" valign="middle"><td><div id="tjkj" class="info_col" info_col=true type="g"></div></td><td><div type="s" info_col=true id="tjsu" class="info_col"></div></td></tr>');
+		_html.push('</table>');
+		_html.push('</div>');
+		div.innerHTML=_html.join('');
+		_buildColTree(div.firstChild.lastChild);
+		 
+	}
+	
+	function _buildColTree(div){
+		coltree=new Ext.lt.Qtree({
+			data: config.cols,
+			field:{id:'code',name:'name',code:'code',sid:'sid',level:'level',isleaf:'isleaf',datatype:"type"},
+			outformartfn:function(ele){
+				return ele.name+('N'==ele.type?"  （数据列）":"");
+			},
+			selectmode:'n',
+			viewmodel:'list',
+			on:{'change':function(qtree,node){
+				var b=false;
+				if(node.data._checked=="checked"){
+					b=addCol(node.data);
+				}else{
+					b=removeCol(node.data);
+				}
+				if(b){redrawDt(dt,buildCols2Datatable())}
+			}}
+		});
+
+		coltree.draw(div);
+	}
+	var coldata={};
+	function addCol(node){
+		var div=document.createElement("div");
+		div.id="perspective_modeconfig_cols_"+node.code;
+		div.innerText=node.name;
+		div.setAttribute("info_col",true);
+		coldata[div.id]=node;
+		var d=null;
+		if('N'==node.type){
+			d=document.getElementById('tjsu');
+			div.setAttribute("type","s");
+		}else{
+			d=document.getElementById('tjkj');
+			div.setAttribute("type","g");
+		}
+		d.appendChild(div);
+		buildDropDiv(div);
+		return true;
+	}
+	function removeCol(node){
+		var div=document.getElementById("perspective_modeconfig_cols_"+node.code);
+		if(div==null)return false;
+		div.parentNode.removeChild(div);
+		coldata[div.id]=null;
+		return true;
+	}
+	
+	function buildCols2Datatable(){
+		var tjkjs = document.getElementById('tjkj').childNodes;
+		var tjsus = document.getElementById('tjsu').childNodes;
+		
+		
+		cols=[dt.columns.seq];
+		for(var i=0;i<tjkjs.length;i++){
+			var node = coldata[ tjkjs[i].id ]
+			cols.push({alias:node.name,datatype:node.type,name:node.code,t:'g'});
+		}
+		for(var i=0;i<tjsus.length;i++){
+			var node = coldata[ tjsus[i].id ]
+			cols.push({alias:node.name,datatype:node.type,name:node.code});
+		}
+		return cols;
+	}
+	function redrawDt(_dt,_cols){
+		_dt.clearCols();
+		_dt.mergeColumn(0)
+		_dt.setCols(_cols);
+		_dt.redraw();
+	}
+	
+	var drawsrc=null;
+	function buildDropDiv(div){
+		div.onmousedown=function(){
+			this.className="move";
+			var _d=this;
+			var d = document;
+			if (!a) a = window.event; //按下时创建一个事件
+			var x = a.clientX - document.body.scrollLeft - _d.offsetLeft; //x=鼠标相对于网页的x坐标-网页被卷去的宽-待移动对象的左外边距
+			var y = a.clientY - document.body.scrollTop - _d.offsetTop; //y=鼠标相对于网页的y左边-网页被卷去的高-待移动对象的左上边距
+			
+			d.onmousemove = function (a) {//鼠标移动
+				if (!a) a = window.event; //移动时创建一个事件
+				_d.style.left = a.clientX + document.body.scrollLeft - x;
+				_d.style.top = a.clientY + document.body.scrollTop - y;
+				if(drawsrc==a.srcElement||!a.srcElement.getAttribute("info_col")||(drawsrc!=null&&drawsrc.getAttribute('type')!=a.srcElement.getAttribute("type"))){return}
+				if(drawsrc!=null){
+					drawsrc.className=drawsrc.className.replace(" mousemove","")
+				}
+				drawsrc=a.srcElement;
+				drawsrc.className+=" mousemove";
+			}
+                
+			d.onmouseup = function () {//鼠标放开
+				document.onmousemove = null;
+				document.onmouseup = null;
+				_d.className="";
+				if(drawsrc!=null&&drawsrc.getAttribute("info_col")){
+					drawsrc.className=drawsrc.className.replace(" mousemove","")
+					if(drawsrc.className=='info_col'){
+						drawsrc.appendChild(_d);
+					}else{
+						drawsrc.parentNode.insertBefore(_d,drawsrc);
+					}
+					redrawDt(dt,buildCols2Datatable());
+				}
+				drawsrc=null;
+			}
+		}
+	}
+	
+	function redrawDatatable(){
+		dt.clearCols();
+		col.push({alias:node.name,datatype:'S',name:node.code});
+		
+		dt.mergeColumn(0)
+		dt.setCols(col);
+		dt.redraw();
+	}
+	function _draw(div){
+		var html=['<div class="perspective_modeconfig_top" layout="{h:{fit:30},w:{fit:true}}"></div>'];
+		html.push('<div layout="{h:{fit:-20},w:{fit:-310}}" style="float:left"></div>');
+		html.push('<div class="perspective_modeconfig_cols" layout="{h:{fit:-30},w:{fit:300}}" style="float:left"></div>');
+		div.innerHTML=html.join('');
+		_buildButtons(div.childNodes[0])
+		_buildDatatable(div.childNodes[1])
+		_buildColumn(div.childNodes[2])
+		
+	}
+	var _modereport={};
+	_modereport.draw=function(div){
+		_draw(div);
+		_modereport.el=div;
+	}
+	_modereport.resize=function(w,h){
+		var div=this.el.childNodes[1];
+		dt.resize(div.clientWidth,div.clientHeight-10);
+	}
+	return _modereport;
+}

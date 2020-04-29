@@ -1,0 +1,121 @@
+.indidb {
+  background: url(../images/cqdb/indisys.png) no-repeat center;
+  width: 68px;
+  height: 68px;
+}
+
+.plandb {
+  background: url(../images/cqdb/plansys.png) no-repeat center;
+  width: 68px;
+  height: 68px;
+}
+
+.paydb {
+  background: url(../images/cqdb/paysys.png) no-repeat center;
+  width: 68px;
+  height: 68px;
+}
+
+.sysfont {
+  font-size: 14px;
+  color: #333;
+  height: 25px;
+  line-height: 25px;
+}
+
+.dbtitleleft {
+  height: 24px;
+  line-height: 24px;
+  width: 41px;
+  background: url(../images/cqdb/dbtitleleft.png) no-repeat left top;
+}
+
+.dbtitlebg {
+  color: #0058a6;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  background: url(../images/cqdb/dbtitlebg.png) repeat left top;
+}
+
+.dbtitlezk {
+  height: 24px;
+  line-height: 24px;
+  width: 20px;
+  background: url(../images/cqdb/dbtitlezk.png) no-repeat left top;
+  cursor: pointer;
+}
+
+.dbtitlesq {
+  height: 24px;
+  line-height: 24px;
+  width: 20px;
+  background: url(../images/cqdb/dbtitlesq.png) no-repeat left top;
+  cursor: pointer;
+}
+
+.dbcontents {
+  color: #000;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  background: url(../images/cqdb/dbtitlebg.png) repeat left top;
+  display: none;
+}
+
+.dbinnerjg {
+  height: 18px;
+  font-size: 0;
+  line-height: 18px;
+}
+
+.dboutterjg {
+  height: 24px;
+  font-size: 0;
+  line-height: 24px;
+}
+
+.dbaudit {
+  height: 60px;
+  background: url(../images/cqdb/dbaudit.png) no-repeat center top;
+}
+
+.dbaprint {
+  height: 60px;
+  background: url(../images/cqdb/dbprint.png) no-repeat center top;
+}
+
+.dbcheck {
+  height: 60px;
+  background: url(../images/cqdb/dbcheck.png) no-repeat center top;
+}
+
+.dbbtnarea {
+  text-align: right;
+  padding-right: 35px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.dbbtnbg {
+  font-size: 13px;
+  color: #333;
+  border: 0;
+  height: 23px;
+  background: url(../images/cqdb/dbbtnbg.gif) no-repeat left top;
+  line-height: 23px;
+  width: 74px;
+  cursor: pointer;
+}
+
+.dbbtnbg_o {
+  font-size: 13px;
+  color: #0058a6;
+  border: 0;
+  height: 23px;
+  background: url(../images/cqdb/dbbtnbg.gif) no-repeat left top;
+  background-position: 0 -23px;
+  line-height: 23px;
+  width: 74px;
+  cursor: pointer;
+}

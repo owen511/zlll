@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="template.report" path="/template/model_no_table_report.jsp">
+		<put name="common" value="/template/common.jsp" />
+		<put name="selfscript" value="/indi2exe/common/selfscript.jsp" />
+		<!-- 默认值 可重载 -->
+		<put name="title"
+			value="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;"
+			direct="true" />
+		<put name="windowtop" value="windowtop" />
+		<put name="mainmenu" value="/template/mainmenu.do" />
+		<put name="edittree" value="/template/treemenu.do" />
+		<put name="navigation" value="/template/navigation.do" />
+		<put name="main" value="/common/_blank.html" />
+		<put name="showhelp" value="/common/_blank.html" />
+	</definition>
+	<!-- 报表开始 -->
+	<!-- 报表编辑首页 -->
+	<definition name="/reportedit/index" extends="template.default2">
+		<put name="main" value="/reportui/reportuimain.jsp" />
+	</definition>
+	<!-- 报表类型定义 -->
+	<definition name="/report/editindex" extends="template.default2">
+		<put name="main" value="/reportui/list_reporttype.jsp" />
+	</definition>
+	<!-- 报表类型定义新增 -->
+	<definition name="/report/add_reporttype" extends="template.default2">
+		<put name="main" value="/reportui/add_reporttype.jsp" />
+	</definition>
+	<!-- 报表类型定义修改 -->
+	<definition name="/report/change_reporttype" extends="template.default2">
+		<put name="main" value="/reportui/change_reporttype.jsp" />
+	</definition>
+	<!-- 报表编辑定义 -->
+	<definition name="/report/editor" extends="template.default2">
+		<put name="main" value="/reportui/list_reportedit.jsp" />
+	</definition>
+	<!-- 报表编辑定义新增 -->
+	<definition name="/report/add_reportedit" extends="template.default2">
+		<put name="main" value="/reportui/add_reportedit.jsp" />
+	</definition>
+	<!-- 报表编辑定义修改 -->
+	<definition name="/report/change_reportedit" extends="template.default2">
+		<put name="main" value="/reportui/change_reportedit.jsp" />
+	</definition>
+	<!--报表查询参数定义 -->
+	<definition name="/report/reportparadef" extends="template.default2">
+		<put name="main" value="/reportui/list_reportparadef.jsp" />
+	</definition>
+	<!--报表查询参数定义 -->
+	<definition name="/report/reportparaset" extends="template.default2">
+		<put name="main" value="/reportui/list_reportparaset.jsp" />
+	</definition>
+	<!-- 更多模板 -->
+	<definition name="/report/moretemplate" extends="template.default2">
+		<put name="main" value="/reportui/moreTemplate.jsp" />
+	</definition>
+	<definition name="/report/index_jsp" extends="template.default2">
+		<put name="main" value="/report/index.jsp"></put>
+	</definition>
+	<definition name="/report/categorizereport_jsp" extends="template.default2">
+		<put name="main" value="/report/categorizereport.jsp"></put>
+	</definition>
+	<definition name="/report/queryother_jsp" extends="template.default2">
+		<put name="main" value="/report/queryother.jsp"></put>
+	</definition>
+	<definition name="/report/show_result_index" extends="template.default2">
+		<put name="main" value="/report/show.jsp"></put>
+	</definition>
+	<definition name="/report/show_in" extends="template.report">
+		<put name="main" value="/report/showFrame.jsp"></put>
+	</definition>
+	<definition name="/jasperreport/goToQuery_in" extends="template.report">
+		<put name="main" value="/report/jasperFrame.jsp"></put>
+	</definition>
+	<!-- 报表的综合查询 -->
+	<definition name="/analyse/showanalyse" extends="template.default2">
+		<put name="main" value="/query/template/queryByTemplate.do?nodelbtn=true">
+		</put>
+	</definition>
+	<definition name="/report/listreport" extends="template.default2">
+		<put name="main" value="/report/listreport.jsp"></put>
+	</definition>
+	<!--报表查询方案自定义  -->
+	<definition name="/report/schemasetting" extends="template.empty2">
+		<put name="main" value="/report/query_rptschema.jsp"></put>
+	</definition>
+	<definition name="/report/copyschematootherusers" extends="template.empty2">
+		<put name="main" value="/report/copy_rptschema.jsp"></put>
+	</definition>
+	<definition name="/report/uniontreeconfig" extends="template.empty2">
+		<put name="main" value="/report/uniontreeconfig.jsp"></put>
+	</definition>
+	<!-- 报表结束 -->
+</tiles-definitions>

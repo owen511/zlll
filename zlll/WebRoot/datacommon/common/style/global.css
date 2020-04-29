@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+br.clear{
+  clear:both;  
+}
+
+span.box{
+  display:block;
+  float:left;
+  margin:2px;
+  padding:2px;
+  line-height:25px;
+  height:25px;  
+}
+

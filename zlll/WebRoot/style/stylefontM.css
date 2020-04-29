@@ -1,0 +1,296 @@
+/*中字号*/
+h1{
+   color: #0066FF;
+   font-size:22px;
+   text-align:center;
+}
+body{
+	font-size: 12px;
+}
+.welcomeA{
+	font-size:12px;
+}
+
+#top #menu ul {
+	font-size: 14px;
+	line-height: 30px;
+}
+#left_tree{
+    font-size:13px;
+}
+
+div#querylist {
+    font-size:14px;
+}
+
+div#querylist1 {
+	font-size: 14px;
+}
+div#querylist input{
+    font-size:14px;
+}
+/*部分显示数据表格的样式，可联合tbl等使用*/
+.main_table_title_letter {
+    font-size:14px;
+	height:22px;
+}
+/*数据表格选中行样式其它信息提示*/
+.main_table_title_letter_info {
+    font-size:14px;
+	height:22px;
+}
+/*数据表格选中行样式*/
+.main_table_title_letter_selected {
+    font-size:14px;
+	height:22px;
+}
+
+/*数据表格特殊行样式*/
+.main_table_title_letter_hilite {
+    font-size:14px;
+	height:22px;
+}
+
+/*数据表格主单   add by  zhaox*/
+.zx {
+    font-size:12px;
+	height:22px;
+}
+
+/*数据表格选中行样式-错误提示*/
+.main_table_title_letter_error1 {
+    font-size:14px;
+	height:22px;
+}
+/*数据表格选中行样式-错误提示*/
+.main_table_title_letter_error2 {
+    font-size:14px;
+	height:22px;
+}
+
+.main_table_title {
+    font-size:13px;
+	height:22px;
+}
+.main_table_title_letterwaitanalyze {
+    font-size:14px;
+}
+.main_table_98 {
+	font-size: 12px;
+}
+.main_table { 
+	font-size: 12px;
+}
+
+#list table {
+	font-size: 12px;
+}
+#list th {
+	font-size: 13px;
+}
+#list td {
+	font-size: 14px;
+}
+#your_position button   , #operation_right button,#confirm_exit_btn button,#confirm_exit_btn input,#operation_right input,#querybutton input,#pop_inner input，  
+	 /*button,*/ .input_button {
+	 font-size:13px;
+}
+
+.button_style {
+	font-size:13px;
+}
+.button_style_1 {
+	font-size:13px;
+}
+/*导航栏字号*/
+#your_position {
+   font-size:12px;
+}
+/*弹窗：审核信息的样式*/
+.auditremark_table {
+	font-size: 12px;
+}
+
+#shenhe_title_middle {
+	font-size: 12px;
+
+}
+.pop_body {
+    font-size:14px;
+}
+.tree-table td{
+    font-size:14px;
+}
+/*编辑区字号*/
+#edit_table,#edit_table_tdetail { 
+	font-size: 14px;
+}
+
+#edit_table th,#edit_table_tdetail th {
+	font-size: 14px;
+}
+#edit_table td,#edit_table_tdetail td {
+	font-size: 14px;
+}
+#edit_table td input,#edit_table_tdetail td input {
+	font-size: 14px;
+}
+#edit_table,#edit_table_tdetail,.edit_table select{
+   font-size:14px;
+}
+.text{font-size:14px;}
+#mainsenddoctime{font-size:14px;}
+#start_createtime{font-size:14px;}
+#end_createtime{font-size:14px;}
+/*带表单,新增或修改页面的表格样式*/
+#form_table {
+	font-size: 12px;
+}
+#form_table th {
+	font-size: 14px;
+}
+#form_table td {
+	font-size: 14px;
+}
+#form_table td input{
+	font-size: 14px;
+}
+#form_table select{
+	font-size: 14px;
+}
+#confirm_exit_btn {
+    font-size:13px;
+}
+#operation_right{
+    font-size:13px;
+}
+/*form_table1适用于数据量很少的页面(一般指单独的新增，修改，生成页面)*/
+#form_table1 {
+	font-size: 12px;
+}
+
+#form_table1 th {
+	font-size: 14px;
+}
+#form_table1 td {
+	font-size: 14px;
+}
+#form_table1 td input{
+	font-size: 14px;
+}
+/*类似标签*/
+#table_list_title {
+	font-size: 12px;
+}
+#table_list_title li.top div {
+    font-size: 12px;
+}
+#form_table_title {
+	font-size: 12px;
+}
+
+/*定义了明细编辑区title的样式*/
+#form_table_title_edit {
+	font-size: 12px;
+}
+
+/*以下是操作按钮的样式*/
+#query_t {
+	font-size: 13px;
+}
+/*首页字号*/
+#default_top_simple {
+	font-size: 12px;
+}
+#default_bottom_simple {
+	font-size: 12px;
+}
+#default_middle_simple {
+    font-size:12px;
+}
+/*首页title样式二*/
+#default_top_title {
+	font-size: 12px;
+}
+#LoadStatus {
+    font-size:14px;
+}
+#div_setymOpposition {
+	font-size: 14px;
+}
+#ttt table{
+	font-size: 12px;
+}
+#ttt table th{
+	  font-size:13px;
+}
+#ttt table td{
+      font-size:12px;
+}
+/*控制页签内列表样式 结束*/ /*控制页签内编辑区样式 开始*/
+#in_table {
+	font-size: 12px;
+}
+#in_table th {
+	font-size: 14px;
+}
+#in_table td {
+    font-size:14px;
+}
+/*安徽公告   add by zhaox*/
+.gonggao_div{
+    font-size:12px;
+}
+.gonggao_div div{
+    font-size:12px;
+}
+ /*非税罚没模块样式 20100129*/
+#total_menu{
+    font-size:12px;
+}
+.columnlist-move-header {
+    font-size:12px;
+}
+/*树的样式控制*/
+div.mztreeview td
+{
+    font-size: 14px;
+}
+div.mztreeview a
+{
+	font-size: 14px;
+}
+#MzTreeInputer
+{
+	font-size: 14px;
+}
+#MzTreeInputer input.text
+{
+	 font-size: 14px;
+}
+.select_font{font-size:14px;}
+/*下拉单层*/
+.single_select{
+  font-size:14px;
+ }
+ .over_single_select{
+  font-size:14px;
+ }
+ .click_single_select{
+  font-size:14px;
+ }
+  /*子树字号*/
+ .sub_legend{font-size: 14px;}
+ }
+ .ac_results li {
+   font-size:14px;
+ }
+ /*输入框的样式20100805*/
+.input_noborder_yellowbg{font-size:14px;}
+/*列表级次树字体控制*/
+.content{{
+	font-size:14px;	
+}
+/*一个表头对应多列表的列表字号*/
+.main_table_titles {font-size:12px;}
+.main_table_title_letters { font-size:14px;}

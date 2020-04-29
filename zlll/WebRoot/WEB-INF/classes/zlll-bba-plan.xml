@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+	<!-- 计划收入 begin -->
+	<bean id = "bba.plan.dao.BBAPlanDAO" parent="bba.base.dao.BBABaseDAO" class="com.zlll.bba.plan.dao.BBAPlanDAO">
+		<property name="associateTag" value="0" />
+		<property name="mainTableName" value="T_BBA_PLAN" />
+		<property name="foreignid" value="mainid" />
+		<property name="dtoClass" value="com.zlll.bba.plan.dto.BBAPlanDTO" />
+	</bean>
+	<bean id = "bba.plan.bo.BBAPlanBO" parent="bba.base.bo.BBABaseBO" class="com.zlll.bba.plan.bo.BBAPlanBO">
+		<property name="bbaPlanDAO" ref="bba.plan.dao.BBAPlanDAO" />
+		<property name="bbaBaseDAO" ref="bba.plan.dao.BBAPlanDAO" />
+		<property name="vouDAO" ref="bba.plan.dao.BBAPlanDAO" />
+		<property name="sourceDAO" ref="bba.plan.dao.BBAPlanDAO" />
+		<property name="sourceMainTableName" value="T_BBA_BANK_RECEIVE"/>
+	</bean>
+	<bean id = "bba.plan.bpo.BBAPlanBPO" parent="bba.base.bpo.BBABaseBPO" class="com.zlll.bba.plan.bpo.BBAPlanBPO">
+		<property name="bbaPlanBO" ref="bba.plan.bo.BBAPlanBO" />
+		<property name="bbaBaseBO" ref="bba.plan.bo.BBAPlanBO" />
+	</bean>
+	<bean id="bba.plan.bpo.BBAPlanBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.plan.bpo.BBAPlanBPO"/>
+	</bean>
+	<!-- 计划收入 end -->
+</beans>

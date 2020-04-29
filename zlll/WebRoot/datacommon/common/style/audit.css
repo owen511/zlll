@@ -1,0 +1,202 @@
+div.auditdef{
+  padding:10px 5px;
+}
+
+div.auditdef label{
+  display:inline-block;
+}
+
+div.auditdef fieldset.fieldset{
+  padding:10px;
+}
+
+div.auditdef fieldset.fieldset legend{
+  font-weight:bold;
+  padding:2px 5px;
+  color:#000;
+}
+
+label span{
+  padding:0 4px;
+}
+ 
+
+
+br.clear{
+  clear:both;
+}
+
+div.float{
+  float:left;
+  margin:5px;
+}
+
+.leftmodel{
+  float:left;
+  width:350px;
+  height:180px;
+  padding:4px 4px;
+}
+
+.leftmodel div{
+  margin:5px 0;
+}
+
+.rightmodel{
+  float:left;
+  width:350px;
+  height:180px;
+  padding:4px 4px;
+}
+
+.rightmodel div{
+  margin:5px 0;
+}
+#selectFormModel{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#efefef;
+}
+#selectFormModel ul{
+  width:200px;
+  height:200px;
+  overflow:auto;
+  overflow-x:hidden;
+}
+
+#selectFormModel ul li{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  cursor:default;
+}
+
+#selectFormModel ul li:hover{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#formModelType{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#efefef;
+}
+#formModelType ul{
+  width:200px;
+  height:200px;
+  overflow:auto;
+  overflow-x:hidden;
+}
+
+#formModelType ul li{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  cursor:default;
+}
+
+#formModelType ul li:hover{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#formfields ul{
+  display:block;
+  width:120px;
+  height:200px;
+  overflow:auto;
+  border:1px solid #ccc;
+}
+
+#formfields ul li{
+  display:block;
+  overflow:hideen;
+  padding:2px;
+  cursor:default;
+}
+
+#formfields ul li:hover{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#lgroup_fields ul{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#fff;;
+}
+
+div.cell_condition_editor{
+  display:none;
+  background:#fff;
+  position:absolute;
+}
+
+div.cell_condition_editor ul{
+  display:block;
+  overflow:auto;
+  border:1px solid #ccc;
+}
+
+div.cell_condition_editor ul li{
+  display:block;
+  overflow:hideen;
+  padding:2px;
+  cursor:default;
+}
+
+div.cell_condition_editor ul li:hover{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+div.cell_condition_editor input{
+  border:0px;
+  padding:0px;
+  margin:0px;
+  background:#eee;
+  overflow:hidden;
+}
+
+div.cell_group_editor{
+  display:none;
+  background:#ccc;
+  position:absolute;
+}
+
+div.cell_group_editor ul{
+  display:block;
+  overflow:auto;
+  border:1px solid #ccc;
+  height:150px;
+}
+
+div.cell_group_editor ul li{
+  display:block;
+  overflow:hideen;
+  padding:2px;
+  cursor:default;
+  background:#88888888;
+}
+
+div.cell_group_editor ul li:hover{
+  overflow:hideen;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#field_selector ul{
+  height:200px;
+  overflow:auto;
+}
+.tip{color:#ff0000;}

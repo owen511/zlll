@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+ 	<!-- 收入调账 begin -->
+	<bean id = "bba.payadjust.dao.BBAPayAdjustDAO" parent="bba.base.dao.BBABaseDAO" class="com.zlll.bba.payadjust.dao.BBAPayAdjustDAO">
+		<property name="associateTag" value="1" />
+		<property name="mainTableName" value="T_BBA_PAY_ADJUST_MAIN" />
+		<property name="subTableName" value="T_BBA_PAY_ADJUST_SUB" />
+		<property name="detailTableName" value="T_BBA_PAY_SUB" />
+		<property name="subDetailTableName" value="T_BBA_PAY_SUB_ADJUST_DETAIL" />
+		<property name="foreignid" value="mainid" />
+		<property name="dtoClass" value="com.zlll.bba.payadjust.dto.BBAPayAdjustDTO" />
+		<property name="subDtoClass" value="com.zlll.bba.payadjust.dto.BBAPayAdjustSubDTO" />
+		<property name="ctrlDtoClass" value="com.zlll.bba.base.dto.BBABaseDTO" />
+		<property name="paService" ref="fasp.pa.paservice.paSeriviceBPO" />
+	</bean>
+	<bean id = "bba.payadjust.bo.BBAPayAdjustBO" parent="bba.base.bo.BBABaseBO" class="com.zlll.bba.payadjust.bo.BBAPayAdjustBO">
+		<property name="bbaPayAdjustDAO" ref="bba.payadjust.dao.BBAPayAdjustDAO" />
+		<property name="bbaBaseDAO" ref="bba.payadjust.dao.BBAPayAdjustDAO" />
+		<property name="bbaPayDAO" ref="bba.pay.dao.BBAPayDAO" />
+		<property name="vouDAO" ref="bba.payadjust.dao.BBAPayAdjustDAO" />
+		<property name="sourceDAO" ref="bba.payadjust.dao.BBAPayAdjustDAO" />
+		<property name="sourceMainTableName" value="T_BBA_PAY_MAIN"/>
+	</bean>
+	<bean id = "bba.payadjust.bpo.BBAPayAdjustBPO" parent="bba.base.bpo.BBABaseBPO" class="com.zlll.bba.payadjust.bpo.BBAPayAdjustBPO">
+		<property name="bbaPayAdjustBO" ref="bba.payadjust.bo.BBAPayAdjustBO" />
+		<property name="bbaBaseBO" ref="bba.payadjust.bo.BBAPayAdjustBO" />
+	</bean>
+	<bean id="bba.payadjust.bpo.BBAPayAdjustBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.payadjust.bpo.BBAPayAdjustBPO"/>
+	</bean>
+	<!-- 收入调账 end -->
+</beans>

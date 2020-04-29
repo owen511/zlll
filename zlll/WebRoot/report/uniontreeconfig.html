@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+
+<object classid="clsid:0B7A9F67-EB6F-42B4-847B-E4A451E276F6" id=WebPrinter codebase="http://127.0.0.1:7001/common/JQezPrinter.ocx#version=1.0.0.0"></object>
+<OBJECT WIDTH="1" HEIGHT="1" ID="RemoveIEToolbar" 
+    CLASSID="CLSID:2646205B-878C-11d1-B07C-0000C040BCDB" codebase="http://127.0.0.1:7001/common/flyie.cab#version=1,0,0,0" VIEWASTEXT>
+	 <PARAM NAME="ToolBar" VALUE="0">
+	 <PARAM NAME="StatusBar" VALUE="1">
+	 <PARAM NAME="MenuBar" VALUE="0">     
+</OBJECT>
+
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:7001/style/ifmis_style.css" />
+<link rel="stylesheet" id="ifmisfontstyle" type="text/css" href="http://127.0.0.1:7001/style/stylefontS.css" />
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:7001/style/ifmis_logo.css"/>
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:7001/style/style.css" />
+<link type="text/css" rel="stylesheet"	href="http://127.0.0.1:7001/style/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:7001/style/calendar.css"/>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/scripts/jsframework.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/prototype.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/jquery-1[1].3.1.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/choose.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/changescroll.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/calendar.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/formatNumber.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/Word_Spell.js"></script>
+<script type="text/vbscript" src="http://127.0.0.1:7001/js/decode_resource.vbs"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/ua.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/ftiens4.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/datatable.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/template.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/overlib/overlibmws.js" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/overlib/overlibmws_filter.js" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/overlib/overlibmws_shadow.js" type=text/javascript></SCRIPT>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/rightButton.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:7001/js/jqueryExtend.js"></script>
+
+<script type="text/javascript">
+   var basePath = 'http://127.0.0.1:7001' ;
+   var linkName ="null" ;
+   var printConfig =null ;   
+   function print(){
+      printL(printConfig,linkName,getDate()) ;
+   }
+   
+   //20091209  通过billid参数进行打印
+   function printBPara(){
+      printM(printConfig,linkName,getDate()) ;
+   }
+   
+      //20100824  通过reportId参数进行打印
+   function printById(reportId){
+      printRById(printConfig,linkName,reportId) ;
+   }
+   
+   //20111203 通过billid参数进行打印 并记录打印日志表，并更新打印次数，打印状态，及打印日期（只记录第一次）
+   function printBParaAsLog(tablename) {
+   	  printBPara() ;
+   	  savePrintLogNoWF(tablename);
+   }
+   // 打印日志 - 不走工作流
+function savePrintLogNoWF(tablename){
+	var url = 'http://127.0.0.1:7001/bank/DirectPayDaily/print/saveprintlognowf.do';
+	var selectRows = tmain.getSelectedRow();
+	var pars = 'tablename='+tablename+'&maindata=' + selectRows.toJSON()+'&isCancel=false&vchtypeid=<c:out value="${vchtypeid}"/>';
+	show();
+	var myAjax = new Ajax.Request(url,
+				   	{
+						method: 'post',
+					   	parameters: pars,
+					   	asynchronous :false,
+					   	onComplete : afterPrintLog,
+						onFailure : function(resp) { 
+							closeDiv();   
+						 	alert("打印日志记录失败！");
+						}
+					} 
+   				);
+}
+
+//打印日志后续操作 - 不走工作流
+function afterPrintLog(resp){
+	if(resp.responseText==""){closeDiv();  return;}
+    var json = resp.responseText.evalJSON(true); 
+    if(json.statuCode!=null && json.statuCode==100 && json.warnmsg !=null && json.warnmsg!=""){
+    	alert(json.warnmsg);
+    	closeDiv();  
+    }
+    var apps = json.vous;
+    var selectrows =  tmain.getSelectedRow();   
+    for(var i= 0; i<apps.size();i++) {
+    	for(var j=0;j<selectrows.length;j++){
+    		if(apps[i].billid==selectrows[j].billid){
+    			selectrows[j].generalprintcount=apps[i].generalprintcount;
+    			selectrows[j].generalprintstatus=apps[i].generalprintstatus;
+    			selectrows[j].generalprintstatus_code=apps[i].generalprintstatus_code;
+    			selectrows[j].generalprintstatus_name=apps[i].generalprintstatus_name;
+    			selectrows[j].generalprinttime = apps[i].generalprinttime;
+    		}
+    	}
+    }
+    tmain.draw();
+  	closeDiv();   
+}
+</script>
+
+
+<script type="text/javascript">
+Using("System.Web.UI.WebControls.MzTreeView");
+var linkvchtypeid = 'null';
+var ROOT_PATH = 'http://127.0.0.1:7001';
+String.prototype.trim = function(){
+	return this.replace(/(^\s*)|(\s*$)/g,"");
+}
+//获取Code全局变量
+ var codeShowConfigs = new Array();
+ var codeShowConfigs_ =null ;
+ if(codeShowConfigs_ != null){
+   codeShowConfigs = codeShowConfigs_;
+ }
+ //系统CODE配置参数
+ var codeShowFlag =0 ;
+</script>
+
+
+<title>
+    财政管理一体化信息系统(IFMIS)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</title>
+<base target="_self"> 
+</head>
+<body class="pop_body">
+<style>
+.only_border{ border:1px #7891CC solid;}
+.only_border_th{ border-right:1px #7891CC solid; border-bottom:1px #7891CC solid; font-size:13px; height:23px; line-height:23px;background-color:#e7ebf7; }
+.only_border_td{ border-right:1px #7891CC solid; border-bottom:1px #7891CC solid; font-size:12px; height:23px; line-height:23px; background:#FFF;}
+.only_border_leftR{ border-left:1px #7891CC solid; border-right:1px #7891CC solid; } 
+.only_border_left{border-left:1px #7891CC solid;}
+.only_border_right{border-right:1px #7891CC solid;}
+.only_border_bottom{border-bottom:1px #7891CC solid;}
+</style>
+<script language="JavaScript" type="text/javascript"  src="/report/image/tbajax.js"></script>
+
+<script type="text/javascript">
+		
+	   var reportid = "fff";
+       //所有科目已设置的显示核算要素
+       var allelementarr=[{seq:0,elementcode:"AGENTBANK",levelno:0,acctsystype:0,acctid:38458,elementname:"代理银行",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:3},{seq:0,elementcode:"BDGAGENCY",levelno:0,acctsystype:0,acctid:25705,elementname:"预算单位",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:9},{seq:0,elementcode:"PAYTYPE",levelno:0,acctsystype:0,acctid:38458,elementname:"支付方式",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:4},{seq:0,elementcode:"PROGRAM",levelno:0,acctsystype:0,acctid:25707,elementname:"项目",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:1},{seq:0,elementcode:"EXPFUNC",levelno:0,acctsystype:0,acctid:38458,elementname:"功能分类",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:4},{seq:0,elementcode:"FUNDSOURCE",levelno:0,acctsystype:0,acctid:25707,elementname:"预算来源",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:2}];
+       //当前科目所选要素 
+       var allgrouparr= [{seq:0,elementcode:"BDGAGENCY",levelno:0,acctsystype:0,acctid:25705,elementname:"预算单位",reportid:0,useid:0,isgroup:1,displaylevel:1,istotal:1,displaylevels:9}];
+       var grouparr=new Array();
+
+       var old_compare = new Array();
+       
+       //登记其要素设置发生变化的科目
+       var changearr=new Array();
+
+//显示科目要素及其分组条件
+function showgrouplist(){ 
+   elearr = allelementarr;
+   grouparr = allgrouparr;
+   old_compare = setcompare(grouparr);
+   inittabpanel(elearr);
+}
+
+//页签显示
+function showdivcontent(divname,format){
+	var divobj=document.getElementById(divname);
+	var tb =divobj.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
+	while(true){
+		try{
+			tb.deleteRow(0);
+		}catch(err){
+			break;
+		}
+	}
+	if(format==1){
+		for(var i=0;i<divobj.contentarray.length;i++){
+			var newTr=tb.insertRow(); 
+			var newTd = newTr.insertCell(); 
+			newTd.innerHTML="<input type=\"checkbox\" value="+i+" >"+divobj.contentarray[i]["elementcode"]+"-"+divobj.contentarray[i]["controlname"]; 
+			//newTd.className="table01-td03" 
+		}
+	}else if(format==2){
+		for(var i=0;i<divobj.contentarray.length;i++){
+			var newTr=tb.insertRow(); 
+			var newTd = newTr.insertCell(); 
+			newTd.width="40%";
+			//newTd.innerHTML="<input type=\"checkbox\" value="+i+" >"+divobj.contentarray[i]["elementcode"]+"-"+divobj.contentarray[i]["elementname"]; 
+			 newTd.innerHTML="<input type=\"checkbox\" value="+i+" name=\"elementName\">"+divobj.contentarray[i]["elementname"];
+			
+			//newTd.className="table01-td03" 
+		}
+	}else if(format==3){
+		for(var i=0;i<divobj.contentarray.length;i++){
+		    
+			var newTr=tb.insertRow(); 
+			newTr.className="table01-td03";
+			var newTd = newTr.insertCell(); 
+			newTd.width="12%";
+			newTd.className="only_border_td";
+			newTd.innerHTML="<input type=\"checkbox\"  name=\"p2_ordercheck\" value="+i+">";
+			var newTd = newTr.insertCell(); 
+			newTd.width="55%";
+			newTd.className="only_border_td";
+			newTd.innerHTML=divobj.contentarray[i]["elementname"];
+			var newTd = newTr.insertCell(); 
+			newTd.width="30%";
+			newTd.className="only_border_bottom";
+			createselect(newTd,divobj.contentarray[i]["displaylevels"],divobj.contentarray[i]["displaylevel"],i)
+		
+		}
+	}else if(format==4){
+		for(var i=0;i<divobj.contentarray.length;i++){
+			var newTr=tb.insertRow(); 
+			newTr.className="main_table_title_content";
+			var newTd = newTr.insertCell(); 
+			 newTd.innerHTML="<input type=\"checkbox\"  name=\"p3_ordercheck\" value="+i+">";
+			var newTd = newTr.insertCell(); 
+			newTd.innerHTML=divobj.contentarray[i]["columnname"];
+			var newTd = newTr.insertCell(); 
+			newTd.innerHTML=divobj.contentarray[i]["columncode"];
+			var newTd = newTr.insertCell(); 
+			if(divobj.contentarray[i]["isshow"]==1)
+			newTd.innerHTML="<input type=\"checkbox\" name=\"isshow\" value=1 onclick=\"changepra('"+divname+"',"+i+")\" checked>";
+			else
+			 newTd.innerHTML="<input type=\"checkbox\" name=\"isshow\" value=0 onclick=\"changepra('"+divname+"',"+i+")\">";
+		}
+	}
+}
+//全部选中
+function selectAllItem(pid,eid){
+	checkboxarr=document.getElementsByName(eid);
+	for(i = 0, iSize = checkboxarr.length;i<iSize;i++){
+	   if(checkboxarr[i].name!=pid&&checkboxarr[i].disabled==false){
+			checkboxarr[i].checked = document.getElementById(pid).checked;
+		}
+	}
+}
+//左右移动
+function movetdcontent(fromdivname,todivname){
+	var fromdivobj=document.getElementById(fromdivname);
+	var todivobj=document.getElementById(todivname);
+	var tb =fromdivobj.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
+	var checkboxarr=tb.getElementsByTagName("input");
+	if(fromdivname=="panel2_rdiv"){
+		checkboxarr=document.getElementsByName("p2_ordercheck");
+	}
+	for(var i=0;i<checkboxarr.length;i++){
+		if(checkboxarr[i].checked){
+			todivobj.contentarray.push(fromdivobj.contentarray[i]);
+		}
+	}
+	for(var i=checkboxarr.length-1;i>=0;i--){
+		if(checkboxarr[i].checked){
+			fromdivobj.contentarray.splice(i,1);
+		}
+	}
+	if(fromdivname=="panel2_rdiv"){
+		showdivcontent(todivname,2);
+		showdivcontent(fromdivname,3);
+	}
+	else if(fromdivname=="panel2_ldiv"){
+		showdivcontent(todivname,3);
+		showdivcontent(fromdivname,2);
+	}else{
+		showdivcontent(todivname,1);
+		showdivcontent(fromdivname,1);
+	}
+	if(document.getElementById("selectAllLeftElement").checked==true){
+		document.getElementById("selectAllLeftElement").checked = false;
+	}
+	if(document.getElementById("selectAllRightElement").checked==true){
+		document.getElementById("selectAllRightElement").checked = false;
+	}
+	
+	
+	
+}
+//上下移动
+function moveupordown(orderdivname,upordown){
+	var divobj=document.getElementById(orderdivname);
+	var checkboxarr=new Array();
+	if(orderdivname=="panel1_rdiv"){
+		var tb =divobj.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
+		checkboxarr=tb.getElementsByTagName("input");
+	}else if(orderdivname=="panel2_rdiv"){
+		checkboxarr=document.getElementsByName("p2_ordercheck");
+	}else if(orderdivname=="panel3_div"){
+		checkboxarr=document.getElementsByName("p3_ordercheck");
+	}
+	var checkedarray=new Array();
+	if(checkboxarr.length==0)	return;
+	var flag=false;
+	if(upordown=="up"){
+		for(var i=0;i<checkboxarr.length;i++){
+			if(!checkboxarr[i].checked){
+				flag=true;
+			}else{
+				if(flag==true){
+					divobj.contentarray[i].checked=true;
+					var temp=divobj.contentarray[i-1];
+					divobj.contentarray[i-1]=divobj.contentarray[i];
+					divobj.contentarray[i]=temp;
+					checkedarray.push(i-1);
+				}else{
+					checkedarray.push(i);
+				}
+			}
+		}	
+	}else if(upordown=="down"){
+		for(var i=checkboxarr.length-1;i>=0;i--){
+			if(!checkboxarr[i].checked){
+				flag=true;
+			}else{
+				if(flag==true){
+					divobj.contentarray[i].checked=true;
+					var temp=divobj.contentarray[i+1];
+					divobj.contentarray[i+1]=divobj.contentarray[i];
+					divobj.contentarray[i]=temp;
+					checkedarray.push(i+1);
+				}else{
+					checkedarray.push(i);
+				}
+			}
+		}
+	}
+	if(orderdivname=="panel2_rdiv"){
+		showdivcontent(orderdivname,3);
+	}else if(orderdivname=="panel3_div"){
+		showdivcontent(orderdivname,4);
+	}else if(orderdivname=="panel1_rdiv"){
+		showdivcontent(orderdivname,1);
+	}
+	for(var i=0;i<checkedarray.length;i++){
+		checkboxarr[checkedarray[i]].checked=true;
+		for(var j=0;j<checkboxarr[checkedarray[i]].parentElement.parentElement.cells.length;j++){
+			checkboxarr[checkedarray[i]].parentElement.parentElement.cells[j].bgColor=""
+		}
+	}
+}
+//复选框点击事件
+function changepra(divname,index){
+	document.getElementById(divname).contentarray[index][event.srcElement.name]=Math.abs(event.srcElement.value-1);
+}
+//创建下拉菜单并添加事件
+function createselect(obj,length,selectvalue,index){
+	var mySelect = document.createElement('select'); 
+	mySelect.name ='displaylevel'; 
+	mySelect.id=index;
+	obj.appendChild(mySelect);
+	for(var i=1;i<length+1;i++){
+		mySelect.add(new Option("第"+i+"级",i)); 
+	}
+	mySelect.value=selectvalue;
+	mySelect.onchange=function changedisplaylevel(){
+ 		document.getElementById('panel2_rdiv').contentarray[event.srcElement.id][event.srcElement.name]=event.srcElement.value;
+	} 
+}
+//绑定数组
+function initdivarray(divname,initarray){
+	document.getElementById(divname).contentarray=initarray;
+}
+
+//初始化panel--查询条件
+function inittabpanel(elearr){
+	var temparr=new Array();
+	for(var i=0;i<grouparr.length;i++){
+		for(var j=0;j<elearr.length;j++){
+			if(elearr[j]["elementcode"].trim()==grouparr[i]["elementcode"].trim()){
+				grouparr[i]["elementname"] = elearr[j]["elementname"];
+				grouparr[i]["displaylevels"] = elearr[j]["displaylevels"];
+				temparr.push(j);
+				break;
+			}
+		}
+	}
+	//科目的要素-已选择的要素 =待选择要素
+	eval('var unselect='+Object.toJSON(elearr)+';');
+	temparr=temparr.sort(function(a,b){return a-b});	
+	for(var j=temparr.length-1;j>=0;j--){
+		unselect.splice(temparr[j],1);
+	}
+	
+	initdivarray("panel2_ldiv",unselect);
+	initdivarray("panel2_rdiv", grouparr);
+	showdivcontent("panel2_ldiv",2);
+	showdivcontent("panel2_rdiv",3);
+	
+}
+//保存
+function savetreeset(){
+    if (isSettingChange()){
+       alert("设置未改变，请返回!");
+	   return ;
+    }
+    for(var j=0; j<grouparr.length; j++){
+       changearr.splice(changearr.length, 0, grouparr[j]);
+    }   
+	var jsonstrobj=new Object();
+	jsonstrobj.reportid=Object.toJSON(parseInt(reportid));
+	jsonstrobj.changestr=Object.toJSON(changearr);
+	
+	var ajaxobj=new Tbajax("/report/saveuniontreeconfig.do",Object.toJSON(jsonstrobj))
+	if(ajaxobj.respText=="success"){
+		//window.close();
+		changearr.length = 0;
+		alert("保存成功!");
+	}else{
+		alert("保存失败!");
+	}
+	//刷新父窗体
+	//window.dialogArguments.toPrepareQuery();
+}
+function back(){
+	window.close();
+}
+ 
+ //选择该科目时，登记其设置信息
+ function setcompare(old_arr){
+    var old_row;
+    var compare = new Array();
+    for(var i=0; i<old_arr.length; i++){
+  	    old_row = old_arr[i]["seq"]
+  	          + old_arr[i]["elementcode"] 
+  	          + old_arr[i]["displaylevel"]  
+  	          + old_arr[i]["isgroup"] 
+  	          + old_arr[i]["istotal"];
+  	     compare.push(old_row); 
+  	}
+  	return  compare;
+  	
+}
+  	
+//判断是否改变设置
+function isSettingChange(){
+   	//在切换科目之前，读取该科目最新设置信息
+   	var new_row;
+   	var new_compare = new Array(); 
+  	for(var j=0; j<grouparr.length; j++){
+  	    var seq = (j+1);
+  	    new_row = seq
+  	          + grouparr[j]["elementcode"] 
+  	          + grouparr[j]["displaylevel"]  
+  	          + grouparr[j]["isgroup"]
+  	          + grouparr[j]["istotal"];
+  	    new_compare.push(new_row); 
+  	}
+  	
+  	//比较该科目的进入和离开时设置信息，如有变化则将该科目ID登记到变化列表
+  	var ischange = (old_compare.sort().toString() == new_compare.sort().toString());
+    return (ischange )
+}
+
+
+
+</script>
+	<ul class="TabbedPanelsTabGroup">
+		<li class="TabbedPanelsTab" tabindex="0">核算要素显示设置</li>
+	</ul>
+	<div class="TabbedPanelsContentGroup">
+		<table width="84%" class="only_border" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th width="30%" nowrap="nowrap" class="only_border_th">
+				<input type="checkbox" onclick="selectAllItem('selectAllLeftElement','elementName');" id="selectAllLeftElement">待选科目要素&nbsp;&nbsp; 
+				</th>
+				<th width="10%" nowrap="nowrap" class="only_border_th">&nbsp;</th>
+				<th width nowrap="nowrap" class="only_border_th">
+				<table border="0px" cellpadding="0" cellspacing="0" style="font-size: 12px;width: 100%;text-indent: 1px;overflow: auto;text-align: center;">
+					<tr>
+						<td width="12%">
+						<input type="checkbox" id="selectAllRightElement" onclick="selectAllItem('selectAllRightElement','p2_ordercheck');"></td>
+						<td width="55%" class="only_border_left">要素名称</td>
+						<td width="30%" class="only_border_left">显示级次</td>
+					</tr>
+				</table>
+				</th>
+			</tr>
+			<tr style="height: expression(document . body .offsetHeight-50-100); border: 0px red solid;">
+				<td align="left" nowrap="nowrap" class="only_border_right">
+				<div id="panel2_ldiv" style="vertical-align: top; height: 100%;">
+					<table border="0px" cellpadding="0" cellspacing="0">
+					</table>
+				</div>
+				</td>
+				<th align="center" class="only_border_right">
+				<input type="button" value=" ↑ " title="上移" class="btn_style" onclick="moveupordown('panel2_rdiv','up')" /><br />
+				<br />
+				<input type="button" value=" ↓ " title="下移" class="btn_style" onclick="moveupordown('panel2_rdiv','down')" /><br />
+				<br />
+				<input type="button" value=" → " title="右移" class="btn_style" onclick="movetdcontent('panel2_ldiv','panel2_rdiv')" /><br />
+				<br />
+				<input type="button" value=" ← " title="左移" class=" btn_style" onclick="movetdcontent('panel2_rdiv','panel2_ldiv')" /></th>
+				<td align="left" nowrap="nowrap">
+				<div id="panel2_rdiv" align="left" style="vertical-align: top; height: 100%;">
+					<table border="0px" cellspacing="0" cellpadding="0" style="font-size: 12px;padding-bottom: 3px;width: 100%;text-indent: 1px;overflow:auto;text-align: center;">
+						</div>
+					</table>
+				</div>
+				</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	 
+	
+	<div id="button_div"
+		style="width:65%; text-align:center;float: left; margin-left: 50px; margin-top:10px; height: 20px;line-height:20px;overflow: hidden;">
+		<input type="button" value="保存" class="button_style"
+			onclick="savetreeset()" />
+		<input type="button" value="返回" class="button_style" onclick="back()" />
+	</div>
+	<script type="text/javascript">
+	     showgrouplist();
+	</script>
+</body>
+</html>

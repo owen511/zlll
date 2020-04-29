@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ColorTable</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+body{
+  padding:0px;
+  margin:0px;
+}
+#colorTable{
+  clear:both;
+  cursor: pointer;
+  border-collapse:collapse;
+}
+  
+#colorTable tr{
+  height:10px;
+}
+
+#colorTable td{
+  width:10px;
+  height:10px;
+  border:1px #FFFFFF solid;
+}
+#SelectedColor{
+  height:16px; 
+  width:50px; 
+  padding:1px; 
+  border:1px #000000 solid;
+  display:block;
+  float:left;
+  margin-right:5px;
+}
+#ColorPreview{
+  height:16px; 
+  width:50px; 
+  padding:1px; 
+  border:1px #000000 solid;
+  display:block;
+  float:right;
+  margin-right:5px;
+}
+#ColorHex{
+  float:left;
+  margin-right:5px;
+}
+
+-->
+</style>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+  $("#colorTable td").mouseover(function(){
+    var bc = $(this).attr("bgcolor");
+    $("#ColorPreview").css("background-color",bc);
+  });
+  $("#colorTable td").click(function(){
+    var bc = $(this).attr("bgcolor");
+    $("#ColorHex").val(bc);
+    $("#SelectedColor").css("background-color",bc);
+  });
+});
+
+function setForecolor(){
+  var color = $('#ColorHex').val();
+  window.parent._dlgParam.setForecolor(color);
+  window.parent.closeDialog();
+}
+-->
+</script>
+</head>
+<body>
+  <span id="ColorPreview"><img src="../images/1px.gif" onclick="" style="cursor:hand" /></span>
+  <span id="SelectedColor" style="background-color:#000000;"><img src="../images/1px.gif" onclick="" style="cursor:hand" /></span>
+  <input type="text" name="ColorHex" id="ColorHex" value="" size="15" style="font-size: 12px"/>
+  
+  
+  <table id="colorTable">
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#003300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#006600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#009900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#330000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#333300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#336600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#339900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#660000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#663300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#666600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#669900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FF00><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#333333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#003333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#006633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#009933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FF33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#330033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#333333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#336633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#339933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FF33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#660033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#663333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#666633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#669933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FF33><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#666666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#003366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#006666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#009966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FF66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#330066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#333366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#336666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#339966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FF66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#660066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#663366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#666666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#669966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FF66><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#999999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#003399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#006699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#009999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FF99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#330099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#333399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#336699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#339999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FF99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#660099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#663399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#666699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#669999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FF99><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0000CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0033CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0066CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0099CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FFCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3300CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3333CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3366CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3399CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FFCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6600CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6633CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6666CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6699CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FFCC><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0000FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0033FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0066FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0099FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00CCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3300FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3333FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3366FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#3399FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33CCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#33FFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6600FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6633FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6666FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#6699FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66CCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#66FFFF><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF0000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#990000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#993300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#996600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#999900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC0000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC3300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC6600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC9900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF0000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF3300><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF6600><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF9900><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCC00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFF00><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#990033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#993333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#996633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#999933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FF33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC0033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC3333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC6633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC9933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFF33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF0033><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF3333><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF6633><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF9933><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCC33><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFF33><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#0000FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#990066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#993366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#996666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#999966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FF66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC0066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC3366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC6666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC9966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFF66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF0066><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF3366><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF6666><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF9966><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCC66><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFF66><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFF00><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#990099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#993399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#996699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#999999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FF99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC0099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC3399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC6699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC9999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFF99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF0099><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF3399><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF6699><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF9999><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCC99><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFF99><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#00FFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9900CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9933CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9966CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9999CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FFCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC00CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC33CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC66CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC99CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFFCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF00CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF33CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF66CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF99CC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCCCC><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFFCC><img src="../images/1px.gif"/></td>
+    </tr>
+    <tr>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF00FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#000000><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9900FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9933FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9966FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#9999FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99CCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#99FFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC00FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC33FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC66FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CC99FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCCCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#CCFFFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF00FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF33FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF66FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FF99FF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFCCFF><img src="../images/1px.gif"/></td>
+      <td bgcolor=#FFFFFF><img src="../images/1px.gif"/></td>
+    </tr>
+  </table>  
+  <p>
+    <button type="button" id="" onclick="setForecolor()">OK</button>
+    <button type="button" onclick="window.parent.closeDialog()">Cancel</button>
+  </p>
+</body>
+</html>

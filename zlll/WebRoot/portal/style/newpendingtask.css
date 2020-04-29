@@ -1,0 +1,77 @@
+/*!
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+/*
+ * FileUploadField component styles
+ */
+.title_blue{
+ font-size:14px;
+ color:#333;
+ height:25px;
+ line-height:25px;
+ border-bottom:1px #ccc dotted;
+ margin-left:5px;
+ margin-right:10px;
+ }
+.content_title{
+ font-size:12px;
+ color:#2C6095;
+ height:25px;
+ line-height:25px;
+ padding-left:5px;
+ margin-left:1px;
+ margin-right:10px;
+ /*background-color:#EEEEEE;
+ filter:progid:DXImageTransform.Microsoft.Gradient(gradienttype=1, startcolorstr=#EBEBEB, endcolorstr=#FFFFFF);*/
+ width:50%;
+ 
+} 
+.content_black{
+ font-size:12px;
+ color:#333333;
+ height:25px;
+ line-height:25px;
+ padding-left:5px;
+ margin-left:1px;
+ margin-right:20px;
+ background-image:url(../../images/done_btn/news.gif);
+ background-position:left center;
+ background-repeat:no-repeat;
+ }
+ 
+ /*待办事项标题样式*/
+.inner_title {
+	font-size: 14px;
+	color: blue;
+	margin-left: 20px;
+	margin-top: 10px;
+	display: block;
+	margin-bottom: 5px;
+}
+/*快速导航、公告标题样式*/
+.title_orange{
+ font-size:16px;
+ color:#DD7D2E;
+ height:30px;
+ line-height:30px;
+ border-bottom:2px #2C609C solid;
+ margin-right:20px;
+ }
+/*报表标题样式*/
+.title_report{
+ font-size:13px;
+ color:#DD7D2E;
+ height:25px;
+ border-bottom:2px #2C609C solid;
+ margin-right:20px;
+ }
+ .title_report ul{list-style:none;margin:0;}
+ .title_report ul li{float:left; margin-right:5px; padding:3px; border:1px #CCC solid; background-image:url(../images/bg/yeqian_report.gif); background-repeat:repeat-x; background-position:left bottom; cursor:pointer;}
+ .title_report ul li.selected{float:left; margin-right:5px; padding:3px; border:1px #2C609C solid; background-image:url(../images/bg/yeqian_report.gif); background-repeat:repeat-x; background-position:left bottom; cursor:pointer; color:#2C609C;}
+ .font_yeqian{ color:#FFF; cursor:pointer;}
+ .font_yeqian_selected{ color:#CCC; cursor:pointer;}
+ .sngPst {FONT-SIZE: 12px; COLOR: #000; LINE-HEIGHT: 15px}
+ .divline{BORDER-BOTTOM: #8BA3DA 1px dotted;}

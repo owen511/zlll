@@ -1,0 +1,187 @@
+/*
+重庆登陆页面的css样式
+*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	background-color: #e7f1fc;
+	background-image: url(../images/cqxz1/bg.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+	overflow: hidden;
+}
+
+.div_bg {
+	height: 768px;
+	width: 100%;
+	background-image: url(../images/cqxz1/cqlogin.jpg);
+	background-position: center top;
+	background-repeat: no-repeat;
+	border-top: 1px #FFF solid;
+}
+
+.login_bg {
+	height: 349px;
+	width: 99%;
+	margin-top: 165px;
+	color: #000;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.login_bg .login_btn {
+	border: 0;
+	background-image: url(../images/cqxz1/login.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 42px;
+	width: 92px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+}
+
+.login_bg .reset_btn {
+	border: 0;
+	background-image: url(../images/cqxz1/reset.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 42px;
+	width: 92px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+}
+
+.login_over {
+	border: 0;
+	background-image: url(../images/cqxz1/logino.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 42px;
+	width: 92px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+	font-weight: 900;
+}
+
+.reset_over {
+	border: 0;
+	background-image: url(../images/cqxz1/reseto.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 42px;
+	width: 92px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+}
+
+.input_style {
+	height: 20px;
+	width: 144px;
+	padding-left: 2px;
+	line-height: 20px;
+	font-size: 14px;
+	background-color: none;
+	border: 0;
+	background: none;
+}
+
+.password_style {
+	height: 20px;
+	width: 144px;
+	padding-left: 2px;
+	line-height: 20px;
+	font-size: 14px;
+	background-color: none;
+	border: 0;
+	background: none;
+}
+
+.input_style_end {
+	line-height: 22px;
+	height: 22px;
+	padding-left: 2px;
+	font-size: 14px;
+	width: 120px;
+	border: 1px #556eac solid;
+}
+
+#chooseyear {
+	filter: alpha(opacity = 80);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+
+#chooseyear div {
+	height: 20px;
+	width: 90px;
+	padding-left: 10px;
+}
+
+.download {
+	z-index: 10;
+	position: absolute;
+	top: 1px;
+	right: 0;
+	background-image: url(../images/cqxz1/download.jpg);
+	height: 97px;
+	width: 97px;
+	background-repeat: no-repeat;
+	filter: alpha(opacity = 80);
+	-moz-opacity: 0.8;
+	color: #2b80f8;
+	font-size: 14px;
+	cursor: pointer;
+	line-height: 100px;
+	font-weight: nomal;
+	text-align: center;
+}
+
+.download_over {
+	z-index: 10;
+	position: absolute;
+	top: 1px;
+	right: 0;
+	background-image: url(../images/cqxz1/download.jpg);
+	height: 97px;
+	width: 97px;
+	background-repeat: no-repeat;
+	color: #2b80f8;
+	font-size: 14px;
+	cursor: pointer;
+	line-height: 100px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.download_over a:link {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.download_over a:visited {
+	color: #FFF;
+}
+
+.download_over a:hover {
+	color: #FFF;
+}
+
+.download_over a:active {
+	color: #FFF;
+}

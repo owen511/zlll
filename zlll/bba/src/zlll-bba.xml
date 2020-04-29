@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- 公共部分  begin -->
+	<bean id = "bba.base.dao.BBABaseDAO" class="com.zlll.bba.base.dao.BBABaseDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id = "bba.base.bo.BBABaseBO" class="com.zlll.bba.base.bo.BBABaseBO">
+		<property name="bbaBaseDAO" ref="bba.base.dao.BBABaseDAO" />
+		<property name="menuBPO" ref="fasp.ca.MenuBPO" />
+		<property name="bcService" ref="bc.bcservice.BcServiceBPO" />
+		<property name="wfService" ref="fasp.wf.WfBPO" />
+		<property name="sysSetService" ref="fasp.systemset.systemSetBPO" />
+		<property name="appUtil" ref="app.util.AppUtil" />
+		<property name="dataRightBPO" ref="fasp.ca.DataRightBPO"/>
+		<property name="dicService" ref="fasp.dic.dictionaryService" />
+		<property name="paService" ref="fasp.pa.paservice.paSeriviceBPO" />
+		<property name="vchComRuleTypeBPO" ref="fasp.pa.vchcomruletype.VchComRuleTypeBPO"/>
+		<property name="vchComRuleBPO" ref="fasp.pa.vchcomrule.VchComRuleBPO" />
+		<property name="comcfgservice" ref="rule.ruleComCfgBPO" />
+	</bean>
+	<bean id = "bba.base.bpo.BBABaseBPO" class="com.zlll.bba.base.bpo.BBABaseBPO">
+		<property name="bbaBaseBO" ref="bba.base.bo.BBABaseBO" />
+	</bean>
+	<!-- 公共部分  end -->
+	
+	<!-- 远程 httpInvoke工具-->
+	<bean id="bba.util.remoting.httpInvokeFactory" class="com.zlll.bba.remoting.util.ZlllHttpInvokeFactory">
+	</bean>
+	
+	<import resource="zlll-bba-info.xml"/>
+	<import resource="zlll-bba-plan.xml"/>
+	<import resource="zlll-bba-pay.xml"/>
+	<import resource="zlll-bba-plandown.xml"/>
+	<import resource="zlll-bba-planadjust.xml"/>
+	<import resource="zlll-bba-payadjust.xml"/>
+</beans>

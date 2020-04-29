@@ -1,0 +1,84 @@
+//检查命名空间
+if(Ext.lt.perspective==null){
+    Ext.lt.perspective={component:{}}
+};
+Ext.lt.perspective.modeconfig=function(config,service){
+	var dt=null;
+	var cols=[];
+	var coltree=null;
+	var rs=new Ext.lt.recordset();
+	rs.addData({});
+	function _buildButtons(div){
+		
+	}
+	
+	function _buildDatatable(div){
+		dt=new Ext.lt.datatable(rs);
+		var col=null;
+		col=[dt.columns.seq];
+		col.push({alias:'A',datatype:'S',name:'A'});
+		dt.setCols(col);
+		/*********设置样式*************/
+		
+		dt.headsort(false);
+		dt.setAllowClock(false);
+		dt.setClassName('dttheme_ifmis');
+		dt.setMouselight('#CFF6FF');
+		dt.mousedrag(false);
+		dt.draw(div);
+	}
+	
+	function _buildColumn(div){
+		var _html=['<div layout="{h:{fit:-220},w:{fit:true}}"><div  layout="{h:{fit:20},w:{fit:true}}">选择需要添加的字段：</div><div layout="{h:{fit:-20},w:{fit:true}}"></div></div>'];
+		_html.push('<div layout="{h:{fit:200},w:{fit:true}}">');
+		_html.push('<table width=100% height=200px>');
+		_html.push('<tr height=10px><td colspan=2>在一下区域间拖动：</td></tr>');
+		_html.push('<tr height=10px><td class="info_td">报表筛选</td><td class="info_td">列标签</td></tr>');
+		_html.push('<tr height=85px><td><div class="info_col"></div></td><td><div class="info_col"></div></td></tr>');
+		_html.push('<tr height=10px><td class="info_td">行标签</td><td class="info_td">数值</td></tr>');
+		_html.push('<tr height=85px><td><div class="info_col"></div></td><td><div class="info_col"></div></td></tr>');
+		_html.push('</table>');
+		_html.push('</div>');
+		div.innerHTML=_html.join('');
+		_buildColTree(div.firstChild.lastChild);
+		 
+	}
+	
+	function _buildColTree(div){
+		coltree=new Ext.lt.Qtree({
+			data: config.cols,
+			field:{id:'code',name:'name',code:'code',sid:'sid',level:'level',isleaf:'isleaf'},
+			outformart:'#code#name',
+			selectmode:'n',
+			viewmodel:'list',
+			on:{'nodeclick':function(node,t,q){
+				debugger;
+			}}
+		});
+
+		coltree.draw(div);
+	}
+	
+	
+	
+	function _draw(div){
+		var html=['<div class="perspective_modeconfig_top" layout="{h:{fit:20},w:{fit:true}}"></div>'];
+		html.push('<div layout="{h:{fit:-20},w:{fit:-310}}" style="float:left"></div>');
+		html.push('<div class="perspective_modeconfig_cols" layout="{h:{fit:-20},w:{fit:300}}" style="float:left"></div>');
+		div.innerHTML=html.join('');
+		_buildButtons(div.childNodes[0])
+		_buildDatatable(div.childNodes[1])
+		_buildColumn(div.childNodes[2])
+		
+	}
+	var _modereport={};
+	_modereport.draw=function(div){
+		_draw(div);
+		_modereport.el=div;
+	}
+	_modereport.resize=function(w,h){
+		var div=this.el.childNodes[1];
+		dt.resize(div.clientWidth,div.clientHeight);
+	}
+	return _modereport;
+}

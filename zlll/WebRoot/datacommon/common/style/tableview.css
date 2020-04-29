@@ -1,0 +1,120 @@
+table.tableview{
+  table-layout:fixed;
+  border-collapse: collapse;
+  border:0;
+  margin:0;
+  background:#c0c0c0;
+  margin-right:10px;
+  margin-bottom:0px;
+}
+
+table.tableview colgroup{
+  overflow:hidden;
+}
+
+table.tableview tr td{
+  overflow:hidden;
+}
+
+table.tableview tr th{
+  overflow:hidden;
+}
+
+
+table.tableview thead{
+  background-color:#ccc;
+}
+
+table.tableview thead tr th {
+  margin:0;
+  padding:0;
+  border:1px solid #c0c0c0;
+  background-color:#cce2fb;
+  color:#000000;
+  empty-cells:show;
+  text-align:center;
+  height:20px;
+  position:static;
+}
+
+table.tableview tbody tr th {
+  margin:0;
+  padding:0;
+  border:1px solid #c0c0c0;
+  background-color:#e7ebf7;
+  color:#000000;
+  empty-cells:show;
+  text-align:left;
+  height:20px;
+  position:static;
+}
+
+table.tableview thead tr td {
+  margin:0;
+  padding:0;
+  border:1px solid #c0c0c0;
+  background-color:#ece9d8;
+  color:#000000;
+  font-weight:bold;
+  empty-cells:show;
+  text-align:center;
+  height:20px;
+  cursor:default;
+}
+
+table.tableview tbody tr td{
+  margin:0;
+  border:1px solid #c0c0c0;
+  overflow:hidden;
+  white-space:pre-wrap;
+  background:#fff;
+  empty-cells:show;
+  height:20px;
+  cursor:default;
+}
+
+table.tableview tbody tr.sel td{
+  background:#efefef;
+}
+
+table.tableview tbody tr.totalRow td{
+  background:#cce2fb;
+}
+
+/*以下是查询的样式*/
+table.queryview{
+  table-layout:fixed;
+  border-collapse: collapse;
+  border:0;
+  margin:0;
+  margin-right:10px;
+  margin-bottom:0px;
+}
+
+table.queryview tr td{
+  overflow:hidden;
+}
+
+table.tableview tr th{
+  overflow:hidden;
+}
+
+table.queryview tbody tr th {
+  margin:0;
+  padding:0;
+  empty-cells:show;
+  text-align:left;
+  height:20px;
+  position:static;
+  width:50px;
+}
+
+table.queryview tbody tr td{
+  margin:0;
+  overflow:hidden;
+  white-space:pre-wrap;
+  empty-cells:show;
+  height:20px;
+  cursor:default;
+  width:200px;
+}

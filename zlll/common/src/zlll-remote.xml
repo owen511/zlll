@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  - Dispatcher servlet for HTTP remoting via Hessian, Burlap, and Spring's
+  - HTTP invoker (see remoting-servlet.xml for the controllers).
+  -->
+<beans>
+
+	<!-- 
+		此文件定义远程服务配置，各模块需各自按以下指定的文件名在各模块的src文件夹下维护、管理远程服务配置。
+		此文件只作管理用途，不允许随意修改！
+	-->
+	<!-- 系统安全远程服务配置 -->
+	<import resource="classpath:SEC-remote.xml"/>
+	<!-- 权限认证远程服务配置 -->
+	<import resource="classpath:CA-remote.xml"/>
+	<!-- 数据字典远程服务配置 -->
+	<import resource="classpath:DIC-remote.xml"/>
+	<!-- 规则远程服务配置 -->
+	<import resource="classpath:RU-remote.xml"/>
+	<!-- 总帐远程服务配置 -->
+	<import resource="classpath:GL-remote.xml"/>
+	<!-- 交易令远程服务配置 -->
+	<import resource="classpath:BC-remote.xml"/>
+	<!-- 工作流远程服务配置 -->
+	<import resource="classpath:WF-remote.xml"/>
+	<!-- 平台接口远程服务配置 -->
+	<import resource="classpath:PA-remote.xml"/>
+	<!-- 账务管理远程服务配置 -->
+	<import resource="classpath:FM-remote.xml"/>
+	
+	<import resource="classpath:RPT-remote.xml"/>	
+
+     <!--框架服务-->
+	<import resource="classpath:FRAMEWORK-remote.xml"/>
+
+	<!-- 接入服务   --> 
+	<import resource="classpath:EX-remote.xml" />
+    
+	<import resource="classpath:XCH-remote.xml"/>
+	
+	<!-- 导出工具请勿注释-->
+	<import resource="classpath:dm-remote.xml"/>
+	
+	<!-- 龙图报表 远程服务-->
+	<import resource="classpath:ifmis-longtureport-remote.xml"/>
+	
+	<!-- 业务系统服务-->
+	<import resource="classpath:ifmis-bcommon-remote.xml"/>
+</beans>

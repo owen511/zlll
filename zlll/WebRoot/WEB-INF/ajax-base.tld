@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+<tlibversion>1.2</tlibversion>
+<jspversion>1.1</jspversion>
+<shortname>ajax</shortname>
+
+<tag>
+<name>view</name>
+<tagclass>com.framework.ajax.taglib.ViewModelTag</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+	<name>viewModelID</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+<tag>
+<name>editTable</name>
+<tagclass>com.framework.ajax.taglib.EditTableTag</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+	<name>tableID</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>urlParams</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+<tag>
+<name>editTablePage</name>
+<tagclass>com.framework.ajax.taglib.AjaxPage</tagclass>
+<bodycontent>JSP</bodycontent>
+<attribute>
+	<name>defaultPageSize</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>maxPageSize</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>beforePageScript</name>
+	<required>false</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+<attribute>
+	<name>tableID</name>
+	<required>true</required>
+	<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+
+</taglib>
+

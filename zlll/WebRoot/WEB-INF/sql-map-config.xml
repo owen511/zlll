@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<sqlMap resource="com/framework/dao/ibatis/maps/utils.xml" />
+	<sqlMap resource="com/frameadmin/dao/ibatis/maps/frameadminSQL.xml" />
+	<sqlMap resource="com/frameadmin/dao/ibatis/maps/FrmModuleSQL.xml" />
+	<sqlMap resource="com/frameadmin/dao/ibatis/maps/FrmCssSQL.xml" />
+	<sqlMap resource="com/frameadmin/dao/ibatis/maps/FrmImageSQL.xml" />
+	<sqlMap resource="com/framework/dao/ibatis/maps/SystemModelSQL.xml" />
+	<sqlMap resource="com/framework/dao/ibatis/maps/SysLoginUserSQL.xml" />
+	<!-- secu -->
+	<sqlMap resource="com/secu/dao/ibatis/maps/RegDSourceSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/TempletSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/SecuSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/UserDivSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/DivTreeSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/ModuleSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/SecuInterfaceSQL.xml" />
+	<sqlMap resource="com/secu/dao/ibatis/maps/UserSQL.xml" />
+    <!-- datarecord -->
+    <sqlMap resource="com/datarecord/dao/ibatis/maps/SysFactorDataTableRecordSql.xml" />
+    <sqlMap resource="com/datarecord/dao/ibatis/maps/CodeTableSql.xml" />
+    <sqlMap resource="com/datarecord/dao/ibatis/maps/MainModelSql.xml" />
+    <sqlMap resource="com/datarecord/dao/ibatis/maps/CorrelativeTableSql.xml" />
+    <sqlMap resource="com/datarecord/dao/ibatis/maps/ValueRelationSql.xml" />
+    <!-- verifyplan -->
+    <sqlMap resource="com/taskexport/dao/ibatis/maps/PlanDetailSql.xml" />
+    <sqlMap resource="com/taskexport/dao/ibatis/maps/PlanExcuterSql.xml" />
+    <sqlMap resource="com/taskexport/dao/ibatis/maps/PlanDataTypeSql.xml" />
+    <sqlMap resource="com/notepad/dao/ibatis/maps/NotePadSQL.xml" />    
+    <sqlMap resource="com/taskexport/dao/ibatis/maps/ExportOracleDataToAccessSql.xml" />
+	<!-- table check -->
+	<sqlMap resource="com/tablecheck/view/dao/ibatis/maps/viewSQL.xml"/>
+	<sqlMap resource="com/tablecheck/view/dao/ibatis/maps/fieldSQL.xml"/>
+	<sqlMap resource="com/tablecheck/checkclass/dao/ibatis/maps/checkclassSQL.xml"/>
+	<sqlMap resource="com/tablecheck/checkdef/dao/ibatis/maps/checkdefSQL.xml"/>
+	<sqlMap resource="com/tablecheck/engine/dao/ibatis/maps/engineSQL.xml"/>
+	<!-- inspectflow -->
+	<sqlMap resource="com/inspectflow/dao/ibatis/maps/inspectflowSQL.xml"/>
+    <!-- datainput -->
+    <sqlMap resource="com/datainput/dao/ibatis/maps/FactorSQL.xml" />
+    <sqlMap resource="com/datainput/dao/ibatis/maps/TableEditSQL.xml" />
+    <sqlMap resource="com/datainput/dao/ibatis/maps/TableConditionSQL.xml" />
+    <sqlMap resource="com/search/dao/ibatis/maps/SearchSQL.xml" />
+    <sqlMap resource="com/search/dao/ibatis/maps/SearchClassSQL.xml" />
+	<sqlMap resource="com/workflow/define/dao/ibatis/maps/FrmDefineSQL.xml"/>
+	<sqlMap resource="com/workflow/execute/dao/ibatis/maps/FrmExecuteSQL.xml"/>
+	<sqlMap resource="com/efmsys/dao/ibatis/maps/EfmSysSQL.xml"/>
+	<!-- mark and planFinish and accessories -->
+	<sqlMap resource="com/mark/dao/ibatis/maps/MarkSQL.xml"/>
+	<!-- chargeCount -->
+	<sqlMap resource="com/charge/dao/ibatis/maps/ChargeCountSQL.xml"/>
+	<!-- conformity -->
+	<sqlMap resource="com/conformity/dao/ibatis/maps/ConformitySQL.xml"/>
+    <!-- law -->
+    <sqlMap resource="com/law/dao/ibatis/maps/lawSQL.xml"></sqlMap>
+    <sqlMap resource="com/law/dao/ibatis/maps/LogInfoSQL.xml"/>
+    <!-- notice -->
+    <sqlMap resource="com/notice/dao/ibatis/maps/noticeSQL.xml"></sqlMap>
+    <!-- reportTask -->
+    <sqlMap resource="com/reportTask/dao/ibatis/maps/reportTaskSQL.xml"/>
+    <sqlMap resource="com/reportTask/dao/ibatis/maps/PurviewSQL.xml"/>
+    <sqlMap resource="com/common/utils/dao/ibatis/maps/utils.xml"/>
+    <sqlMap resource="com/macroproject/common/dao/ibatis/maps/MacroProjectCommonSQL.xml"/>
+    <sqlMap resource="com/synthquery/dao/ibatis/maps/SynthQuerySQL.xml"/>
+	<sqlMap resource="com/chart/dao/ibatis/maps/chartSQL.xml"/>
+	<sqlMap resource="com/chart/dao/ibatis/maps/reportSQL.xml"/>
+	<sqlMap resource="com/chart/dao/ibatis/maps/SelectTreeSQL.xml"/>
+    <sqlMap resource="com/chart/dao/ibatis/maps/BusinessObjSQL.xml"/>
+    <sqlMap resource="com/cquery/datatable/dao/ibatis/maps/FrmCQDataTableSQL.xml"/>
+	<sqlMap resource="com/cquery/linkpattern/dao/ibatis/maps/FrmCQLinkPatternSQL.xml"/>
+	<sqlMap resource="com/cquery/execute/dao/ibatis/maps/FrmExecuteSQL.xml"/>
+	<!-- vv -->
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormDetailSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormDigColSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormDigPathSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormSortSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataFormTitleSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DataSetColSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/DsAuthorizeSQL.xml"/>
+	<sqlMap resource="com/cquery/querydefine/dao/ibatis/maps/PrivilegeSQL.xml"/>
+	<!-- loginfo  -->
+	<sqlMap resource="com/loginfo/dao/ibatis/maps/SysLogInfoSQL.xml"></sqlMap>	
+	<!-- wj -->
+	<sqlMap resource="com/wj/dao/ibatis/maps/wjSql.xml"/>	 
+	<!-- bulletin -->
+	<sqlMap resource="com/bulletin/dao/ibatis/maps/bulletinSQL.xml"/>
+		<!-- Workingpaper-->
+	<sqlMap resource="com/workingpaper/dao/ibatis/maps/WorkingPaperSQL.xml"/>
+</sqlMapConfig>

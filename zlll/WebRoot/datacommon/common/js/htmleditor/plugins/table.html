@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Link</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+body{
+  padding:10px;
+  margin:0px;
+}
+
+*{
+  font-size:12px;
+}
+
+
+-->
+</style>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+<!--
+
+$(document).ready(function(){
+  $("#table_enablewidth").bind("click",function(){
+    	if($("#table_enablewidth").attr("checked")==true){
+    			$("#table_width").attr("disabled","");
+    			$("#table_width_unit").attr("disabled","");
+    	}else{
+    		  $("#table_width").attr("disabled","disabled");
+    			$("#table_width_unit").attr("disabled","disabled");
+    	}
+  });
+  $("#table_enableheight").bind("click",function(){
+    	if($("#table_enableheight").attr("checked")==true){
+    			$("#table_height").attr("disabled","");
+    			$("#table_height_unit").attr("disabled","");
+    	}else{
+    		  $("#table_height").attr("disabled","disabled");
+    			$("#table_height_unit").attr("disabled","disabled");
+    	}
+  });
+});
+function isNumber(num){
+  return isNaN(num);
+}
+function createTable(table_rows,table_cols,table_align,table_border,table_collspacing,table_collpadding,table_width,table_width_unit,table_height,table_height_unit){
+	   var table = $("<table></table>");
+	   for(var i = 0; i < table_rows; i++) {  
+	    	var row = $("<tr></tr>"); 
+    		for(var j = 0; j < table_cols; j++) {   
+	         var cell = $("<td>&nbsp;</td>");  
+	        row.append(cell);   
+   			}
+   			table.append(row);     
+		 }
+     table.attr("align",table_align);
+     table.attr("border",table_border);
+     table.attr("cellspacing",table_collspacing);
+		 table.attr("cellpadding",table_collpadding);
+		 if(table_width>0){
+		 		table.attr("width",table_width+table_width_unit);
+		 }
+		 if(table_height>0){
+		 	  table.attr("height",table_height+table_height_unit);
+		 }
+		 var div = $("<div></div>");
+		 div.append(table);
+     return div.html();
+}
+
+
+function insertTable(){
+	
+		var table_rows = $("#table_rows").val();
+		var table_cols = $("#table_cols").val();
+		var table_align = $("#table_align").val();
+		var table_border = $("#table_border").val();
+		var table_collspacing = $("#table_collspacing").val();
+		var table_collpadding = $("#table_collpadding").val();
+		var table_width = 0;
+		var table_width_unit;
+		if($("#table_enablewidth").attr("checked")==true){
+		   		table_width =	$("#table_width").val();
+		   		table_width_unit = 	$("#table_width_unit").val();
+		}
+		var table_height = 0;
+		var table_height_unit;
+		if($("#table_enableheight").attr("checked")==true){
+		  		table_height =	$("#table_height").val();
+		   		table_height_unit =	$("#table_height_unit").val();
+		}
+		if(!isNumber(table_rows) && !isNumber(table_cols) && !isNumber(table_border) && !isNumber(table_collspacing) && !isNumber(table_collpadding) && !isNumber(table_width) && !isNumber(table_height)){
+				if(table_rows != 0 || table_cols != 0){
+						table_rows = table_rows==0?1:table_rows;
+						table_cols = table_cols==0?1:table_cols;
+						var newTableHtml = createTable(table_rows,table_cols,table_align,table_border,table_collspacing,table_collpadding,table_width,table_width_unit,table_height,table_height_unit);
+						window.parent.Dialogs["htmleditor_inserttable"].context.insertHtml(newTableHtml);
+						window.parent.Dialogs["htmleditor_inserttable"].close();
+				}
+		}else{
+			alert("请您正确输入表格信息！");
+		}
+}
+-->
+</script>
+</head>
+<body>
+<fieldset>
+  <legend>表格大小</legend>
+  <label>行</label>
+  <input type="text" id="table_rows" value="" style="width:40px;" />
+  <label>列</label>
+  <input type="text" id="table_cols" value="" style="width:40px;" />
+</fieldset>
+
+<fieldset>
+  <legend>表格样式</legend>
+  <p>
+    <label>对齐方式</label><br />
+    <select id="table_align">
+    		<option value="left">LEFT为居左</option>
+    		<option value="center">CENTER为居中</option>
+    		<option value="right">RIGHT为居右</option>
+    </select>
+  </p>
+  <p>
+    <label>边框大小</label><br />
+    <input type="text" id="table_border" value="" style="width:100px;" />
+  </p>
+  <p>
+    <label>单元格间距</label><br />
+    <input type="text" id="table_collspacing" value="" style="width:100px;" />
+  </p>
+  <p>
+    <label>单元格边距</label><br />
+    <input type="text" id="table_collpadding" value="" style="width:100px;" />
+  </p>
+  <p>
+    <input type="checkbox" id="table_enablewidth" /><label>宽</label><br />
+    <input type="text" id="table_width" value="0" style="width:100px;" disabled="disabled" /><select id="table_width_unit" disabled="disabled"><option value="px">px</option><option value="%">%</option></select>
+  </p>
+  <p>
+    <input type="checkbox" id="table_enableheight" /><label>高</label><br />
+    <input type="text" id="table_height" value="0" style="width:100px;" disabled="disabled" /><select id="table_height_unit" disabled="disabled"><option value="px">px</option><option value="%">%</option></select>
+  </p>
+</fieldset>
+<p>
+    <button type="button" id="" onclick="insertTable()">确定</button>
+    <button type="button" onclick="window.parent.Dialogs['htmleditor_inserttable'].close()">取消</button>
+</p>
+</body>
+</html>

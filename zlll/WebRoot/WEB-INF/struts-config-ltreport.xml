@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+		<action path="/report/index"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="showIndexAction">
+			<forward name="success" path="/report/index_jsp"></forward>
+		</action>
+		<action path="/report/categorizereport"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="categorizeReportAction">
+			<forward name="success" path="/report/categorizereport_jsp"></forward>
+		</action>
+		<action path="/report/view_result"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="viewReportResultAction">
+			<forward name="success" path="/report/view.jsp"></forward>
+		</action>
+		<action path="/report/print"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="printReportResultAction">
+		</action>
+		<action path="/report/selectPrintTemplate"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="selectPrintTemplate">
+			<forward name="success" path="/report/selectPrintTemplate.jsp"></forward>
+		</action>
+
+		<action path="/report/exportExcel_result"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="exportReportResultAction">
+			<forward name="success" path="/report/exportExcel.jsp"></forward>
+		</action>
+		<action path="/report/exportDBF"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="exportDBF">
+
+		</action>
+		<action path="/report/query_result"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="queryReportResultAction">
+			<forward name="success" path="/report/show.jsp"></forward>
+		</action>
+		<action path="/report/show_result"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="showReportResultAction">
+			<forward name="success" path="/report/show.jsp"></forward>
+		</action>
+		<action path="/report/query_result_in"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="queryReportResultAction">
+			<forward name="success" path="/report/show_in"></forward>
+		</action>
+		<action path="/report/show_result_in"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="goToFrame">
+			<forward name="success" path="/report/show_in"></forward>
+		</action>
+
+		<action path="/jasperreport/goToQuery"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="goToQueryAction">
+			<forward name="success" path="/report/jasperreport.jsp"></forward>
+		</action>
+
+		<action path="/jasperreport/queryReport"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="queryReportAction">
+			<forward name="success" path="/report/jasperreport.jsp"></forward>
+		</action>
+
+		<action path="/jasperreport/goToQuery_in"
+			type="gov.mof.fasp.ifmis.report.common.action.ReportAction"
+			parameter="goToJasperFrame">
+			<forward name="success" path="/jasperreport/goToQuery_in"></forward>
+		</action>
+		<action path="/report/editindex"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportTypeAction">
+			<forward name="success" path='/reportedit/index' />
+		</action>
+		<action path="/report/reporttype"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportTypeAction">
+			<forward name="success" path='/report/editindex' />
+		</action>
+		<action path="/report/add_reporttype"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="turnToSaveReportTypeAction">
+			<forward name="success" path='/report/add_reporttype' />
+		</action>
+		<action path="/report/reporttype_add"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="saveReportTypeAction">
+			<forward name="success" path='/report/list_reporttype_find.do' />
+		</action>
+		<action path="/report/reporttype_add_continue"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="saveReportTypeAction">
+			<forward name="success" path='/report/add_reporttype.do' />
+		</action>
+		<action path="/report/update_reporttype"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="turnToUpdteTypeAction">
+			<forward name="success" path='/report/change_reporttype' />
+		</action>
+		<action path="/report/reporttype_update"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="updteTypeAction">
+			<forward name="success" path='/report/reporttype.do' />
+		</action>
+		<action path="/report/list_reporttype_find"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportTypeAction">
+			<forward name="success" path='/report/editindex' />
+		</action>
+		<action path="/report/list_reporttype_del"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="delReportTypeAction">
+			<forward name="success" path='/report/list_reporttype_find.do' />
+		</action>
+		<action path="/report/reportedit"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportEditAction">
+			<forward name="success" path='/report/editor' />
+		</action>
+		<action path="/report/add_reportedit"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="turnToSaveReportEditAction">
+			<forward name="success" path='/report/add_reportedit' />
+		</action>
+		<action path="/report/reportedit_add"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="saveReportEditAction">
+		</action>
+		<action path="/report/update_reportedit"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="turnToUptReportEditAction">
+			<forward name="success" path='/report/change_reportedit' />
+		</action>
+		<action path="/report/reportedit_update"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="uptReportEditAction">
+			<forward name="success" path='/report/reportedit.do' />
+		</action>
+		<action path="/report/reportedit_del"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="delReportEditAction">
+			<forward name="success" path='/report/reportedit.do' />
+		</action>
+		<action path="/report/list_reportedit_find"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportEditAction">
+			<forward name="success" path='/report/reportedit.do' />
+		</action>
+		<action path="/report/list_reportparadef"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportParaDefAction">
+			<forward name="success" path='/report/reportparadef' />
+		</action>
+		<action path="/report/update_reportparadef"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="updateReportParaDefAction">
+			<forward name="success" path='/report/reportedit.do' />
+		</action>
+		<action path="/report/list_reportparaset"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="listReportParaSetAction">
+			<forward name="success" path='/report/reportparaset' />
+		</action>
+		<action path="/report/update_reportparaset"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="updateReportParaSetAction">
+			<forward name="success" path='/report/reportedit.do' />
+		</action>
+		<action path="/report/reportdownload"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="downloadReportAction">
+			<forward name="success" path='/report/editor' />
+		</action>
+		<action path="/report/moretemplate"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="moreTemplateAction">
+			<forward name="success" path='/report/moretemplate' />
+		</action>
+		<action path="/report/moretemplatedownload"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="downloadMoreTemplateAction">
+		</action>
+		<action path="/report/moretemplate_save"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="saveMoreTemplateAction">
+			<forward name="success" path='/report/moretemplate.do' />
+		</action>
+		<!--更多模板删除处理 -->
+		<action path="/report/moretemplate_del"
+			type="gov.mof.fasp.ifmis.system.report.ReportEditAction" parameter="delMoreTemplateAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/report/schemasetting"
+			type="gov.mof.fasp.ifmis.report.schema.action.ReportSchemaAction"
+			parameter="listReportSchemaAction">
+			<forward name="success" path='/report/schemasetting' />
+		</action>
+
+		<action path="/report/copyschematootherusers"
+			type="gov.mof.fasp.ifmis.report.schema.action.ReportSchemaAction"
+			parameter="turnToCopyReportSchemaToOtherUsersAction">
+			<forward name="success" path='/report/copyschematootherusers' />
+		</action>
+
+		<action path="/report/savecopyschematootherusers"
+			type="gov.mof.fasp.ifmis.report.schema.action.ReportSchemaAction"
+			parameter="saveCopyReportSchemaToOtherUsersAction">
+			<forward name="success" path='/report/copyschematootherusers' />
+		</action>
+		<action path="/report/savequeryschemas"
+			type="gov.mof.fasp.ifmis.report.schema.action.ReportSchemaAction"
+			parameter="saveReportSchemaAction">
+			<forward name="success" path='' />
+		</action>
+
+		<action path="/common/printvoucher" type="gov.mof.fasp.ifmis.system.report.ReportAction"
+			parameter="printVoucherAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+
+		<action path="/report/listreport" type="gov.mof.fasp.ifmis.system.report.ReportAction"
+			parameter="listReportAction">
+			<forward name="success" path="/report/listreport" />
+		</action>
+		<action path="/report/savereport" type="gov.mof.fasp.ifmis.system.report.ReportAction"
+			parameter="saveReportAction">
+			<forward name="success" path="/report/listreport.do" />
+		</action>
+		<action path="/report/downloadreport" type="gov.mof.fasp.ifmis.system.report.ReportAction"
+			parameter="downloadReportAction">
+		</action>
+	</action-mappings>
+</struts-config>

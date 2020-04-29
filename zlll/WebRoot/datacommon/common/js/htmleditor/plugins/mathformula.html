@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Math Formula</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/style/dialog.css" />
+
+<style type="text/css">
+<!--
+body{
+  padding:10px;
+  margin:0px;
+}
+
+*{
+  font-size:12px;
+}
+
+#mathformula_examples{
+  
+}
+
+#mathformula_examples div{
+  display:block;
+  border:1px solid #ccc;
+  width:40px;
+  height:40px;
+  float:left;
+}
+-->
+</style>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+  var editor = window.parent.Dialogs['htmleditor_mathformula'].context;
+  var selected = editor.getSelected();
+  if(selected && selected.tagName && selected.tagName.toLowerCase()=="img" && $(selected).attr("class")=="math"){
+    var code = selected.alt;
+    $("#mathformula_input").val(code);
+    proviewMathformula();
+  }
+});
+
+function insertFormula(){
+  var editor = window.parent.Dialogs['htmleditor_mathformula'].context;
+  var _mathUrl = window.parent.Dialogs["htmleditor_mathformula"].context._MathUrl;
+  var url = _mathUrl+encodeURI($("#mathformula_input").val());
+  
+  var html = "<img src=\""+url+"\"";
+  html += " class=\"math\"";
+  html += "alt=\""+$("#mathformula_input").val()+"\"";
+  html += " style=\"vertical-align:middle\"";
+  html +=" />";
+  editor.insertHtml(html);
+  window.parent.Dialogs['htmleditor_mathformula'].close();
+}
+
+function showFormulaExample(){
+  var editor = window.parent.Dialogs['htmleditor_mathformula'].context;
+  editor.showFormulaExample(window);
+}
+
+function appendFormula(formula){
+  $("#mathformula_input").append(formula);
+  proviewMathformula();
+}
+
+function proviewMathformula(){
+  if($("#mathformula_input").val()==""){
+    $("#previewimg").remove();
+  }else{
+    var _mathUrl = window.parent.Dialogs["htmleditor_mathformula"].context._MathUrl;
+    var imgurl = _mathUrl+encodeURI($("#mathformula_input").val());
+    if($("#previewimg").length==0){
+      $("#preview_container").append($("<img id=\"previewimg\" />"));
+    }
+    $("#previewimg").attr("src",imgurl);
+  }
+}
+-->
+</script>
+</head>
+<body>
+<fieldset>
+  <legend>公式输入</legend>
+  <p align="center">
+    <textarea id="mathformula_input" style="width:240px;height:100px;" onkeyup="proviewMathformula()"></textarea>
+  </p>
+  <p align="center"><a href="javascript:showFormulaExample()">查看演示示例</a></p>
+</fieldset>
+<fieldset>
+  <legend>预览</legend>
+  <div style="width:200px;height:150px;text-align:center" id="preview_container"></div>
+</fieldset>  
+<p>
+  <button type="button" onclick="insertFormula()" id="">确定</button>
+  <button type="button" onclick="window.parent.Dialogs['htmleditor_mathformula'].close()">取消</button> 
+</p>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="ui.selfscript" path="/strutsui/common/selfscript.jsp">
+		<put name="modulescript" value="/strutsui/common/nullscript.jsp" /> <!-- 默认值 可重载 -->
+	</definition>
+	<definition name="template.strutsui.default" extends="template.default2">
+		<put name="selfscript" value="ui.selfscript" />
+	</definition>
+	<definition name="template.strutsui.salary" extends="template.salary.public">
+		<put name="selfscript" value="ui.selfscript" />
+	</definition>
+	<definition name="template.strutsui.empty" extends="template.empty">
+		<put name="selfscript" value="ui.selfscript" />
+	</definition>
+	<!-- 开始页面 -->
+	<definition name="/strutsui/strutsui_index_task" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/index.jsp" />
+	</definition>
+	<!--主子列表 -->
+	<definition name="/strutsui/common/index" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/index_mainsubdata.jsp" />
+	</definition>
+	<!--新增有来源主子编辑 -->
+	<definition name="/strutsui/common/addsrc" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/add_srcmaindata.jsp" />
+	</definition>
+	<!--修改有来源主子编辑 -->
+	<definition name="/strutsui/common/modsrc" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/mod_srcmaindata.jsp" />
+	</definition>
+	<!--编辑有来源主子编辑 -->
+	<definition name="/strutsui/common/editsrceditchild"
+		extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/edit_srceditchild.jsp" />
+	</definition>
+	<!--新增有来源无头主子编辑 -->
+	<definition name="/strutsui/common/addsrcnohead" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/add_srcdatanohead.jsp" />
+	</definition>
+	<!--修改有来源无头主子编辑 -->
+	<definition name="/strutsui/common/modsrcnohead" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/mod_srcdatanohead.jsp" />
+	</definition>
+	<!--无来源主子编辑 -->
+	<definition name="/strutsui/common/edit" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/edit_mainsubdata.jsp" />
+	</definition>
+	<!--主列表（无子） -->
+	<definition name="/strutsui/common/singleindex" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/index_maindata.jsp" />
+	</definition>
+	<!--新增有来源列表选择 -->
+	<definition name="/strutsui/common/addlist" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/add_listdata.jsp" />
+	</definition>
+	<!--有来源单表＋编辑区(分存比例,头寸管理) -->
+	<definition name="/strutsui/common/edit1table" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/edit_src1table.jsp" />
+	</definition>
+
+	<!--无列表的表单编辑 -->
+	<definition name="/strutsui/common/formedit" extends="template.strutsui.default">
+		<put name="main" value="/strutsui/common/edit_formdata.jsp" />
+	</definition>
+</tiles-definitions>

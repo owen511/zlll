@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ProjectForm API</title>
+
+<script src="../../common/js/calendarProject.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../ltext/datatabletheme.css" />
+<link rel="stylesheet" type="text/css" href="../../../ltext/datatabletheme35.css" />
+<link rel="stylesheet" type="text/css" href="../uidoc.css" />
+
+<script src="../../../ltext/frameworksupport.js"></script>
+<script src="../../../ltext/ltext_core.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../common/style/tableview.css" />
+<script src="../../common/js/hashmap.js"></script>
+<script src="../../common/js/jquery-1.8.3.min.js"></script>
+<script src="../../common/js/extendInitProject.js"></script>
+
+
+
+</head>
+
+<body>
+<h1>ProjectForm 插件</h1>
+<h2>说明：</h2>
+<p>
+ProjectForm 插件是一个用来展示基本信息的表格
+</p>
+<h2>初始化参数说明</h2>
+<p>
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+    <tr>
+      <th width="15%" bgcolor="#00FFFF">参数名</th>
+      <th width="15%" bgcolor="#00FFFF">数据类型</th>
+      <th bgcolor="#00FFFF">说明</th>
+    </tr>
+    <tr>
+      <td bgcolor="#CCCCCC">data</td>
+      <td bgcolor="#EEEEEE">String</td>
+      <td bgcolor="#EEEEEE">表格数据,由后台BaseFormService类的loadProjectForm方法提供</td>
+    </tr>
+
+  </table>
+</p>
+<h2>属性说明</h2>
+<h3>version</h3>
+<p>组件版本号:1.0</p>
+<h3>type</h3>
+<p>组件类型:table</p>
+
+<h2>方法说明</h2>
+<h3>draw</h3>
+<p>
+用来生成form表单，参数为显示div的id<br/>
+<pre>
+var projectForm = new ProjectForm(data);
+projectForm.draw(divId);
+</pre>
+
+
+</p>
+
+<h3>setDisabled</h3>
+<p>
+设置某个单元格不可编辑<br>
+projectForm.setDisabled("FORMTYPE",true);
+</p>
+
+<h3>getData</h3>
+<p>
+获取projectform的数据，返回值为json，error为错误信息,data为数据信息<br>
+var result = projectForm.getData();
+if(result && result.error){
+	alert(result.error);
+	return;
+}
+var data = result.data;
+</p>
+
+<h3>getValue</h3>
+<p>
+获取某一列的值<br>
+projectForm.getValue("FORMTYPE");
+</p>
+
+<h3>setValue</h3>
+<p>
+设置某一列的值，如果列为引用项则value{itemid:1,code:'001',name:'类型'}<br>
+projectForm.setValue("FORMTYPE",value);
+</p>
+
+<h3>setTableStyle</h3>
+<p>
+设置table的class，默认为tableview<br>
+projectForm.setTableStyle(style);
+</p>
+
+
+
+<h2>事件说明</h2>
+
+<h3>clickRefAfter</h3>
+<p>
+选择引用项后调用 , node为所选树节点的信息<br>	
+projectForm.clickRefAfter = function(node){
+		
+	alert(Object.toJSON(node));
+}
+</p>
+
+<h2>消息说明</h2>
+<p>
+
+</p>
+
+
+<script>
+
+var tableHtml2 = "<div><table style=\"width:100%;\" class=\"tableview\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0\"    product=\"TPMS\" ><tr><th><label><span>报表类型</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_FORMTYPE\" code=\"FORMTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td><th><label><span>项目名称</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_NAME\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"10\"  minLength=\"null\"  regexp=\"null\"   > </input></td></tr><tr><th><label><span>项目代码</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_CODE\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"255\"  minLength=\"null\"  regexp=\"null\"   > </input></td><th><label><span>开始时间</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_STARTDATE\" readOnly=\"true\"  format=\"YYYYMMDD\" itemid=\"\" dataType=\"datetime\"  value=\"\" > </input></td></tr><tr><th><label><span>结束时间</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ENDDATE\" readOnly=\"true\"  format=\"YYYY-MM-DD\" itemid=\"\" dataType=\"datetime\"  value=\"\" > </input></td><th><label><span>处室</span></label></th><td colspan='1'><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_MOFDEPMANAGER\" code=\"BDGMANAGEDIVISION\"  itemid=\"\"  readOnly=\"true\"   format=\"#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr><tr><th colspan='4'><label><span>qq</span></label></th></tr><tr><th><label><span>是否启用监控</span></label></th><td><input type=\"radio\" name=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL\" value=\"1\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL_1\"  dataType=\"bool\"  ><label for=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL_1\">是</label><input type=\"radio\" name=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL\" value=\"0\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL_0\"  dataType=\"bool\" checked=\"checked\" ><label for=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_ISCONTROL_0\">否</label></td><th><label><span>项目类型</span></label></th><td colspan='1'><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_PROJECTTYPE\" code=\"COLUMNTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr><tr><th><label><span>项目摘要</span></label></th><td colspan='3'><textarea id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_REMARK\" style='width:100%;height:30px;overflow:hidden;' dataType=\"mutilinetext\"  maxLength=\"1000\"  minLength=\"null\"  regexp=\"null\"  > </textarea></td></tr><tr><th><label><span>录入人</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_USERCODE\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"255\"  minLength=\"null\"  regexp=\"null\"   > </input></td><th><label><span>级次</span></label></th><td><input style='width:99%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_LEVELNO\"  dataType=\"number\"  value=\"\" maxValue=\"999999\"  minValue=\"0\"  decimal=\"0\"  thousand=\"false\"   > </input></td></tr><tr><th><label><span>项目属性</span></label></th><td colspan='3'><input style='width:32.5%;' type=\"text\" id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_PROJECTATTR\" code=\"COLUMNTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr></table><div id=\"fb0f0d1bc29a7d78401f0dd8d0da61b0_tempContainer\" class='tempContainerClass'  style=\"display:none;height:290px;overflow:scroll;position:absolute;background-color:#FCFCFC;border:1px solid #ccc;\"></div></div>";
+var tableHtml3 = "<div><table class=\"tableview\" id=\"2ce047a47f036cd1d7fae0684ff46b31\"    product=\"TPMS\" ><tr><th><label><span>报表类型</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_FORMTYPE\" code=\"FORMTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td><th><label><span>项目名称</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_NAME\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"10\"  minLength=\"null\"  regexp=\"null\"   > </input></td><th><label><span>项目代码</span><span class=\"tip\" style=\"color:#ff0000;\" >*</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_CODE\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"255\"  minLength=\"null\"  regexp=\"null\"   > </input></td></tr><tr><th><label><span>开始时间</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_STARTDATE\" readOnly=\"true\"  format=\"YYYYMMDD\" itemid=\"\" dataType=\"datetime\"  value=\"\" > </input></td><th><label><span>结束时间</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_ENDDATE\" readOnly=\"true\"  format=\"YYYY-MM-DD\" itemid=\"\" dataType=\"datetime\"  value=\"\" > </input></td><th><label><span>处室</span></label></th><td colspan='1'><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_MOFDEPMANAGER\" code=\"BDGMANAGEDIVISION\"  itemid=\"\"  readOnly=\"true\"   format=\"#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr><tr><th colspan='6'><label><span>qq</span></label></th></tr><tr><th><label><span>是否启用监控</span></label></th><td><input type=\"radio\" name=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL\" value=\"1\" id=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL_1\"  dataType=\"bool\"  ><label for=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL_1\">是</label><input type=\"radio\" name=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL\" value=\"0\" id=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL_0\"  dataType=\"bool\" checked=\"checked\" ><label for=\"2ce047a47f036cd1d7fae0684ff46b31_ISCONTROL_0\">否</label></td><th><label><span>项目类型</span></label></th><td colspan='3'><input style='width:32.5%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_PROJECTTYPE\" code=\"COLUMNTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr><tr><th><label><span>项目摘要</span></label></th><td colspan='5'><textarea id=\"2ce047a47f036cd1d7fae0684ff46b31_REMARK\" style='width:100%;height:30px;overflow:hidden;' dataType=\"mutilinetext\"  maxLength=\"1000\"  minLength=\"null\"  regexp=\"null\"  > </textarea></td></tr><tr><th><label><span>录入人</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_USERCODE\"  dataType=\"singlelinetext\"  value=\"\" maxLength=\"255\"  minLength=\"null\"  regexp=\"null\"   > </input></td><th><label><span>级次</span></label></th><td><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_LEVELNO\"  dataType=\"number\"  value=\"\" maxValue=\"999999\"  minValue=\"0\"  decimal=\"0\"  thousand=\"false\"   > </input></td><th><label><span>项目属性</span></label></th><td colspan='1'><input style='width:99%;' type=\"text\" id=\"2ce047a47f036cd1d7fae0684ff46b31_PROJECTATTR\" code=\"COLUMNTYPE\"  itemid=\"\"  readOnly=\"true\"   format=\"#code-#name\" dataType=\"reference\"  value=\"\"  > </input></td></tr></table><div id=\"2ce047a47f036cd1d7fae0684ff46b31_tempContainer\" class='tempContainerClass'  style=\"display:none;height:290px;overflow:scroll;position:absolute;background-color:#FCFCFC;border:1px solid #ccc;\"></div></div>";
+
+function showTable(type){
+	
+	if(type == "1"){
+		projectForm = new ProjectForm(tableHtml3);
+		projectForm.draw("treelist_demo");
+	}
+	
+	if(type == "2"){
+		projectForm = new ProjectForm(tableHtml2);
+		projectForm.draw("treelist_demo");
+	}
+}
+
+</script>
+<div id="tempDiv" style="display:none;"></div>
+<table width="100%" border=1>
+	<tr>
+			<th colspan=2>ProjectForm列数显示和点击事件</th>
+	<tr>
+		<td style="width:50%;">			
+			<div id="treelist_demo" style="width:700px;height:400px;display:block">
+				
+			</div>
+		</td>
+		<td>
+
+			
+<input type="button" onClick="showTable(1);" value="三列显示"></input>
+<input type="button" onClick="showTable(2);" value="两列显示"></input>
+<pre class="democodearea">
+
+	projectForm = new ProjectForm(tableHtml2);
+	projectForm.draw("treelist_demo");
+
+</pre>
+
+
+		</td>
+	</tr>
+	
+	<tr>
+			<th colspan=2></th>
+	<tr>
+		<td>			
+			<div id="treelist_demo1" style="width:700px;height:400px;display:block"></div>
+		</td>
+		<td>
+
+			
+			
+<pre class=democodearea>
+
+</pre>
+
+
+		</td>
+	</tr>
+	
+	
+	
+
+</table>
+</body>
+</html>
+<script>
+var codes=jQuery('.democodearea')
+
+for(var i=0;i<codes.length;i++){
+	eval(codes[i].innerHTML)	
+}
+
+</script>

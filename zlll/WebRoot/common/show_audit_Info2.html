@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>审核情况</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link type="text/css" rel="stylesheet" href="../style/style.css"/>
+<!--link href="../style/common.css" rel="stylesheet" type="text/css" /-->
+</head>
+<script type="text/javascript">
+window.focus();
+
+function Jumping(){
+  document.form1.submit();
+  return ;
+}
+
+function gotoPage(pagenum){
+  document.form1.jumpPage.value = pagenum;
+  document.form1.submit();
+  return ;
+}
+function showPlan(queue){
+   var BillObjID=eval("document.form1.BillObjID"+queue).value;
+   window.open("auditplanshow.jsp?unit=&currentBillIDList="+BillObjID,
+                        "审核信息","top=150,left=50,width=750,height=500");
+ }
+</script>
+
+<body class="pop_body">
+ <div id="popPage"><div id="shenhe_title"><div id="shenhe_title_middle">审核情况</div></div>
+   <div id="pop_inner">
+   <div id="form_table_title">
+      <ul>
+        <li class="top"><div>历史动作</div></li>
+      </ul>
+   </div>
+
+    <div id="list" >
+      <table border="0" id="tbl" cellspacing="1" align="center">
+       <tr>
+	<th nowrap="nowrap">序号</th>
+	<th nowrap="nowrap">操作</th>
+	<th nowrap="nowrap">操作人</th>
+	<th nowrap="nowrap">操作时间</th>
+	<th nowrap="nowrap">操作状态</th>
+	<th nowrap="nowrap">操作意见</th>
+	<th nowrap="nowrap">修改项</th>
+	<th nowrap="nowrap">原值</th>
+	<th nowrap="nowrap">新值</th>
+       </tr>
+       <tr onmouseover="this.className='mouseover';" onmouseout="this.className='mouseout';">
+	<td align="center" nowrap="nowrap">1</td>
+	<td align="left"nowrap="nowrap">单位录入</td>
+	<td align="center" nowrap="nowrap">廖洪成</td>
+	<td align="center" nowrap="nowrap">2008-09-02 23:46:54</td>
+	<td align="center" nowrap="nowrap">已录入</td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+  </tr>
+  <tr onmouseover="this.className='mouseover';" onmouseout="this.className='mouseout';">
+	<td align="center" nowrap="nowrap">2</td>
+	<td align="left" nowrap="nowrap">单位审核</td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+  </tr>
+  <tr onmouseover="this.className='mouseover';" onmouseout="this.className='mouseout';">
+	<td align="center" nowrap="nowrap">3</td>
+	<td align="left" nowrap="nowrap">部门审核</td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+  </tr>
+  <tr onmouseover="this.className='mouseover';" onmouseout="this.className='mouseout';">
+	<td align="center" nowrap="nowrap">4</td>
+	<td align="left" nowrap="nowrap">业务经办审核</td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+  </tr>
+  <tr onmouseover="this.className='mouseover';" onmouseout="this.className='mouseout';">
+	<td align="center" nowrap="nowrap">5</td>
+	<td align="left" nowrap="nowrap">业务领导审核</td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+	<td align="center" nowrap="nowrap"></td>
+  </tr>
+  
+  
+   </table>
+  </div>
+ </div>
+</div>
+<br/>
+  <center><button onclick="window.close()" class="button_style" onmouseover="this.className='OverBtn'" onmouseout="this.className='button_style'" onmousedown="this.className='down'">关闭窗口</button></center>
+</body>
+</html>

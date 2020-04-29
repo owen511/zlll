@@ -1,0 +1,425 @@
+/*采集表定义公用样式*/
+
+.budget_save{ margin:1px; border:0;font-size:12px;  background:url(../images/save.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_add{ margin:1px; border:0;font-size:12px;  background:url(../images/add.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_mod{ margin:1px; border:0;font-size:12px;  background:url(../images/mod.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_del{ margin:1px; border:0;font-size:12px;  background:url(../images/del.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_audit{ margin:1px; border:0;font-size:12px;  background:url(../images/audit.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_export{ margin:1px; border:0;font-size:12px;  background:url(../images/excel.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_search{ margin:1px; border:0;font-size:12px;  background:url(../images/view.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_clear{ margin:1px; border:0;font-size:12px;  background:url(../images/clear.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_morebtn{ margin:1px; border:0;font-size:12px;  background:url(../images/bottom_c.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_setting{ margin:1px; border:0;font-size:12px;  background:url(../images/nomal_set.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_colse{ margin:1px; border:0;font-size:12px;  background:url(../images/colse.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_over{ background:#76A0DE;}
+.budget_file{ margin:1px; border:0;font-size:12px;  background:url(../images/file.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_sumrow{ margin:1px; border:0;font-size:12px;  background:url(../images/showSumRow.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+.budget_back{ margin:1px; border:0;font-size:12px;  background:url(../images/flip.gif) no-repeat left center; padding-left:17px; cursor:pointer;}
+
+
+/**标红必填项**/
+lable span.tip{color:#ff0000;}
+
+/**审核**/
+.dataaudit_div{
+	width:100%;
+	position:relative;
+	border:1px solid #ccc;
+	background:#efefef; 
+	overflow:Hidden;
+}
+.dataaudit_head{
+	background: url(../images/audit_bar_bg.png) repeat-x left center;
+	font-size:13px;
+	display:block;
+	font-weight:bold;
+	color:#FFF;
+	text-align: left;
+	text-indent:10px;
+	height:23px;
+	line-height:23px;
+	overflow: hidden;
+	padding-left: 20px;
+}
+
+.dataaudit_head .closeIcon{
+	display:block;
+  	float:right;
+	margin-top:6px;
+	margin-right:10px;
+	cursor:pointer;
+	background: url(../images/audit_close.gif);
+	width:10px;
+	height:10px;
+	overflow: hidden;
+}
+.dataaudit_head .title{
+	
+}
+
+.dataaudit_content { width:100%;overflow:auto;}
+.dataaudit_content dl{display:block; width:98%; border:0; border-bottom:1px solid #ccc; padding:5px 0;}
+.dataaudit_content dl dt{display:block; background:#ccc; line-height:20px; height:20px; padding:0;}
+.dataaudit_content dl dd{display:block; padding:4px 0px;}
+
+
+
+/** 一体化样式 **/
+.dttheme_budget {
+	padding:0px;
+	border-left:1px solid #8ba3da;
+	border-top:1px solid #8ba3da;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	position: relative;
+	overflow:auto;
+	font-size:12px;
+}
+
+.dttheme_budget .h{
+	overflow:hidden;
+	position:absolute;
+	padding-left:0px;
+	border-left: 1px #8ba3da solid;
+}
+
+.dttheme_budget td {
+	margin:0px;
+	border-left:2px #e7ebf7 solid;
+	border-right:1px #8ba3da solid;
+	border-top:0px #e7ebf7 solid;
+	border-bottom:1px #8ba3da solid;
+	font-weight:bold;
+	word-break: keep-all;
+	text-align:center;
+	background-color:#e7ebf7;
+	position:relative;
+	height:20px;
+	
+}
+.dttheme_budget td span {
+	word-break: keep-all;
+}
+.dttheme_budget td .c {
+	padding-left:0px;
+}
+
+.dttheme_budget .l {
+	overflow:hidden;
+	margin-top:0px;
+	margin-left:0px;
+	padding-left: 0px;
+	height:20px;
+	padding-bottom:1px;
+}
+
+.dttheme_budget .l .c {
+	border-top: 0px #fff solid;
+	border-left: 0px #c0c0c0 solid;
+	border-right: 1px #c0c0c0 solid;
+	padding-left:2px;
+	height:100%;
+	color:#000;
+	float:left;
+	line-height:19px;
+}
+
+.dttheme_budget .clock .c {
+	background:rgb(238, 238, 238);
+}
+
+.dttheme_budget span{
+	padding-left:0px;
+	padding-right:2px;
+	text-decoration: none;
+	display:block;
+}
+
+.dttheme_budget .bl{
+	border-bottom:1px #c0c0c0 solid;
+}
+.dttheme_budget .bnl{
+	border-bottom:1px #fff solid;
+}
+
+.dttheme_budget .clock .bnl{
+	border-bottom:1px rgb(238, 238, 238) solid;
+}
+.dttheme_budget .popupmenu .item{
+	text-align:left;
+	height:25px;
+	line-height:25px;
+}
+.dttheme_budget .clockrow {
+	margin-left:0px;
+}
+.dttheme_budget .clockrow .c {
+	background-color: yellow;
+}
+.dttheme_budget .l .m {
+
+}
+
+.dttheme_budget .l .ed{
+	background-color:#ffffce;
+}
+.dttheme_budget .l .ef{
+	background-color:#dddddd;
+}
+.dttheme_budget .h .seq{
+	background-color:#cce2fb;
+border-left:2px #cce2fb solid;
+}
+.dttheme_budget .h .titles .seq{
+	background-color:#cce2fb;
+	border-left:2px #cce2fb solid;
+	height:20px;
+	padding-top:0px;
+}
+
+/**设置合计行背景色**/
+.dttheme_budget .totalrow{ background:#ffff00;}
+/**设置必填项背景色**/
+.dttheme_budget .required{ background:#ffcccc;}
+/**设置必填项正在编辑状态背景色**/
+.dttheme_budget .required_click{ background:#fec58b;}
+/**设置选填项背景色**/
+.dttheme_budget .selectable{ background:#cfffcf;}
+/**设置选填项正在编辑状态背景色**/
+.dttheme_budget .selectable_click{ background:#a4e1a4;}
+/**设置公式项背景色**/
+.dttheme_budget .formula{ background:#c1ddf3;}
+
+/** 一体化配置页面样式
+.dttheme_budget_config {
+	padding:0px;
+	border-left:1px solid #8ba3da;
+	border-top:1px solid #8ba3da;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	position: relative;
+	overflow:auto;
+	font-size:12px;
+}
+
+.dttheme_budget_config .h{
+	overflow:hidden;
+	position:absolute;
+	padding-left:0px;
+}
+
+.dttheme_budget_config td {
+	margin:0px;
+	border-left:2px #ece9d8 solid;
+	border-right:1px #c0c0c0 solid;
+	border-top:0px #ece9d8 solid;
+	border-bottom:1px #c0c0c0 solid;
+	font-weight:bold;
+	word-break: keep-all;
+	text-align:center;
+	background-color:#e7ebf7;
+	position:relative;
+	height:22px;
+	line-height:22px;
+}
+.dttheme_budget_config td span {
+	word-break: keep-all;
+	position:relative;
+}
+.dttheme_budget_config td .c {
+	padding-left:0px;
+}
+
+.dttheme_budget_config .l {
+	overflow:hidden;
+	margin-top:0px;
+	margin-left:0px;
+	padding-left: 0px;
+	height:22px;
+	padding-bottom:1px;
+}
+
+.dttheme_budget_config .l .c {
+	border-top: 0px #fff solid;
+	border-left: 0px #c0c0c0 solid;
+	border-right: 1px #c0c0c0 solid;
+	padding-left:2px;
+	height:100%;
+	color:#000;
+	float:left;
+	line-height:22px;
+}
+
+.dttheme_budget_config .clock .c {
+	background:rgb(238, 238, 238);
+}
+
+.dttheme_budget_config span{
+	padding-left:0px;
+	padding-right:2px;
+	text-decoration: none;
+	display:block;
+}
+
+.dttheme_budget_config .bl{
+	border-bottom:1px #c0c0c0 solid;
+}
+.dttheme_budget_config .bnl{
+	border-bottom:1px #fff solid;
+}
+
+.dttheme_budget_config .clock .bnl{
+	border-bottom:1px rgb(238, 238, 238) solid;
+}
+.dttheme_budget_config .popupmenu .item{
+	text-align:left;
+	height:25px;
+	line-height:25px;
+}
+.dttheme_budget_config .clockrow {
+	margin-left:0px;
+}
+.dttheme_budget_config .clockrow .c {
+	background-color: yellow;
+}
+.dttheme_budget_config .l .m {
+
+}
+
+.dttheme_budget_config .l .ed{
+	background-color:#ffffce;
+}
+.dttheme_budget_config .l .ef{
+	background-color:#dddddd;
+}
+.dttheme_budget_config .h .seq{
+	background-color:#cce2fb;
+border-left:2px #cce2fb solid;
+}
+.dttheme_budget_config .h .titles .seq{
+	background-color:#cce2fb;
+	border-left:2px #cce2fb solid;
+	height:20px;
+	padding-top:0px;
+}
+ **/
+
+/*采集表备份-数据比较功能的 差异数据背景样式*/
+.dttheme_budget .l .formmodelCompare_differenttype_1{
+	border-bottom: 1px #8ba3da solid;
+	background-color: #FFFF00;
+}
+.dttheme_budget .l .formmodelCompare_differenttype_2{
+	border-bottom: 1px #8ba3da solid;
+	background-color: #FFC864;
+}
+.dttheme_budget .l .formmodelCompare_differenttype_2_1{
+	border-bottom: 1px #8ba3da solid;
+	background-color: #C86464;
+}
+.dttheme_budget .l .formmodelCompare_differenttype_3{
+	border-bottom: 1px #8ba3da solid;
+	background-color: #C8C8C8;
+}
+#form_table_title li.prediffBTN {
+	display:block;
+   	float:left;
+   	/*width:14px;*/
+   	height:20px;
+   	background-image:url(/datacommon/common/images/sourceonly_up.gif);
+   	background-repeat:no-repeat;
+   	background-position:left;   
+   	padding-left:18px;
+   	padding-right:3px;
+   	cursor : pointer;
+}
+#form_table_title li.nextdiffBTN {
+	display:block;
+   	float:left;
+   	/*width:14px;*/
+   	height:20px;
+   	background-image:url(/datacommon/common/images/sourceonly_down.gif);
+   	background-repeat:no-repeat;
+   	background-position:left;   
+   	padding-left:18px;
+   	padding-right:3px;
+	cursor : pointer;
+}
+
+
+/** 加载tab页签样式**/
+.bottom_tablpanel2{position:relative;}
+.bottom_tablpanel2 .top{height:29px;float:left;position:absolute;bottom:0px;}
+.bottom_tablpanel2 .top .left{width:13px;height:29px;float:left;background:url(../../../ltext/images/tabpanel/leftbutton.gif) no-repeat left top; }
+.bottom_tablpanel2 .top .right{height:29px;width:13px;float:left;background:url(../../../ltext/images/tabpanel/rightbutton.gif) no-repeat left top; }
+.bottom_tablpanel2 .top .leftnoscroll{width:13px;height:29px;float:left;background:url(../../../ltext/images/tabpanel/leftbutton2.gif) no-repeat left top; }
+.bottom_tablpanel2 .top .rightnoscroll{height:29px;width:13px;float:left;background:url(../../../ltext/images/tabpanel/rightbutton2.gif) no-repeat left top; }
+.bottom_tablpanel2 .top .leftnotscroll{width:13px;height:29px;float:left; background:url(../../../ltext/images/tabpanel/leftbutton2.gif) repeat left top;}
+.bottom_tablpanel2 .top .rightnotscroll{height:29px;width:13px;float:left;background:url(../../../ltext/images/tabpanel/rightbutton2.gif) repeat left top;}
+.bottom_tablpanel2 .top .centersorll{
+	overflow:hidden;
+	float:left;
+	position:relative;
+	height:29px;
+	LINE-HEIGHT: 25px;
+	margin-top:0px;
+	background:url(../../../ltext/images/tabpanel/topbg.gif) repeat left top;
+}
+.bottom_tablpanel2 .top .center{
+	white-space:nowrap; 
+	background:url(../../../ltext/images/tabpanel/topbg.gif) repeat left top;
+	position:absolute;
+}
+.bottom_tablpanel2 .title{
+	float:left;
+	font-size:12px;
+}
+.bottom_tablpanel2 .select{
+	float:left;
+	font-size:12px;
+}
+.bottom_tablpanel2 .select .title_left{
+	background:url(../../../ltext/images/tabpanel/l_bg.gif) no-repeat right top;
+}
+.bottom_tablpanel2 .select .title_center{
+	background:url(../../../ltext/images/tabpanel/c_bg.gif) repeat left top;
+}
+.bottom_tablpanel2 .select .title_right{
+	background:url(../../../ltext/images/tabpanel/r_bg.gif) no-repeat left top;
+}
+.bottom_tablpanel2 .title_left{
+	float:left;
+	width:8px;
+	height:29px;
+	background:url(../../../ltext/images/tabpanel/l_bg2.gif) no-repeat right top;
+}
+.bottom_tablpanel2 .title_center{
+	float:left;
+	height:29px;
+	background:url(../../../ltext/images/tabpanel/c_bg2.gif) repeat left top;
+	padding-top: 5px;
+	padding-left:5px;
+	padding-right: 5px;
+	white-space:nowrap;
+}
+.bottom_tablpanel2 .title_right{
+	float:left;
+	width:8px;
+	height:29px;
+	background:url(../../../ltext/images/tabpanel/r_bg2.gif) no-repeat left top;
+}
+.bottom_tablpanel2 .main{
+	border: 1px solid #8ba3da;
+}
+.bottom_tablpanel2 .buttons{
+	border: 1px solid #8ba3da;
+	height:28px;
+}
+.bottom_tablpanel2 .buttons button{
+	height:26px;
+	margin-top:1px;
+	margin-left:2px;
+	margin-right:2px;
+}
+div.calendar{position:relative;z-index:100006;}
+

@@ -1,0 +1,97 @@
+/*用于采集表定义中公式部分*/
+
+button.oneGrounp{border:0; background:none; width:20px; height:23px; color:#FFF; background:url(../images/oneGrounp.png) no-repeat center center;}
+
+div.cell_condition_editor{
+  display:none;
+  background:#fff;
+  position:absolute;
+  border:1px solid #CAE1FF;
+}
+
+div.cell_condition_editor ul{
+  display:block;
+  overflow:auto;
+  border:1px solid #ccc;
+}
+
+div.cell_condition_editor ul li{
+  display:block;
+  overflow:hidden;
+  padding:2px;
+  cursor:default;
+}
+
+div.cell_condition_editor ul li:hover{
+  overflow:hidden;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+div.cell_condition_editor input{
+  border:0px;
+  padding:0px;
+  margin:0px;
+  background:#eee;
+  overflow:hidden;
+}
+
+#selectFormModel{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#efefef;
+}
+#selectFormModel ul{
+  width:200px;
+  height:200px;
+  overflow:auto;
+  overflow-x:hidden;
+}
+
+#selectFormModel ul li{
+  overflow:hidden;
+  padding:2px;
+  display:block;
+  cursor:default;
+}
+
+#selectFormModel ul li:hover{
+  overflow:hidden;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#selectFormModelField{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#efefef;
+}
+#selectFormModelField ul{
+  width:200px;
+  height:200px;
+  overflow:auto;
+  overflow-x:hidden;
+}
+
+#selectFormModelField ul li{
+  overflow:hidden;
+  padding:2px;
+  display:block;
+  cursor:default;
+}
+
+#selectFormModelField ul li:hover{
+  overflow:hidden;
+  padding:2px;
+  display:block;
+  background:#888888;
+}
+
+#newControlWindow span.boxRule{
+	margin:2px;
+  	padding:2px;
+  	line-height:25px;
+  	height:25px;  
+}

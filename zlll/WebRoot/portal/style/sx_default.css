@@ -1,0 +1,286 @@
+/*
+山西首页页面的css样式
+*/
+html,body{ margin:0; padding:0;background:#FFF; overflow-x:hidden;}}
+.defaultoutter{width:1000px; margin:0 auto; background:#FFF;overflow:hidden;}
+.logoarea{ height:65px; background:url(../images/login/shanxi/logo.jpg) no-repeat left center; font-size:12px; color:#000; text-align:right;}
+.logoarea table{float:right;}
+.logoarea a:link{ color:#000; text-decoration:none;}
+.logoarea a:visited{ color:#000; text-decoration:none;}
+.logoarea a:hover{ color:#034278; text-decoration:underline;}
+.logoarea a:active{ color:#000; text-decoration:none;}
+.fontcolor{ color:#aa0711;}
+
+.menuareaoutter{ width:100%;}
+.redline{height:3px; font-size:3px; background:#912228;}
+.menubg{background:#034278;}
+.userinfos{background:#cedbe5; height:98px; width:235px; margin:4px 0 5px 28px;}
+.usersphoto{width:58px; height:80px; margin-top:8px; margin-left:8px;}
+.userinfo_g{background:url(../images/login/shanxi/userinfo_g.jpg) no-repeat right center; width:4px; font-size:4px;}
+.infoname{ font-size:12px; color:#333; height:35px; white-space:normal; padding-bottom:3px;}
+.infocs{ font-size:12px; color:#990000; height:26px; white-space:normal; padding-bottom:3px;}
+.infozw{ font-size:12px; color:#990000; height:26px; white-space:normal;}
+.menuarea{width:700px; margin-left:50px; margin-top:10px; color:#FFF; padding-bottom:10px; font-size:14px;line-height:30px;}
+.menuarea a:link{ color:#FFF; text-decoration:none; padding:10px 10px 10px 10px;}
+.menuarea a:visited{ color:#FFF; text-decoration:none; padding:10px 10px 10px 10px;}
+.menuarea a:hover{ color:#DDD; text-decoration:none; padding:10px 10px 10px 10px;}
+.menuarea a:avtive{ color:#FFF; text-decoration:none; padding:10px 10px 10px 10px;}
+
+.middlearea{border:1px #3b86ba solid;}
+.menubottom{height:5px; font-size:5px; background:url(../images/login/shanxi/menubottombg.jpg) repeat-x left top;}
+
+.leftpart{border-right:1px #91a8b9 solid;}
+.leftpartredline{background:#912228; height:2px; font-size:2px; line-height:2px;}
+.leftpartmain{width:220px; background:#b9cbd9 url(../images/login/shanxi/leftparttopbg.jpg) repeat-x left top; height:445px;}
+.leftparttitle{ height:27px; line-height:27px; color:#FFF; font-size:12px; background:url(../images/login/shanxi/leftptb.jpg) no-repeat left top; padding-left:33px;}
+.leftpartbottom{width:220px; background:url(../images/login/shanxi/leftpartbottom.jpg) no-repeat right top; height:77px;}
+
+
+.bottomblueline{ height:4px; line-height:4px; font-size:4px; background:#034278;}
+.bottompart{ height:58px; background:#FFF url(../images/login/shanxi/allrights.gif) no-repeat center top;}
+
+/*备忘部分*/
+.bw{ background:#FFF url(../images/login/shanxi/bw.gif) no-repeat right bottom;}
+.contents_bw{ border:1px #93aabb solid; border-top:0; padding:10px 35px 20px 20px; height:507px;}
+.contents_right{border:1px #93aabb solid;}
+.bw_date{height:61px; background:url(../images/login/shanxi/datem.gif) repeat-x left top; width:200px;}
+.bw_date_r{height:61px; background:url(../images/login/shanxi/dater.gif) no-repeat right top;}
+.bw_date_l{height:61px; background:url(../images/login/shanxi/datel.gif) no-repeat left top; line-height:61px;}
+.time{font-size:40px; font-family:Arial, Helvetica, sans-serif; color:#034278; padding:30px 20px;}
+.ap{border:1px #90a6c2 solid; color:#034278; font-size:12px; padding:3px 10px; position:relative; top:-20px;}
+.calendararea{border:1px #90a6c2 solid;height:218px; width:200px; margin-top:10px;}
+.addbw{width:133px; height:152px; background:url(../images/login/shanxi/addbw.gif) no-repeat left top; margin:30px 0 0 35px; cursor:pointer;}
+.addbw_o{width:133px; height:152px; background:url(../images/login/shanxi/addbw_over.gif) no-repeat left top; margin:30px 0 0 35px; cursor:pointer;}
+.bw_datetype{height:23px; font-size:12px; color:#000; font-weight:bold; background:url(../images/login/shanxi/bw_tb.gif) no-repeat left center; padding-left:20px; line-height:23px; border-bottom:1px #90a6c2 solid; margin:10px 10px 10px 10px;}
+.bwitems{color:#173163; font-size:12px; line-height:24px; margin:0 10px;}
+.bwitems a:link{ color:#a7a5a5; text-decoration:none;}
+.bwitems a:visited{ color:#a7a5a5;text-decoration:none;}
+.bwitems a:hover{ color:#FF0000;text-decoration:none;}
+.bwitems a:active{ color:#a7a5a5;text-decoration:none;}
+
+/*公告部分样式*/
+.noticearea{ width:99%;}
+.contenttitlebg{ border:1px #93aabb solid; background:url(../images/login/shanxi/contentstitle.jpg) repeat-x left top; height:28px;border-bottom:0;}
+.titletb{ background:url(../images/login/shanxi/contentstitle_tb.jpg) no-repeat left top; padding-left:26px; font-size:12px; color:#000; height:28px; line-height:28px;}
+.titleblueline{ height:3px; font-size:3px; background:#034278;}
+.contents{ border:1px #93aabb solid; border-top:0; padding:10px 35px 20px 20px; height:465px;}
+.gg_sy{ background:#FFF url(../images/login/shanxi/gg_sy.gif) no-repeat right bottom;}
+p.gg{ margin:0; padding:0; height:25px; background:url(../images/login/shanxi/itemstb.gif) no-repeat left top; background-position:10px 8px; padding-left:25px; border-bottom:1px #959595 dotted; font-size:12px; line-height:25px;}
+p.gg a:link{ text-decoration:none; color:#000;}
+p.gg a:vivited{ text-decoration:none; color:#000;}
+p.gg a:hover{ text-decoration:none; color:#0d4a7d;}
+p.gg a:sctive{ text-decoration:none; color:#000;}
+.datainfo{font-size:12px; padding-left:20px; color:#555; font-family:Arial, Helvetica, sans-serif;}
+.gg_fy{ height:40px; background:#eef3f9; border:1px #93aabb solid; border-top:0;}
+.fy_scrollnext{background:url(../images/login/shanxi/fy_scrollnext.gif) no-repeat center center; padding:0; margin:0; height:40px; width:30px; float:right; cursor:pointer;}
+.fy_num_choosed{padding:0; margin:0; height:40px; width:27px; line-height:40px; text-align:center; font-size:12px; color:#000; float:right; cursor:pointer;}
+.fy_num{background:url(../images/login/shanxi/fy_choosed.gif) no-repeat center center; padding:0; margin:0; height:40px; width:27px; line-height:40px; text-align:center; font-size:12px; color:#000; float:right;}
+.fy_scrollpre{background:url(../images/login/shanxi/fy_scrollpre.gif) no-repeat center center; padding:0; margin:0; height:40px; width:30px; cursor:pointer; float:right;}
+
+
+/*菜单样式*/
+#basic-accordian{
+	width:199;
+	z-index:2;
+	margin-top:10px;
+	margin-left:10px;
+}/*菜单背景*/
+.accordion_headings{
+	cursor:pointer;
+	font-weight:nomal;
+	font-size: 13px;
+	line-height: 32px;
+	letter-spacing: 1px;
+	background:url(../images/login/shanxi/itembg_right.png) no-repeat right center;
+	color:#000;
+	width:199px;
+}/*菜单分类行*/
+.accordion_headings:hover{
+}
+.accordion_child{
+    font-size:12px;
+    color:#333333;
+	padding-bottom: 1px;
+	background:#FFF;
+	border:1px #979797 solid;
+	border-bottom:0;
+	width:196px;
+	margin-top:0px;
+    border-radius-topright: 3px;
+    border-radius-topleft: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius:5px;
+}
+.accordion_child ul{ padding:0; margin-left:27px; padding:10px 0;}
+.accordion_child ul li{
+	font-size: 12px;
+	display: block;
+	line-height: 20px;
+	display:block;
+	padding-left:16px;
+	background:url(../images/login/shanxi/itemstb.gif) no-repeat left center;
+}
+.iteml_ysbz{padding-left:35px; background:url(../images/login/shanxi/bmys.png) no-repeat left center;}
+.iteml_yszx{padding-left:35px; background:url(../images/login/shanxi/indi.png) no-repeat left center;}
+.iteml_jsfx{padding-left:35px; background:url(../images/login/shanxi/pay.png) no-repeat left center;}
+.iteml_sz{padding-left:35px; background:url(../images/login/shanxi/salary.png) no-repeat left center;}
+.iteml_notax{padding-left:35px; background:url(../images/login/shanxi/notax.png) no-repeat left center;}
+.iteml_csky{padding-left:35px; background:url(../images/login/shanxi/cskyhl.png) no-repeat left center;}
+.iteml_zc{padding-left:35px; background:url(../images/login/shanxi/zc.png) no-repeat left center;}
+.iteml_portal{padding-left:35px; background:url(../images/login/shanxi/portal.png) no-repeat left center;}
+.iteml_czcw{padding-left:35px; background:url(../images/login/shanxi/account.png) no-repeat left center;}
+.accordion_child ul li a{
+	text-decoration: none;
+	color: #666666;
+}
+.accordion_child ul li a:hover{
+	color: #0d4a7d;
+}
+.item_jg{height:6px; font-size:6px; line-height:6px;}
+.header_highlight{
+	
+}/*当前显示菜单分类样式*/
+	
+/*菜单样式结束*/
+/*特殊样式-------------------------*/
+-->
+/*编辑区域*/
+.editarea{ margin-left:19px; margin-top:10px; width:94%;}
+.editarea td{ height:35px;}
+.editarea td.thele{ font-weight:bold; color:#1d1d1d; font-size:12px;}
+.editarea td input.e{height:23px; border:1px #bcbcbc solid; background:#fbfbfb; font-size:12px; line-height:23px; padding-left:10px; width:95%; color:#1d1d1d;}
+.editarea td select.cus{height:23px; border:1px #bcbcbc solid; background:#fbfbfb; font-size:12px; line-height:23px;color:#1d1d1d; width:50%;}
+.editarea td textarea.e{height:69px; border:1px #bcbcbc solid; background:#fbfbfb; font-size:12px; line-height:23px; padding-left:10px; width:95%;color:#1d1d1d;}
+.editarea td div.e{border:1px #bcbcbc solid; background:#fbfbfb; font-size:12px; line-height:23px; padding-left:10px; width:95%;color:#1d1d1d; padding-top:2px;}
+.editarea td input.cus{height:23px; border:1px #bcbcbc solid; background:#fbfbfb; font-size:12px; line-height:23px; padding-left:10px; width:50%; color:#1d1d1d;}
+.textarestyle{background:#FFF; height:100px; width:330px;border:1px #90a6c2 solid; font-size:12px; color:#000; line-height:20px; padding:0; padding-left:2px; color:#333; padding-top:2px;}
+.inputstyle{background:#FFF; width:330px;border:1px #90a6c2 solid; height:20px; line-height:20px; padding-left:2px;}
+
+.nomalbtn{ width:62px; height:23px; border:0; background:url(../images/login/shanxi/btn.gif) no-repeat left top; background-position:0 -23px; line-height:22px; color:#333; cursor:pointer;}
+.nomalbtn_o{ width:62px; height:23px; border:0; background:url(../images/login/shanxi/btn.gif) no-repeat left top; background-position:0 0; line-height:22px; color:#FFF; cursor:pointer;}
+
+/*弹出层窗口*/
+.wind7{}
+.wind7 .wnd_icon
+{
+	width:23px;
+	background-image:url(../images/login/shanxi/tw_tb.gif);
+	background-attachment: scroll;
+	background-repeat: repeat-x;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .head
+{
+	height: 30px;
+	line-height: 30px;
+}
+.wind7 .head .left
+{
+	width:4px;
+	height:30px;
+	font-size: 1px;
+	background-image:url(../images/login/shanxi/tw_tl.gif);
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .head .bg
+{
+	background-image:url(../images/login/shanxi/tw_trbg.gif);
+	background-attachment: scroll;
+	background-repeat: repeat-x;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;	
+}
+.wind7 .head .title
+{
+	color:#000;
+	font-size: 12px;
+	padding-top:0;
+}
+.wind7 .head .right
+{
+	width:4px;
+	height:30px;
+	font-size: 1px;
+	background-image:url(../images/login/shanxi/tw_tr.gif);
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position-x: left;
+	background-position-y: bottom;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .wbody
+{
+	overflow: auto;
+	padding:0;
+	/*border:#AAAAAA 1px solid;*/
+	display: block;
+	position: relative;
+	background-color: rgb(255, 255, 255);
+}
+.wind7 .closewidth{width:22px;}
+.wind7 .btn_close{background-image: url(../images/login/shanxi/closewin.gif);background-position-y:top;background-color: transparent;width:22px;height:30px;border:0px;}
+.wind7 .btn_close_over
+{background-image: url(../images/login/shanxi/closewin.gif);background-position-y:-30px;background-color: transparent;width:22px;height:30px;border:0px;}
+.wind7 .foot .left_bg
+{
+	width:4px;
+	font-size: 1px;
+	background-image:url(../images/login/shanxi/tw_lbg.gif);
+	background-attachment: scroll;
+	background-repeat: repeat-y;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .foot .right_bg
+{
+	width:5px;
+	font-size: 1px;
+	background-image:url(../images/login/shanxi/tw_rbg.gif);
+	background-attachment: scroll;
+	background-repeat: repeat-y;
+	background-position-x: left;
+	background-position-y: top;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+
+.wind7 .foot .tw_bl{ background:#f1f1f1 url(../images/login/shanxi/tw_bl.gif) no-repeat left bottom; width:4px; height:2px; font-size:1px;	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .foot .tw_bbg{ background:#f1f1f1 url(../images/login/shanxi/tw_bbg.gif) repeat-x left bottom; height:2px; font-size:1px;	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}
+.wind7 .foot .tw_br{ background:#f1f1f1 url(../images/login/shanxi/tw_br.gif) no-repeat left bottom; width:4px; height:2px; font-size:1px;	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: transparent;
+}

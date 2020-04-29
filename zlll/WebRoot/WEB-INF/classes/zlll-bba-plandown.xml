@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+ 	<!-- 收入结余 begin -->
+	<bean id = "bba.plandown.dao.BBAPlanDownDAO" parent="bba.plan.dao.BBAPlanDAO" class="com.zlll.bba.plandown.dao.BBAPlanDownDAO">
+		<property name="associateTag" value="0" />
+		<property name="mainTableName" value="T_BBA_PLAN" />
+		<property name="foreignid" value="mainid" />
+		<property name="dtoClass" value="com.zlll.bba.plandown.dto.BBAPlanDownDTO" />
+	</bean>
+	<bean id = "bba.plandown.bo.BBAPlanDownBO" parent="bba.plan.bo.BBAPlanBO" class="com.zlll.bba.plandown.bo.BBAPlanDownBO">
+		<property name="bbaPlanDownDAO" ref="bba.plandown.dao.BBAPlanDownDAO" />
+		<property name="bbaBaseDAO" ref="bba.plandown.dao.BBAPlanDownDAO" />
+		<property name="vouDAO" ref="bba.plandown.dao.BBAPlanDownDAO" />
+		<property name="sourceDAO" ref="bba.plandown.dao.BBAPlanDownDAO" />
+	</bean>
+	<bean id = "bba.plandown.bpo.BBAPlanDownBPO" parent="bba.plan.bpo.BBAPlanBPO" class="com.zlll.bba.plandown.bpo.BBAPlanDownBPO">
+		<property name="bbaPlanDownBO" ref="bba.plandown.bo.BBAPlanDownBO" />
+		<property name="bbaBaseBO" ref="bba.plandown.bo.BBAPlanDownBO" />
+	</bean>
+	<bean id="bba.plandown.bpo.BBAPlanDownBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.plandown.bpo.BBAPlanDownBPO"/>
+	</bean>
+	<!-- 收入结余 end -->
+</beans>

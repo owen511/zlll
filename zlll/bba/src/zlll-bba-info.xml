@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+	<!-- 基础数据维护 begin -->
+	<bean id = "bba.baseinfo.dao.BBAInfoDAO" parent="bba.base.dao.BBABaseDAO" class="com.zlll.bba.baseinfo.dao.BBAInfoDAO">
+	</bean>
+	<bean id = "bba.baseinfo.bo.BBAInfoBO" parent="bba.base.bo.BBABaseBO" class="com.zlll.bba.baseinfo.bo.BBAInfoBO">
+		<property name="bbaInfoDAO" ref="bba.baseinfo.dao.BBAInfoDAO" />
+		<property name="bbaBaseDAO" ref="bba.baseinfo.dao.BBAInfoDAO" />
+		<property name="vouDAO" ref="bba.baseinfo.dao.BBAInfoDAO" />
+		<property name="sourceDAO" ref="bba.baseinfo.dao.BBAInfoDAO" />
+	</bean>
+	<bean id = "bba.baseinfo.bpo.BBAInfoBPO" parent="bba.base.bpo.BBABaseBPO" class="com.zlll.bba.baseinfo.bpo.BBAInfoBPO">
+		<property name="bbaInfoBO" ref="bba.baseinfo.bo.BBAInfoBO" />
+		<property name="bbaBaseBO" ref="bba.baseinfo.bo.BBAInfoBO" />
+	</bean>
+	<bean id="bba.baseinfo.bpo.BBAInfoBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.baseinfo.bpo.BBAInfoBPO"/>
+	</bean>
+	<!-- 基础数据维护  end -->
+</beans>

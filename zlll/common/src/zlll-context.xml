@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- 业务层工具类 -->
+	<bean id="app.util.AppUtil" class="gov.mof.fasp.ifmis.common.AppUtil">
+		<property name="stepDescBPO" ref="fasp.wf.StepDescBPO" />
+		<property name="wfDescBPO" ref="fasp.wf.WfDescBPO" />
+		<property name="actionDescBO" ref="fasp.wf.ActionDescBO" />
+		<property name="wfBPO" ref="fasp.wf.WfBPO" />
+		<property name="dataRightBPO" ref="fasp.ca.DataRightBPO" />
+		<property name="menuBPO" ref="fasp.ca.MenuBPO" />
+		<property name="vouDAO" ref="vouDAO" />
+		<property name="voucherTypeBPO" ref="fasp.pa.vouchertype.VoucherTypeBPO"/>
+	</bean>
+		 
+	<!-- 检查框架版本升级 -->
+	<bean id="ifmis.autoCheckSystemVersionBO" class="gov.mof.fasp.ifmis.common.bo.AutoCheckSystemVersionBO" init-method="init" >
+		<property name="autoCheckSystemVersionDAO">
+			<ref bean="common.autoCheckSystemVersionDAO" /> 
+		</property>
+		<property name="code"><value>common</value></property>
+	</bean>
+	<!-- 服务器缓存初始化 jjy20090323 新增配置 -->
+	<bean id="ifmis.JdbcCacheManagerBO" class="gov.mof.fasp.ifmis.common.bo.JdbcCacheManagerBO" init-method="init" >
+		<property name="datasource">
+			<ref bean="dataSource" /> 
+		</property>
+		<property name="cacheManagerDAO">
+			<ref bean="frame.CacheManagerDAO" />
+		</property>
+		<property name="initlist">
+			<list>
+				<ref bean="system.UIConfigCacheDAO" />				 
+			</list>
+		</property>
+	</bean>
+	<!-- 公共配置 -->
+	<import resource="classpath:ifmis-template.xml" />	
+	
+	<import resource="classpath:ifmis-report.xml"/>
+	
+	<import resource="classpath:ifmis-system.xml" />
+	
+	<import resource="classpath:ifmis-system-importcore.xml" />
+	
+
+	<!-- 门户 -->
+	<import resource="classpath:ifmis_portal.xml"/>
+
+	
+	<!-- 后台框架 -->
+	<import resource="classpath:ifmis-framestruts.xml"/>
+	
+	<!-- 接入服务系统 -->
+	<!-- <import resource="classpath:ifmis-exserver-context.xml"/> -->
+
+	<!-- 业务公用包 -->
+	<import resource="classpath:ifmis-bcommon.xml"/>
+
+	<import resource="classpath:zlll-bba.xml"/>
+</beans>

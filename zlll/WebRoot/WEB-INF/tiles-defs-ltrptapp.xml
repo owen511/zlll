@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="template.ltrptapp.default" extends="template.default2">
+		<put name="selfscript" value="/ltrptapp/common/selfscript.jsp" />
+	</definition>
+	<!-- 报表编辑定义 -->
+	<definition name="/ltrptapp/manage/query" extends="template.ltrptapp.default">
+		<put name="main" value="/ltrptapp/manage/list_reportquery.jsp" />
+	</definition>
+	<definition name="/ltrptapp/manage/editor" extends="template.ltrptapp.default">
+		<put name="main" value="/ltrptapp/manage/list_reportedit.jsp" />
+	</definition>
+	<!-- 报表编辑定义新增 -->
+	<definition name="/ltrptapp/manage/add_reportedit" extends="template.ltrptapp.default">
+		<put name="main" value="/ltrptapp/manage/add_reportedit.jsp" />
+	</definition>
+	<!-- 报表编辑定义修改 -->
+	<definition name="/ltrptapp/manage/change_reportedit"
+		extends="template.ltrptapp.default">
+		<put name="main" value="/ltrptapp/manage/change_reportedit.jsp" />
+	</definition>
+</tiles-definitions>

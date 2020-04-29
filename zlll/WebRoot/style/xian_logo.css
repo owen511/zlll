@@ -1,0 +1,10 @@
+#logo table {
+    /*background-image:url(../images/logo/anhuisheng_area.gif);
+	background-position:left top;
+	background-repeat:no-repeat;*/
+}
+
+#logo {
+	background-image: url(../lightblue_images/logo/logo_bg_1280X50(right).gif);
+	background-repeat: repeat-x;
+}

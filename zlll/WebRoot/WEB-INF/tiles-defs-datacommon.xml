@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<!-- 预算首页 -->
+	<definition name="template.datacommon.default" extends="template.default2">
+		<put name="selfscript" value="/datacommon/common/selfscript.jsp" />
+	</definition>
+	<!-- 待办事项 start -->
+	<definition name="/datacommon/task/showWaitTask" extends="template.budget.quotas">
+		<put name="main" value="/datacommon/task/showwaittask_index.jsp" />
+	</definition>
+	<!-- 待办事项 end -->
+</tiles-definitions>

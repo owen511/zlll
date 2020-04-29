@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="template.indi2exe.default" extends="template.default2">
+	</definition>
+	<definition name="/common/srcandtragetvouinfo" extends="template.empty">
+		<put name="main" value="/bcommon/common/srcandtragetvouinfo.jsp" />
+	</definition>
+	<definition name="/common/showSourceDestinationAction"
+		extends="template.empty">
+		<put name="main" value="/bcommon/common/showSourceDestinationInfo.jsp" />
+	</definition>
+	<definition name="/common/showSourcePlanAction" extends="template.empty">
+		<put name="main" value="/bcommon/common/showSourcePlanInfo.jsp" />
+	</definition>
+	<definition name="/common/showAllAssignedIndiAction"
+		extends="template.empty">
+		<put name="main" value="/bcommon/common/showAllAssignedIndi.jsp" />
+	</definition>
+	<definition name="/indi2exe/common/matchrule/list/index"
+		extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/common/matchrule/list.jsp" />
+	</definition>
+	<definition name="/indi2exe/common/matchrule/list/add"
+		extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/common/matchrule/add.jsp" />
+	</definition>
+	<definition name="/indi2exe/common/matchrule/list/modify"
+		extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/common/matchrule/modify.jsp" />
+	</definition>
+	<definition name="/common/ruscope/list" extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/common/ruscope_list.jsp" />
+	</definition>
+	<definition name="/system/autoauditset/index" extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/autoaudit/list_autoaudit.jsp" />
+	</definition>
+	<definition name="/system/autoauditset/add/index" extends="template.indi2exe.default">
+		<put name="main" value="/bcommon/autoaudit/add_autoaudit.jsp" />
+	</definition>
+	<definition name="/system/autoauditset/showlog" extends="template.empty">
+		<put name="main" value="/bcommon/autoaudit/show_autoauditlog.jsp" />
+	</definition>
+	<definition name="/system/signaturecheck/manage/index"
+		extends="template.default2">
+		<put name="main" value="/bcommon/signaturecheck/main.jsp" />
+	</definition>
+	<definition name="/system/signaturecheck/manage/add/index"
+		extends="template.default2">
+		<put name="main" value="/bcommon/signaturecheck/add.jsp" />
+	</definition>
+	<definition name="/system/signaturecheck/manage/modify/index"
+		extends="template.default2">
+		<put name="main" value="/bcommon/signaturecheck/modify.jsp" />
+	</definition>
+	<definition name="/ltinspect/system/dealtype/query" extends="template.default2">
+		<put name="main" value="/bcommon/common/list_dealtype.jsp" />
+	</definition>
+	<definition name="/ltinspect/system/monitorstart/query"
+		extends="template.default2">
+		<put name="main" value="/bcommon/common/list_monitorstart.jsp" />
+	</definition>
+	<definition name="/ltinspect/system/monitorlink/query"
+		extends="template.default2">
+		<put name="main" value="/bcommon/common/list_monitorlink.jsp" />
+	</definition>
+	<definition name="/ltinspect/system/dealfeedback/query"
+		extends="template.default2">
+		<put name="main" value="/bcommon/common/list_dealfeedback.jsp" />
+	</definition>
+	<definition name="/common/querySignature/index" extends="template.empty">
+		<put name="main" value="/pay/ViewSignature.jsp" />
+	</definition>
+</tiles-definitions>

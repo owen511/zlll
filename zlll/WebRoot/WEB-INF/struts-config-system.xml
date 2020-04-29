@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+		<action path="/system/ui/mainColSort"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findMainListSortAction">
+			<forward name="success" path="/system/ui/showColSort.jsp" />
+		</action>
+		<action path="/system/ui/detailColSort"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findDetailListSortAction">
+			<forward name="success" path="/system/ui/showColSort.jsp" />
+		</action>
+		<action path="/system/ui/mainSetList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findMainListSetListAction">
+			<forward name="success" path='/system/ui/showMainList.jsp' />
+		</action>
+		<action path="/system/ui/delMainListSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delMainListSetAction">
+			<forward name="success" path='/system/ui/showMainList.jsp' />
+		</action>
+		<action path="/system/ui/addMainSetBefore"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="autoCompliteAction">
+			<forward name="suc" path='/system/ui/addMainList.jsp' />
+		</action>
+		<action path="/system/ui/addMainListSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addMainListSetAction">
+			<forward name="success" path='/system/ui/mainSetList.do' />
+			<forward name="successAndComeOn" path='/system/ui/addMainSetBefore.do' />
+			<forward name="repeatErrar" path='/system/ui/addMainSetBefore.do' />
+		</action>
+		<action path="/system/ui/findOneMainSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findOneMainSetAction">
+			<forward name="success" path='/system/ui/modifyMainList.jsp' />
+		</action>
+		<action path="/system/ui/modifyOneMainSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="modifyOneMainSetAction">
+			<forward name="success" path='/system/ui/showMainList.jsp' />
+			<forward name="repeatErrar" path='/system/ui/modifyMainList.jsp' />
+		</action>
+		<action path="/system/ui/detailSetList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findDetailListSetListAction">
+			<forward name="success" path='/system/ui/showDetailList.jsp' />
+		</action>
+		<action path="/system/ui/secDetailSetList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findSecDetailListSetListAction">
+			<forward name="success" path='/system/ui/showDetailList.jsp' />
+		</action>
+		<action path="/system/ui/addDetailSetBefore"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="autoCompliteAction">
+			<forward name="suc" path='/system/ui/addDetailList.jsp' />
+		</action>
+		<action path="/system/ui/addDetailListSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addDetailListSetAction">
+			<forward name="success" path='/system/ui/detailSetList.do' />
+			<forward name="successAndComeOn" path='/system/ui/addDetailSetBefore.do' />
+			<forward name="repeatErrar" path='/system/ui/addDetailSetBefore.do' />
+		</action>
+		<action path="/system/ui/delDetailSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delDetailListSetAction">
+			<forward name="success" path='/system/ui/showDetailList.jsp' />
+		</action>
+		<action path="/system/ui/findOneDetailSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findOneDetailSetAction">
+			<forward name="success" path='/system/ui/modifyDetailList.jsp' />
+		</action>
+		<action path="/system/ui/modifyOneDetailSet"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="modifyOneDetailSetAction">
+			<forward name="success" path='/system/ui/showDetailList.jsp' />
+			<forward name="repeatErrar" path='/system/ui/modifyDetailList.jsp' />
+		</action>
+		<action path="/system/ui/conditionList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findConditonListSetAction">
+			<forward name="success" path='/system/ui/showQueryCondition.jsp' />
+		</action>
+		<action path="/system/ui/getMyCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="getMyConditonAction">
+			<forward name="success" path='/system/ui/setMyCondition.jsp' />
+		</action>
+		<action path="/system/ui/saveMyCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="saveMyConditonAction">
+		</action>
+		<action path="/system/ui/delMyCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delMyConditonAction">
+		</action>
+		<action path="/system/ui/delConditionList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delConditionAction">
+			<forward name="success" path='/system/ui/showQueryCondition.jsp' />
+		</action>
+		<action path="/system/ui/addConditionBefore"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="autoCompliteAction">
+			<forward name="suc" path='/system/ui/addQueryCondition.jsp' />
+		</action>
+		<action path="/system/ui/addCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addConditionAction">
+			<forward name="success" path='/system/ui/conditionList.do' />
+			<forward name="successAndComeOn" path='/system/ui/addConditionBefore.do' />
+			<forward name="repeatErrar" path='/system/ui/addConditionBefore.do' />
+		</action>
+		<action path="/system/ui/findOneCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findOneConditionAction">
+			<forward name="success" path='/system/ui/modifyQueryCondition.jsp' />
+		</action>
+		<action path="/system/ui/modifyOneCondition"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="modifyOneConditionAction">
+			<forward name="success" path='/system/ui/showQueryCondition.jsp' />
+			<forward name="repeatErrar" path='/system/ui/modifyQueryCondition.jsp' />
+		</action>
+		<action path="/system/ui/functionButtonList"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findFunctionButtonListAction">
+			<forward name="success" path='/system/ui/showFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/delFunctionButton"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delFunctionButtonAction">
+			<forward name="success" path='/system/ui/showFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/findOneFunctionButton"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findOneFunctionButtonAction">
+			<forward name="success" path='/system/ui/modifyFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/modifyOneFunctionButton"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="modifyOneFunctionButtonAction">
+			<forward name="repeatErrar" path='/system/ui/modifyFunctionList.jsp' />
+			<forward name="success" path='/system/ui/showFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/addFunctionButtonBefore"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addFunctionButtonBeforeAction">
+			<forward name="success" path='/system/ui/addFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/addFunctionButton"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addFunctionButtonAction">
+			<forward name="success" path='/system/ui/functionButtonList.do' />
+			<forward name="successAndComeOn" path='/system/ui/addFunctionButtonBefore.do' />
+			<forward name="repeatErrar" path='/system/ui/addFunctionList.jsp' />
+		</action>
+		<action path="/system/ui/showPageMessage"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="showPageMessageAction">
+			<forward name="success" path='/system/ui/showStateConfiguer.jsp' />
+		</action>
+		<action path="/system/ui/addPageMessage"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addPageMessageAction">
+		</action>
+		<action path="/system/import/turnToImport"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction"
+			parameter="turnToImport">
+			<forward name="success" path='/system/import/main' />
+		</action>
+		<action path="/system/import/query"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction"
+			parameter="query">
+			<forward name="success" path='/system/import/main' />
+		</action>
+		<action path="/system/import/update"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction"
+			parameter="updateData">
+			<forward name="success" path='/system/import/query.do' />
+		</action>
+		<action path="/system/import/importData"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction" input="/system/import/query.do"
+			parameter="importData">
+		</action>
+		<action path="/system/import/turnBack"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction"
+			parameter="turnBack">
+		</action>
+		<action path="/system/import/searchFile"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction"
+			parameter="turnToOpenFile">
+			<forward name="success" path='/system/import/searchFile.jsp' />
+		</action>
+		<action path="/system/import/openFile"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportAction" input="/system/import/searchFile.do"
+			parameter="openFile">
+			<forward name="success" path='/system/import/searchFileSuccess.jsp' />
+		</action>
+		<action path="/system/importConfig/index"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="query">
+			<forward name="success" path='/system/importConfig/list' />
+		</action>
+		<action path="/system/importConfig/query"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="query">
+			<forward name="success" path='/system/importConfig/list' />
+		</action>
+		<action path="/system/importConfig/turnToSave"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="turnToSave">
+			<forward name="success" path='/system/importConfig/add' />
+		</action>
+		<action path="/system/importConfig/save"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			input="/system/importConfig/turnToSave.do" parameter="save">
+			<forward name="success" path='/system/importConfig/query.do' />
+		</action>
+		<action path="/system/importConfig/turnToModify"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="turnToModify">
+			<forward name="success" path='/system/importConfig/change' />
+		</action>
+		<action path="/system/importConfig/update"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			input="/system/importConfig/turnToModify.do" parameter="update">
+			<forward name="success" path='/system/importConfig/query.do' />
+		</action>
+		<action path="/system/importConfig/delete"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="delete">
+			<forward name="success" path='/system/importConfig/query.do' />
+		</action>
+		<action path="/system/importConfig/listItem"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			parameter="turnToItemConfig">
+			<forward name="success" path='/system/importConfig/listItem' />
+		</action>
+		<action path="/system/importConfig/updateItem"
+			type="gov.mof.fasp.ifmis.system.importmod.action.ImportConfigAction"
+			input="/system/importConfig/listItem.do" parameter="updateItem">
+			<forward name="success" path='/system/importConfig/query.do' />
+		</action>
+		<action path="/common/advancedquery"
+			type="gov.mof.fasp.ifmis.common.action.AdvancedQueryAction"
+			parameter="showAdvancedQueryUi">
+			<forward name="success" path='/common/advancedquery.jsp' />
+		</action>
+		<action path="/system/ui/editformsetlist"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="listEditFromSetAction">
+			<forward name="success" path='/system/ui/editformsetlistforpage' />
+		</action>
+		<action path="/system/ui/saveeditformsetlist"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="saveEditFromSetAction">
+			<forward name="success" path='/system/ui/editformsetlist.do' />
+		</action>
+		<action path="/system/ui/showsetpageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="showEditAction">
+			<forward name="success" path='/system/ui/showSetPageEdit.jsp' />
+		</action>
+		<action path="/system/ui/addshowsetPageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addShowEditAction">
+			<forward name="success" path='/system/ui/showsetpageedit.do' />
+			<forward name="suc" path='/system/ui/showsetpageedit_add.jsp' />
+		</action>
+		<action path="/system/ui/updateshowsetpageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="updateShowEditAction">
+			<forward name="success" path='/system/ui/showsetpageedit.do' />
+			<forward name="suc" path='/system/ui/showsetpageedit_update.jsp' />
+		</action>
+		<action path="/system/ui/findshowsetpageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="findshowEditAction">
+			<forward name="success" path='/system/ui/showsetpageedit_update.jsp'>
+			</forward>
+		</action>
+		<action path="/system/ui/delshowsetpageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="delShowEditAction">
+			<forward name="success" path='/system/ui/showsetpageedit.do' />
+		</action>
+		<action path="/system/ui/addsquelshowsetPageedit"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="addSquelShowEditAction">
+			<forward name="success" path='/system/ui/autoComplite.do'></forward>
+			<forward name="suc" path='/system/ui/autoComplite.do' />
+		</action>
+		<action path="/system/ui/updateajax"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="doAjaxAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/system/expressionrule/manage/index"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="query">
+			<forward name="success" path='/system/expressionrule/main' />
+		</action>
+		<action path="/system/expressionrule/manage/add/index"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="turnToSave">
+			<forward name="success" path='/system/expressionrule/add' />
+		</action>
+		<action path="/system/expressionrule/manage/add/savereturn"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="save" input="/system/expressionrule/manage/add/index.do">
+			<forward name="success" path='/system/expressionrule/manage/index.do' />
+		</action>
+		<action path="/system/expressionrule/manage/modify/index"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="turnToModify">
+			<forward name="success" path='/system/expressionrule/change' />
+		</action>
+		<action path="/system/expressionrule/manage/modify/savereturn"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="update" input="/system/expressionrule/manage/modify/index.do">
+			<forward name="success" path='/system/expressionrule/manage/index.do' />
+		</action>
+		<action path="/system/expressionrule/manage/delete"
+			type="gov.mof.fasp.ifmis.system.expressionrule.action.ExpressionruleAction"
+			parameter="delete">
+			<forward name="success" path='/system/expressionrule/manage/index.do' />
+		</action>
+		<action path="/system/ui/autoComplite"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="autoCompliteAction">
+			<forward name="suc" path='/system/ui/showsetpageedit_add.jsp' />
+		</action>
+		<action path="/system/ui/showlevelconfiglist"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="showLevelConfigAction">
+			<forward name="success" path='/system/ui/showlevelconfigsetlist.jsp' />
+		</action>
+		<action path="/system/ui/showdefvaluelist"
+			type="gov.mof.fasp.ifmis.system.ui.action.UISettingAction" parameter="showDefValueAction">
+			<forward name="success" path='/system/ui/showdefvaluesetlist.jsp' />
+		</action>
+		<action path="/system/print/query"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="showprintlistAction">
+			<forward name="success" path='/system/printconfig/print_query.jsp' />
+		</action>
+		<action path="/system/print/seal"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="addprintseallistAction">
+			<forward name="success" path='/system/printconfig/print_seal.jsp' />
+		</action>
+		<action path="/system/print/save"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="saveprintlistAction">
+			<forward name="success" path='/system/print/query.do' />
+		</action>
+		<action path="/system/print/addseal"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="saveprintseallistAction">
+			<forward name="success" path='/system/print/seal.do' />
+		</action>
+		<action path="/system/ui/delrow"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="delRowAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/system/print/findsealbyprint"
+			type="gov.mof.fasp.ifmis.system.print.action.PrintConfigAction"
+			parameter="findSaveSeal">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/system/export/xlsExport"
+			type="gov.mof.fasp.ifmis.system.export.action.XlsExportAction"
+			parameter="exoprtAction">
+		</action>
+		<action path="/system/export/xlsExportTem"
+			type="gov.mof.fasp.ifmis.system.export.action.XlsExportAction"
+			parameter="exoprtTemAction">
+		</action>
+		<action path="/system/savequery/save"
+			type="gov.mof.fasp.ifmis.system.savequery.action.SaveAction"
+			parameter="saveAction">
+		</action>
+		<action path="/system/savequery/delete"
+			type="gov.mof.fasp.ifmis.system.savequery.action.SaveAction"
+			parameter="deleteAction">
+		</action>
+		<action path="/system/moudeldef/index"
+			type="gov.mof.fasp.ifmis.system.moduledef.action.ModuledefAction"
+			parameter="listAction">
+			<forward name="success" path="/strutsui/common/singleindex" />
+		</action>
+		<action path="/system/moudeldef/edit"
+			type="gov.mof.fasp.ifmis.system.moduledef.action.ModuledefAction"
+			parameter="editAction">
+			<forward name="success" path="/strutsui/common/formedit" />
+		</action>
+		<action path="/system/moudeldef/save"
+			type="gov.mof.fasp.ifmis.system.moduledef.action.ModuledefAction"
+			parameter="saveAction">
+			<forward name="success" path="/system/moudeldef/index.do" />
+		</action>
+		<action path="/system/moudeldef/delete"
+			type="gov.mof.fasp.ifmis.system.moduledef.action.ModuledefAction"
+			parameter="deleteAction">
+		</action>
+		<action path="/system/moudeldef/doaction"
+			type="gov.mof.fasp.ifmis.system.moduledef.action.ModuledefAction"
+			parameter="doAction">
+		</action>
+		<action path="/system/license/index"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="listAction">
+			<forward name="success" path="/system/license/index" />
+		</action>
+		<action path="/system/license/edit"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="editAction">
+			<forward name="success" path="/system/license/edit" />
+		</action>
+		<action path="/system/license/save"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="saveAction">
+			<forward name="success" path="/system/license/index.do" />
+		</action>
+		<action path="/system/license/delete"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="deleteAction">
+		</action>
+		<action path="/system/license/doaction"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="doAction">
+		</action>
+		<action path="/system/license/createcert"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="createCertAction">
+			<forward name="success" path="/system/license/index" />
+		</action>
+		<action path="/system/moudeldef/macadress"
+			type="gov.mof.fasp.ifmis.system.license.action.LicenseAction"
+			parameter="getMacAddress">
+			<forward name="success" path="/system/license/macaddress" />
+		</action>
+		<action path="/system/checking/index"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="getAllResultAction">
+			<forward name="success" path="/system/checking/index" />
+		</action>
+		<action path="/system/checking/getAllSys"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="getAllSysAction">
+			<forward name="success" path="/system/syscheck/checksys.jsp" />
+		</action>
+		<action path="/system/checking/expSysExcel"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="expSysExcelAction">
+		</action>
+		<action path="/system/moudeldef/plugin"
+			type="gov.mof.fasp.ifmis.common.action.PluginCheckAction" parameter="indexPluginAction">
+			<forward name="success" path="/system/plugininfo" />
+		</action>
+		<action path="/system/updateplugininfo"
+			type="gov.mof.fasp.ifmis.common.action.PluginCheckAction" parameter="updatePluginAction">
+		</action>
+		<action path="/system/checking/getsyscheckset"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="getSyscheckSetAction">
+			<forward name="success" path="/system/checking/getsyscheckset" />
+		</action>
+		<action path="/system/checking/getSyscheckQueryLog"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="getSyscheckQueryLogAction">
+			<forward name="success" path="/common/tree/mutlQtree.jsp" />
+		</action>
+		<action path="/system/checking/getsyschecklog"
+			type="gov.mof.fasp.ifmis.system.syscheck.action.SysCheckAction"
+			parameter="getSyscheckLogAction">
+			<forward name="success" path="/system/checking/getsyschecklog" />
+		</action>
+		<action path="/system/moudeldef/setIE" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			parameter="indexAction">
+			<forward name="success" path="/system/setIE" />
+		</action>
+		<action path="/system/moudeldef/saveSite" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			input="/system/setIE/turnToSave.do" parameter="saveSite">
+			<forward name="success" path="/system/moudeldef/setIE.do" />
+		</action>
+		<action path="/system/setIE/turnToSave" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			parameter="turnToSave">
+			<forward name="success" path="/system/turnToSave" />
+		</action>
+		<action path="/system/setIE/delete" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			parameter="delete">
+			<forward name="success" path="/system/moudeldef/setIE.do" />
+		</action>
+		<action path="/system/setIE/modify" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			parameter="turnToModify">
+			<forward name="success" path="/system/modify" />
+		</action>
+		<action path="/system/moudeldef/modifySite" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			parameter="modify">
+			<forward name="success" path="/system/moudeldef/setIE.do" />
+		</action>
+		<action path="/system/setIE/create" type="gov.mof.fasp.ifmis.common.action.SetIEAction"
+			name="fileForm" parameter="createAction">
+		</action>
+		<action path="/system/logMonitor/index"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="indexAction">
+			<forward name="success" path="/system/logMonitor/index"></forward>
+		</action>
+		<action path="/system/logMonitor/showSys"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="showSysAction">
+			<forward name="success" path="/system/logMonitor/chooseSys.jsp"></forward>
+		</action>
+		<action path="/system/logMonitor/showLogInfo"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="showLogListAction">
+			<forward name="success" path="/system/logMonitor/index"></forward>
+		</action>
+		<action path="/system/logMonitor/queryLogInfo"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="queryCountInfoListAction">
+			<forward name="success" path="/system/logMonitor/index"></forward>
+		</action>
+		<action path="/system/logMonitor/getSameURL"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="getSameURLListAction">
+			<forward name="success" path="/system/logMonitor/index"></forward>
+		</action>
+		<action path="/system/logMonitor/searchFile"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			parameter="turnToOpenFile">
+			<forward name="success" path='/system/logMonitor/uploadLog.jsp' />
+		</action>
+		<action path="/system/logMonitor/openFile"
+			type="gov.mof.fasp.ifmis.system.logmonitor.action.LogMonitorAction"
+			input="/system/logMonitor/searchFile.do" parameter="openFile">
+			<forward name="success" path='/system/logMonitor/uploadLog.jsp' />
+		</action>
+		<action path="/common/error/getErrorLog"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="getErrorLogAction">
+			<forward name="success" path="/common/error/getErrorLog"></forward>
+		</action>
+		<action path="/system/errorlog/querytree"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="getQueryTreeAction">
+			<forward name="success" path="/common/tree/mutlQtree.jsp"></forward>
+		</action>
+		<action path="/common/error/saveErrorLog"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="saveErrorLogAction">
+		</action>
+		<action path="/common/error/updateErrorlog"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="updateErrorlogAction">
+			<forward name="success" path="/common/error/getErrorLog.do"></forward>
+		</action>
+		<action path="/common/error/deleteErrorlog"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="deleteErrorlogAction">
+			<forward name="success" path="/common/error/getErrorLog.do"></forward>
+		</action>
+		<action path="/common/error/error500"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="error500Action">
+			<forward name="success" path="/common/error/error500"></forward>
+		</action>
+		<action path="/common/error/expSysExcel"
+			type="gov.mof.fasp.ifmis.system.saveerror.action.ErrorLogAction"
+			parameter="expSysExcelAction">
+		</action>
+	</action-mappings>
+</struts-config>

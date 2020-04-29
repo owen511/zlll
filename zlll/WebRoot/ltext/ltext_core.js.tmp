@@ -1,0 +1,5143 @@
+if(Ext == null) var Ext={};
+Ext.BLANK_IMAGE_URL = '../images/s.gif';
+/**
+ext框架的扩展，本文件为核心包。包括动态加载，模板管理的功能。
+
+API说明：
+
+命名空间：Ext.lt
+方法说明：
+getNextSeqValue()  返回该页面中的一个唯一索引，数字型最小值1000
+regKeyEvent(char,fn,ctrl,shift) 注册组合键事件。char表示要监控的字母按键，不区分大小写。ctrl、shift表示是否要同时按住键盘的ctrl键和shift键
+clone(Object)	 复制以对象
+createComponent(function(){ return cmpinstance}) 创建组件对象方法，要求返回对象必须实现draw，resize方法
+
+
+
+aninmation(HTMLElement)  属性动画实现类,将给定对象添加属性动画实现方法。
+    return HTMLElement.setAnimatProperty(proerty,start,end) 设置动画属性及开始值和结束值
+                      .play(time);                          执行动画，time为动画执行的时间
+                      .stop();                              终止动画执行，属性直接赋值为结束值
+
+
+
+
+
+命名空间：Ext.lt.RCP
+    实现浏览器调用远程服务的方法，调试快捷键'ctrl+shift+r'
+方法说明：
+call(server, m, parameters, callbakfn, falsefun)
+asyncall(server, m, parameters);
+asynserver(serverid, m, parameters)
+asynserverNotEncode(serverid, m, parameters)  不对参数进行编码
+server(serverid, m, parameters, callbakfn, falsefun)
+script( serverid, m, parameters, callName)
+
+
+
+
+命名空间：Ext.lt.util
+    各种JavaScript的常用工具方法
+方法说明：
+setText(String)		将参数中的文本发送到剪贴版中
+fnbind(fn,Object)		将方法的this常量指向Object
+clone(Object)		复制一个值对象。只能复制对象的字符串、数字、数组属性。方法和绑定的事件不能对象
+
+
+
+
+命名空间：Ext.lt.HTML
+		各类HTML常用方法及扩展
+		对HTML元素增加鼠标移入、移出、点击时的样式控制，属性名
+			鼠标移入样式 overclass overstyle
+			鼠标点击样式 clickclass clickstyle
+			开关样式     switchstyle switchclass  当鼠标点击一次，对象样式换为属性指定内容，再次点击以后样式恢复
+			开关组       switchgroup 一组开关中只能有一个开关打开，当打开一个开关后，同一组中的其他开关自动关闭，并出发onclick时间
+			开关状态     switch=on   当该属性为on时，改元素默认使用打开状态样式
+
+方法说明：
+positionedOffset(element)  返回指定元素在页面中的位置。为方便使用，返回值结构为数组、对象混用模式。返回值基本类型为数组[左边距，上编剧]。也可以从返回值对象中获取left、top属性
+mark(element,boolean:flag)     采用IFRAME遮罩指定对象，flag 默认为true。当flag为true时遮罩指定对象，flase时恢复
+setStyle(element,csstext)      采用CSS格式设置对象样式。如 setStyle(divid,'width:100%;border:1px red solid')
+drag(cfg:{})               对HTML对象生成拖拽操作，参数为拖拽的配置信息。
+ cfg={element:HTMLElement, 需要拖拽的HTML元素
+      holder:boolean,      是否显示占位负号
+      x:int,               鼠标和拖拽对象的X轴相对位置
+      y:int,               鼠标和拖拽对象的Y轴相对位置
+      onend:function,      当拖拽结束时执行的方法
+      onstart:function     当拖拽开始时执行的方法
+      dragel:HTMLElement   拖拽对象
+      }    
+
+
+
+命名空间：Ext.lt.dateutil
+    实现各种日期工具
+方法说明：
+YYMMDD(dateobj)    返回'YYYY年MM月DD日' 的中文格式
+weekday(dateobj)   返回中文的星期几
+solarDay(dateobj)  返回农历和节日
+holiday(dateobj)   返回西方节日名称
+chinaholiday(dateobj)  返回中国传统节日名称
+
+
+
+
+命名空间：Ext.lt.layout
+		简单布局管理
+使用布局管理时需要在HTML元素上增加布局设置layout属性。如：<div layout="{h:{fit:-65,min:400}}"></div>
+在layout属性中设置HTML元素的宽、高设置，设置信息符合Json格式。最外层布局元素的属性是相对窗口可见区的大小来设置的
+min:表示元素的最小值，当界面高度或宽度小于这个值时，则使用这个值
+fit:属性用来控制元素宽度。
+		'auto' - 自动适应宽度，使用上级元素的宽度（高度）减去其他兄弟元素的宽度（高度）。如果平级兄弟元素中有多个fit:auto则只有第一个生效
+		 true  - 自动充满真个区域
+		 正数  - 应用该宽度
+		 负数  - 与上级布局元素的属性的差值
+当页面大小被改变后，布局样式在0.2秒之后开始应用。在完成布局计算后，向页面发送"layout","endlayout"消息，其他页面组件可以通过Ext.lt.message.hook("layout","endlayout",function(){})来获取消息
+例如：
+设置一个div，大小充满这个窗口可见区域 
+	<div layout="{h:{fit:true},w:{fit:true}}"></div>
+设置一个div，高度为窗口可见区域大小减去页头高度（100px）
+	<div layout="{h:{fit:-100}}"></div>
+设置一个div，宽度为窗口可见区减去左侧菜单宽度150px，并且，宽度不得小于600px
+	<div layout="{w:{fit:-150,min:600}}"></div>
+
+
+命名空间：Ext.lt.message
+		页面消息管理器，页面间组件可以通过消息相互通讯。消息机制可以在组件之间保持松耦合状态下的实现各种联动效果。
+
+属性：
+	assistfn:function()	辅助区内容扩展函数。参数与alert参数相同，返回HTML代码并生成到系统提示框辅助区中
+		
+方法说明：
+	send(src,type,msg)  发送一个消息，src消息来源  type消息类型  msg消息内容，消息内容可以是数字、日期、字符串、对象，结构有消息发布者规定，并需要提供详细的结构说明，消息使用者根据该说明使用
+	hook(src,type,fn)   拦截一个消息，src消息来源  type消息类型  fn消息处理的回调函数，参数为发送消息的msg参数。在函数中可以修改msg的内容，并且会影响拦截该消息的其他组件。
+	unhook(src,type,fn) 取消消息拦截，src消息来源  type消息类型  fn消息处理的回调函数
+	alert(msg,{title:,assist:,})	替换浏览器缺省提示框，在原有提示框的基础上增加标题控制和辅助区。并提供扩展接口可修改服务区内容
+
+
+
+
+
+
+Ext.lt.cookie
+	add(name,value,expires,path,domain,secure)  添加一个cookie
+	del(name)                                   删除cookie
+	get(key)									获取一个cookie
+
+
+
+
+
+ */
+ 
+var N=null;
+if(Ext.lt==null){
+Ext.lt = new function(){
+	var _seq=1000;  //内置序列
+	var _keymap={}; //快捷键缓存
+	var _keymapTime={key:'',time:new Date()}; //快捷键缓存
+	
+	// 运行模式，默认为演示模式使用本地数据文件。变为运行模式后则按照server属性设置加载服务器端数据
+	this.demomode=false;
+	// 演示模式下模拟交互的数据,key为远程调用的URL
+	this.demodatamap=[];
+	
+	// 服务器访问路径，当系统为演示模式时该参数无效，而变为运行模式时，所有数据文件访问将自动追加服务器地址
+	this.serverUrl='http://localhost:7001/fcas';
+	// 用于设置客户端框架根目录位置，默认/ltext
+	this.ltextpath='/ltext';
+	
+	// ie版本号
+	var _msie=navigator.userAgent.toLowerCase().match(/msie (\d+)\./);
+	this.ieversion=_msie?_msie[1]:7;
+	
+	// 存储已加载js库文件名称
+	this.jslib={};
+	
+	// 定义常量NULL
+	N=null;   
+	
+	var _onload_fn =[];
+	
+	this.onload=function(fn){
+		_onload_fn.push(fn)
+	}
+	
+	window.attachEvent('onload',function(){
+		for(var i=0,l=_onload_fn.length;i<l;i++){
+			try{
+				_onload_fn[i]();
+			}catch(e){}
+		}
+	})
+	
+	
+	/**
+	 * 向页面中加载新的js库
+	 * 由于页面初始显示时并不需要加载所有的js文件。因此，后使用的js库文件通过改方法动态加载到页面中
+	 */
+	this.loadLib=function(libname, fn){
+    if(this.jslib.libname == null){
+      var scpt = document.createElement("SCRIPT");
+      scpt.type = "text/javascript";
+      scpt.src = './ltext/extends/'+libname+'.js';
+      scpt.onreadystatechange = function(){
+      	if (this.readyState == "complete") { 
+      		Ext.lt.jslib.libname = true;
+      		// 尝试执行js库的初始化函数
+   			  eval(libname+"_init()");
+      		
+      		if(Ext.lt.isFunction(fn)){
+      			fn();
+      		}
+      	}
+      }
+      document.getElementsByTagName("HEAD")[0].appendChild(scpt);
+    }
+    else{
+    	if(Ext.lt.isFunction(fn)){
+        fn();
+      }
+    }
+	};
+	
+	/**
+	 * 检查指定的js库是否被加载
+	 */
+	this.hasJsLib=function(libname){
+		return (this.jslib.libname)?true:false;
+	};
+	
+	/**
+	 * 处理系统中获取数据url
+	 * 如为demo系统则访问本地数据，如果是真实系统，则根据Ext.lt.serverUrl修改链接，直接从正式服务上获取数据
+	 */
+	this.encodeUrl=function(url){
+	    // 如果链接已经指定具体的域名则直接返回
+	    if(url.toLowerCase().indexOf('http') ==0){
+		   return url;
+	    }
+	    
+	    if(!Ext.lt.demomode){
+		   if(url.substring(0,1) == '/'){
+		       return Ext.lt.serverUrl+url;
+		   }
+		   else{
+		       return Ext.lt.serverUrl+'/'+url;
+		   }
+	    }
+	    return url;
+	};
+	
+	/**
+	 * 创建模型用的远程调用方法
+	 */
+	this.createModule=function(modulename,moduleparams){
+		modulerul = Ext.lt.serverUrl+'/module/'+modulename;
+		return function(fn){
+			Ext.Ajax.request({
+				url: modulerul,
+				success: fn,
+				failure: function(){
+			  	alert("error");	
+				},
+				params: moduleparams
+			});
+		}
+	}
+	
+	this.getNextSeqValue=function(){return _seq++};
+	this.apply=function(p,c){for(var n in c){p[n]=c[n]};return p};
+	this.isArray=function(object) {return object && object.constructor === Array;};
+	this.isFunction=function(e){return typeof(e)=='function'};
+	this.isDate=function(e){return Object.prototype.toString.apply(e)==='[object Date]'}
+	this.exception=function(){};
+	this.log=function(){};
+	
+	this.clone=function(obj){
+		if(obj==null) return null;
+		eval('var tmp='+Object.toJSON(obj));
+		// 将对象中的其他属性复制到克隆对象中
+		Ext.lt.apply(tmp,obj);
+		return tmp;
+	}
+
+	// 错误代码库
+	this.errlib=new function(){
+			var errs=[]
+			addErr=function(e){
+				if(!e.code){i=i/0}
+				if(!e.msg){i=i/0}
+				errs.push(e);
+			}
+			this.loadErr=function(){
+				
+			}
+	};
+	
+	// 拦截所有键盘事件，处理各种组合键事件
+	document.attachEvent('onkeypress',function(){
+		var nD=new Date();
+		if((nD-_keymapTime.time)>1000){
+			_keymapTime.key='';
+		}
+		_keymapTime.key=_keymapTime.key+"_"+event.keyCode
+		_keymapTime.time=nD;
+		var en=_keymap['press'+_keymapTime.key];
+		if(en==null) return true;
+		if(event.ctrlKey==en.ctrl && event.shiftKey==en.shift){
+			en.fn();
+		}
+	});
+	
+	// 注册组合键事件。ctrl、shift表示键盘ctrl键和是shift的组合，字母键不区分大小写
+	this.regKeyEvent=function(k,fn,pressctrl,pressshift){
+		if(fn==null || k==null) return false ;
+		if(k.length<1) return false;
+		var charcodes=['','',''];
+		for(var i=0;i<k.length;i++){
+			var _k=k.charAt(i);
+			charcodes[0]=charcodes[0]+"_"+(_k.toUpperCase().charCodeAt(0));
+			charcodes[1]=charcodes[1]+"_"+(_k.toLowerCase().charCodeAt(0));
+			charcodes[2]=charcodes[2]+"_"+(_k.toUpperCase().charCodeAt(0)-64);
+		}
+		_keymap['press'+charcodes[0]]={'fn':fn,'ctrl':(pressctrl==true),'shift':(pressshift==true)}
+		_keymap['press'+charcodes[1]]={'fn':fn,'ctrl':(pressctrl==true),'shift':(pressshift==true)}
+		_keymap['press'+charcodes[2]]={'fn':fn,'ctrl':(pressctrl==true),'shift':(pressshift==true)}
+		if(pressctrl){
+			if(k=='v') _keymap['press22']={'fn':fn,'ctrl':(pressctrl==true),'shift':(pressshift==true)}
+		}
+	}
+
+	var _logger=[]
+	window.errlog=function(msg){
+		// 分析堆栈呢rio那个
+		var stack=[],caller=errlog.caller;
+		while(caller!=null){
+			stack.push(caller.toString('Function'));
+			caller=caller.caller;
+		alert(caller)
+		}
+		_logger.push({'Date':new Date(),'msg':msg,'stack':stack})		
+	}
+	
+	
+	this.createComponent=function(cmpfunction){
+		return function(cfg){
+			var newcmp=new cmpfunction(cfg);
+			// 检查newcmp对象是否包含draw、resize等方法
+			if(Ext.lt.isFunction(newcmp.draw) && Ext.lt.isFunction(newcmp.resize)){
+				// 遍历对象所有方法，设置通过fnbind函数，将所有方法的this指针指向newcmp
+				for(var fn in newcmp){
+					if(Ext.lt.isFunction(newcmp[fn])){
+						Ext.lt.util.fnbind(newcmp[fn],newcmp);
+					}
+				}
+				
+				// 将组件基本方法组装到组件中
+				return new Ext.lt.component(newcmp);
+			}
+			else{
+				alert("无法创建组件，组件没有实现draw方法或resize方法");
+				return;
+			}
+		}
+	}
+
+};
+
+
+
+// 对数字格式化的扩展，参数为unit:int计量单位，dot:int小数位，qfw:boolean是否显示千分位
+String.prototype.toNumber=function(dot, qfw, unit){
+	if(unit==null || isNaN(unit)) unit=1;
+	if(dot==null || isNaN(dot)) dot=2;
+	if(qfw==null) qfw=true;
+	
+	var v=parseFloat(this,10);
+	if(isNaN(v)) v=0;	
+	v=v/unit;
+	
+	// 判断是否为负数
+	var neg=v<0
+	if(neg) v*=-1;
+
+	
+	// 四舍五入 dot属性小于0时不做四舍五入的控制
+	if(dot>-1){
+		v=(v+(0.5*Math.pow(0.1, dot)))
+	}
+	v+=''
+	var p=v.lastIndexOf('.');
+	if(p==-1){
+		p=v.length;
+		v+=".";
+	}
+	
+	// 处理千分位
+	if(qfw){
+		if(p>3){
+			var re = /(\d)(\d{3}[,\.])/;
+			while (re.test(v)){
+				v = v.replace(re, "$1,$2");
+				p++;
+			}
+		}
+	}
+	
+	// 处理小数位
+	if(dot==0){
+		v=v.substring(0,p);
+	}
+	else if((p+dot+1)<v.length){
+		v=v.substring(0,(p+dot+1));
+	}
+	
+	return neg?'-'+v:v;
+}
+
+// 设置对象格式化输出的模板，设置模板后会追加out方法。调用后按照模板形式返回字符串
+// 设置数据模板
+var _regfn={}
+Object.setTemplate=function(obj,tmp){
+	var _tmp=tmp;
+	
+	var _getRegFn=function(field){
+		var regx=_regfn[field]
+		if(regx==null){
+			regx=RegExp("#"+field,"ig");
+			_regfn[field]=regx
+		}
+		return regx;
+	}
+	
+	
+	obj.out=function(){
+		var o=_tmp,fs=[],fi,l;
+		for(var f in this){
+			l=f.length
+			if(l!=null && fs[l]==null){
+				fs[l]=[];
+			}
+			fs[l].push(f);
+		}
+		
+		for(var i=fs.length-1;i>-1;i--){
+			fi=fs[i];
+			if(fi==null) continue;
+			for(var j=fi.length;j>-1;j--){
+				f=fi[j]
+				if(this[f]==null){
+					o=o.replace(_getRegFn(f),'');
+				}else if(typeof(this[f])!='function' && typeof(this[f])!='object'){
+					o=o.replace(_getRegFn(f),this[f]);
+				}
+			}
+		}
+		
+		/*
+		
+		for(var f in this){
+			if(this[f]==null){
+				o=o.replace(_getRegFn(f),'');
+			}else if(typeof(this[f])!='function' && typeof(this[f])!='object'){
+				o=o.replace(_getRegFn(f),this[f]);
+			}
+		}
+		*/
+		return o;
+	}
+}
+
+// 扩展数组toArray方法
+Array.prototype.toArray=function(){return this}
+// 扩展数组清空方法
+Array.prototype.clear=function(){
+	this.splice(0,this.length);
+}
+// 删除数组中的指定对象
+Array.prototype.remove=function(obj){
+	for(var i=0,l=this.length;i<l;i++){
+		if(this[i]==obj){
+			this.splice(i--,1);
+			l--;
+		}
+	}
+}
+// 向数组中追加新元素
+Array.prototype.add=function(arr){
+	for(var i=0,l=arr.length;i<l;i++) this.push(arr[i]);
+}
+// 添加删除空格的方法
+String.prototype.trim = function(){
+	return this.replace(/(^\s*)|(\s*$)/g,"");
+}
+
+// 对象输出模板
+Ext.lt.out={};
+Ext.lt.out.template=function(template){
+	var _template=template;
+	var _cmp={};
+	var _fields=[];
+	
+	// 设置输出字段集合或字段名
+	_cmp.setField=function(fs){
+		if(!Ext.lt.isArray(fs)) fs=[fs];
+		for(var i=0,l=fs.length;i<l;i++){
+			_fields.push(fs[i]);
+			_fields[fs[i]]=RegExp("#"+fs[i],"ig")
+		}
+		// 按字段长短排序
+		var t=[],len,o;
+		for(var i=0,l=_fields.length;i<l;i++){
+			o=_fields[i];
+			if(o==null)return;
+			len=o.length
+			if(len!=null && t[len]==null){
+				t[len]=[];
+			}
+			t[len].push(o);
+		}
+		
+		
+		// 按字段属性由长到短重新生成
+		var f=[],fi;
+		for(var i=t.length-1;i>-1;i--){
+			fi=t[i];
+			if(fi==null) continue;
+			f=f.concat(fi);
+		}
+		_fields.clear();
+		_fields.add(f);
+	}
+	
+	
+	_cmp.out=function(o){
+		// 复制输出摸板
+		var str=_template+'',f
+		for(var i=0,l=_fields.length;i<l;i++){
+				f=_fields[i]
+				if(o[f]==null){
+					str=str.replace(_fields[f],'');
+				}else if(typeof(o[f])!='function' && typeof(o[f])!='object'){
+					str=str.replace(_fields[f],o[f]);
+				}
+		}
+		return str;
+	}
+	
+	return _cmp;
+}
+
+
+// 数据集对象
+Ext.lt.recordset=function(obj){
+	var _datas=[];
+	    _datas.size=0;
+	var _datas_all=[];
+	    _datas_all.size=0
+	var _splite_p=20;
+	var _splite=1048576;  // 2的9次方
+	var _splite_y=_splite-1; // 用于计算512的余数
+	// var columns={}; // 列明索引
+	var _columnNames=[];      // 列名即合
+	var lt=Ext.lt;
+	var _datatable;  // 数据表格对象
+	var _asc=true;   // 升序排序，false时为降序排序
+	var _total=-1;
+	var dataSort=false;
+	var _prejson=obj==null?false:true==obj.prejson; // 是否预处理导出JSON串
+	var _version=(obj!=null&&obj.ver!=null)?obj.ver:'1.1';
+	var _filter=[]; 	// 数据过滤调节集合
+	var _locationposition=0;
+	var maxlength=null;
+	var sortobj=null;
+	// 设置数据过滤条件，结构为{key1:[value1,value2,…],key1:[value1,value2,…],…}
+	function _setFilter(filterset){
+		// 清除原有过滤条件
+		_filter=[];
+		if(filterset!=null){
+			for(var key in filterset){
+				var values=filterset[key];
+				// 保存过滤条件内容
+				_filter.push(key);
+				for(var i=0,l=values.length;i<l;i++){
+					_filter['_k'+key+'_v'+values[i]]=true
+				}
+			}
+		}
+		// 过滤数据
+		_filterData();
+	}
+	
+	function _filterData(){
+		if(_filter.length==0){
+			_datas=_datas_all;
+			_setSortId()
+			return;
+		}
+		
+		// 清空数据集
+		_datas=[];
+		// 验证数据，并将数据插入数据集中
+		for(var i=0,n=_datas_all.length;i<n;i++){
+			for(var j=0,l=_filter.length;j<l;j++){
+				if(_filter['_k'+_filter[j]+'_v'+_datas_all[i][_filter[j]]]){
+					// 发现匹配数据项，将匹配数据项添加到显示数组中
+					_datas.push(_datas_all[i]);
+					break;
+				}
+			}
+		}
+		_datas.size=_datas.length;
+		_setSortId()
+	}
+	
+	function _clearFilter(){
+		_setFilter();
+	}
+			
+	function _addData(d){
+		// 保存数据副本
+		_datas_all.push(d);
+		_datas_all.size++;
+		_fix(d);
+	}
+	
+	function _fix(d){
+		// 预处理成Json
+		if(_prejson && d._jsonstring==null){
+			var _temp=[];
+			for (var i=0,l=_columnNames.size;i<l;) {
+				_cn=_columnNames[i++]
+				if(d[_cn]!=null)	_temp.push(_cn+":"+d[_cn]);
+				}
+				d._jsonstring='{'+_temp.join(',')+'}';
+		}
+		
+		// 内部排序字段
+		if(d._locationposition==null) d._locationposition=_locationposition++;
+	}
+	
+	function _size(){
+		return _datas.size;
+	};
+
+	function _getData(n){
+		// 这里改为过滤数据
+		return _datas[n];
+	}
+			
+	function _insertData(i,d){
+		var _newdatas=_datas_all.slice(0,i+1);
+		var _newdatae=_datas_all.slice(i+1);
+		
+		// 对追加数据进行预处理
+		for(var i=0,l=d.length;i<l;i++) _fix(d[i]);
+		
+		_datas_all=_newdatas.concat(d,_newdatae);
+		_datas_all.size=_datas_all.length;
+		_filterData();
+		return ;
+	}
+	
+	function _delData(fn,i){
+		var _newdatas=[];
+		_newdatas.size=0;
+		
+		var tmp,p=0;
+		if(i==null)i=0;
+		for(n=0,l=_datas_all.length;n<l;n++){
+			tmp=_datas_all[n];
+			if(n>=i){
+				if(!fn(tmp)){
+					_newdatas.push(tmp);
+					_newdatas.size++
+				}
+			}
+			else{
+				_newdatas.push(tmp)
+				_newdatas.size++
+			}
+		}
+		_datas_all=_newdatas;
+		_datas_all.size=_datas_all.length;
+		_filterData();
+	}
+	
+	function _setData(n,data){
+		//_datas[n]=data
+		_datas_all[n].push(data);
+		_filterData();
+	}
+	
+	function _swap(i,j,arr){
+		if(arr==null) arr=_datas;
+		var d=arr[i];
+		arr[i,arr[j]];
+		arr[j,d];
+	}
+	
+	// 排序函数
+	function _sortArray(s,e,arr){
+	
+		//首行或末尾不排序
+		var totval=null;
+		if(_total>-1){
+			totval=arr[_total];
+			arr[_total]=null;
+			arr.remove(null);
+		}
+		//-------------
+		var size=arr.length;
+		// shell排序法
+		for (var step = size >> 1; step > 0; step >>= 1){
+			for (var i = 0; i < step; ++i){
+				for (var j = i + step; j < size; j += step){
+					var k = j, value =arr[j];
+					
+					//while (k >= step && (arr[k - step]>value)==_asc){
+					
+					if(typeof(arr[k - step])=='string')
+					{
+					  while (k >= step && (arr[k - step].localeCompare(value)>0)==_asc){
+					      arr[k]=arr[k - step]
+		   			k -= step;
+					}
+					}else 
+			        {
+					while(k >= step && (arr[k - step]>value)==_asc){
+					      arr[k]=arr[k - step]
+						k -= step;
+					}
+					}
+					
+					
+					arr[k]=value;
+				}
+			}
+		}
+		//首行或末尾不排序
+		if(_total==0){
+			arr=[].concat(totval, arr);
+		}else if(_total>0){
+			arr=arr.concat(totval);
+		}
+		//----------
+		return arr;	
+	}
+	
+	function _sortWithColumn(s,e,cname){
+
+		var size=_size();
+		/*
+		// 快速排序法
+		if (s == null) s = 0;
+    if (e == null) e = size - 1;
+    if (s >= e) return;
+    _swap((s + e) >> 1, e);
+    var index = s - 1;
+    
+    var d2=_getData(e);
+    for (var i = s; i <= e; ++i){
+    	var d1=_getData(i);
+			if (d1[cname] <= d2[cname]){
+				_setData(i,_getData(++index));
+				_setData(index,d1);
+			}
+    }
+        
+    _sortWithColumn(s, index - 1,cname);
+    _sortWithColumn(index + 1, e,cname);
+		*/
+		
+		// shell排序法
+			for (var step = size >> 1; step > 0; step >>= 1){
+				for (var i = 0; i < step; ++i){
+					for (var j = i + step; j < size; j += step){
+						var k = j, data=_getData(j), value =data[cname];
+						
+						while (k >= step && (_getData(k - step)[cname]>value)==_asc){
+							_setData(k,_getData(k - step));
+							k -= step;
+						}
+						
+						_setData(k,data);
+					}
+				}
+			}
+	}
+	
+	var _setColNames=function(cs){
+		if(lt.isArray(cs)){
+			_columnNames=[];
+			for(var i=0,j=cs.length;i<j;i++){
+				_columnNames[i]=cs[i];
+				_columnNames[cs[i]]=i
+			}	
+			_columnNames.size=_columnNames.length;
+		}
+	}
+	
+	// 为显示的数据添加排序ID，属性名为_sortid
+	function _setSortId(){
+		for(var i=0,l=_datas.size;i<l;i++){
+			_datas[i]['_sortid']=i;
+		}
+	}
+	
+	// 处理初始化数据集，将数据集重新转换为对象结构
+	var start = new Date(),log=[];
+	if(obj!=null && obj.columns!=null && obj.datas!=null){
+		_setColNames(obj.columns);
+		var m=0,n=obj.columns.length;
+		var t,o,v,sv;
+		var seqdata=obj.seqdata;
+		var seqdatamap=obj.seqdatamap==null?{}:obj.seqdatamap;
+		
+		if(seqdata!=null){
+			for(var i=0,j=seqdata.length;i<j;i++){
+				seqdatamap['@'+i]=seqdata[i];
+			}
+		}
+
+		log.push(new Date()-start);
+		var l=0;
+		
+		for(var i=0,j=obj.datas.length;i<j;i++){
+			t=obj.datas[i],o={_locationposition:null};
+			for(m=0;m<n;m++) if(t[m]!=null) o[_columnNames[m]]=t[m];
+			_addData(o);
+		}
+		maxlength=obj.ml;
+		log.push(l);
+	}
+		
+		log.push(new Date()-start);
+//alert(log);
+
+	_filterData();
+	
+	// 窗口退出时释放内存
+	window.attachEvent('onunload',function(){
+		_datas=null;
+		_columnNames=null;
+	});
+	
+  // 公有方法
+	return new function(){
+		this.version="1.0";
+		this.type="recordset";
+		this.setTotal=function(v){
+			if(v>=0)
+			_total=v
+		}
+		// 返回数据集长度
+		this.size=function(){return _size()};
+		// 向数据集中追加数据
+		this.setData=function(d,i){
+			if(d==null) return;
+			if(i==null){
+				if(lt.isArray(d)){for(var n=0,l=d.length;n<l;n++){_addData(d[n]);}}
+				else{_addData(d);}
+			}
+			else{
+				if(lt.isArray(d)){for(var n=0,l=d.length;n<l;n++){_datas[n]=d}}
+				else{_datas[i]=d}
+			}
+			_filterData();
+			if(sortobj!=null&&sortobj.col!=null&&i==null&&dataSort){
+				this.sort(sortobj.col,sortobj.asc,sortobj.fn);
+			}
+		}
+		// 向数据集中的指定位置追加数据
+		this.addData=function(d,i){
+			if(i==null) i=this.size();
+			if(lt.isArray(d)){_insertData(i,d)}else{_insertData(i,[d])}
+			if(_datatable!=null) _datatable.reflash();
+		}
+		this.join=function(dt,ip){
+			if(ip==null) ip=this.size();
+			// 向现有数据集中追加字段名
+			var cs=dt.getColNames();
+			if(lt.isArray(cs)){
+				var cn;
+				for(var i=0,j=cs.length;i<j;i++){
+					cn=cs[i];
+					if(_columnNames[cn]==null){
+							// 现有数据集中没有该字段名，则追加字段名
+							_columnNames[cn]=_columnNames.length;
+							_columnNames.push(cn);
+					}
+				}	
+			}
+			
+			// 向现有数据集中追加数据
+			this.addData(dt.toArray(),ip);
+		}
+		this.toArray=function(){
+			return _datas;
+		}
+		//从数据集中获取数据
+		this.getData=function(n){
+			return 	_getData(n);
+		}
+		this.getDataValue=function(n,name){
+			var r=this.getData(n);
+			return 	(r)?r[name]:r[columns[name]];
+		}
+		// 设置列名
+		this.setColNames=function(cs){
+			_setColNames(cs)
+		}
+		// 获取列名的数组
+		this.getColNames=function(){
+			if(_columnNames.length==0 && this.size()>0){
+				var obj=this.getData(0);
+				for(var n in obj){
+					if('_locationposition'!=n) _columnNames.push(n);
+				}
+			}
+			return _columnNames;
+		}
+		// 循环结果集 fn 
+		this.each=function(fn,s,l){
+			if(!s){s=0}
+			if(!l){l=this.size()}else{(s+l<this.size())?l=s+l:l=this.size()-l}
+			for(;s<l;s++){
+				fn(this.getData(s));
+			}
+		}
+		
+		this.bindTable=function(dt){
+			_datatable=dt;
+		}
+		this.setDataSort=function(b){
+			dataSort=b;
+		}
+		// 按照指定属性排序，使用谢尔排序法
+		// 采用js页面排序时需要大量的从数组中获取数据对象再获取属性的操作，由于js是解释型语言。因此，频繁重复的操作会消耗大量的时间。
+		// 因此，这次排序优化的方式时先将需要排序的内容保存到一个数组sortkey中，需要排序的数据按照排序内容分组保存到一个对象sortmap中。
+		// 然后对sortkey中的内容进行排序，最后再将sortmap中的数据按sortkey中的顺序保存到结果集中
+		this.sort=function(col,asc,fn){
+			sortobj={col:col,asc:asc,fn:fn};
+			if(col==null) col="_locationposition";
+			_asc=asc==true;
+			var start = new Date();
+			
+			// 采用分组排序优化方式提高排序速度
+			var sortkey=[],sortmap={};
+			var ds=this.toArray(),dobj,darr,dk;
+			// 按照排序字段分组
+			for(var i=0,l=ds.length;i<l;i++){
+				dobj=ds[i];
+				dk=dobj[col];  // 此处应该转换为列显示的实际内容
+
+				darr=sortmap[dk];
+				if(darr==null){
+					darr=[];
+					sortmap[dk]=darr;
+					sortkey.push(dk);
+				}
+				darr.push(dobj);
+			}
+	
+			if(fn!=null){
+				var dk,sk;
+				for(var i=0,l=sortkey.length;i<l;i++){
+					dk=sortkey[i];
+					sk=fn(dk);
+					sortkey[i]=sk;
+					sortmap[sk]=sortmap[dk];
+				}
+			}
+			
+			// 排序指定字段的值
+			sortkey=_sortArray(null,null,sortkey);
+
+			// 重新填充数据
+			_datas=[]
+			for(var i=0,l=sortkey.length;i<l;i++){
+				for(var j=0,m=sortmap[sortkey[i]].length;j<m;j++){
+					_datas.push(sortmap[sortkey[i]][j]);
+				}
+			}
+			_datas.size=_datas.length;
+			_setSortId()
+			sortmap=null;
+			sortkey=null;
+			ds=null;
+			dobj=null;
+			darr=null;
+			dk=null;
+		}
+		
+		// 清除数据集内容
+		this.clear=function(){
+			_datas=null;
+			_datas=[];
+			_datas.size=0;
+			_datas_all=null;
+			_datas_all=[];
+	    _datas_all.size=0
+		}
+		
+		// 从指定位置开始删除数据
+		this.delData=function(fn,i){
+			_delData(fn,i);
+			if(_datatable!=null) _datatable.reflash();
+		}
+		
+		// 转换为JSON形式的字符串
+		this.toJSON=function(){
+			
+			if(_prejson){
+				var r=[];
+				for(var i=0,li=_datas.size;i<li;i++){
+					r.push(_datas[i]._jsonstring);
+				}
+				return '['+r.join(',')+']'.replace(/'/g,"\\\'").replace(/"/g,"\\\"");;
+			}
+			else{
+				return Object.toJSON(_datas);	
+			}
+		}
+		
+		// 设置过滤条件，设置格式为{key:string/number/array[number/string],…}
+		this.setFilter=function(filterset){
+			for(var key in filterset){
+				if(!Ext.lt.isArray(filterset[key])){
+					filterset[key]=[filterset[key]];
+				}
+			}
+			_setFilter(filterset);
+		}
+		this.sortobj=function(){
+			if(sortobj!=null&&sortobj.col!=null){
+				this.sort(sortobj.col,sortobj.asc,sortobj.fn);
+			}
+		}
+		// 清除数据过滤
+		this.clearFilter=function(){
+			_clearFilter();
+		}
+		
+		// 根据过滤条件查询数据集中的数据，过滤条件格式为{key:string/number/array[number/string],…}
+		this.query=function(filterset){
+			var r=[],keys=[];
+			
+			// 没有查询条件，返回全部数据
+			if(filterset==null){
+				return _datas_all;
+			}
+		
+			// 生成查询索引
+			if(filterset!=null){
+				for(var key in filterset){
+					keys.push(key);
+				}
+				
+				for(var k=0,j=keys.length;k<j;k++){
+					var values=filterset[keys[k]];
+					if(!Ext.lt.isArray(values)) values=[values];
+					for(var i=0,l=values.length;i<l;i++){
+						filterset['_k'+keys[k]+'_v'+values[i]]=true
+					}
+				}
+			}
+		
+			// 验证数据，并将数据插入数据集中
+			var checkflag=true;
+			for(var i=0,n=_datas_all.length;i<n;i++){
+				checkflag=true;
+				for(var j=0,l=keys.length;j<l;j++){
+					if(filterset['_k'+keys[j]+'_v'+_datas_all[i][keys[j]]]!=true){
+						// 发现匹配数据项，将匹配数据项添加到显示数组中
+						checkflag=false;
+						break;
+					}
+				}
+				if(checkflag) r.push(_datas_all[i]);
+				
+			}
+		
+			return r;
+		}
+		
+		// 从数据集中移除数据元素，移除的元素必须是从数据集中取出的对象
+		this.remove=function(datas){
+			if(!Ext.lt.isArray(datas)) datas=[datas];
+			for(var i=0,l=datas.length;i<l;i++){
+				datas['_locationposition'+datas[i]._locationposition]=true;
+			}
+			
+			var _datas_all_new=[];
+			for(var i=0,l=_datas_all.length;i<l;i++){
+					if(datas['_locationposition'+_datas_all[i]._locationposition]!=true) _datas_all_new.push(_datas_all[i]);
+			}
+			_datas_all=_datas_all_new;
+			_datas_all.size=_datas_all.length;
+			_filterData();
+			if(_datatable!=null) _datatable.reflash();
+		}
+		
+		this.select=function(fn){
+			if(!Ext.lt.isFunction(fn)){
+				return this;
+			}
+			
+			var rs=new Ext.lt.recordset({columns:this.getColNames(),datas:[]}),ds=[];
+			this.each(function(d){
+				if(fn(d)) ds.push(d);
+			});
+			rs.addData(ds);
+			return rs;
+		}
+		
+		this.createMaxColLength=function(){
+			maxlength=[];
+			var collength=_columnNames.length
+			for(var p=0;p<collength;p++) maxlength[p]=0;
+			
+			this.each(function(d){
+				for(var n=0;n<collength;n++){
+					var v=d[_columnNames[n]];
+					if(v!=null && maxlength[n]<v.length) maxlength[n]=v.length;
+				}
+			},0,1000)
+		}
+		
+		this.getMaxColDataLength=function(){
+			if(maxlength==null) this.createMaxColLength();
+			return maxlength;
+		}
+		
+		this.getMaxLength=function(col){
+			for(var i=0;i<_columnNames.length;i++){
+				if(col==_columnNames[i]){
+					if(maxlength==null) this.createMaxColLength();
+					return maxlength[i];
+				}
+			}
+			return 0;
+		}
+		this.setMaxLength=function(col,l){
+			for(var i=0;i<_columnNames.length;i++){
+				if(col==_columnNames[i]){ 
+					maxlength[i]=l;
+					return ;
+				}
+			}
+		}
+		Ext.lt.message.hook("recordset","load",function(config){
+			if(config.rs==this){this.clear();this.setData(config.data,0);}
+		});
+	}
+}
+
+
+/**
+ * 属性动画实现类
+ * 将给定对象添加属性动画实现方法。
+ * 执行后，将给对象添加setAnimatProperty(proerty,start,end);
+                       play(time,fn);
+                       stop();
+   三个方法
+ */
+Ext.lt.aninmation=function(elem){
+	elem.animat={playtime:0,property:[],timer:0,starttime:0};
+	
+	elem.setAnimatProperty=function(proerty,start,end){
+		this.animat.property.push({"name":proerty,"start":start,"end":end});
+	}
+	
+	// 终止动画播放
+	elem._stop=function(){
+		if(this.animat.timer!=0){
+			clearInterval(this.animat.timer);
+			
+			var l=this.animat.property.length;
+			for(var i=0;i<l;i++){
+				var pro=this.animat.property[i];
+				this._changeAnimatProperty(pro.name,0,pro.end,-1);
+			}
+
+			this.animat.timer=0
+			this.animat.playtime=0;
+			this.animat.property=[];
+			
+			if(Ext.lt.isFunction(this.animat.endfn)) this.animat.endfn();
+		}
+	}
+	
+	elem._changeAnimatProperty=function(proerty,start,end,run){
+		var v=end;
+		if(run>0){
+			var x=Math.sqrt(run/this.animat.playtime);
+			v=start+((end-start)*(x));
+		}
+		
+		if(proerty.indexOf('style')==0){
+			this.style[proerty.replace('style\.','')]=v+'px';
+		}
+		else{
+			this.setAttribute(proerty,v);
+		}
+	}
+	
+	elem._play=function(){
+		var p=new Date()-this.animat.starttime;
+		// 判断动画是否结束
+		if(p>=this.animat.playtime){
+			this._stop();
+			return;
+		}
+		
+		var l=this.animat.property.length;
+		for(i=0;i<l;i++){
+			var pro=this.animat.property[i];
+			this._changeAnimatProperty(pro.name,pro.start,pro.end,p);
+		}
+		
+	}
+	
+	// 播放动画
+	elem.play=function(time,fn){
+		// 检查当前是否有动画在运行
+		if(this.animat.timer!=0){
+			this._stop();
+		}
+		
+		this.animat.playtime=time;
+		this.animat.starttime=new Date();
+		this.animat.timer=setInterval( Ext.lt.util.fnbind(this._play,elem),1);
+		this.animat.endfn=fn;
+	}
+	
+	return elem;
+}
+
+
+Ext.lt.RCP = new function () {
+	var _lt=Ext.lt;
+	// 远程调用日志
+	var _remotelog = [];
+	var _url = "";
+	try{_url=_ROOT_PATH_;}catch(e){}
+	
+	
+	// 远程调用方法
+	// server    服务ID，使用组件初始化时框架提供的服务引用参数
+	// m         方法名
+	// paramets  参数集合，可以是简单变量，如数字、文本等，多个参数需要使用数组形式
+	// callbakfn 回调函数，服务端执行结果对象化后直接作为第一个参数，第二个参数表示服务端是否有错误。
+	// falsefun  远程调用异常时执行该方法，并返回错误码
+	this.call = function (server, m, parameters, callbakfn, falsefun) {
+		///defaulttitleservice.rcp
+		if (server == null || m == null) {
+			return;
+		}
+		var para = "";
+		para += "method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + encodeURIComponent(Object.toJSON(parameters));
+			}
+			else{
+				para += "&paramjson=" +encodeURIComponent(Object.toJSON([parameters]));;
+			}
+		}
+		// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "."+server + ".rcp";
+		if(Ext.lt.demomode){
+			this.demoCall(remote_url+'?'+para,callbakfn);
+		}
+		else{
+			new Ajax.Request(_url+server + ".rcp?"+new Date(),{
+				parameters:para, 
+				method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},//禁止读取缓存数据
+				onComplete:function (resp) {
+					var respText = resp.responseText.split(":");
+					if(respText[0]=='error'){
+						// 产生错误调用日志
+						_remotelog.push({'calltype':'call','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'error','calltime':new Date()});
+						
+						if(falsefun==null){
+							alert(respText[1]);
+						}
+						else{
+							falsefun(respText[1]);	
+						}
+						return;
+					}
+					
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'call','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					if(callbakfn!=null) callbakfn(Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' ')),true);
+				},
+				onFailure:function (resp) {
+					if(falsefun==null){
+						if(resp.status==12029){
+							alert("网络不通，连接失败!");
+						}else{
+						alert(x.statusText);
+						}
+					}
+					else{
+						// 产生失败调用日志
+						_remotelog.push({'calltype':'call','httpurl':remote_url+'?'+para,'response':resp.statusText+'('+resp.status+')','result':'fail','calltime':new Date()});
+						falsefun(x.statusText);	
+					}
+				}
+			});
+		}
+	};
+	// 远程调用方法
+	// server    服务ID，使用组件初始化时框架提供的服务引用参数
+	// m         方法名
+	// paramets  参数集合，可以是简单变量，如数字、文本等，多个参数需要使用数组形式
+	// callbakfn 回调函数，服务端执行结果对象化后直接作为第一个参数，第二个参数表示服务端是否有错误。
+	// falsefun  远程调用异常时执行该方法，并返回错误码
+	this.asyncall = function (server, m, parameters) {
+		///defaulttitleservice.rcp
+		if (server == null || m == null) {
+			return;
+		}
+		var para = "";
+		para += "method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + encodeURIComponent(Object.toJSON(parameters));
+			}
+			else{
+				para += "&paramjson=" +encodeURIComponent(Object.toJSON([parameters]));;
+			}
+		}
+		// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "."+server + ".rcp";
+		if(Ext.lt.demomode){
+			this.demoCall(remote_url+'?'+para,callbakfn);
+		}
+		else{
+				var resps=null;
+			new Ajax.Request(_url+server + ".rcp?"+new Date(),{
+				parameters:para, 
+				method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},//禁止读取缓存数据
+				asynchronous: false,
+				onComplete:function (resp) {
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'call','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					resps=Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' '));
+				}
+			});
+			return resps;
+		}
+	};
+		//同步调用
+	this.asynserver = function (serverid, m, parameters) {
+		///defaulttitleservice.rcp
+		var para = "";
+		if (serverid == null || m == null) {
+			return;
+		}
+		para += "serverid=" + serverid;
+		para += "&method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + encodeURIComponent(Object.toJSON(parameters));
+			}
+			else{
+				para += "&paramjson=" +encodeURIComponent(Object.toJSON([parameters]));;
+			}
+		}
+				// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "./webservice.rcp";
+		if(Ext.lt.demomode){
+			return this.demoCall(remote_url+'?'+para);
+		}
+		else{
+			var resps=null;
+		var ajax=new Ajax.Request(_url + "/webservice.rcp?"+new Date(), {
+				parameters:para, method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},
+				asynchronous: false,
+				onComplete:function (resp) {
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					resps=Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' '));
+				}
+			});
+			return resps;
+		}
+	};	
+	this.asynserverNotEncode = function (serverid, m, parameters) {
+		///defaulttitleservice.rcp
+		var para = "";
+		if (serverid == null || m == null) {
+			return;
+		}
+		para += "serverid=" + serverid;
+		para += "&method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + Object.toJSON(parameters);
+			}
+			else{
+				para += "&paramjson=" +Object.toJSON([parameters]);;
+			}
+		}
+				// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "./webservice.rcp";
+		if(Ext.lt.demomode){
+			return this.demoCall(remote_url+'?'+para);
+		}
+		else{
+			var resps=null;
+		var ajax=new Ajax.Request(_url + "/webservice.rcp?"+new Date(), {
+				parameters:para, method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},
+				asynchronous: false,
+				onComplete:function (resp) {
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					resps=Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' '));
+				}
+			});
+			return resps;
+		}
+	};
+	//webservice.rcp?serverid=defaultloginservice&method=getLoginYears
+	this.serverNotEncode = function (serverid, m, parameters, callbakfn, falsefun) {
+		///defaulttitleservice.rcp
+		var para = [];
+		if (serverid == null || m == null) {
+			return;
+		}
+		para.push("serverid=",serverid,"&method=",m);
+		var start=new Date();
+		if (null != parameters) {
+			para.push("&paramjson=",Object.toJSON(_lt.isArray(parameters)?parameters:[parameters]));
+		}
+		para=para.join('');
+		// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "./webservice.rcp";
+		if(Ext.lt.demomode){
+			return this.demoCall(remote_url+'?'+para);
+		}
+		else{
+			var ajax=new Ajax.Request(_url + "/webservice.rcp?"+new Date(), {
+				parameters:para,
+				method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},
+				onComplete:function (resp) {
+					var respText = resp.responseText.split(":");
+					if(respText[0]=='error'){
+						// 产生错误调用日志
+						_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':respText[1],'result':'error','calltime':new Date()});
+
+						if(falsefun==null){
+							alert(respText[1]);
+						}
+						else{
+							falsefun(respText[1]);	
+						}
+						return;
+					}
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					if(callbakfn!=null) callbakfn(Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' ')),true);
+				},
+				onFailure:function (resp) {
+					// 产生失败调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.statusText+'('+resp.status+')','result':'fail','calltime':new Date()});
+
+					if(falsefun==null){
+						alert(x.statusText);
+					}
+					else{
+						falsefun(x.statusText);	
+					}
+				}
+			});
+		}
+	};
+	//webservice.rcp?serverid=defaultloginservice&method=getLoginYears
+	this.server = function (serverid, m, parameters, callbakfn, falsefun) {
+		///defaulttitleservice.rcp
+		var para = [];
+		if (serverid == null || m == null) {
+			return;
+		}
+		para.push("serverid=",serverid,"&method=",m);
+		var start=new Date();
+		if (null != parameters) {
+			para.push("&paramjson=",encodeURIComponent(Object.toJSON(_lt.isArray(parameters)?parameters:[parameters])));
+		}
+		para=para.join('');
+		// 验证系统运行模式，如果为演示模式，则使用本地数据文件模拟远程调用
+		var remote_url = "./webservice.rcp";
+		if(Ext.lt.demomode){
+			return this.demoCall(remote_url+'?'+para);
+		}
+		else{
+			var ajax=new Ajax.Request(_url + "/webservice.rcp?"+new Date(), {
+				parameters:para,
+				method:"post", 
+				requestHeaders:{Accept:"application/json","If-Modified-Since":"0"},
+				onComplete:function (resp) {
+					var respText = resp.responseText.split(":");
+					if(respText[0]=='error'){
+						// 产生错误调用日志
+						_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':respText[1],'result':'error','calltime':new Date()});
+
+						if(falsefun==null){
+							alert(respText[1]);
+						}
+						else{
+							falsefun(respText[1]);	
+						}
+						return;
+					}
+					// 产生成功调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.responseText,'result':'success','calltime':new Date()});
+					if(callbakfn!=null) callbakfn(Ext.util.JSON.decode(resp.responseText.replace(/\n/g,' ').replace(/\r/g,' ')),true);
+				},
+				onFailure:function (resp) {
+					// 产生失败调用日志
+					_remotelog.push({'calltype':'server','httpurl':remote_url+'?'+para,'response':resp.statusText+'('+resp.status+')','result':'fail','calltime':new Date()});
+
+					if(falsefun==null){
+						alert(x.statusText);
+					}
+					else{
+						falsefun(x.statusText);	
+					}
+				}
+			});
+		}
+	};
+	
+	this.script = function ( serverid, m, parameters, callName) {
+		if (callName == null || m == null || serverid == null) {
+			return false;
+		}
+		var httpurl = "";
+		var para = "";
+		para += "&method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + encodeURIComponent(Object.toJSON(parameters));
+			}
+			else{
+				para += "&paramjson=" +encodeURIComponent(Object.toJSON([parameters]));;
+			}
+		}
+		//new Ext.lt.util().createScript(httpurl + "/" + serverid + ".script?" + para, serverid);
+		// 生成返回的变量名
+		var returnname="servrereturnvalue" + _lt.getNextSeqValue();
+		if(Ext.lt.demomode){
+			this.demoCall("." + serverid + ".script?returnname="+returnname+"&"+ para,callName);
+		}
+		else{
+			var s = document.createElement("SCRIPT");
+			s.id = "cgi_emotion_list" + _lt.getNextSeqValue();
+			s.src = httpurl + serverid + ".script?returnname="+returnname+"&"+ para;
+			s.onreadystatechange = function () {
+				if (this.readyState == "complete" || this.readyState == "loaded") {
+					// 产生失败调用日志
+					if (callName != null) {
+						callName(eval(returnname));
+						try{
+						_remotelog.push({'calltype':'script','httpurl':"."+serverid + ".script?returnname="+returnname+"&"+ para,'response':returnname+'='+eval(returnname).toJSON(),'result':'success','calltime':new Date()});
+						}catch(e){}
+					}
+				}
+			};
+			document.getElementsByTagName("HEAD")[0].appendChild(s);
+		}
+	};
+	
+	this.script = function (httpurl, serverid, m, parameters, callName,jsessionid) {
+		if (callName == null || m == null || serverid == null) {
+			return false;
+		}
+		if (httpurl == null || httpurl == "") {
+			httpurl = "";
+		}
+		var para = "";
+		para += "&method=" + m;
+		if (null != parameters) {
+			if(_lt.isArray(parameters)){
+				para += "&paramjson=" + Object.toJSON(parameters);
+			}
+			else{
+				para += "&paramjson=" +Object.toJSON([parameters]);
+			}
+		}
+		if(jsessionid!=null){
+			jsessionid='&seesionid='+jsessionid;
+		}else{
+			jsessionid=''
+		}
+		//new Ext.lt.util().createScript(httpurl + "/" + serverid + ".script?" + para, serverid);
+		// 生成返回的变量名
+		var returnname="servrereturnvalue" + _lt.getNextSeqValue();
+		if(Ext.lt.demomode){
+			this.demoCall("." + serverid + ".script?returnname="+returnname+"&"+ para,callName);
+		}
+		else{
+		//获取系统时间，防止请求地址相同不再发送请求
+		 var date = new Date();
+		 /*  
+         var sysTime = String(date.getFullYear()) + String((date.getMonth()+1)) +  String(date.getDate()) + String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds())+String(date.getMilliseconds());  
+			var s = document.createElement("SCRIPT");
+			s.id = "cgi_emotion_list" + _lt.getNextSeqValue();
+			s.src = httpurl + serverid + ".script?returnname="+returnname+"&"+ para+jsessionid+"&"+sysTime;
+			*/
+		    var sysTime = String(date.getFullYear()) + String((date.getMonth()+1)) +  String(date.getDate()) + String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds())+String(date.getMilliseconds());  
+       //  var sysTime = String(date.getFullYear()) + String((date.getMonth()+1)) +  String(date.getDate()) + String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds())+String(date.getMilliseconds());  
+			var s = document.createElement("SCRIPT");
+			s.id = "cgi_emotion_list" + _lt.getNextSeqValue();
+			s.src = httpurl + "/" + serverid + ".script?returnname="+returnname+"&"+ para+jsessionid+"&"+sysTime;
+			//s.src = httpurl + "/" + serverid + ".script?returnname="+returnname+"&"+ para+jsessionid+"&"+1;
+			s.onreadystatechange = function () {
+				if (this.readyState == "complete" || this.readyState == "loaded") {
+					// 产生失败调用日志
+					if (callName != null) {
+						callName(eval(returnname));
+						try{
+						_remotelog.push({'calltype':'script','httpurl':"."+serverid + ".script?returnname="+returnname+"&"+ para,'response':returnname+'='+eval(returnname).toJSON(),'result':'success','calltime':new Date()});
+						}catch(e){}
+					}
+				}
+			};
+			document.getElementsByTagName("HEAD")[0].appendChild(s);
+		}
+	};
+	// 采用本地数据文件模拟远程调用
+	this.demoCall = function(httpurl,callbakfn){
+		for(var i=0;i<Ext.lt.demodatamap.length;i++){
+			if(Ext.lt.demodatamap[i].httpurl==httpurl){
+				if(null!=callbakfn){
+					window.setTimeout ((function(){callbakfn(Ext.lt.demodatamap[i].value); }),100);
+				return ;
+				}else{
+					return Ext.lt.demodatamap[i].value;
+				}
+			}
+		}
+	}
+	
+	// 增加调试快捷键'ctrl+shift+r'
+	var _RCPlogWindow=null;
+	document.attachEvent('onkeypress',function(){
+		var event = window.event;
+		if(event.shiftKey && event.ctrlKey && event.keyCode==18){
+			// 生成日志表格及调用日志
+			var logtable=[],logscript=[],tmp=[];
+			var log;
+			logtable.push('<table border=1 width="100%"><tr><td>访问时间</td><td>调用类型</td><td>请求</td><td>服务端响应</td><td>返回值</td></tr>');
+			for(var i=0,loop=_remotelog.length;i<loop;){
+				log = _remotelog[i++];
+				logtable.push('<tr><td>');
+				logtable.push(log.calltime);
+				logtable.push('</td><td>');
+				logtable.push(log.calltype);
+				logtable.push('</td><td>');
+				logtable.push(log.httpurl);
+				logtable.push('</td><td>');
+				logtable.push(log.result);
+				logtable.push('</td><td >');
+				if(log.response.length>197){
+					logtable.push(log.response.substring(0,197)+'...');
+				}else{
+					logtable.push(log.response);
+				}
+				logtable.push('</td></tr>');
+
+				tmp.push('Ext.lt.demodatamap.push({"httpurl":\'');
+				tmp.push(log.httpurl);
+				tmp.push('\',"value":');
+				tmp.push(log.response);
+				tmp.push('});');
+				logscript.push(tmp.join(''));
+				tmp=[];
+				//logscript.push();
+				//logscript.push();
+				//logscript.push();
+				//logscript.push();
+			}
+			logtable.push('</table>');
+			
+			
+			if(_RCPlogWindow==null){
+				_RCPlogWindow=Ext.lt.window({title:"查看调用日志", w:406, h:481,close:true,pop:true,mark:false});
+				var _div=document.createElement("div");
+				document.body.appendChild(_div);
+				_div.style.height='450px';
+				_div.style.width='400px';
+				_div.innerHTML="<button onclick='Ext.lt.message.send(\"RCPlogWindow\",\"logtable\")'>查看调用日志</button><button onclick='Ext.lt.message.send(\"RCPlogWindow\",\"logscript\")'>生成模拟数据</button><div id='_RCPlogWindow_div' style='height:428px;width:400px;overflow:scroll;font-size:12px;'></div>";
+				_RCPlogWindow.draw(_div);
+				document.getElementById('_RCPlogWindow_div').innerHTML=logtable.join('');
+				Ext.lt.message.hook("RCPlogWindow","logtable",function(){
+					document.getElementById('_RCPlogWindow_div').innerHTML=logtable.join('');
+				});
+				Ext.lt.message.hook("RCPlogWindow","logscript",function(){
+					document.getElementById('_RCPlogWindow_div').innerHTML=logscript.join('\n');
+				});
+			}
+			_RCPlogWindow.show();
+
+		}
+	});
+};
+
+
+/**
+  终端调用
+  在远程调用的同时，在客户端提供一个显示终端，可以将服务端信息推送到客户端显示
+  提供多种终端显示方式：如进度条、信息提示、滚动信息等
+*/
+Ext.lt.RCPConsole=new function(){
+	var _url = "";
+	try{_url=_ROOT_PATH_;}catch(e){}
+	
+	// 控制请求超时的定时器
+	var _timeout_interval=0;
+	// 用于获取控制太输出的定时器
+	var _console_interval=0;
+	// 终端是否已经插入到页面中
+	var _tipsappend=false;
+	var _tipsconsolediv=document.createElement('DIV');
+	_tipsconsolediv.className='rcpconsole';
+	_tipsconsolediv.style.display='none';
+	_tipsconsolediv.consoletype=null;
+	var _closebtn=null;
+	var _messagediv=null;
+	var _processdiv=null;
+	
+	// 关闭终端窗口，清除输出内容，关闭遮罩
+	function _close(){
+		clearInterval(_timeout_interval);
+		clearInterval(_console_interval);
+		_tipsconsolediv.style.display='none';
+		if(_messagediv!=null)_messagediv.innerHTML='';
+		if(_processdiv!=null)_processdiv.style.width='0px';
+		Ext.lt.HTML.unmark();
+	}
+	
+	// 显示终端，在达到超时时间之后显示关闭按钮，默认15秒
+	function _showtipsconsole(timeout){
+		timeout=timeout==null?15:timeout;
+		if(_tipsconsolediv.consoletype!='tips'){
+			_tipsconsolediv.innerHTML='<table cellpadding="0" cellspacing="0" background="0" width="100%"><tr><td nowrap="nowrap" class="ll">&nbsp;</td><td nowrap="nowrap" class="l_loading"><img src="'+Ext.lt.ltextpath+'/images/rcpconsole/wait.gif"></td><td nowrap="nowrap" class="l_loading"><div class="console"></div></td><td nowrap="nowrap" width="12px" valign="top" align="right" class="l_loading title"><button class="closebtn" type="button" overclass="closebtn_over" title="关闭"></button></td><td nowrap="nowrap" class="lr">&nbsp;</td></tr></table>';
+			document.body.appendChild(_tipsconsolediv);
+			// 查找关闭按钮
+			var l=_tipsconsolediv.firstChild.cells.length;
+			_closebtn=_tipsconsolediv.firstChild.cells.item(l-2).firstChild;
+	    _closebtn.style.display='none';
+	    _closebtn.onclick=_close;
+	    // 查找输出数据的位置
+	    _messagediv=_tipsconsolediv.firstChild.cells.item(l-3).firstChild
+			_tipsconsolediv.consoletype='tips';
+		}
+		
+		_tipsconsolediv.style.display='';
+		Ext.lt.HTML.center(_tipsconsolediv);
+		
+		// 超时后显示关闭窗口
+		_timeout_interval=setInterval(function(){
+			_closebtn.style.display='';
+		},timeout*1000)
+	}
+	
+	this.tipscall=function(serverid, m, parameters, callbakfn, falsefun){
+		var config={timeout:15,rcptype:'call'};
+		config['serverid']=serverid
+		config['m']=m
+		config['parameters']=parameters
+		config['callbakfn']=callbakfn
+		config['falsefun']=falsefun
+		
+		buildtipsconsole(config);
+	}
+	this.tipsserver=function(serverid, m, parameters, callbakfn, falsefun){
+		var config={timeout:15,rcptype:'server'};
+		config['serverid']=serverid
+		config['m']=m
+		config['parameters']=parameters
+		config['callbakfn']=callbakfn
+		config['falsefun']=falsefun
+		
+		buildtipsconsole(config);
+	}
+	this.tipsserverNotEncode=function(serverid, m, parameters, callbakfn, falsefun){
+		var config={timeout:15,rcptype:'serverNotEncode'};
+		config['serverid']=serverid
+		config['m']=m
+		config['parameters']=parameters
+		config['callbakfn']=callbakfn
+		config['falsefun']=falsefun
+		
+		buildtipsconsole(config);
+	}
+	function buildtipsconsole(config){
+		
+		Ext.lt.HTML.mark();
+		_showtipsconsole(config.timeout);
+		
+		// 提示框架开启终端
+		config.m+="&rcpconsole=tips"
+		var callbakfn=config.callbakfn
+		var falsefun=config.falsefun
+		
+		_console_interval=setInterval(function(){
+			// 通过同步调用获取返回值
+			var msg = Ext.lt.RCP.asynserver('com.longtu.framework.portal.termial.RCPConsoleComponentService','getConsoleMessage');
+			if(msg==null) return;
+			msg.each(function(text){
+				var lastdiv = _messagediv.lastChild;
+				if(lastdiv!=null && lastdiv.doaninmation==null){
+					Ext.lt.aninmation(lastdiv);
+					lastdiv.setAnimatProperty('style.marginTop',0,-1*_messagediv.offsetHeight);
+					lastdiv.play(200,function(){lastdiv.removeNode(true)});
+					lastdiv.doaninmation=true
+				}
+				
+				var msgdiv=document.createElement('DIV');
+				msgdiv.className='tipsmsg';
+				msgdiv.style.cssText='width:'+(_messagediv.offsetWidth)+'px;Height:'+(_messagediv.offsetHeight)+'px';
+				msgdiv.innerHTML=text;
+				_messagediv.appendChild(msgdiv);
+			});
+		},100)
+		
+		// 重载回调函数
+		Ext.lt.RCP[config.rcptype](config.serverid, config.m, config.parameters, function(rs){
+			_close();
+			callbakfn(rs)
+		}, function(rs){
+			_close();
+			if(falsefun!=null)falsefun(rs)
+		});
+		
+	}
+	
+	// 显示终端，在达到超时时间之后显示关闭按钮，默认15秒
+	function _showprocessconsole(timeout){
+		timeout=timeout==null?15:timeout;
+		if(_tipsconsolediv.consoletype!='process'){
+			_tipsconsolediv.innerHTML='<table cellpadding="0" cellspacing="0" background="0" width="100%"><tr><td nowrap="nowrap" class="ll">&nbsp;</td><td nowrap="nowrap" class="l_loading"><div class="console"><div class="lt"><div class="process0"><div class="process100"></div></div></div><div class="processmsg" ></div></td><td nowrap="nowrap" width="12px" valign="top" align="right" class="l_loading title"><button class="closebtn" type="button" overclass="closebtn_over" title="关闭"></button></td><td nowrap="nowrap" class="lr">&nbsp;</td></tr></table>';
+			document.body.appendChild(_tipsconsolediv);
+			// 查找关闭按钮
+			var l=_tipsconsolediv.firstChild.cells.length;
+			_closebtn=_tipsconsolediv.firstChild.cells.item(l-2).firstChild;
+	    _closebtn.style.display='none';
+	    _closebtn.onclick=_close;
+	    // 查找进度条位置
+	    _processdiv=_tipsconsolediv.firstChild.cells.item(l-3).firstChild.firstChild.firstChild.firstChild;
+	    _processdiv.style.width='1px'
+	    // 查找输出数据的位置
+	    _messagediv=_tipsconsolediv.firstChild.cells.item(l-3).firstChild.lastChild
+			_tipsconsolediv.consoletype='process'
+		}
+		
+		_tipsconsolediv.style.display='';
+		Ext.lt.HTML.center(_tipsconsolediv);
+		
+		// 超时后显示关闭窗口
+		_timeout_interval=setInterval(function(){
+			_closebtn.style.display='';
+		},timeout*1000)
+	}
+	this.processcall=function(serverid, m, parameters, callbakfn, falsefun){
+		var config={timeout:15,rcptype:'call'};
+		config['serverid']=serverid
+		config['m']=m
+		config['parameters']=parameters
+		config['callbakfn']=callbakfn
+		config['falsefun']=falsefun
+		
+		buildprocessconsole(config);
+	}
+	this.processserver=function(serverid, m, parameters, callbakfn, falsefun){
+		var config={timeout:15,rcptype:'server'};
+		config['serverid']=serverid
+		config['m']=m
+		config['parameters']=parameters
+		config['callbakfn']=callbakfn
+		config['falsefun']=falsefun
+		
+		buildprocessconsole(config);
+	}
+	function buildprocessconsole(config){
+		
+		Ext.lt.HTML.mark();
+		_showprocessconsole(config.timeout);
+		
+		// 提示框架开启终端
+		config.m+="&rcpconsole=process"
+		var callbakfn=config.callbakfn
+		var falsefun=config.falsefun
+		
+		_console_interval=setInterval(function(){
+			// 通过同步调用获取返回值
+			var msg = Ext.lt.RCP.asynserver('com.longtu.framework.portal.termial.RCPConsoleComponentService','getProcessMessage');
+			var p=msg.process;
+			_processdiv.style.width=Math.round(_processdiv.parentElement.offsetWidth*p)+'px';
+			
+			if(msg.text==null) return;
+			msg.text.each(function(text){
+				_messagediv.innerHTML=text
+			});
+		},100)
+		
+		// 重载回调函数
+		Ext.lt.RCP[config.rcptype](config.serverid, config.m, config.parameters, function(rs){
+			_processdiv.style.width=_processdiv.parentElement.offsetWidth+'px';
+			_close();
+			callbakfn(rs);
+		}, function(rs){
+			_processdiv.style.width=_processdiv.parentElement.offsetWidth+'px';
+			_close();
+			if(falsefun!=null)falsefun(rs);
+		})
+
+	}
+	
+	
+}
+
+
+Ext.lt.util = new function () {
+	// 记录当前页面加载过的js
+	var JSCACH=[];
+
+	this.createScript = function (srcIp, divId) {
+		if (document.getElementById("cgi_emotion_list" + divId)) {
+			document.getElementsByTagName("HEAD")[0].removeChild(document.getElementById("cgi_emotion_list" + divId));
+		}
+		var s = document.createElement("SCRIPT");
+		s.id = "cgi_emotion_list" + divId;
+		document.getElementsByTagName("HEAD")[0].appendChild(s);
+		s.src = srcIp;
+		return s;
+	};
+	this.createScript = function (srcIp, divId, fn) {
+		if(JSCACH[srcIp]){
+			if(fn!=null){
+				fn();
+			}
+			return;
+		}
+		
+		if (document.getElementById("cgi_emotion_list" + divId)) {
+			document.getElementsByTagName("HEAD")[0].removeChild(document.getElementById("cgi_emotion_list" + divId));
+		}
+		var s = document.createElement("SCRIPT");
+		s.id = "cgi_emotion_list" + divId;
+		s.src = srcIp+"?id"+Math.random();
+		s.onreadystatechange = function () {
+			if (this.readyState == "complete" || this.readyState == "loaded") {
+				if (fn != null) {
+					fn();
+				}
+			}
+		};
+		document.getElementsByTagName("HEAD")[0].appendChild(s);
+		JSCACH[srcIp]=true
+		return s;
+	};
+	this.createStylesheet = function (srcIp, divId) {
+		var s = document.createElement("LINK");
+		s.id = "cgi_LINK_list" + divId;
+		document.getElementsByTagName("HEAD")[0].appendChild(s);
+		s.type = "text/css";
+		s.href = srcIp;
+	};
+	this.addTablPanel = function (title, panel, tablpanelid) {
+		Ext.getCmp(tablpanelid).add({title:title, items:[panel]}).show();
+	};
+	this.setText=function(txt){
+		return window.clipboardData.setData("text",txt);
+	};
+	this.fnbind=function(fn,context){
+		if (arguments.length < 2 && context===undefined) return fn;  
+		var method = fn//,args=arguments
+		//slice = Array.prototype.slice,  
+		//args = slice.call(arguments, 2) ;  
+		return function(){ 
+			//var array = slice.call(arguments, 0);  
+			//return method.apply(context,args.concat(array))  
+			return method.apply(context,arguments)  
+		} 
+	};
+	this.checkData=function(data){
+		var check=/^[\u4e00-\u9fa5a-zA-Z0-9_]+$/;
+		if(check.test(data)){
+			return true;
+		}
+		return false;
+	};
+	this.clone=function(obj){
+		return Ext.lt.clone(obj);
+	};
+		//返回值 0成功
+	//返回值 1含有非数字类型的
+	//返回值 2小于最小值
+	//返回值 3大于最大值
+	//返回值 4where时候失败
+	this.checkNumber=function(num,min,max,wherefn){
+		if(isNaN(num)){
+			return 1;
+		}
+		if(min!=null&&num<min){
+			return 2;
+		}
+		if(max!=null&&num>max){
+			return 3;
+		}
+		if(wherefn!=null&&!wherefn(num)){
+			return 4;
+		}
+		return 0;
+	}
+};
+
+if(Ext.lt.HTML==null)
+Ext.lt.HTML=new function(){
+	var _returnOffset = function(l, t) {
+	  var result = [l, t];
+	  result.left = l;
+	  result.top = t;
+	  return result;
+	};
+	
+	var _camelize=function(style) {
+    var parts = style.split('-'), len = parts.length;
+    if (len == 1) return parts[0];
+
+    var camelized = parts[0].charAt(0) == '-'
+      ? parts[0].charAt(0).toUpperCase() + parts[0].substring(1)
+      : parts[0];
+
+    for (var i = 1; i < len; i++)
+      camelized += parts[i].charAt(0).toUpperCase() + parts[i].substring(1);
+
+    return camelized;
+  };
+  
+  this.hiddenAll=function(sels){
+  	var sel;
+  	for(var i=0,l=sels.length;i<l;i++){
+  		sel=sels.item(i);
+  		if(sel.currentStyle.display!='none'){
+  			sel.style.display='none';
+  			sel._marked=true;
+  		}
+  	}
+	}
+	
+  this.showAll=function(sels){
+  	var sel;
+  	for(var i=0,l=sels.length;i<l;i++){
+  		sel=sels.item(i);
+  		if(sel._marked){
+  			sel.style.display='';
+  		}
+  	}
+	}
+  
+  // 遮罩指定HTML元素
+  // 改用DIV遮罩
+  this.mark=function(el,flag){
+  	if(flag==null) flag=true;
+  	if(el==null) el=document.body;
+  	
+  	
+  	function elresize(){
+  		if(el.tagName=="BODY"){
+				_pw=document.documentElement.clientWidth;
+				_ph=document.documentElement.clientHeight;
+			}
+			else{
+				_pw=el.offsetWidth-parseInt(el.currentStyle.marginLeft,10)-parseInt(el.currentStyle.marginRight,10);
+				_ph=el.offsetHeight-parseInt(el.currentStyle.marginTop,10)-parseInt(el.currentStyle.marginBottom,10);
+			}
+			el.initmark.style.width=_pw+'px';
+  		el.initmark.style.height=_ph+'px';
+  	}
+  	
+  	if(el.initmark==null){
+  		//el.initmark=document.createElement('IFRAME');
+  		el.initmark=document.createElement('DIV');
+  		var _pl=0,_pt=0;
+  		if(el.tagName=='BODY'){
+	  		_pl=0;
+				_pt=0;
+			}
+			else{
+				var _p=this.positionedOffset(el,null,false);
+				_pl=_p.left;
+				_pt=_p.top;
+			}
+  		el.initmark.style.cssText="display:none;filter:Alpha(Opacity=50);position:absolute;background-color:#000;height:0px;left:"+_pl+"px;top:"+_pt+"px;";
+  		Ext.lt.aninmation(el.initmark)
+  		document.body.appendChild(el.initmark);
+  	}
+  	// 启动遮罩
+  	if(flag==true){
+  		// 已经遮罩成功了
+  		if(el.initmark.style.display=='') return false;
+  		var _pw=0,_ph=0;
+  		if(el.tagName=="BODY"){
+				_pw=document.documentElement.scrollWidth;
+				_ph=document.documentElement.scrollHeight;
+			}
+			else{
+				_pw=el.offsetWidth-parseInt(el.currentStyle.marginLeft,10)-parseInt(el.currentStyle.marginRight,10);
+				_ph=el.offsetHeight-parseInt(el.currentStyle.marginTop,10)-parseInt(el.currentStyle.marginBottom,10);
+				
+			}
+			// 隐藏所有不能被遮罩的HTML对象
+	  	Ext.lt.HTML.hiddenAll(el.getElementsByTagName('SELECT'));
+	  	Ext.lt.HTML.hiddenAll(el.getElementsByTagName('OBJECT'));
+	  	Ext.lt.HTML.hiddenAll(el.getElementsByTagName('IFRAME'));
+  		
+			//el.initmark.contentWindow.document.write('<html><body style="background-color:#000"></body></html>');
+  		el.initmark.style.display='';
+  		el.initmark.style.width=_pw+'px';
+  		el.initmark.style.height='0px';
+  		el.initmark.setAnimatProperty("style.height",0,_ph);
+  		//时间控制下
+  		el.initmark.play(0,function(){
+  			 Ext.lt.message.hook("layout","endlayout",elresize);
+  		}); 
+  		
+  		return true;
+  	}
+  	else{
+			// 隐藏所有不能被遮罩的HTML对象
+	  	Ext.lt.HTML.showAll(el.getElementsByTagName('SELECT'));
+	  	Ext.lt.HTML.showAll(el.getElementsByTagName('OBJECT'));
+	  	Ext.lt.HTML.showAll(el.getElementsByTagName('IFRAME'));
+  		// 消除遮罩
+  		Ext.lt.message.unhook("layout","endlayout",elresize);
+  		el.initmark.style.display='none';
+  		Ext.lt.layout.doLayout();
+  		return true;
+  	}
+  }
+  this.unmark=function(el){
+  	if(el==null) el=document.body;
+  	Ext.lt.HTML.mark(el,false);
+  }
+  
+  // 让指定的HTML对象定位到屏幕中间
+  this.center=function(el){
+  	var left=isNaN(document.documentElement.scrollLeft)?0:document.documentElement.scrollLeft+(document.documentElement.clientWidth-el.offsetWidth)/2
+		var top=isNaN(document.documentElement.scrollTop)?0:document.documentElement.scrollTop+(document.documentElement.clientHeight-el.offsetHeight)/3
+		
+		if(top<0){
+			el.runtimeStyle.height=(document.body.offsetHeight-50)+'px';
+			top=30;
+		}
+		el.style.left=left+'px'
+		el.style.top=(top)+'px'
+  }
+  
+  // 生成拖拽操作
+  this.drag=function(cfg){
+  	var el=cfg.element;
+  	var endfn=cfg.onend==null?function(){}:cfg.onend;
+  	var startfn=cfg.onstart==null?function(){}:cfg.onstart;
+		var holder=cfg.holder!=false; // 控制是否显示占位符
+		var _x=cfg.x;
+		var _y=cfg.y;
+		var _dragel=cfg.dragel==null?el:cfg.dragel;
+		
+  	
+  	// 生成占位标签
+	  _dragel._placeholder=document.createElement('DIV');
+	  _dragel._placeholder.style.cssText='border:#999999 2px dotted;display:none';
+	  
+  
+  	// 鼠标按下后开始拖动
+  	el.onmousedown=function(){
+  		startfn.apply(el);
+  		
+  		// 保存鼠标相对位置
+  		var pos=Ext.lt.HTML.positionedOffset(_dragel,document.body,false);
+  		(cfg.x==null)? _x=window.event.screenX-pos.left:_x=cfg.x;//-window.event.offsetX;
+  		(cfg.y==null)? _y=window.event.screenY-pos.top:_y=cfg.y;//-window.event.offsetY;
+  		//window.status=window.event.y+' '+window.event.screenY+' '+window.event.offsetY+' '+pos.top+'  '+_y;
+  		_dragel.runtimeStyle.position='absolute';
+  		_dragel.style.left=(window.event.screenX -_x)+"px";
+  		_dragel.style.top=(window.event.screenY-_y)+"px";
+  		_dragel.style.zIndex="9999999"
+  		_dragel.runtimeStyle.cursor='pointer';
+  		// 通过插入占位符记录HTML元素原有位置
+  		_dragel.insertAdjacentElement('beforeBegin',_dragel._placeholder);
+  		document.body.appendChild(_dragel);
+
+  		// 显示占位DIV
+  		if(holder){
+	  		_dragel._placeholder.style.display='block';
+	  		_dragel._placeholder.style.width=(_dragel.offsetWidth-4)+'px';
+	  		_dragel._placeholder.style.height=(_dragel.offsetHeight-4)+'px';
+	  	}
+  	
+  		document.body.onmousemove=function(){
+  			_dragel.style.left=(window.event.screenX -_x)+'px';
+  			_dragel.style.top=(window.event.screenY-_y)+'px';
+  		}
+  		
+  		// 鼠标抬起后停止拖动
+	  	document.body.onmouseup=function(){
+	  		document.body.onmousemove=null;
+	  		document.body.onmouseup=null;
+	  		_dragel.runtimeStyle.cursor='';
+	  		
+	  		if(_dragel==null) return;
+	  		if(holder) _dragel._placeholder.style.display='none';
+	  		_dragel._placeholder.insertAdjacentElement('beforeBegin',_dragel);
+	  		_dragel.runtimeStyle.position='';
+	  		
+	  		endfn.apply(el);
+	  	}
+  		return true;
+  	}
+  	
+  	el.onselect=function(){return false};
+  	el.onselectstart=function(){return false};
+  	el.ondragstart=function(){return false};
+
+  	
+  }
+	
+	this.positionedOffset=function(element,endel,flag) {
+    var valueT = 0, valueL = 0;
+    if(flag==null) flag=true;
+    if(endel==null) endel=document.body;
+    if(element==endel) return _returnOffset(0, 0);
+    do {
+      valueT += element.offsetTop  || 0;
+      valueL += element.offsetLeft || 0;
+      element = element.offsetParent;
+      if (element) {
+        if (element.uniqueID == endel.uniqueID) break;
+        var p = this.getStyle(element, 'position');
+        if ((p == 'relative' || p == 'absolute') && flag) break;
+      }
+    } while (element);
+    return _returnOffset(valueL, valueT);
+  };
+  
+  // 获取指定HTML元素的四个边宽度
+  this.getBorderSet=function(element){
+  	var r=[0,0,0,0];
+  	var attr=['Left','Right','Top','Bottom'];
+  	var sty=['padding','margin','border'];
+  	if(element==null) return r;
+  	var v=0
+  	var v=0,styleobj,num
+  	for(var i=0;i<sty.length;i++){
+  		for(var j=0;j<attr.length;j++){
+  			styleobj=element.currentStyle==null?element.style:element.currentStyle;
+  			num=styleobj[sty[i]+attr[j]+(sty[i]=='border'?'Width':'')]
+  			v=parseInt(num,10);
+  			r[j]+=isNaN(v)?0:v;
+  		}	
+  	}
+  		
+  	r.left=r[0];
+  	r.right=r[1];
+  	r.top=r[2];
+  	r.bottom=r[3]
+  	r.width=r.left+r.right;
+  	r.height=r.top+r.bottom;
+  	return r;
+  }
+  
+  this.getStyle=function(element, style) {
+    //element = $(element);
+    style = style == 'float' ? 'cssFloat' : _camelize(style);
+    var styleobj=element.currentStyle?element.currentStyle:element.style
+    var value = styleobj[style];
+    if (style == 'opacity') return value ? parseFloat(value) : 1.0;
+    return value == 'auto' ? null : value;
+  }
+  
+  this.setStyle=function(element, styletext) {
+    var sty=styletext.split(';');
+    var s,k,v;
+    for(var i=0,l=sty.length;i<l;i++){
+    	s=sty[i].split(':');
+    	if(s.length!=2) continue;
+			k=s[0],v=s[1];
+    	k = k == 'float' ? 'styleFloat' : _camelize(k);
+   		element.style[k]=v;
+    }
+  }
+  
+  this.setRuntimeStyle=function(element, styletext) {
+    var sty=styletext.split(';');
+    var s,k,v;
+    for(var i=0,l=sty.length;i<l;i++){
+    	s=sty[i].split(':');
+    	if(s.length!=2) continue;
+			k=s[0],v=s[1];
+    	k = k == 'float' ? 'cssFloat' : _camelize(k);
+   		element.runtimeStyle[k]=v;
+    }
+  }
+  
+  this.clearRuntimeStyle=function(ele){
+  	var rsty=ele.runtimeStyle;
+  	rsty.cssText="";
+  }
+  
+  var _switchgroup={}; // 保存开关组
+  Ext.lt.onload(function(){
+
+	  document.body.attachEvent('onmouseout',function(event){
+	  	var el=event.srcElement;
+	  	if(el==null) return;
+	  	try{
+		  	while(el!=null){
+		  		var attr=el.getAttribute("overclass"),flag=false;
+		  		if(attr!=null){
+		  			el.className=_expandelement[el.uniqueID];
+		  			flag=true;
+		  		}
+		  		
+		  		attr=el.getAttribute("overstyle");
+		  		if(attr!=null){
+						el.runtimeStyle.cssText='';
+						flag=true;
+		  		}
+		  		
+		  		if(flag) return
+		  		el=el.parentElement;
+		  	}
+		  }
+		  catch(e){}
+	  });
+	  
+	  document.body.attachEvent('onmousedown',function(event){
+	  	var el=event.srcElement
+	  	if(el==null) return;
+	  	try{
+		  	var attr=el.getAttribute("clickclass");
+		  	if(attr!=null)el.className=attr;
+		  	
+		  	attr=el.getAttribute("clickstyle");
+		  	if(attr!=null){
+			  	el.rsty=el.runtimeStyle.cssText;
+		  		Ext.lt.HTML.setRuntimeStyle(el,attr);
+		  	}
+		  }
+		  catch(e){}
+	  })
+	  
+	  document.body.attachEvent('onmouseup',function(event){
+	  	var el=event.srcElement
+	  	if(el==null) return;  		
+	  	try{
+		  	var attr=el.getAttribute("clickclass");
+		  	if(attr==null) return;
+		  	
+		  	var el=event.srcElement;
+		  	el.className=el.overclass==null?_expandelement[el.uniqueID]:el.overclass;
+	  		if(el.rsty!=null)	el.runtimeStyle.cssText=el.rsty;
+		  }
+		  catch(e){}
+	  })
+	  
+	  document.body.attachEvent('onmouseover',function(event){
+	  	var el=event.srcElement
+	  	if(el==null) return;	  	
+	  	try{
+		  	var attr=el.getAttribute("overclass");
+		  	if(attr!=null){
+		  		var uniqueID=el.uniqueID;
+		  		if(_expandelement[uniqueID]==null) _expandelement[uniqueID]=el.className;
+		  		el.className=attr;
+		  	}
+		  }
+		  catch(e){}
+		  	try{
+			  	var attr=el.getAttribute("overstyle");
+			  	if(attr!=null){
+			  		//var uniqueID=el.uniqueID;
+			  		//if(_expandelement[uniqueID]==null) _expandelement[uniqueID]=el.style.cssText;
+			  		el.runtimeStyle.cssText=attr;
+			  	}
+			  }
+			  catch(e){}
+	  })
+  })
+  
+  
+  function getElementExpAttr(el){
+  	return {attroverclass:el.getAttribute("overclass")}
+  }
+  
+  
+  
+  
+  
+  // 扩展鼠标移入、移出、点击样式 overclass clickclass  
+  // 处理分组样式属性，包括switchclass、switchgroup、switch
+  function expandHTMLElementSwitchStyle(el){
+  	//var switchclass=el.getAttribute('switchclass');
+  	if(el.switchclass==null) return;
+  	
+  	var switchgroup=el.getAttribute('switchgroup');
+  	
+  	// 开关样式，指鼠标点击以后样式改变，再点击一次后恢复的效果，同一组的开关按钮只能有一个被按下
+		el.onswitchclass=Ext.lt.util.fnbind(function(){  		
+			if(this.switchon){
+				this.className=this.getAttribute("switchclass");
+			}
+			else{
+				this.className=_expandelement[this.uniqueID];
+			}
+		},el);
+		el.attachEvent('onclick',Ext.lt.util.fnbind(function(){this.onswitchclass()},el));
+		
+		
+		el.switchon=false;
+		el.attachEvent('onclick',Ext.lt.util.fnbind(function(){
+			// 修改开关状态
+			this.switchon^=true
+			
+			var group=_switchgroup[this.getAttribute("switchgroup")];
+			if(group!=null){
+				// 开始进行分组检查，并跳过其他按钮的分组检查
+				window.switchgroupskip=true;
+				var grouptype='',tmp=this.getAttribute("switchgroup").split(':'),otherclear=false;
+				if(tmp.length>1) grouptype=tmp[1];
+					
+				for(var i=0,l=group.length;i<l;i++){
+					// 将本组中的其他选中项清除选中状态
+  				if(group[i].switchon && group[i]!=this){
+  					//group[i].fireEvent('onclick');
+  					// 修改选中状态
+  					group[i].switchon^=true
+  					// 处理样式
+  					group[i].onswitchclass()
+  					otherclear=true
+  				}
+  			}
+  			
+  			// 强制选中一个，不能取消选中状态
+  			if('clockone'==grouptype && this.switchon==false && !otherclear) this.switchon=true;
+  			
+  		}
+		},el));
+	
+  	// _switchgroup 处理开关组
+  	if(switchgroup!=null){
+  		var group=_switchgroup[switchgroup];
+  		if(group==null){group=[];_switchgroup[switchgroup]=group}
+  		group.push(el);
+  		
+			// 替换删除方法，删除对象之前检查对象
+			el.oldremoveNode=el.removeNode;
+			el.removeNode=function(flag){
+				_switchgroup[this.getAttribute("switchgroup")].remove(this);
+				this.oldremoveNode(flag);
+			}
+  	}
+  	
+  	if(el.getAttribute('switch')=='on') el.fireEvent('onclick');
+  }
+  
+  
+  function expandEditHTMLElement(el,tagName){
+		// 可编辑控件方法绑定
+		if((tagName=='INPUT' && el.type=='text')||tagName=='TEXTAREA'){
+			expandINPUTHTMLElement(el);
+		}
+		// select 控件绑定方法
+		else if(tagName=='SELECT'){
+			expandSELECTHTMLElement(el);
+		}
+  }
+  
+  var _expandelement={};
+
+  // 界面中的HTML元素很多，对全部进行扩展没有必要，因此，这里设置筛选功能
+  var _StyleExpanderHTMLTag={'SPAN':true,'DIV':true,'FONT':true,'LI':true,'TD':true,'TH':true,'A':true,'BUTTON':true};
+  var _EditHTMLExpander={'INPUT':true,'BUTTON':true,'TEXTAREA':true,'SELECT':true};
+  
+	function isinclude(uniqueID){
+		return _expandelement[uniqueID]!=null;
+	}
+  
+  // 增加鼠标移入、移出、点击时的样式控制，
+  // 属性名 overclass overstyle clickclass clickstyle switchstyle switchclass switchgroup switch
+  // 为input select 控件添加数据绑定方法
+  this.expandHTMLElement=function(el){
+  	var tagname=el.tagName,uniqueID=el.uniqueID;
+  	// 如果是已经处理过扩展属性的HTML元素则直接退出
+ 		if(isinclude(uniqueID)) return;
+  	
+  	if(_StyleExpanderHTMLTag[tagname]){
+  		_expandelement[uniqueID]=el.className;
+  		el.setInnerHTML=innerHTMLsetter;
+  		// expandHTMLElementMouseStyle(el);
+  		expandHTMLElementSwitchStyle(el);  		
+  	}
+
+  	if(_EditHTMLExpander[tagname]){
+  		_expandelement[uniqueID]=el.className;
+  		expandEditHTMLElement(el,tagname);
+  	}
+  }
+  
+  var func_bind=function(ds){
+			if(ds==null) ds={};
+			this._binddataset=ds;
+			if(ds[this.name]==null) ds[this.name]='';
+			this.value=ds[this.name]
+			this.defaultValue=ds[this.name];
+		}
+  
+  // 扩展Input对象的属性
+  var expandINPUTHTMLElement=function(el){
+		// 添加数据绑定方法 bind，参数为数据对象，绑定后与数据对象中name同名属性的值进行绑定。
+		// 数据绑定只支持 type为 checkbox hidden password radion text 对text类型将绑定更多行为
+		el.bind=Ext.lt.util.fnbind(function(ds){
+			if(ds==null) ds={};
+			this._binddataset=ds;
+			if(ds[this.name]==null) ds[this.name]='';
+			this.defaultValue=ds[this.name];
+			this.settext(ds[this.name]);
+		},el);
+		
+		el.settext=Ext.lt.util.fnbind(inputsetvalue,el);
+		el.setvalue=function(v){el._binddataset[el.name]=v};
+		// 获取对象绑定数据
+		el.getBindValue=Ext.lt.util.fnbind(function(){return this._binddataset[this.name];},el);
+		// 失焦点时处理绑定数据，并触发绑定数据修改后的事件
+		el.attachEvent('onblur',Ext.lt.util.fnbind(htmlelementbind,el));
+		// 重置文本框的内容
+		el.reset=htmlelementreset;
+		// 增加输入校验功能
+		if(el.getAttribute('validchars')!=null || el.getAttribute('notvalidchars')!=null || el.getAttribute('validreg')!=null || el.getAttribute('notvalidreg')!=null){
+			el.attachEvent('onkeyup',Ext.lt.util.fnbind(validinput,el));
+			el.attachEvent('onpaste',Ext.lt.util.fnbind(validClipboardData,el));
+		}
+		// 如果是文本框，增加默认值输出功能
+		if(el.type=='text' && el.getAttribute("tipstext")!=null){
+			el.tipstext=el.getAttribute("tipstext");
+			el.attachEvent('onfocus',Ext.lt.util.fnbind(inputdefaulttips,el));
+			el.attachEvent('onblur',Ext.lt.util.fnbind(inputdefaulttips,el));
+			el.fireEvent('onblur');
+		}
+		// 扩展键盘事件操作
+		// {keycode:fn}
+		// left:37 up:38 right:39 down:40 space:32 enter13
+		el.onKey=function(keyevent){
+			var _keyevent={};
+			
+			var fn;
+			for(var key in keyevent){
+				fn=keyevent[key];
+				if(!isNaN(parseInt(key,10))){
+					_keyevent['k'+key]=fn;
+				}
+			}
+			if(keyevent['*']!=null) _keyevent['k*']=keyevent['*'];
+			
+			el.attachEvent('onkeydown',function(en){
+				if(_keyevent['k'+en.keyCode]!=null){
+					_keyevent['k'+en.keyCode].apply(el,[en]);
+				}
+				else if(_keyevent['k*']!=null){
+					_keyevent['k*'].apply(el,[en]);
+				}
+			});
+		}
+  }
+  
+  // 扩展Select对象的属性
+  var expandSELECTHTMLElement=function(el){
+		// 从Select标签中读取数据，并转换成RecordSet对象
+		el.readData=Ext.lt.util.fnbind(function(){
+			var opts=el.options,opt,v=[];
+			for(var i=0,l=opts.length;i<l;i++){
+				opt=opts.item(i);
+				if(opt.selected){
+					_selectValue=opt.value;
+					_selectText=opt.text;
+				}
+				v.push([opt.text,opt.value,opt.selected,opt.getAttribute("py")]);	
+			}
+			return new Ext.lt.recordset({columns:['t','v','s','p'],datas:v});
+		},el);
+  }
+  
+  var valid=function(nstr){
+  	if(nstr==null) return;
+  	if(nstr.srcElement!=null){
+	  	// 获取输入按键的编码
+		 	var keycode=event.keyCode;
+			if(keycode<41 && keycode>36) return true; // 方向键
+			if(keycode==13 || keycode==9 || keycode==46 || keycode==8 ) return true; // 回车、tab键 del键 退格键
+		 	// 转换为字符
+		 	if(keycode>128 && keycode<256) keycode-=128;
+			nstr=String.fromCharCode(keycode)
+	  }
+	  
+  	if(this.validchars!=null){
+  		if(this.validchars.indexOf(nstr)==-1) return false;
+  	}
+		if(this.notvalidchars!=null){
+  		if(this.notvalidchars.indexOf(nstr)>-1) return false;
+  	}
+  	if(this.validreg!=null){
+  		if(!eval('('+this.validreg+')').test(nstr)){
+  			return false;
+  		}
+  	}
+  	if(this.notvalidreg!=null){
+  		if(eval('('+this.notvalidreg+')').test(nstr)) return false;
+  	}
+
+		return true;  	
+  }
+  
+  var validinput=function(){
+  	var txt=this.value,char,i=0,v=[],f=false;
+  	
+  	for(l=txt.length;i<l;i++){
+  		char=txt.charAt(i)
+  		if(!valid.apply(this,[char])){
+  			Ext.lt.HTML.minitips(this,char+'&nbsp;不能录入');
+  			f=true
+  		}
+  		else v.push(char);
+  	}
+  	
+  	if(f){
+			r = document.selection.createRange(); 
+			r.collapse(false); 
+			r.setEndPoint("StartToStart", this.createTextRange());
+			point= r.text.length;
+  		this.value=v.join('');
+			r.move("character", point-1); 
+			r.select();
+  	}
+  	return true;
+  }
+  
+  var inputdefaulttips=function(en){
+  	if(en.type=='focus'){
+  		if(this.value==this.tipstext){
+  			this.value='';
+  		}
+ 			this.runtimeStyle.color='';
+  	}
+  	else if(en.type=='blur'){
+  		if(this.value==this.tipstext || this.value.trim()==''){
+  			this.runtimeStyle.color='#ccc';
+  			this.value=this.tipstext;
+  		}
+  	}
+  }
+  
+  
+  // 验证剪贴办内容
+  var validClipboardData=function(){
+		var clipdata=window.clipboardData.getData('Text');
+  	if(clipdata==null) return true;
+  	var char
+  	for(var i=0,l=clipdata.length;i<l;i++){
+  		char=clipdata.charAt(i)
+  		if(!valid.apply(this,[char])){
+  			alert("剪贴板中包含禁止录入的字符-> "+char+"\r\n剪贴板内容为："+clipdata);
+  			return false;
+  		}
+  	}
+  	return true;
+  }
+  
+  var inputsetvalue=function(v){
+  	this.value=v==null?'':v
+  }
+  
+  // HTML元素重置方法
+  var htmlelementreset=function(){
+		this.value=this.defaultValue;
+		this.fireEvent('onblur');
+  }
+  
+  // 处理各种录入框失去焦点后将用户录入内容绑定到数据集中
+  var htmlelementbind=function(){
+		if(this._binddataset==null) return;
+		if(this.type=='radio' || this.type=='checkbox'){
+			// 单选、或多选框只有选中时才更改绑定数据
+			if(this.checked) this._binddataset[this.name]=this.value;
+		}
+		else if(this.type=='text' || this.type=='password'||this.tagName=='TEXTAREA'){
+			this._binddataset[this.name]=this.value==''?null:this.value;
+		}
+		if(Ext.lt.isFunction(this.onafterbind)) this.onafterbind();
+  }
+  
+  // 设置元素HTML并自动进行HTML扩摘
+  var innerHTMLsetter=function(html){
+  	if(html==null) return;
+  	this.innerHTML=html;
+  	Ext.lt.HTML.expand(this)
+  }
+  
+  this.setInnerHTML=function(el,html){
+  	el.setInnerHTML=innerHTMLsetter;
+  	el.setInnerHTML(html);
+  }
+  
+  // 界面中的HTML元素很多，对全部进行扩展没有必要，因此，这里设置筛选功能
+  this.expand=function(el){
+		if(el!=document)
+			Ext.lt.HTML.expandHTMLElement(el);
+		var els=el.all;
+		// 遍历所有元素是否使用指定标签
+		for(var i=0,l=els.length;i<l;i++){
+			Ext.lt.HTML.expandHTMLElement(els(i));
+		}  	
+  }
+  
+  // 增加鼠标移入、移出、点击时的样式控制，属性名 overclass overstyle clickclass clickstyle switchstyle switchclass switchgroup switch
+  Ext.lt.onload(function(){
+		if(document.hoverfinish) return;
+		Ext.lt.HTML.expand(document);
+		document.hoverfinish=true;
+  });
+	
+	
+	
+	/*
+	******************************************
+	minitips
+	******************************************
+	<div class="minitips">
+	  <div class="popHeader">
+	    <div class="popLeft"></div>
+	    <div class="minitipsText"><span class=\"popIcon wrong></span>请输入您的用户名！</div>
+	    <div class="popRight"></div>
+	  </div>
+	  <div class="popAngle"><span></span></div>
+	</div>
+	*/
+	var tipsdiv=null, tipsmsgdiv=null;
+	var _lastinputtime=0;
+	this.minitips=function(el,txt,p){
+		if(tipsdiv==null){
+			tipsdiv=document.createElement('DIV');
+			tipsdiv.className='minitips';
+			tipsdiv.innerHTML='<div class="popHeader"><div class="popLeft"></div><div class="minitipsText"><span class="popIcon wrong"></span>请输入您的用户名！</div><div class="popRight"></div></div><div class="popAngle"><span></span></div>';
+			tipsmsgdiv=tipsdiv.firstChild.children.item(1);
+			tipsdiv.style.display='none';
+			document.body.appendChild(tipsdiv)
+		}
+		tipsmsgdiv.innerHTML='<span class="popIcon wrong"></span>'+txt;
+		var p=Ext.lt.HTML.positionedOffset(el);
+		tipsdiv.style.display='';
+		tipsdiv.style.top=(p.top-tipsdiv.offsetHeight)+'px';
+		tipsdiv.style.left=p.left+'px';
+		
+		_lastinputtime=new Date()
+		window.setTimeout(function(){
+			if(new Date()-_lastinputtime>=1500) tipsdiv.style.display='none';
+		},2000);
+	}
+}
+
+Ext.lt.Qtree=function(cfg){
+	// 数据集结构为[{itemid:,code:,name:,level:,isleaf:,superitemid:,},……]
+	var _config=Ext.lt.apply({data:{},el:null,field:{id:'itemid',name:'name',code:'code',sid:'superitemid',level:'level',isleaf:'isleaf'},outformart:'#code-#name',showRootNode:false,rootNode:null,selectmode:false,values:[],on:{},viewmodel:'tree',linkchild:false,expandlevel:1,expand:null},cfg);
+	var _id='qtree'+Ext.lt.getNextSeqValue();
+	// 数据集
+	var _data=_config.data.toArray();
+	    _data.size=_data.length;
+	var _data_bak=_data; // 当设置了数据过滤条件后使用该对象保存原始数据集
+	    _data_bak.size=_data_bak.length;
+	var _maxlength=50;
+	if(_config.data.getMaxColDataLength!=null){
+		var _coldatalength=_config.data.getMaxColDataLength();
+		for(var i=0;i<_coldatalength.length;i++){
+			_maxlength=_maxlength>_coldatalength[i]?_maxlength:_coldatalength[i];
+		}
+	}
+	//设置初始单机不展开
+	var _onclick_expand=false;
+	if(_config.expand=='click'){
+		_onclick_expand=true;
+	}
+	if(_config.clickexpand==true){
+		_onclick_expand=true;
+	}
+	//设置电击展开层次
+	var _onclick_expandlevel=1;
+	if(_config.clickexpandlevel!=null){
+		_onclick_expandlevel=_config.clickexpandlevel;
+	}
+	
+	// 设置数据过滤条件。过滤条件为数组对象，数组中保存需要过滤的属性名
+	// 匹配的值集作为对象属性保存 _filter._kXXX_vXXX=true 方便快速过滤数据值集,不符合过滤条件的数据，其选中属性将自动删除
+	var _filter=[];
+	// 数据集中所有字段名
+	var _fields=[];
+	// 设置渲染目标HTML对象
+	var _tagel=_config.el;
+	// 设置id属性名
+	var _field_id=_config.field.id;
+			_fields[_field_id]='';
+			_fields.push(_field_id);
+	var _preid='PK_'
+	// 设置name属性
+	var _field_name=_config.field.name;
+			_fields[_field_name]='';
+			_fields.push(_field_name);
+	// 设置code属性
+	var _field_code=_config.field.code;
+			_fields[_field_code]='';
+			_fields.push(_field_code);
+	// 设置上级ID属性名
+	var _field_sid=_config.field.sid;
+			_fields[_field_sid]='';
+			_fields.push(_field_sid);
+	// 设计级次属性名
+	var _field_level=_config.field.level;
+			_fields[_field_level]='';
+			_fields.push(_field_level);
+	// 设置是否末级属性名，使用true、false或0、1
+	var _field_isleaf=_config.field.isleaf;
+			_fields[_field_isleaf]='';
+			_fields.push(_field_isleaf);
+	// 表示选中的属性
+	var _field_checked='_checked'
+			_fields[_field_checked]='';
+			_fields.push(_field_checked);
+	// 设置默认显示格式
+	var _formart=_config.outformart;
+	// 处理输出格式的函数
+	var _formartfn=_config.outformartfn;
+	// 是否产生根节点，默认为false。
+	var _showRootNode=_config.showRootNode;
+	// 根节点值对象
+	var _rootnodeobject=_config.rootNode;
+	if(_rootnodeobject==null){
+		_rootnodeobject={'name':'全部'}
+		_rootnodeobject[_field_id]='QTreeAllNode';
+		_rootnodeobject[_field_sid]='QTreeRootNode';
+		_rootnodeobject[_field_isleaf]=1;
+	}
+	var _rootnode=null;
+	// 已经生成HTML代码的节点数组，节点采用数组、对象混合存储方式。如果需要遍历可以按数组方式寻缘_treenode对象，遍历所有节点。
+	// 如果需要通过数据ID查找具体的节点对象可以通过该对象的'node'+dataid的方式查找节点
+	var _treenode=[];
+	
+	// 选择模式 false-不选择  radio、1-单选  checkbox、n-多选
+	var _selectmode=_config.selectmode;
+	var _select_formart=''
+	if(_selectmode==1 || _selectmode=='radio'){
+		//_selectmode=1;
+		//_select_formart='<input type="radio" name="'+_id+'" dataid="#'+_field_id+'" #'+_field_checked+' value="#'+_field_id+'"/>';
+		// 取消单选控制
+		_selectmode=null
+	}
+	else if(_selectmode=='n' || _selectmode=='checkbox'){
+		_selectmode='n';
+		_select_formart='<input type="checkbox" name="'+_id+'" dataid="#'+_field_id+'" value="#'+_field_id+'" #'+_field_checked+'/>';
+	}
+	
+	var _viewmodel=_config.viewmodel;
+	var _oldviewmodel=_viewmodel;
+	var _linkchild=_config.linkchild==true&&_selectmode=='n'&&_viewmodel=='tree';
+	var _linkparend=_config.linkparend==true&&_selectmode=='n'&&_viewmodel=='tree';
+	//自定义样式类
+	var _classname = _config.classname ? _config.classname : "";
+	
+	var _lastSelected={className:''};
+	// 异步创建标志
+	var _sync=false;
+	// 异步数据阀值
+	var _sync_value=_config.syncvalue==null?100:isNaN(_config.syncvalue)?100:_config.syncvalue<1?100:_config.syncvalue;
+	
+	
+	// 默认选中值
+	var _values=_config.values==null?[]:_config.values;
+	if(_values!=null) for(var i=0;i<_values.length;i++) _values[_preid+_values[i]]='checked';
+	
+	// 根元素，如果数据集没有根元素则声称缺省根元素，一般认为_field_sid属性为null或0的对象为根节点
+	var _root=[];
+
+	
+	// 对用于显示树的数据进行处理
+	var _initRootData=function(){
+		_root=[];
+		
+		// 如果有全选节点，则增加次节点
+		if(_showRootNode){
+			_root.push(_rootnodeobject);
+			//Object.setTemplate(_rootnodeobject,_select_formart+'#name');
+		}
+		
+		// 将符合条件的根目录添加到root中，当有过滤条件的时候所有数据都形成List结构
+		if(_viewmodel=='tree'){
+			for(var i=0,l=_data.length;i<l;i++){
+				if(_filter.length>0){
+					_root.push(_data[i]);
+				}
+				else if((_data[i][_field_sid]==0&&(_data[i][_field_sid]+'').length<=1) || _data[i][_field_sid]==null || _data[i][_field_level]==1){
+					_root.push(_data[i]);
+				}
+			}
+		}
+		else{
+			_root=_root.concat(_data)
+		}
+		
+		// 设置根节点的长度
+		_root.size=_root.length;
+		// 设置异步加载标志
+		_sync=_root.size>=_sync_value
+		
+	}
+	
+	// 对树的数据进行过滤，如果过滤条件为空则直接返回
+	var _filterData=function(regfilter){
+		
+		if(_filter.length==0){
+			_data=_data_bak;
+			_viewmodel=_oldviewmodel
+			return;
+		}
+		_viewmodel='list';
+
+		// 清空数据集
+		_data=[];
+		
+		// 将参与匹配的数据拼到一个字符串中，格式$@xxxxx$%dataid$@xxxxx$%dataid
+		// 目前测试与下面的实现方法速度差不多，主要性能问题在单层数据量太大时速度缓慢
+		var searchText=[];
+		var l=_filter.length,d
+		for(var i=0;i<_data_bak.size;i++){
+			d=_data_bak[i]
+			for(var j=0;j<l;j++){
+				searchText.push('##',d[_filter[j]])
+			}
+			searchText.push('%%',d[_field_id],'\n');
+		}
+		
+		// 采用正则表达式匹配
+		var tmp=searchText.join('').match(regfilter),d;
+		
+		if(tmp!=null){
+			tmp=tmp.join('\n').replace(/.*%%(.*)/ig,'$1').split('\n');
+			for(var i=0,l=tmp.length;i<l;i++){
+				d=_data_bak[_preid+tmp[i]]
+				_data.push(d);
+				_data[_preid+tmp[i]]=d
+			}
+		}
+		
+		_data.size=_data.length;
+	}
+	
+	var _t,_superIds={};
+	// 将数据集转换为编码索引的结构
+	for(var i=0,l=_data.size;i<l;i++){
+		_t=_data[i];
+		// 防止id为数字，因此增加PK前缀
+		_data[_preid+_t[_field_id]]=_t;
+		
+		// 添加选中属性
+		_t[_field_checked]=_values[_preid+_t[_field_id]]
+		
+		// 是否末级节点为空则默认末级节点
+		if(_t[_field_isleaf]==null) _t[_field_isleaf]=1;
+		else if(_t[_field_isleaf]==true) _t[_field_isleaf]=1
+		else if(_t[_field_isleaf]==false) _t[_field_isleaf]=0
+			
+		// 级次为空则默认为1级
+		if(_t[_field_level]==null) _t[_field_level]=0;
+		_superIds[_preid+_t[_field_sid]]=true;
+	}
+	// 检查是否末级标志
+	for(var i=0,l=_data.size;i<l;i++){
+		_t=_data[i];
+		// 检查非末级节点数据是否能找到下级数据
+		//if(_t[_field_isleaf]==0){
+			_superIds[_preid+_t[_field_id]]==true?_t[_field_isleaf]=0:_t[_field_isleaf]=1;
+		//}
+	}
+	
+	// 为选中值生成选中路径
+	var _t,_tmp;
+	for(var i=0,l=_values.length;i<l;i++){
+		_t=_data[_preid+_values[i]];
+		_tmp=[];
+		
+		while(_t!=null){
+			_tmp.push(_t[_field_id]);
+			if(_t[_field_sid]==0) break;
+			_t=_data[_preid+_t[_field_sid]];
+		}
+		// 反转顺序
+		_tmp.reverse();
+		_values['path:'+_values[i]]=_tmp;
+	}
+	
+	_filterData();
+	_initRootData();
+
+	// 创建输出模板
+	var _template=new Ext.lt.out.template(_select_formart+(_formartfn==null?_formart:''));
+	// 获取输出字段列表
+	if(_data.length>0){
+		var v=_data[0];
+		for(var f in v){
+			if(!Ext.lt.isFunction(v[f])){
+				if(_fields[f]==null){
+					_fields[f]=''
+					_fields.push(f);
+				}
+			}
+		}
+	}
+	_template.setField(_fields);
+
+	
+	// 根据上级ID获取下级数据
+	var _subnodes=null;
+	function _getSubData(sid){
+		if(_subnodes==null){
+			_subnodes={}
+			var t=[],d,_sid;
+			for(var i=0,l=_data.size;i<l;i++){
+				d=_data[i],_sid=d[_field_sid];
+				if(_subnodes[_sid]==null) _subnodes[_sid]=[]
+				_subnodes[_sid].push(d);
+			}
+		}
+		return _subnodes[sid]==null?[]:_subnodes[sid];
+	}
+	
+	
+	// 创建树的HTML代码
+	function _buildTreeHTML(){
+		var start=new Date();
+		var _popHTML=[];
+		var _subHTML=[];
+		var ele,cls,end='0';
+		var i=0,out,maxlength=1,dataid
+
+		// 构造全选节点
+		if(_showRootNode){
+			ele=_root[i];
+			_popHTML.push('<div class="rootitem" type="node" stat="open" stat="close" level="0" isleaf="',ele[_field_isleaf],'"  end="',end,'" dataid="',ele[_field_id],'"><div level=0 class="qbody" type="body" class="qbody" end="',end,'" dataid="',ele[_field_id],'" style="width:250px"><font class="link" overclass="overlink">',_template.out(ele),(_formartfn!=null?_formartfn(ele):''),'</font></div></div>');
+			i++;
+		}
+
+		for(;i<_root.size;i++){
+
+			// 单层一次最多构造200节点
+			if(i<_sync_value){
+				_popHTML.push(_buildRootNodeHTML(_root[i],i));
+			}
+			else{
+				break;
+				_subHTML.push(['<div id=',_id,'_node_',dataid,' class="item" stat="close" type="node" level="0" isleaf="',ele[_field_isleaf],'" style="width:',(_maxlength*16+100),'px" end=',end,' dataid=',dataid,'><span class=',cls,'></span><div type="body" class="qbody" level=0 end=',end,' dataid=',dataid,'><font class="link" overclass="overlink">',_template.out(ele),(_formartfn!=null?_formartfn(ele):''),'</font></div></div>'].join(''));
+			}
+			
+		}
+		return [_popHTML.join(''),_subHTML];
+	}
+	
+	function _buildRootNodeHTML(ele,i){
+			var cls='itemclose',end='0',i=i==null?0:i
+			if(ele[_field_isleaf]==1) cls='rootline'; // 没有字段
+			if(i==_root.size-1){
+				cls+='-nl'
+				end='1'
+			}
+			var dataid=ele[_field_id]
+		
+		return ['<div id=',_id,'_node_',dataid,' class="item" stat="close" type="node" level="0" isleaf="',ele[_field_isleaf],'" style="width:',(_maxlength*16+100),'px" end=',end,' dataid=',dataid,'><span class=',cls,'></span><div type="body" class="qbody" level=0 end=',end,' dataid=',dataid,'><font class="link" overclass="overlink">',_template.out(ele),(_formartfn!=null?_formartfn(ele):''),'</font></div></div>'].join('')
+	}
+	
+	// 处理双击事件
+	function _body_dblclick(){
+		if(!_onclick_expand){
+			this.parentElement.fireEvent('onclick');
+		}
+	};
+	// 处理选中后样式
+	function _body_click_style(){
+		// 更换样式
+		if(_lastSelected!=this){
+			// 没有设置选择模式，通过body的点击控制选中数据
+			if(_selectmode==false){
+				if(_lastSelected.getAttribute!=null && _lastSelected.getAttribute('dataid')!=""+_rootnodeobject[_field_id] && _data[_preid+_lastSelected.getAttribute('dataid')]!=null) _data[_preid+_lastSelected.getAttribute('dataid')][_field_checked]=null;
+				if(this.getAttribute('dataid')!=""+_rootnodeobject[_field_id]) _data[_preid+this.getAttribute('dataid')][_field_checked]='checked';
+			}
+
+			_lastSelected.className=_lastSelected.className.replace(' selected','');
+			_lastSelected=this;
+			this.className+=' selected';			
+		}
+		if(_onclick_expand){
+			_node_click_load.apply(this.parentElement,[false,_onclick_expandlevel])
+		}
+
+		_fireEvent('onnodeclick',{body:this,node:this.parentElement,data:_data[_preid+this.getAttribute('dataid')]});
+	}
+
+	// 处理下级数据加载事件,flag为强制展开标志
+	function _node_click_load(flag,expandlevel){
+		// 只有树才需要处理下级节点加载
+		if(_viewmodel!='tree') return;
+		flag=flag==true;
+		expandlevel=expandlevel==null?1:expandlevel;
+		// 末级节点不需要处理下级数据的加载
+		if(this.getAttribute('isleaf')==1) return;
+		
+		var stat=this.getAttribute('stat');
+		
+		var icon=this.children.item(parseInt(this.getAttribute('level'),10));
+		if(this.getAttribute('stat')=='close' || flag){
+			// 其他节点关闭样式，则换成根节点打开
+			icon.className=icon.className.replace('itemclose','itemopen');
+			this.setAttribute('stat','open');
+			if(this.subtree==null){
+				// 加载下级数据
+				var ul=document.createElement('DIV'),html=[];
+				ul.superitem=this;
+				var level=parseInt(this.getAttribute('level'),10)+1
+				var dataid=this.getAttribute('dataid');
+				var subeles=_getSubData(dataid);
+				    subeles.size=subeles.length;
+
+				
+				var ele,rootpath=[this],end=0,spclass='line'
+				
+				var sel=this.parentElement.parentElement; // 获取上级级的DIV对象
+				while(sel!=null && _tagel.contains(sel)){
+					rootpath.push(sel);
+					if(sel.getAttribute('level')==0) break;
+					if(sel.parentElement==null) break;
+					sel=sel.parentElement.parentElement; // 获取上级级的UL对象
+				}
+				
+				
+					var spclass='line',spanhtml=[];
+					//只有树才生成span
+					if(_viewmodel=='tree'){
+						// 生成之前层次的竖线
+						for(var j=level-1;j>-1;j--){
+							if(rootpath[j].getAttribute('end')==1){
+								spclass='line-nl'
+							}else{
+								spclass='line';
+							}
+							spanhtml.push('<span class=',spclass,' ></span>');
+						}
+					}
+				
+				for(var i=0;i<subeles.size;i++){
+					ele=subeles[i];
+					cls='itemclose'
+					if(ele[_field_isleaf]==1) cls='itemnomorl'; // 没有下级字段
+					if(i==subeles.size-1){
+						cls+='-nl';
+						end='1';
+					}
+					
+					html.push('<div type="node" class="item" stat="close"  level="',level,'" isleaf="',ele[_field_isleaf],'" end=',end,' dataid=',ele[_field_id],'>');
+
+					html.push(spanhtml.join(''),'<span class=',cls,'></span><div type="body" class="qbody" level=',level,' end=',end,' dataid=',ele[_field_id],'><font class="link" overclass="overlink">',_template.out(ele),(_formartfn!=null?_formartfn(ele):''),'</font></div></div>');
+				}
+
+				ul.innerHTML=html.join('');
+				// 追加下级节点
+				this.subtree=ul;
+				this.appendChild(ul);
+				
+				// 添加树行为
+				var items=ul.children,it;
+				items.size=items.length;
+				for(var i=0;i<items.size;i++){
+					it=items.item(i);
+					it.body=it.lastChild
+					if(_selectmode!=false)it.body.select=it.body.getElementsByTagName('INPUT').item(0);
+					// 追加node索引
+					_treenode.push(it);
+					_treenode['node'+it.getAttribute('dataid')]=it;
+				}
+			}
+			this.subtree.style.display='';
+			
+			if(expandlevel>1 || expandlevel<0){
+				var subids=_getSubData(this.getAttribute('dataid'));
+				for(var i=0,l=subids.length;i<l;i++){
+					_tree.nodeExpand(_tree.getNode(subids[i][_field_id]),expandlevel-1);
+				}
+			}
+		}
+		else if(this.getAttribute('stat')=='open'){
+			// 其他节点打开样式，则换成根节点关闭
+			icon.className=icon.className.replace('itemopen','itemclose');
+			this.setAttribute('stat','close');
+			
+			// 隐藏下级列表
+			if(this.subtree==null){
+				var childs=this.children;
+				childs.size=childs.length;
+				for(var i=0;i<childs.size;i++){
+					if(childs.item(i).tagName=='UL'){
+						this.subtree=childs.item(i);
+						break;
+					}
+				}
+			}
+			if(this.subtree!=null && _lastSelected!=null && _lastSelected.all!=null && this.subtree.contains(_lastSelected)){
+				this.body.fireEvent('onclick');
+			}
+			this.subtree.style.display='none';
+		}
+		else{
+			alert('树节点状态错误，必须为open、close之一')
+		}
+	}
+
+	// 带选择模式的树，需要绑定单选框、复选框的行为
+	var _last_checkbox=null;
+	function _check_click(){
+		var dataid=this.getAttribute('dataid');
+		
+		if(dataid=='QTreeAllNode'){
+			// 全选节点 设置所有数据项
+			for(var i=0;i<_data.size;i++){
+				_data[i][_field_checked]=this.checked?'checked':null;
+			}
+			// 设置所有界面上显示的选择框的选中状态
+			var eles=_tagel.getElementsByTagName('INPUT');
+			    eles.size=eles.length;
+			for(var i=0;i<eles.size;i++){
+				if(eles[i].type=='checkbox' || eles[i].type=='radio') eles[i].checked=this.checked;
+			}
+			_fireEvent('onchange');
+			return;
+		}
+		
+		_data[_preid+dataid][_field_checked]=this.checked?'checked':null;
+		
+		// 需要关联上下级选中项检查
+		if(_linkchild){
+			// 同步下级子节点状态
+			_syncchildnode(dataid,this.checked);
+
+		}
+		
+		if(_linkparend){
+			// 检查上级节点状态
+			_checkparentnode(dataid);
+		}
+		
+		if(this.checked ){
+			if(_rootnode!=null){
+				// 检查是否已经是全选
+				var i=0,l=_data.size;
+				for(;i<l;i++){
+					if(_data[i][_field_checked]!='checked') break;
+				}
+				_rootnode.body.select.checked=i==_data.size;
+			}
+			
+			// 如果是单选按钮，在这里清除上一次选中数据的选中状态
+			if(this.type=='radio'){
+				for(var i=0,l=_data.length;i<l;i++){
+					_data[i][_field_checked]=(_data[i][_field_id]==dataid)?'checked':null;
+				}
+			}
+		}
+		else{
+			if(_rootnode!=null){
+				_rootnode.body.select.checked=false
+			}
+		}
+		_fireEvent('onchange');
+	}
+	
+	// 同步下级节点数据，参数为节点ID
+	function _syncchildnode(dataid,checkstatus){
+		var sub=_getSubData(dataid),t,node;
+		for(var i=0,l=sub.length;i<l;i++){
+			t=sub[i];
+			t[_field_checked]=checkstatus?"checked":null;
+			node=_treenode['node'+t[_field_id]]
+			if(node!=null) node.body.select.checked=checkstatus;
+			_syncchildnode(t[_field_id],checkstatus);
+		}
+	}
+	
+	// 检查上级节点状态
+	function _checkparentnode(dataid){
+		var sid=_data[_preid+dataid][_field_sid];
+		if(sid==null || sid==0) return;
+		// 检查同级节点是否全部选中
+		var sub=_getSubData(sid),i,l;
+		for(i=0,l=sub.length;i<l;i++){
+			if(sub[i][_field_checked]!='checked') break;
+		}
+		_treenode['node'+sid].body.select.checked=i==l;
+		_data[_preid+sid][_field_checked]=i==l?"checked":null;
+		_checkparentnode(sid);
+	}
+	
+	// 处理事件
+	var _events=['onchange','onclick','onnodeclick','ondblclick','oncontextmenu'];
+	for(var i=0;i<_events.length;i++){
+		var fname=_events[i];
+		if(_config.on[fname.substr(2)]!=null) _events[fname]=_config.on[fname.substr(2)];
+	}
+	function _fireEvent(eventname,params){
+		var en=_events[eventname];
+		if(en==null) return ;
+		en(_tree,params);
+	}
+	
+	// 根据事件来源对象查找Node节点对象
+	function _findNode(el){
+		var obj={};
+		if(el.tagName=='INPUT'){
+			obj.check=el;
+			obj.body=el.parentElement.parentElement;
+			obj.node=obj.body.parentElement;
+			obj.src='check';
+		}
+		else while(el!=null && el.getAttribute("type")!='body' && el.getAttribute("type")!='node' ){
+			if(_tagel.contains(el)){
+				el = el.parentElement;				
+			}
+			else{
+				return obj;
+			}
+		}
+		el.type=el.getAttribute("type");
+		
+		if(el.type=='body'){
+			obj.check=el.firstChild;
+			obj.body=el;
+			obj.node=el.parentElement;
+			obj.src='body';
+		}
+		else if(el.type=='node'){
+			obj.node=el;
+			obj.body=el.lastChild;
+			obj.check=obj.body.firstChild;
+			obj.src='node';
+		}
+		return obj;
+	}
+	
+	var elTop=0; // 记录第一批数据绘制出的高度
+	function _buildtree(){
+		var start=new Date(),log=[];
+		// 生成首层数据
+		var html=_buildTreeHTML();
+
+		function setInnerHTML(html){
+			_tagel.innerHTML=html;
+		}
+		// 获取延时加载节点
+		var othernode=html[1];
+		var initnode=['<div class="',_classname,'q',_viewmodel,'">',html[0]],nodehieght=20*_sync_value;
+		for(i=0,l=Math.ceil(_root.length/_sync_value)-1;i<l;i++){
+			initnode.push('<div id="',_id,'_',i,'" type="othernode" seq="',i,'" style="height:',nodehieght,'px;display:block"></div>');
+		}
+		initnode.push('</div>');
+
+		// 生成处室树
+		setInnerHTML(initnode.join(''))
+		
+		
+		// 添加树行为
+		var items=_tagel.firstChild.children,it;
+
+		// 保存根节点对象引用，没有根节点的则删除根节点定义
+		if(_showRootNode){
+			_rootnode=items.item(0);
+			_rootnode.body=_rootnode.lastChild;
+			_rootnode.body.select=_rootnode.body.getElementsByTagName('INPUT').item(0);
+		}
+		else{
+			_rootnode=null;
+		}
+		
+
+		// 生成node、body之间的引用关系
+		var node,body,nodeid,nodehieght=0;
+		for(var i=0,l=items.length;i<l;i++){
+			node=items.item(i);
+			if(node.getAttribute('type')=='othernode'){
+				if(elTop==0) elTop=node.offsetTop;
+				node.style.height=elTop+'px';
+			}
+			else{
+				nodeid=node.getAttribute('dataid');
+				body=node.lastChild;
+				node.body=body
+				if(_selectmode!=false){
+					body.select=body.firstChild.firstChild;
+				}
+				// 追加node索引
+				_treenode.push(node);
+				_treenode['node'+nodeid]=node;
+			}
+		}
+		
+		document.body.attachEvent('onscroll',_buildQtree);
+		document.attachEvent('onmousewheel',_buildQtree);
+		_tagel.attachEvent('onscroll',_buildQtree);
+		_tagel.attachEvent('onmousewheel',_buildQtree);
+	}
+	
+		
+		// 生成Qtree可见的部分
+	function _buildQtree(en){
+		if(elTop==0) return;
+		
+		// 估算显示页数
+		var showpage=Math.ceil((_tagel.scrollTop+document.body.scrollTop)/elTop)-1;
+		var pagediv=document.getElementById(_id+'_'+showpage--);
+		_buildQtreeContent(pagediv);
+
+		var pagediv=document.getElementById(_id+'_'+showpage);
+		_buildQtreeContent(pagediv);
+		
+		if(pagediv==null) return;
+		
+		var flag=pagediv.offsetTop>(_tagel.scrollTop+document.body.scrollTop);
+		while(pagediv!=null &&  pagediv.offsetTop>(_tagel.scrollTop+document.body.scrollTop)){
+			showpage+=flag?-1:1;
+			pagediv=document.getElementById(_id+'_'+showpage);
+			_buildQtreeContent(pagediv);
+		}
+	}
+	
+	function _buildQtreeContent(div){
+		if(div==null) return;
+		if(div._displayflag==true) return;
+		
+		var id=div.id.split('_')[1];
+		var start=_sync_value*(parseInt(id,10)+1);
+		var html=[];
+		
+		for(var i=start,l=(start+_sync_value)<_root.length?(start+_sync_value):_root.length;i<l;i++){
+			html.push(_buildRootNodeHTML(_root[i],i))
+		}
+		
+		div.innerHTML=html.join('')
+		div.style.height='auto';
+		div._displayflag=true
+		
+		// 生成Node对象
+		var node,body,nodeid,nodehieght=0,items=div.children;
+		for(var i=0,l=items.length;i<l;i++){
+			node=items.item(i);
+			nodeid=node.getAttribute('dataid');
+			body=node.lastChild;
+			node.body=body
+			if(_selectmode!=false){
+				body.select=body.firstChild.firstChild;
+			}
+			// 追加node索引
+			_treenode.push(node);
+			_treenode['node'+nodeid]=node;
+		}
+	}
+	
+	// 将所有延迟加载的节点全部加载
+	function _showOthernode(){
+		var items=_tagel.firstChild.children,it;
+		for(var i=0,l=items.length;i<l;i++){
+			node=items.item(i);
+			if(node.type!='othernode') continue;
+			_buildQtreeContent(node)
+		}
+	}
+	
+	// 将有选中的值的节点展开
+	function _expandSelect(){
+		if(_values==null) return;
+		if(_values.length==0) return null;
+		
+		var v,paths,node,rootv;
+		for(var i=0,l=_values.length;i<l;i++){
+			v=_values[i],paths=_values['path:'+v];
+			// 显示根id
+			_showRootNodeById(paths[0])
+			for(var j=0,m=paths.length-1;j<m;j++){
+				node=_treenode['node'+paths[j]];
+				if(node!=null && node.getAttribute('stat')=='close') 
+					_node_click_load.apply(node,[true]);
+			}
+			if(_treenode['node'+v]){
+				_body_click_style.apply(_treenode['node'+v].body);
+				_treenode['node'+v].scrollIntoView();
+			}
+		}
+	}
+	
+	// 构造指定根节点HTML代码
+	function _showRootNodeById(dataid){
+		for(var i=0,l=_root.length;i<l;i++){
+			if(_root[i][_field_id]!=dataid) continue;
+
+			pagediv=document.getElementById(_id+'_'+Math.floor((i-_sync_value)/_sync_value));
+			_buildQtreeContent(pagediv);
+		}
+	}
+
+	var _tree=new function(){
+		function onTreeClick(){
+			var obj=_findNode(window.event.srcElement);
+			if(obj.src==null) return;
+			
+			if(obj.src=='node'){
+				_node_click_load.apply(obj.node);
+			}
+			else if(obj.src=='body'){
+				_body_click_style.apply(obj.body);
+			}
+			else if(obj.src=='check'){
+				_check_click.apply(obj.check);
+				_tree.nodeExpand(obj.node,_onclick_expandlevel);
+			}
+			_fireEvent('onclick');
+		}
+		
+		function onTreeDblClick(){
+			var obj=_findNode(window.event.srcElement);
+			if(obj.src==null) return;
+			
+			_body_dblclick.apply(obj.body);
+			_fireEvent('ondblclick',[]);
+		}
+		// 扩展增加右键事件 lp
+		function onContextMenu(){
+			var obj=_findNode(window.event.srcElement);
+			if(obj.src==null) return;
+			_fireEvent('oncontextmenu', obj);
+		}
+		this.draw=function(tagel){
+			var start=new Date(),t=[];
+			if(tagel!=null) _tagel=tagel;
+			if(_tagel==null){
+				alert('没有指定绘制区域');
+				return ;
+			}
+			
+			if(_tagel._qtree!=null){
+				_tagel._qtree.destory();
+			}
+			var h=_tagel.offsetHeight;
+			var w=_tagel.offsetWidth;
+			Ext.lt.HTML.setStyle(_tagel,"overflow:auto");
+			tagel.ignorelayout=true;
+			_buildtree();
+			
+			// 事件扩展
+			var _eventel=_tagel;
+			_eventel.attachEvent('onclick',onTreeClick)
+			
+			_eventel.attachEvent('ondblclick',onTreeDblClick);
+			
+			_eventel.attachEvent('oncontextmenu',onContextMenu);
+		
+			this.expandlevel(_config.expandlevel);
+			if(_viewmodel=='tree'){ _expandSelect()}
+			_tagel._qtree=this;
+		};
+		
+		// 展开指定层次数据
+		this.expandlevel=function(l){
+			if(l<2) return;
+			
+			// 显示所有延迟加载节点
+			_showOthernode();
+			
+			var node,flag=true,start=0,loop=_treenode.length;
+			while(flag){
+				flag=false;
+				for(;start<loop;start++){
+					var node=_treenode[start];
+					if(node!=null && node.getAttribute('level')<l && node.getAttribute('stat')=='close'){
+						_node_click_load.apply(node,[true])
+					}
+				}
+				flag=loop<_treenode.length
+				loop=_treenode.length
+			}
+		}
+		
+		this.dataExpand=function(){
+			
+		}
+		
+		// 展开指定节点
+		this.nodeExpand=function(node,expandlevel){
+			if(!node)return;
+			var expandlevel=isNaN(expandlevel)?1:expandlevel;
+			if(expandlevel==0) return
+			// 展开指定节点
+			if(node.isleaf == '0'){
+				_node_click_load.apply(node,[true])
+				var dataid=node.dataid;
+				var subids=_getSubData(dataid);
+				for(var i=0,l=subids.length;i<l;i++){
+					this.nodeExpand(this.getNode(subids[i][_field_id]),expandlevel-1);
+				}
+			}
+		}
+		
+		this.getData=function(id){
+			return _data[_preid+id];
+		}
+		// 得取所有数据集 lp
+		this.getAllData = function() {
+			return _data;
+		}
+		// 根据数据ID获取节点对象
+		this.getNode=function(id){
+			return _treenode['node'+id];
+		}
+		
+		// 返回指定数据的所有下级节点
+		this.getSubData=function(id){
+			return _getSubData(id);
+		}
+		
+		// 返回树选中的数据对象
+		this.getSelected=function(){
+			var r=[]
+			for(var i=0;i<_data_bak.length;i++){
+				if(_data_bak[i][_field_checked]=='checked')
+					r.push(_data_bak[i])
+			}
+			return r;
+		}
+		// 获取所有子孙级数据,包括id数组  lp
+		this._getAllSubData = function (sid){
+			var sub = {subid:[],subdata:[]};
+			var subid = [];
+			var subdata = []; 
+			for (var i=0,l=_data.size;i<l;i++){
+				var d = _data[i];
+				// 子级
+				if(d[_field_sid] == sid) {
+					subid.push(d[_field_id]);
+					subdata.push(d);
+				}
+				// 孙级
+				for (var j=0,len=subdata.length; j<len; j++) {
+					if (d[_field_sid] && d[_field_sid] == subdata[j][_field_id]) {
+						subid.push(d[_field_id]);
+						subdata.push(d);
+					}
+				}
+			}
+			sub.subid = subid;
+			sub.subdata = subdata;
+			return sub;
+		}
+		/**反选 lp
+		 * @param curnode 事件发生节点
+		 * @param divid 树所在的区域
+		 */
+		this.reverCheck = function(curnode, divid) {
+			// 发生事件节点
+			var node = curnode.check;
+			var check = node.getElementsByTagName('input');
+			var dataid = check[0].getAttribute("dataid");
+			var subid = this._getAllSubData(dataid)["subid"];
+			for(var i=0;i<_data.size;i++){
+				if (dataid != "QTreeAllNode" && dataid != _data[i][_field_id] && subid.indexOf(_data[i][_field_id])== -1) {
+					_data[i]["_checked"] = "checked";
+				} else {
+					_data[i]["_checked"] = "null";
+				}
+			}
+			// 选中checkbox
+			if (typeof divid != "undefined")
+				var divObj = document.getElementById(divid);
+			// 设置所有界面上显示的选择框的选中状态
+			var eles = divObj ? divObj.document.getElementsByTagName('INPUT') : document.getElementsByTagName('INPUT');
+			    eles.size=eles.length;
+			for (var i=0;i<eles.size;i++) {
+				var eleid = eles[i].getAttribute("dataid");
+				if (eleid != "QTreeAllNode" && eles[i].type=='checkbox' && dataid != eleid) {
+					eles[i].checked = true;
+				} else {
+					eles[i].checked = false;
+				}
+			} 
+		}
+		// 清除选中
+		this.clearSelected=function(){
+			var sels=this.getSelected();
+			for(var i=0,l=sels.length;i<l;i++){
+				sels[i][_field_checked]=null;
+			}
+			
+			this.reflash();
+		}
+		
+		
+		// 返回用户最后一次操作的结点
+		this.getActiveNode=function(){
+			return this.getNode(_lastSelected.dataid);//  _lastSelected.parentElement;
+		}
+		
+		// 设置数据过滤条件，结构为[{field:key1,values:[value1,value2,…],{field:key1,values:[value1,value2,…],…],match:fn}
+		this.setFilter=function(filter,match){
+			// 清除原有过滤条件
+			_filter=[];
+			// 采用正则表达式过滤数据，正则表达式结构如下所示
+			// /\$#.*[1].*\$%(.*)/ig
+			var regfilter=[];
+			
+			if(filter!=null){
+				var values,field
+				for(var i=0,l=filter.length;i<l;i++){
+					values=filter[i].values;
+					if(values=='' || values.length==0)
+						continue;
+					field=filter[i].field;
+					_filter.push(field);
+					values=Ext.lt.isArray(values)?values:[values];
+					_filter['_k'+field]=values;
+					for(var j=0,m=values.length;j<m;j++){
+						_filter['_k'+field+'_v'+values[j]]=true
+						if(regfilter['v+'+values[j]]==null){
+							regfilter.push(values[j]);
+							regfilter['v+'+values[j]]=true;
+						}
+					}
+				}
+			}
+			
+
+			
+			if(match==null){
+				// 精确匹配
+				_filter.matchfn=function(k,v){
+					var vs=this['_k'+k];
+					for(var i=0,l=vs.length;i<l;i++){
+						if(v==vs[i]) return true;
+					}
+					return false;
+				}
+				regfilter=regfilter.length>0?eval('/##('+regfilter.join('|')+')%%.*/ig'):null
+			}
+			else if(match=='left'){
+				// 左侧开始匹配
+				_filter.matchfn=function(k,v){
+					if(v==null) return false;
+					var vs=this['_k'+k];
+					for(var i=0,l=vs.length;i<l;i++){
+						if(v.indexOf(vs[i])==0) return true;
+					}
+					return false;
+				}
+				regfilter=regfilter.length>0?eval('/##('+regfilter.join('|')+').*%%.*/ig'):null
+			}
+			else if(match=='contain'){
+				// 包含开始匹配
+				_filter.matchfn=function(k,v){
+					if(v==null) return false;
+					var vs=this['_k'+k];
+					for(var i=0,l=vs.length;i<l;i++){
+						if(v.indexOf(vs[i])>-1) return true;
+					}
+					return false;
+				}
+				regfilter=regfilter.length>0?eval('/##.*('+regfilter.join('|')+').*%%.*/ig'):null
+			}
+			_filterData(regfilter);
+			_initRootData();
+			this.reflash();
+		}
+		
+		// 重绘树
+		this.reflash=function(){
+			_buildtree();
+		}
+		
+		// 添加事件
+		this.on=function(events){
+			for(var event in events){
+					_events['on'+event]=events[event]
+			}
+		}
+		
+		this.destory=function(){
+			_tagel.detachEvent('onclick',onTreeClick)
+			_tagel.detachEvent('ondblclick',onTreeDblClick);
+			_tagel.detachEvent('oncontextmenu',onContextMenu);
+		}
+	}
+	return _tree;
+}
+
+Ext.lt.dateutil=new function(){
+	var lunarInfo = new Array(
+	0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2, 0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977, 0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970, 0x06566, 0x0d4a0, 0x0ea50, 0x06e95, 0x05ad0, 0x02b60, 0x186e3, 0x092e0, 0x1c8d7, 0x0c950, 0x0d4a0, 0x1d8a6, 0x0b550, 0x056a0, 0x1a5b4, 0x025d0, 0x092d0, 0x0d2b2, 0x0a950, 0x0b557, 0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5d0, 0x14573, 0x052d0, 0x0a9a8, 0x0e950, 0x06aa0, 0x0aea6, 0x0ab50, 0x04b60, 0x0aae4, 0x0a570, 0x05260, 0x0f263, 0x0d950, 0x05b57, 0x056a0, 0x096d0, 0x04dd5, 0x04ad0, 0x0a4d0, 0x0d4d4, 0x0d250, 0x0d558, 0x0b540, 0x0b5a0, 0x195a6, 0x095b0, 0x049b0, 0x0a974, 0x0a4b0, 0x0b27a, 0x06a50, 0x06d40, 0x0af46, 0x0ab60, 0x09570, 0x04af5, 0x04970, 0x064b0, 0x074a3, 0x0ea50, 0x06b58, 0x055c0, 0x0ab60, 0x096d5, 0x092e0, 0x0c960, 0x0d954, 0x0d4a0, 0x0da50, 0x07552, 0x056a0, 0x0abb7, 0x025d0, 0x092d0, 0x0cab5, 0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930, 0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530, 0x05aa0, 0x076a3, 0x096d0, 0x04bd7, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45, 0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0);
+	var Gan = new Array("甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸");
+	var Zhi = new Array("子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥");
+	var cmStr = new Array('日', '正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '腊');
+	var nStr1 = new Array('日', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十');
+	var solarTerm = new Array("小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至")
+	var lFtv = new Array("0101*春节", "0115 元宵节", "0505 端午节", "0707 七夕", "0715 中元节", "0815 中秋节", "0909 重阳节", "1208 腊八节", "1224 小年", "0100*除夕")
+	var sFtv = new Array("0101*元旦", "0214 情人节", "0308 妇女节", "0312 植树节", "0401 愚人节", "0501 劳动节", "0504 青年节", "0512 护士节", "0601 儿童节", "0701 建党节", "0801 建军节", "0910 教师节", "1001*国庆节", "1101 万圣节", "1108 记者日", "1225 圣诞节", "0513 母亲节", "0617 父亲节")
+
+	function cyclical(num) { return (Gan[num % 10] + Zhi[num % 12]) }
+	function lYearDays(y) {
+    var i, sum = 348
+    for (i = 0x8000; i > 0x8; i >>= 1) sum += (lunarInfo[y - 1900] & i) ? 1 : 0
+    return (sum + leapDays(y))
+	}
+	function leapDays(y) {
+    if (leapMonth(y)) return ((lunarInfo[y - 1900] & 0x10000) ? 30 : 29)
+    else return (0)
+	}
+	function leapMonth(y) { return (lunarInfo[y - 1900] & 0xf) }
+	function monthDays(y, m) { return ((lunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29) }
+	function Lunar(objDate) {
+    var i, leap = 0, temp = 0
+    var baseDate = new Date(1900, 0, 31)
+    var offset = (objDate - baseDate) / 86400000
+    this.dayCyl = offset + 40
+    this.monCyl = 14
+    for (i = 1900; i < 2050 && offset > 0; i++) {
+        temp = lYearDays(i)
+        offset -= temp
+        this.monCyl += 12
+    }
+    if (offset < 0) {
+        offset += temp;
+        i--;
+        this.monCyl -= 12
+    }
+    this.year = i
+    this.yearCyl = i - 1864
+    leap = leapMonth(i)
+    this.isLeap = false
+    for (i = 1; i < 13 && offset > 0; i++) {
+        if (leap > 0 && i == (leap + 1) && this.isLeap == false)
+        { --i; this.isLeap = true; temp = leapDays(this.year); }
+        else
+        { temp = monthDays(this.year, i); }
+        if (this.isLeap == true && i == (leap + 1)) this.isLeap = false
+        offset -= temp
+        if (this.isLeap == false) this.monCyl++
+    }
+    if (offset == 0 && leap > 0 && i == leap + 1)
+        if (this.isLeap)
+        { this.isLeap = false; }
+        else
+        { this.isLeap = true; --i; --this.monCyl; }
+    if (offset < 0) { offset += temp; --i; --this.monCyl; }
+    this.month = i
+    this.day = offset + 1
+	}	
+	function cDay(m, d) {
+		d=parseInt(d);
+	    var nStr2 = new Array('初', '十', '廿', '卅', '　'); var s
+	    s = cmStr[m] + '月'
+	    switch (d) {
+	        case 10: s += '初十'; break;
+	        case 20: s += '二十'; break;
+	        case 30: s += '三十'; break;
+	        default: s += nStr2[Math.floor(d / 10)]; s += nStr1[Math.round(d % 10)];
+	    } return (s)
+	}
+
+	// 返回中文的年月日格式
+	this.YYMMDD=function(dateobj) {
+		if(dateobj==null) dateobj=new Date();
+		return ('' + dateobj.getFullYear() + '-' + (dateobj.getMonth() + 1) + '-' + dateobj.getDate() + '') 
+	}
+	// 返回星期数
+	this.weekday=function(dateobj) {
+		if(dateobj==null) dateobj=new Date();
+		var cl = '';
+		return (cl + '星期' + nStr1[dateobj.getDay()] + '');
+	}
+	// 返回节日
+	this.holiday=function(dateobj){
+		var SY = dateobj.getFullYear(); SM = dateobj.getMonth(); SD = dateobj.getDate();
+		for (var i=0,loop=sFtv.length;i<loop;i++)
+			if (sFtv[i].match(/^(\d{2})(\d{2})([\s\*])(.+)$/)) {
+				tmp1 = Number(RegExp.$1) - (SM + 1)
+				tmp2 = Number(RegExp.$2) - SD
+				if (tmp1 == 0 && tmp2 == 0) return RegExp.$4
+			}
+	}
+	//返回中国传统节日
+	this.chinaholiday=function(dateobj){
+		// 转换为阴历
+		var lDObj = new Lunar(dateobj);
+
+		for (var i=0,loop=lFtv.length;i<loop;i++)
+			if (lFtv[i].match(/^(\d{2})(.{2})([\s\*])(.+)$/)) {
+				tmp1 = Number(RegExp.$1) - lDObj.month
+				tmp2 = Number(RegExp.$2) - lDObj.day
+				if (tmp1 == 0 && tmp2 == 0) return RegExp.$4
+			}		
+	}
+	
+	// 返回农历和节日
+	this.solarDay=function(dateobj) {
+		var sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758)
+		var sDObj = dateobj;
+		var SY = dateobj.getFullYear(); SM = dateobj.getMonth(); SD = dateobj.getDate();
+		var lDObj = new Lunar(sDObj);
+		var lDPOS = new Array(3)
+		var festival = '', solarTerms = '', solarFestival = '', lunarFestival = '', solarTerms = '', tmp1, tmp2;
+
+		for (var i=0,loop=lFtv.length;i<loop;i++)
+			if (lFtv[i].match(/^(\d{2})(.{2})([\s\*])(.+)$/)) {
+				tmp1 = Number(RegExp.$1) - lDObj.month
+				tmp2 = Number(RegExp.$2) - lDObj.day
+				if (tmp1 == 0 && tmp2 == 0) lunarFestival = RegExp.$4
+			}
+
+
+		if (lunarFestival == '') {
+			for (var i=0,loop=lFtv.length;i<loop;i++)
+				if (sFtv[i].match(/^(\d{2})(\d{2})([\s\*])(.+)$/)) {
+					tmp1 = Number(RegExp.$1) - (SM + 1)
+					tmp2 = Number(RegExp.$2) - SD
+					if (tmp1 == 0 && tmp2 == 0) solarFestival = RegExp.$4
+				}
+
+				if (solarFestival == '') {
+					tmp1 = new Date((31556925974.7 * (SY - 1900) + sTermInfo[SM * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5))
+					tmp2 = tmp1.getUTCDate()
+					if (tmp2 == SD) solarTerms = solarTerm[SM * 2 + 1]
+					tmp1 = new Date((31556925974.7 * (SY - 1900) + sTermInfo[SM * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5))
+					tmp2 = tmp1.getUTCDate()
+
+					if (tmp2 == SD) solarTerms = solarTerm[SM * 2]
+					if (solarTerms == '') sFtv = ''; else sFtv = solarTerms
+				} else sFtv = solarFestival
+		} else sFtv = lunarFestival
+		if (sFtv == '')
+			sTermInfo = cyclical(lDObj.year - 1900 + 36) + '年 农历' + cDay(lDObj.month, lDObj.day)
+		else sTermInfo = cDay(lDObj.month, lDObj.day) + ' ' + sFtv + ''
+		return (sTermInfo)
+	}
+	
+	this.YYYYMMDD=function(v){
+		var _datevalue='';
+		if(typeof(v)=='string'){
+			if(v.length=8){
+				// 8位数字，可能是YYYYMMdd形式
+				_datevalue=v
+			}
+			else{
+				var dateobj=new Date(parseInt(ds[_input.name],10));
+				var mm=(dateobj.getMonth()<10?'0':'')+(dateobj.getMonth() + 1);
+				var dd=(dateobj.getDate()<10?'0':'')+dateobj.getDate();
+				_datevalue=dateobj.getFullYear()  + mm +  dd;
+			}
+		}
+		else if(typeof(v)=='number'){
+				var dateobj=new Date(v);
+				var mm=(dateobj.getMonth()<10?'0':'')+(dateobj.getMonth() + 1);
+				var dd=(dateobj.getDate()<10?'0':'')+dateobj.getDate();
+				_datevalue=dateobj.getFullYear()  + mm +  dd;
+		}
+		else if(Ext.lt.isDate(v)){
+				var mm=(v.getMonth()<10?'0':'')+(v.getMonth() + 1);
+				var dd=(v.getDate()<10?'0':'')+v.getDate();
+				_datevalue=v.getFullYear()  + mm +  dd;
+		}
+		return _datevalue;
+	}
+	
+}
+
+
+
+// 布局管理
+Ext.lt.layout=new function(){
+	var elroot=document.body;
+	var _onload_fn=[];
+	// 布局调整是否在运行
+	this.running=false;
+	
+	function addLayout(pel,el,c){
+		if(pel==null) pel=document.body;
+		if(pel.childlayoutelement==null) pel.childlayoutelement=[]
+		
+		pel.childlayoutelement.push(el)
+		el.layout=Ext.lt.apply({h:{},w:{}},c);
+		// 为了防止元素长宽不能修改，将元素样式改为溢出隐藏
+		//el.style.overflow='hidden';
+	}
+	
+	function getOffsetHeight(el){
+		var mt=parseInt(el.currentStyle.paddingTop,10),ml=parseInt(el.currentStyle.paddingBottom,10);
+		if(el.tagName=="BODY") return document.documentElement.clientHeight-mt-ml;
+		return el.offsetHeight-mt-ml;
+	}
+	
+	function getOffsetWidth(el){
+		var mt=parseInt(el.currentStyle.paddingLeft,10),ml=parseInt(el.currentStyle.paddingRight,10);
+		if(el.tagName=="BODY") return document.documentElement.clientWidth;
+		return el.offsetWidth;
+	}
+	
+	this.doLayout=function(pel){
+		if(pel==null) pel=document.body;
+		if(pel!=document.body) pel.style.overflow="hidden";
+		
+		var el,els=pel.childlayoutelement,_pw=pel._w,_ph=pel._h;
+		
+		if(els==null) return;
+		if(pel.tagName=="BODY"){
+			var border=Ext.lt.HTML.getBorderSet(document.body);
+			_pw=document.documentElement.clientWidth-border.width;
+			_ph=document.documentElement.clientHeight-border.height;
+		}
+		
+		// 记录初始布局
+		for(var i=0,l=els.length;i<l;i++){
+			el=els[i];
+			pel=el.parentElement;
+			el._w=el.offsetWidth,el._h=el.offsetHeight;
+			
+			if(Ext.lt.ieversion=='6' && el.style.styleFloat =='left'){
+				el.style.marginRight='-3px';
+				el.ie6widthfix=true
+			}
+							
+			var border=Ext.lt.HTML.getBorderSet(el);
+			el._wfix=border.width+(el.ie6widthfix==true?3:0);
+			el._hfix=border.height;
+		}
+		
+		// 应用布局
+		var _brothers,_tempel,_autoel=[];
+		for(var i=0,l=els.length;i<l;i++){
+			el=els[i];
+			if(el==null) continue;
+			
+			// 处理布局设置的逻辑
+			var _wconfig=el.layout.w,_w=_pw;
+			if(_wconfig.fit!=null && _wconfig.fit!='auto'){
+				if(_wconfig.fit==true) _w=_pw;
+				else if(_wconfig.fit>0) _w=_wconfig.fit;
+				else if(_wconfig.fit<0) _w=_pw+_wconfig.fit;
+				
+				// 处理最小宽度设置			
+				if(_w<_wconfig.min){
+					_w=_wconfig.min;
+				}
+				if(_w<0) _w=0;
+				el._w=(_w-el._wfix>0?_w-el._wfix:0);
+				el.style.width=el._w+'px';
+			}
+			else if(_wconfig!=null){
+				//el._w=_pw
+			}
+			
+			var _hconfig=el.layout.h,_h=_ph,_tempelm;
+			if(_hconfig.fit!=null && _hconfig.fit!='auto'){
+				if(_hconfig.fit==true) _h=_ph;
+				else if(_hconfig.fit>0) _h=_hconfig.fit;
+				else if(_hconfig.fit<0) _h=_ph+_hconfig.fit;
+				// 处理最小宽度设置			
+				if(_h<_hconfig.min){
+					_h=_hconfig.min;
+				}
+				try{
+					if(_h<0 || el.currentStyle.visibility=='hidden' || el.currentStyle.display=='none') _h=0;
+				}catch(e){
+					_h=0;
+				}
+				try{
+					el._h=(_h-el._hfix>0?_h-el._hfix:0);
+					el.style.height=el._h+'px'
+				}catch(e){}
+			}
+			else if(_hconfig!=null){
+				//el._h=_ph;
+			}
+			
+			if((_wconfig!=null && _wconfig.fit=='auto')||(_hconfig!=null && _hconfig.fit=='auto')){
+				_autoel.push(el);
+			}
+			// 处理下级样式
+			else if(el.childlayoutelement!=null) doLayout(el);
+		}
+		
+		
+		
+		// 处理'auto'样式
+		for(var i=0,l=_autoel.length;i<l;i++){
+			el=_autoel[i];
+			
+			// 处理布局设置的逻辑
+			var _wconfig=el.layout.w,_w=_pw;
+			if(_wconfig.fit!=null && _wconfig.fit=='auto'){
+				if(_wconfig.fit=='auto') {
+					var _divw=getOffsetWidth(el.parentElement),_brothers=el.parentElement.children;
+					for(var wi=0,wl=_brothers.length;wi<wl;wi++){
+						_tempel=_brothers.item(wi);
+						//如果样式带绝对路径不计算。（宽）
+						if(el!=_tempel && _tempel.tagName!='!' && _tempel.tagName!='SCRIPT' && _tempel.tagName!='LINK' && _tempel.tagName!='STYLE' && _tempel.currentStyle.visibility!='hidden' && _tempel.currentStyle.display!='none'&&_tempel.style.left==""&&_tempel.style.right==""){
+							_divw-=_tempel._w==null?_tempel.offsetWidth:(_tempel._w+_tempel._wfix);
+							
+							var _tempelm=parseInt(_tempel.currentStyle.marginLeft,10)
+							_divw-=isNaN(_tempelm)?0:_tempelm;
+							var _tempelm=parseInt(_tempel.currentStyle.marginRight,10)
+							_divw-=isNaN(_tempelm)?0:_tempelm;
+							
+							_divw-=_tempel.ie6widthfix==true?3:0;
+						}
+					}
+					_w=_divw;
+
+					var elw=parseInt(el.currentStyle.marginLeft,10);
+					if(!isNaN(elw))_w-=elw;
+					var elw=parseInt(el.currentStyle.marginRight,10);
+					if(!isNaN(elw))_w-=elw;
+					
+					_w-=el.ie6widthfix==true?3:0
+				}
+				
+				// 处理最小宽度设置			
+				if(_w<_wconfig.min){
+					_w=_wconfig.min;
+				}
+				if(_w<0) _w=0;
+				el._w=(_w-el._wfix>0?_w-el._wfix:0);
+				el.style.width=el._w+'px';
+				
+			}
+			
+			var _hconfig=el.layout.h,_h=_ph,_tempelm;
+			if(_hconfig.fit!=null && _hconfig.fit=='auto'){
+				if(_hconfig.fit=='auto') {
+					var _divh=getOffsetHeight(el.parentElement),_brothers=el.parentElement.children;
+					for(var hi=0,hl=_brothers.length;hi<hl;hi++){
+						_tempel=_brothers.item(hi);
+							//如果样式带绝对路径不计算。（高）
+						if(el!=_tempel && _tempel.tagName!='!' && _tempel.tagName!='SCRIPT' && _tempel.tagName!='LINK' && _tempel.tagName!='STYLE' && _tempel.currentStyle.visibility!='hidden' && _tempel.currentStyle.display!='none'&&_tempel.style.bottom==""&&_tempel.style.top==""){
+							_divh-=_tempel.offsetHeight
+							_tempelm=parseInt(_tempel.currentStyle.marginTop,10);
+							_divh-=isNaN(_tempelm)?0:_tempelm;
+							_tempelm=parseInt(_tempel.currentStyle.marginBottom,10)
+							_divh-=isNaN(_tempelm)?0:_tempelm;
+							_divh-=_tempel.tagName=='FORM'?10:0;
+						}
+					}
+					_h=_divh
+					_tempelm=parseInt(el.currentStyle.marginTop,10);
+					_h-=isNaN(_tempelm)?0:_tempelm;
+					_tempelm=parseInt(el.currentStyle.marginBottom,10);
+					_h-=isNaN(_tempelm)?0:_tempelm;
+				}
+				// 处理最小宽度设置			
+				if(_h<_hconfig.min){
+					_h=_hconfig.min;
+				}
+				if(_h<0 || el.currentStyle.visibility=='hidden' || el.currentStyle.display=='none') _h=0;
+				try{
+					el._h=(_h-el._hfix>0?_h-el._hfix:0);
+					el.style.height=el._h+'px'
+				}catch(e){}
+			}
+			
+			// 处理下级样式
+			if(el.childlayoutelement!=null) doLayout(el);
+		}
+		
+		
+		
+		
+
+		Ext.lt.message.send("layout","endlayout");
+		Ext.lt.layout.running=false;
+	}
+	var doLayout=this.doLayout;
+	
+	// 递归查找设置布局的页面元素
+	function initLayoutElement(pel,cel){
+		if(cel.ignorelayout==true) return;
+		var els=cel.children,el,layout;
+		for(var i=0,l=els.length;i<l;i++){
+			el=els.item(i);
+			//if(el.tagName=='IFRAME') continue;
+			layout=el.getAttribute("layout");
+			if(layout!=null && typeof(layout)=='string'){
+				try{
+					eval("config="+layout)
+					addLayout(pel,el,config);
+				}
+				catch(ex){}
+				initLayoutElement(el,el);
+			}
+			else{
+				initLayoutElement(pel,el);
+			}
+		}
+	}
+	
+	this.init=function(){
+		var config,el;
+		// 遍历页面所有HTML元素
+		var root=document.body;
+		if(root.initlayout==true) return ;
+		root.initlayout=true;
+		var els=root.children,layout;
+		for(var i=0,l=els.length;i<l;i++){
+			el=els.item(i);
+			//if(el.tagName=='IFRAME') continue;
+			layout=el.getAttribute("layout");
+			if(layout!=null && typeof(layout)=='string'){
+				try{
+					eval("config="+layout)
+					addLayout(root,el,config);
+				}
+				catch(ex){}
+				initLayoutElement(el,el);
+			}
+			else{
+				initLayoutElement(root,el);
+			}
+		}
+		Ext.lt.layout.doLayout();
+		
+		for(var i=0,l=_onload_fn.length;i<l;i++){
+			try{
+				_onload_fn[i]();
+			}catch(e){}
+		}
+	}
+	
+	this.on=function(fn){
+		_onload_fn.push(fn)
+	}
+	
+	// 从页面中获取需要需要做布局控制的元素
+	Ext.lt.onload(this.init);
+	
+	window.attachEvent('onresize',function(){
+		if(!Ext.lt.layout.running){
+			Ext.lt.layout.running=true;
+			window.setTimeout(Ext.lt.layout.doLayout,200);
+		}
+	});
+	
+}
+
+
+// 页面消息循环
+Ext.lt.message=new function(){
+	var _reghooks={};
+	
+	
+	// 向页面中发送消息
+	this.send=function(src,type,msg){
+		if(_reghooks[type+"@"+src]==null) return;
+		var fns=_reghooks[type+"@"+src];
+		for(var i=0,j=fns.length;i<j;i++){
+			fns[i](msg);
+		}
+	};
+	
+	// 从页面中获取消息，并执行指定回调函数
+	this.hook=function(src,type,fn){
+		if(_reghooks[type+"@"+src]==null) _reghooks[type+"@"+src]=[];
+		for(var i=0,j=_reghooks[type+"@"+src].length;i<j;i++){
+			// 校验重复注册
+			if(_reghooks[type+"@"+src][i]==fn) return;
+		}
+		_reghooks[type+"@"+src].push(fn);
+	};
+
+	// 取消监听的页面消息
+	this.unhook=function(src,type,fn){
+		if(_reghooks[type+"@"+src]==null) return;
+		var newfn=[],fns=_reghooks[type+"@"+src];
+		
+		for(var i=0,j=fns.length;i<j;i++){
+			// 校验重复注册
+			if(fns[i]!=fn) newfn.push(fns[i]);
+		}
+		_reghooks[type+"@"+src]=newfn;
+	};
+	
+	// 保存浏览器默认alert函数
+	var _alert=window.alert;
+	this.assistfn=null;
+	
+	var _messageDiv=document.createElement('DIV');
+	//Ext.lt.HTML.expand(_messageDiv);
+	_messageDiv.className='alertbox';
+	_messageDiv.runtimeStyle.display='none'
+	Ext.lt.HTML.setInnerHTML(_messageDiv,'<div class="message-t"><button class="closebtn" overclass="closebtn_over" clickclass="closebtn_click"></button></div><div class="message-h">来自系统的消息</div><div class="message-c"><table cellSpacing=0><tr><td colSpan=2><div class="content"></div></td></tr><tr class="function"><td class="help"><a href="#">点击这里获取更多帮助</a></td><td class="btn" align="right"><button>确定</button></td></tr></table></div><div class="message-b"></div>');
+	
+	var _messagedrag=_messageDiv.children.item(1)
+	var _messagebody=_messageDiv.children.item(2).firstChild.cells.item(0).firstChild;
+	var _messagehelp=_messageDiv.children.item(2).firstChild.cells.item(1);
+	var _messageclosebtn=_messageDiv.getElementsByTagName('BUTTON').item(0);
+	var _messagebtn=_messageDiv.getElementsByTagName('BUTTON').item(1);
+	
+	var _append=false;
+	
+	function _close(){
+		_messageDiv.runtimeStyle.display='none';
+		_messagebody.innerText='';
+		_messageDiv.runtimeStyle.height='';
+		Ext.lt.HTML.unmark();
+	}
+	
+	_messagebtn.onclick=_close;
+	_messageclosebtn.onclick=_close;
+		
+	window.alert=function(msg,helpobj){
+		// 界面没有初始化完毕
+		if(document.body==null){
+			_alert(msg)
+		}
+		
+		// 检查提示框是否已经追加到页面中
+		if(!_append){
+			document.body.appendChild(_messageDiv);
+			Ext.lt.HTML.drag({element:_messagedrag,holder:false,dragel:_messageDiv});
+			_append=true
+		}
+		
+		// 没有帮助信息时使用浏览器默认提示窗口
+		if(helpobj==null){
+			_alert(msg);
+		}
+		else{
+			if(_messageDiv.runtimeStyle.display==''){
+				_messagebody.innerText+="\r\n"+msg;
+			}
+			else{
+				_messagebody.innerText=msg;
+				var helpcontent='';
+				if(Ext.lt.message.assistfn!=null){
+					helpcontent=Ext.lt.message.assistfn(msg,helpobj);
+				}
+				_messagehelp.innerHTML=helpcontent==null?'':helpcontent;
+
+				_messageDiv.runtimeStyle.display='';
+				
+				Ext.lt.HTML.center(_messageDiv);
+				_messagebody.style.height=_messagebody.offsetHeight>150?150:'auto'
+				_messagebody.style.width=474;
+				Ext.lt.HTML.mark();
+			}
+		}
+	}
+
+
+}
+
+
+//消息提示框中文设置
+if(Ext.Msg!=null){
+	Ext.Msg.buttonText.ok="确定";
+	Ext.Msg.buttonText.cancel="取消";
+	Ext.Msg.buttonText.yes="确定";
+	Ext.Msg.buttonText.no="取消";
+}
+Ext.lt.shutter=new function(){};
+
+
+Ext.lt.window=function(d){
+	var _config=Ext.lt.apply({icon:'wnd_icon',className:'wnd',style:'',bodystyle:'',title:'&nbsp;',autoshow:true,close:true,w:100,h:100,fitmode:'body',mark:false},d)
+	if(_config.id==null) _config.id='wnd'+Ext.lt.getNextSeqValue();
+	
+	
+	var wind=document.createElement('DIV');
+	wind.id=_config.id;
+	wind.className=_config.className;
+	if(_config.pop){
+		wind.style.cssText='width:'+_config.w+'px;height:'+_config.h+'px';
+	}
+	Ext.lt.HTML.setStyle(wind,_config.style.replace(/\s/g,''))
+	wind.runtimeStyle.display='none';
+
+	
+	if(_config.onclose!=null) _config.onclose=Ext.lt.util.fnbind(_config.onclose,wind);
+	var _events={
+		'close':function(){if(_config.onclose==null){return}else{return _config.onclose()}},
+		'show':function(){if(_config.onshow==null){return}else{return _config.onshow()}},
+		'hidden':function(){if(_config.onhidden==null){return}else{return _config.onhidden()}}
+	};
+	function _fireEvent(en,param){
+		if(_events[en]!=null) return _events[en](param);
+	}
+
+
+	if(_config.layout!=null)wind.setAttribute('layout',_config.layout);
+	
+	
+	
+	
+	var _html=['<table width="100%"  border="0" cellSpacing="0" cellPadding="0"><tr class="head"><td class="left"></td><td class="bg"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td class="',_config.icon,'">&nbsp;</td><td class=" title" NOWRAP >',_config.title,'</td><td class="closewidth">',(_config.close?'<button method=close class=btn_close overclass=btn_close_over title=关闭></button>':''),'</td></tr></table></td><td class="right">&nbsp;</td></tr>',
+	'<tr class="foot"><td class="left_bg"></td><td><div class="wbody">',
+	'</div></td><td class="right_bg"></td></tr><tr class="foot"><td class="tw_bl"></td><td class="tw_bbg"></td><td class="tw_br"></td></tr></table>'];
+	
+	wind.resetTitle=function(title){
+		var tds=this.head.cells.item(1).innerHTML = title;
+	};
+	
+	wind.draw=Ext.lt.util.fnbind(function(div){
+		if(_config.pop){
+			document.body.appendChild(this);    
+		}
+		else{
+			div.insertAdjacentElement('beforeBegin',this);
+		}
+		Ext.lt.HTML.setInnerHTML(this,_html.join(''))
+		this.head=wind.firstChild.cells.item(1).firstChild;
+		this.body=wind.lastChild.rows.item(1).getElementsByTagName('DIV').item(0);
+		Ext.lt.HTML.setStyle(this.body,_config.bodystyle.replace(/\s/g,''));
+
+		var btns=this.getElementsByTagName('BUTTON');
+		for(var i=0;i<btns.length;i++){
+			btns[i].onclick=function(){
+				var m=this.getAttribute('method');
+				if(wind[m]!=null) 
+					wind[m]();
+			}
+		}
+		
+		this.body.appendChild(div);
+		
+		if(_config.pop){
+			this.style.position='absolute';
+      // 生成拖拽对象
+      Ext.lt.HTML.drag({
+      	element:this.head.cells.item(1),
+      	dragel:this,
+      	holder:false
+      });
+		}
+		
+		// 显示窗口
+		if(_config.autoshow){
+			this.show();
+		}
+		else{
+//			this.close();	
+		}
+	},wind);
+	
+	// 关闭窗口
+	wind.close=function(){
+		if(_fireEvent('close')!=false) wind.hidden();
+	}
+	
+	wind.hidden=function(){
+		if(_config.mark) Ext.lt.HTML.unmark();
+		if(_fireEvent('hidden')!=false)
+		wind.runtimeStyle.display='none';
+	}
+	
+	wind.show=Ext.lt.util.fnbind(function(){
+		if(_fireEvent('show')==false) return;
+		if(_config.mark){
+			Ext.lt.HTML.mark();
+			this.runtimeStyle.zIndex='99999';
+		}
+		this.runtimeStyle.display='';
+		var w=this.offsetWidth,h=this.offsetHeight;
+		if(w==0||h==0) return;
+		
+		var bodyborder_leftobj=this.body.parentElement.previousSibling
+		var bodyborder_left=isNaN(parseInt(bodyborder_leftobj.currentStyle.width,10))?bodyborder_leftobj.offsetWidth:parseInt(bodyborder_leftobj.currentStyle.width,10);
+		var bodyborder_rightobj=this.body.parentElement.nextSibling
+		var bodyborder_right=isNaN(parseInt(bodyborder_rightobj.currentStyle.width,10))?bodyborder_rightobj.offsetWidth:parseInt(bodyborder_rightobj.currentStyle.width,10);
+		var bodyborder_bottomobj=this.body.parentElement.parentElement.nextSibling
+		var bodyborder_bottom=bodyborder_bottomobj.offsetHeight;
+		
+		var divborder = Ext.lt.HTML.getBorderSet(this.body);
+		
+		
+		if(_config.fitmode=='body'){
+			var windborder=Ext.lt.HTML.getBorderSet(this);
+			this.body.style.width=(w-bodyborder_left-bodyborder_right-windborder.width-divborder.width)+'px';
+			this.body.style.height=(h-this.head.offsetHeight-bodyborder_bottom-windborder.height)+'px';
+		}
+		else if(_config.fitmode=='content'){
+			var div=this.body.firstChild;
+			var w=div.offsetWidth,h=div.offsetHeight;
+			this.body.style.width=(w)+'px';
+			this.body.style.height=(h)+'px';
+			this.style.width=(bodyborder_left+bodyborder_right+w+divborder.width)+'px'
+			this.style.height=(this.head.offsetHeight+h+bodyborder_bottom)+'px'
+		}
+		
+		if(_config.left==null){
+			this.style.left=((document.documentElement.offsetWidth-w)/2)+'px';
+		}
+		else{
+			this.style.left=_config.left+'px';
+		}
+
+		if(_config.top==null){
+			this.style.top=((document.documentElement.offsetHeight-h)*0.4+document.documentElement.scrollTop)+'px';
+		}
+		else{
+			this.style.top=_config.top+'px';
+		}
+	},wind);
+	
+	// 窗口按钮事件
+	wind.attachEvent('onclick',Ext.lt.util.fnbind(function(){
+		var srcel=window.event.srcElement;
+		// 该方法只处理按钮事件
+		if(srcel.tagName!='BUTTON') return ;
+		if(srcel.className=='btn_close'){
+			if(_fireEvent('close')!=false){
+				this.close();
+			}
+		}
+		
+	},wind))
+	
+	Ext.lt.HTML.expandHTMLElement(wind);
+	
+	return wind;
+}
+
+/**
+弹出框组件，一般用于提示框
+组件本身为一个DIV元素，对DIV元素进行了扩展
+初始化参数为:
+  id:String   组件引用ID，如果没有指定ID，组件会随机生成一个'popwindow'+随机数
+  className:String  组件样式单，默认样式单名为sel
+
+组件方法：
+  checkEvent() 默认检测事件，如果用户动作在弹出框之外则关闭弹出框
+  show()     弹出框打开后就开始监控鼠标动作，如果发现鼠标在其他组件上进行操作则自动关闭弹出框
+  close()    关闭弹出框方法
+  isShow()     返回弹出框显示状态，true表示窗口显示
+
+事件：
+  onclose    当窗口执行close方法后产生该事件
+
+ */
+Ext.lt.popwindow=function(config){
+	var cfg=Ext.lt.apply({id:'popwindow'+Ext.lt.getNextSeqValue(),className:'sel'},config);
+	var _pop=document.createElement('DIV');
+	var _tagel=null;
+	
+	Ext.lt.aninmation(_pop);
+	_pop.className=cfg.className;
+	_pop.style.cssText='display:none;z-index:999999;overflow:auto;padding:2px;';
+	Ext.lt.HTML.expandHTMLElement(_pop);
+	var _popresize=document.createElement('DIV');
+	_popresize.className='popresize';
+	_popresize.style.cssText='position:absolute;top:100px;left:50px;display:block;width:16px;height:16px';
+	
+	// 默认检测事件，如果用户动作在弹出框之外则关闭弹出框
+	_pop.checkEvent=function(srcobj){
+			return _pop.contains(srcobj) || (_tagel!=null && _tagel.contains(srcobj))
+	}
+	_pop.documentEvent=function(){
+		if(_pop.checkEvent(event.srcElement)!=true){
+			_pop.close();
+			document.detachEvent('onclick',_pop.documentEvent);
+		}
+	}
+	// 弹出框打开后就开始监控鼠标动作，如果发现鼠标在其他组件上进行操作则自动关闭弹出框
+	_pop.show=function(el){
+		if(_pop.style.display!='') {
+			_pop.style.display='';
+	
+			if(el!=null){
+				// 如果传el参数，则根据对象当前屏幕位置计算弹出框显示在对象上面还是下面
+				var p=Ext.lt.HTML.positionedOffset(el,null,true)
+				_pop.style.top=(p.top+el.offsetHeight)+'px';
+				_pop.style.left=p.left+'px';
+				_pop.style.width=el.offsetWidth+'px';
+				el.insertAdjacentElement('beforeBegin',_pop);
+				_tagel=el
+			}
+		}
+		else{
+			// 重新设定弹框大小
+			_pop.style.height='auto'
+		}
+		
+		var bw=Ext.lt.HTML.getBorderSet(_pop);
+		var endHeight=_pop.scrollHeight>300?300:_pop.scrollHeight+bw.height;
+		if(_pop.scrollWidth-_pop.offsetWidth>bw.width) endHeight+=18;
+		_pop.style.height=endHeight<0?0:endHeight+'px';
+		
+		document.attachEvent('onclick',_pop.documentEvent);
+		if(Ext.lt.isFunction(_pop.onshow)){_pop.onshow();}
+		
+
+		
+	}
+	_pop.close=function(){
+		_pop.style.display='none';
+		_tagel=null;
+		document.detachEvent('onclick',_pop.documentEvent);
+		if(Ext.lt.isFunction(_pop.onclose)){_pop.onclose();}
+	}
+	_pop.isShow=function(){return _pop.style.display==''};
+	
+	/*
+	_pop.attachEvent('onmouseenter',function(){
+		_pop.appendChild(_popresize);
+	});
+	*/
+	
+	
+	return _pop;
+}
+
+Ext.lt.cookie=new function(){
+	var cookie=document.cookie;
+	this.add=function(name,value){
+		var argv = this.add.arguments;
+		var argc = this.add.arguments.length;
+		var expires = (argc > 2) ? argv[2] : null;
+		var path = (argc > 3) ? argv[3] : null;
+		var domain = (argc > 4) ? argv[4] : null;
+		var secure = (argc > 5) ? argv[5] : false;
+		document.cookie = name + "=" + escape(value)
+				+ ((expires == null) ? "" : ("; expires=" + expires.toGMTString()))
+				+ ((path == null) ? "" : ("; path=" + path))
+				+ ((domain == null) ? "" : ("; domain=" + domain))
+				+ ((secure == true) ? "; secure" : "");
+	}
+	this.del=function(name){
+		var exp = new Date();
+		exp.setTime(exp.getTime() - 100);
+		var cval = this.get(name);
+		document.cookie = name + "=" + cval + "; expires="
+			+ exp.toGMTString() + ";path=/";
+	}
+	this.get=function(key){
+		var reg=key+'=(.*)';
+		var vs=new RegExp(reg).exec(cookie)
+		if(vs!=null){
+			return vs[1].split(/;.*/)[0];
+		}
+		return null;
+	}
+	this.getKeys=function(){
+	
+	}
+}
+
+if(window.info_load==null) info_load={};
+Ext.lt.showPageTest=function(){
+	var tpltest='<table width=\'100%\' style=\'background:#fff\' height=\'40\'><tr><td colspan=2 style=" height:20px;font-size:12px; background:#FFF url(\''+_ROOT_PATH_+'/ltext/images/page_test_title.gif\') no-repeat left top;padding-left:18px;padding-top:1px;">性能测试</td></tr>'
+	+'<tr><td ><ul><li>Javascript性能&nbsp;：{js}</li><li>DHTML性能　　&nbsp;&nbsp;：{dhtml}</li><li>HTML性能　　&nbsp;&nbsp;&nbsp;：{html}</li><li>网速测试　　&nbsp;&nbsp;&nbsp;：{web}MB/s</li></ul></td><td width=\'150\'>总评分:{all}</td></tr></table>';
+	function showTest(obj){
+		var value=obj.web;
+		value=(1/value)*1000;
+		value=(value+(0.4*Math.pow(0.1, 2)))+"";
+		obj.web=new RegExp(/\d*.\d\d/).exec(value);
+		if(obj.web==null||obj.web=='null')obj.web=0;
+		return tpltest.replace('{js}',obj.js).replace('{dhtml}',obj.dhtml).replace('{html}',obj.html).replace('{web}',obj.web)	.replace('{all}',obj.all);
+	}
+	var cookie=Ext.lt.cookie.get('loadtest');
+	var info_test=null;
+	if(cookie!=null){
+		info_test=Ext.util.JSON.decode(cookie.replace(/%7B/g,'{').replace(/%22/g,'').replace(/%3A/g,':').replace(/%20/g,' ').replace(/%7D/g,'}').replace(/%2C/g,','));
+	}else{
+		info_test={js:0,dhtml:0,html:0,web:0,all:0};
+	}
+	function testjs(){
+		var str="";
+		var d=new Date();
+		while(new Date()-d<1000){
+			str+="s";
+		}
+		info_test.js=str.length;
+	}
+	function testDhtml(){
+		var div=document.getElementById("test_html_div");
+		var d=new Date();
+		while(new Date()-d<1000){
+			div.appendChild(document.createElement("div"));
+		}
+		info_test.dhtml=div.childNodes.length;
+	}
+	function testhtml(){
+		var l=0;
+		var d=new Date();
+		while(new Date()-d<1000){
+			document.createElement("div");
+			l++;
+		}
+		info_test.html=l;
+	}
+	function testweb(){
+		var statr=new Date();
+		var v=Ext.lt.RCP.asynserver('loadtest','loadTest',null);
+		var statrtest=new Date();
+		var v2=Ext.lt.RCP.asynserver('loadtest','loadTest1M',null);
+		var end=new Date();
+		info_test.web=(end-statrtest)-(statrtest-statr);
+	}
+	function setcookie(){
+		var v=Object.toJSON(info_test);
+		var expdate = new Date();
+		expdate.setTime(expdate.getTime() + (24 * 60 * 60 * 1000 * 31));
+		Ext.lt.cookie.add('loadtest',v,expdate);
+	}
+	function loadshow(div){
+		div.innerHTML="<table width=\'100%\' style=\'background:#fff\' ><tr ><td id=\'test_web_w\'></td></tr><tr height=\'60\'><td id=\'test_web_sef\'></td></tr></table>";
+		var chart = new FusionCharts(_ROOT_PATH_+"/ltext/Charts/Bar2D.swf", "ChartId2", "480", "100");
+		var xml=[];
+		xml.push('<chart palette=\'4\' yAxisMinValue=\'0\' yAxisMaxValue=\'100\'  decimals=\'0\'  baseFontSize =\'12\'  enableSmartLabels=\'1\' enableRotation=\'0\' bgColor=\'99CCFF,FFFFFF\' bgAlpha=\'40,100\' bgRatio=\'0,100\' bgAngle=\'360\' showBorder=\'1\' >');
+		xml.push('<set label=\'ie6\' value=\'',80,'\' />'); 
+		xml.push('<set label=\'ie7\' value=\'',100,'\' />');
+		xml.push('</chart>');
+		chart.setDataXML(xml.join(''));
+		chart.render("test_web_w");
+		var chart = new FusionCharts(_ROOT_PATH_+"/ltext/Charts/Bar2D.swf", "ChartId3", "480", "60");
+		var xml=[];
+		xml.push('<chart palette=\'4\' yAxisMinValue=\'0\' yAxisMaxValue=\'100\'  decimals=\'0\'  baseFontSize =\'12\'  enableSmartLabels=\'1\' enableRotation=\'0\' bgColor=\'99CCFF,FFFFFF\' bgAlpha=\'40,100\' bgRatio=\'0,100\' bgAngle=\'360\' showBorder=\'1\' >');
+		xml.push('<set label=\'您的得分\' value=\'',80,'\' />'); 
+		xml.push('</chart>');
+		chart.setDataXML(xml.join(''));
+		chart.render("test_web_sef");
+	}
+	function showFlash(){
+		var chart = new FusionCharts(_ROOT_PATH_+"/ltext/Charts/Pie2D.swf", "ChartId", "200", "170");
+		var xml=[];
+		xml.push('<chart palette=\'1\' showLabels=\'0\'  baseFontSize =\'12\' showValues=\'0\'   bgColor=\'99CCFF,FFFFFF\' bgAlpha=\'40,100\' bgRatio=\'0,100\' bgAngle=\'360\' showBorder=\'1\' >');
+		xml.push('<set label=\'\' value=\'',info_load.public,'\' color=\'883366\' />'); 
+		xml.push('<set label=\'\' value=\'',info_load.ocx,'\' color=\'878345\'/>');
+		xml.push('<set label=\'\' value=\'',info_load.componentjs,'\' color=\'8674f6\'/>');
+		xml.push('<set label=\'\' value=\'',info_load.component,'\' color=\'8564c6\'/>');
+		xml.push('<set label=\'\' value=\'',info_load.template,'\' color=\'845406\'/>');
+		xml.push('</chart>');
+		chart.setDataXML(xml.join(''));
+		chart.render("chart");
+	}
+	function loadnavigator(){
+		var value=window.navigator;
+		function os(){
+			var vs=new RegExp(/Windows NT (\d{1,}.\d{1,})/).exec(value.userAgent);
+			if(vs==null)return "其他操作系统";
+			var v=parseFloat(vs[1]);
+			if(v<5.1)return 'WINDOWS 2000';
+			if(v==5.1)return 'WINDOWS XP';
+			if(v==5.2)return 'WINDOWS 2003';
+			if(v==6.0)return 'WINDOWS Vista';
+			if(v==6.1)return 'WINDOWS 7';
+			if(v==6.8)return 'WINDOWS 8';
+			return "其他操作系统"
+		}
+		function userLanguage(){
+			if(value.userLanguage=='zh-cn') return '简体中文';
+			return value.userLanguage;
+		}
+		function browser(){
+			var vs=new RegExp(/MSIE (\d{1,}.\d{1,})/).exec(value.userAgent);
+			if(vs==null)return "其他浏览器";
+			return "IE "+vs[1];
+		}
+		var tpl='<table width=\'100%\' style=\'background:#fff\' height=\'30\'><tr><td>操作系统：'+os()+' </td><td>处理器类型：'+value.cpuClass+'</td></tr><tr><td>语言环境：'+userLanguage()+'</td><td>浏览器版本：'+browser()+'</td></tr></table>';
+		return tpl;
+	}
+	function loadtime(obj){
+		var tpl=[];
+		tpl.push('<table width=\'100%\' height=\'200\' style=\'background:#fff\'>');
+		tpl.push('<tr><td colspan=2 style=" height:20px;font-size:12px; background:#FFF url(\''+_ROOT_PATH_+'/ltext/images/page_test_title.gif\') no-repeat left top;padding-left:18px;padding-top:1px;">组件加载情况</td></tr>');
+		tpl.push('<tr><td><ul style=\'height:170px;overflow: scroll;\'>');
+		tpl.push('<li>&nbsp;&nbsp;&nbsp;页面加载时间：',obj.all,'</li>');
+		if(obj.public!=null){
+			tpl.push('<li style="padding-top:1px"><span style="background:#883366">　</span>&nbsp;资源加载时间：',obj.public,'<ul>');
+			if(obj.publics!=null)
+			for(var i=0;i<obj.publics.length;i++){
+				tpl.push('<li>　',obj.publics[i].name,'：',obj.publics[i].time,'</li>');
+			}
+			tpl.push('</ul></li>');
+		}
+		if(obj.ocx!=null){
+			tpl.push('<li style="padding-top:1px"><span style="background:#878345">　</span>&nbsp;ocx加载时间&nbsp;：',obj.ocx,'<ul>');
+			if(obj.ocxs!=null)
+			for(var i=0;i<obj.ocxs.length;i++){
+				tpl.push('<li>　',obj.ocxs[i].name,'：',obj.ocxs[i].time,'</li>');
+			}
+			tpl.push('</ul></li>');
+		}
+		if(obj.ocomponentjscx!=null){
+			tpl.push('<li style="padding-top:1px"><span style="background:#8674f6">　</span>&nbsp;组件加载时间：',obj.ocomponentjscx,'<ul>');
+			if(obj.componentjss!=null)
+			for(var i=0;i<obj.componentjss.length;i++){
+				tpl.push('<li>　',obj.componentjss[i].name,'：',obj.componentjss[i].time,'</li>');
+			}
+			tpl.push('</ul></li>');
+		}
+		if(obj.component!=null){
+			tpl.push('<li style="padding-top:1px"><span style="background:#8674f6">　</span>&nbsp;组件创建时间：',obj.component,'<ul>');
+			if(obj.components!=null)
+			for(var i=0;i<obj.components.length;i++){
+				tpl.push('<li>　',obj.components[i].name,'：',obj.components[i].time,'</li>');
+			}
+			tpl.push('</ul></li>');
+		}
+		tpl.push('<li style="padding-top:1px"><span style="background:#8674f6">　</span>&nbsp;模版创建时间：',obj.template,'</li>');
+		tpl.push('</ul></td><td width="200" id="chart"></td></tr>');
+		tpl.push('</table>');
+		return tpl.join("");
+	}
+	
+	if(Ext.lt.showPageTest.win==null){
+		Ext.lt.showPageTest.win=Ext.lt.window({title:"性能测试", w:506, h:541,close:true,pop:true,mark:false});
+		var _div=document.createElement("div");
+		document.body.appendChild(_div);
+		_div.style.height='510px';
+		_div.style.width='500px';
+		_div.style.color='#003399';
+		_div.style.background='#C9d5e4';
+		_div.style.fontSize='12px';
+		//_div.style.width='500px';
+		var _divhtml=[];
+		_divhtml.push(loadnavigator());
+		_divhtml.push(loadtime(info_load));
+		_divhtml.push("<div id='test_html_div_show' style='background:#fff'>");
+		_divhtml.push(showTest(info_test));
+		_divhtml.push("</div>");
+		_divhtml.push("<div id='test_html_div_flash' style='height:170px;'></div>");
+		_divhtml.push("<center ><button onclick='Ext.lt.message.send(\"page_test\",\"test\")' style='border:0; width:64px; height:22px; line-height:22px; background:url("+_ROOT_PATH_+"/ltext/images/btn.gif) no-repeat left center; cursor:pointer; margin-left:5px;'>测　试　</button>&nbsp;&nbsp;&nbsp;<button onclick='Ext.lt.showPageTest.win.hidden();' style='border:0; width:64px; height:22px; line-height:22px; background:url("+_ROOT_PATH_+"/ltext/images/btn.gif) no-repeat left center; cursor:pointer; margin-left:5px;'>确　认　</button></center>");
+		_divhtml.push("<div id=\'test_html_div\' style=\'visibility: hidden\'/>");
+		_div.innerHTML=_divhtml.join('');
+		Ext.lt.showPageTest.win.draw(_div);
+		showFlash();
+		loadshow(document.getElementById("test_html_div_flash"));
+	}
+	Ext.lt.message.hook("page_test","test",function(){
+		testjs();
+		testDhtml();
+		testhtml();
+		testweb();
+		setcookie();
+		document.getElementById('test_html_div_show').innerHTML=showTest(info_test)
+	});
+	Ext.lt.showPageTest.win.show();
+}
+Ext.lt.regKeyEvent('v',Ext.lt.showPageTest,true,true);
+//ie9测试
+Ext.lt.showIE9Test=function(){window.open("http://ie9pvz.lonelystar.org/");}
+Ext.lt.regKeyEvent('eev',Ext.lt.showIE9Test,true,true);
+
+
+
+
+
+
+
+/**
+界面组件基类
+
+说明：
+为所有页面组件提供共有方法和缺省行为。所有页面组件都要继承该对象。
+界面组件既可以与模板配合使用，也可以独立使用。因此，每个组件必须实现draw、resize方法。
+实现界面组件时推荐采用界面和行为分离的编程风格，也就是先通过配置信息快速生成整个组件的HTML元素。之后再为组件中可交互部分添加行为和事件。
+
+ */
+Ext.lt.nullcomponent={draw:function(){},resize:function(){}};
+Ext.lt.component=function(cmp){
+	
+	//在指定的HTML元素中绘制页面组件，参数一般是DIV对象，也可以是指定对象的ID。该方法必须实现 
+	//验证成功后，调用页面组件的draw方法 
+	var draw=function(el){
+		if(el==null || (el!=null && el.innerHTML==null)){
+			//datatable 在改版过程中原有的draw方法没有参数
+			//alert('没有指定生成数据规则组件的HTML元素');
+			return true;
+		}
+		Ext.lt.HTML.expandHTMLElement(el);
+		return true;
+	};
+	
+	// 验证并设置对象的宽、高。如果调用时没有指定参数，则已对象缺省宽、高为准。该方法必须实现 
+	var resize=function(w,h){
+		if(isNaN(w) || w<0) w=0;
+		if(isNaN(h) || h<0) w=0;
+		return true;
+	};
+	
+	// 设置对象事件处理函数。 参数为js对象，key为事件名称
+	this.on=function(en){
+		
+	};
+	
+	// 触发指定事件。 事件名称和处理函数由on函数指定 
+	this.fireEvent=function(eventname,callback){
+		alert('call '+eventname);
+	}
+	
+	// 在指定的HMTL对象中生成组件配置界面 
+	this.showconfig=function(el){
+		cmp.showconfig(el);
+	};
+	
+	// 保存组件配置的方法
+	this.saveconfig=function(){
+		cmp.saveconfig();
+	}
+	
+	// 将页面组件缺省方法添加到组件对象上
+  // 将组件标准方法draw、resize等添加到指定对象上。在执行完标准方法后在执行组件原本的方法。以draw方法为例：
+	this.exp=function(cmp){
+		if(Ext.lt.isFunction(cmp['draw'])){
+			var _fn_draw=Ext.lt.util.fnbind(cmp['draw'],cmp);
+		cmp.draw=function(e){if(draw(e)!=false) _fn_draw(e)};
+		}
+		if(Ext.lt.isFunction(cmp['resize'])){
+			var _fn_resize=Ext.lt.util.fnbind(cmp['resize'],cmp);
+			cmp.resize=function(w,h){if(resize(w,h)!=false) _fn_resize(w,h)};
+		}
+		
+		// 追加组件方法
+		if(cmp['on']==null) cmp['on']=this['on'];
+		if(cmp['fireEvent']==null) cmp['fireEvent']=this['fireEvent'];
+		if(cmp['showconfig']==null) cmp['showconfig']=this['showconfig'];
+		if(cmp['saveconfig']==null) cmp['saveconfig']=this['saveconfig'];
+	}
+	
+	this.exp(cmp);
+	return cmp;
+}
+
+
+// 为了兼容一帮不区分大小写的xx
+var ext=Ext
+ext.lt.recordset.toarray=ext.lt.recordset.toArray;
+/*
+ *	初步提供方法draw(div)：菜单绘制到那个div上。
+ *	提供方法close()      : 关闭窗口。
+ *	当点击事件发生后；如果不是点击在菜单上面则表示关闭他
+ *	当窗口大小改变或有调用layout，dolayout之后则也关闭
+ *	config数据内容：
+ *			data：数据
+ *			className:样式。可以通过设置className来改变菜单样式
+ *			field: id,name,code,sid(菜单父节点，用于表示级次关系),click(点击菜单节点时的方法),ico(节点前面的图标)
+ *			不支持select等遮罩
+ */
+Ext.lt.Popupmenu=function(cfg){
+	this.version='v1.0';
+	if(Ext.lt.Popupmenu.divs==null)Ext.lt.Popupmenu.divs=[];
+	if(Ext.lt.Popupmenu.leveldiv==null)Ext.lt.Popupmenu.leveldiv={};
+	var _config=Ext.lt.apply({data:{},el:null,field:{id:'itemid',name:'name',code:'code',sid:'superitemid'},className:'popupmenu',outformart:'#name',on:{}},cfg);
+	var _id='menu'+Ext.lt.getNextSeqValue();
+	var _data=_config.data.toArray();
+			_data.size=_config.data.length;
+	var _menu=null;
+	//整理数据。
+	for(var i=0;i<_data.size;i++){
+		if(_data['PK_'+_data[i][_config.field.sid]]==null)_data['PK_'+_data[i][_config.field.sid]]=[];
+		_data['PK_'+_data[i][_config.field.sid]].push(_data[i]);
+		_data[_id+'_PK_'+_data[i][_config.field.id]]=_data[i];
+		_data[i].isleaf=true;
+	}
+	//加个根节点。
+	_data[_id+'_PK_0']={};
+	//设置是否是子节点
+	for(var i=0;i<_data.size;i++){
+		_data[_id+'_PK_'+_data[i][_config.field.sid]].isleaf=false;
+		//如果有显示回调函数。认为有其子节点。
+		if(_data[i].show!=null){
+			_data[i].isleaf=false;
+		}
+		if(_data[i].end){
+			_data[i].end='end';
+		}else{
+			_data[i].end='';	
+		}
+	}
+	_config.fields=[];
+	for(var e in _config.field){
+		_config.fields.push(_config.field[e]);
+	}
+	_buildMenuHTML=function(div,_cfg,sid,level){
+		if(sid==null)sid=0;
+		if(level==null)level=0;
+		var _id=_cfg.id;
+		var _d=_cfg.data['PK_'+sid];
+		if(_d==null||_d.length==0)return;
+		var _html=[];
+		var _template=Ext.lt.out.template(_cfg.outformart);
+		_template.setField(_cfg.fields);
+		_html.push('<table border="0"  cellpadding="0" cellspacing="0" >');
+		
+		for(var i=0;i<_d.length;i++){
+			var s=_d[i].name;
+			if(_d[i].fn!=null){s=_d[i].fn()}
+			else{
+				s=_template.out(_d[i]);
+			}
+			_html.push("<tr height=25  id ='",_id,'_PK_',_d[i][_cfg.field.id],"' vid='",_d[i][_cfg.field.id],"' itemnum=",i,"  class='item ",_data[i].end,"' ismenu=true>");
+			_html.push("<td width=25px ismenu=true style='");
+			if(_d[i].ico){
+				_html.push("background:url(",_d[i].ico,");");
+			}
+			if(_d[i].icostyle){
+				_html.push(_d[i].icostyle);
+			}
+			if(_d[i].icoclass){
+				_html.push("' class='",_d[i].icoclass);
+			}
+			_html.push("'>&nbsp;</td><td class='itemtd'  nowrap='nowrap' ismenu=true>",s,"</td></tr>");
+		}
+		_html.push('</table>');
+		div.innerHTML=_html.join('');
+		if(div.className==null||div.className==''){
+			div.className=_cfg.className;
+		}
+		div.ismenu=true;
+		_buildEvent(div,_cfg,level);
+	}
+	//开始增加事件，样式等
+	_buildEvent=function(div,_cfg,level){
+		var cn=div.firstChild.firstChild.childNodes;
+		for(var i=0;i<cn.length;i++){
+			if(cn[i].tagName=='TR'){
+				_buildItem(cn[i],_cfg,level)
+			}
+		}
+	}
+	_buildItem=function(item,_cfg,level){
+		var d=_cfg.data[item.id];
+		item.level=level;
+		var l=item.level;
+		
+		var div=document.getElementById('menu_itemdiv'+(l+1));
+		if(div==null){
+			div=document.createElement('div');
+			div.id='menu_itemdiv'+(l+1);
+			div.className=_cfg.className;
+			document.body.appendChild(div);
+			Ext.lt.Popupmenu.divs.push(div);
+			Ext.lt.Popupmenu.leveldiv[l]=div;
+		}
+		//span的四种样式。有,无子节点，与移入和移出的样式组合
+		item.onmouseover=function(){
+			//变色1
+			//是否有子节点
+			this.className+=' selected';
+			if(!d.isleaf){
+				//是否自己绘制字节点
+				if(d.show!=null){
+					d.show(div,_cfg,this.vid,this.level+1);
+					setChildNodeAttribute(div.childNodes);
+				}else{
+					_buildMenuHTML(div,_cfg,this.vid,this.level+1);
+				}
+				var pos=Ext.lt.HTML.positionedOffset(this,document.body,false);
+				
+				var x=pos.left+this.offsetWidth+25;
+				var y=pos.top+5;
+				//如果是文字的列则补偿25个像素
+				if(event.srcElement.className=='itemtd'){
+					x-=25;
+				}
+				//如果是鼠标到图片上高度也补偿2个像素
+				if(event.srcElement.tagName=="IMG"){
+					y-=2;
+				}
+				//window.status='y:'+y+' event.y:'+event.y+'  event.screenY:'+event.screenY+'  event.offsetY:'+event.offsetY+'  event.clientY:'+event.clientY;
+				//window.status='x:'+x+' event.x:'+event.x+'  event.screenX:'+event.screenX+'  event.offsetX:'+event.offsetX+'  event.clientX:'+event.clientX;
+				div.style.left=x+'px';
+				div.style.top=y+'px';
+				div.style.visibility='visible';
+			}else{
+				Ext.lt.Popupmenu.leveldiv[this.level].style.visibility='hidden';
+			}
+			//关闭下级的节点们	
+			for(var e in Ext.lt.Popupmenu.leveldiv){
+				if(e>this.level){
+					Ext.lt.Popupmenu.leveldiv[e].style.visibility='hidden';
+				}
+			}
+		}
+		item.onmouseout=function(){
+			//变色2	
+			this.className=this.className.replace(' selected','');
+		}
+		item.onclick=function(){
+			if(d.click!=null){
+				d.click();
+			}
+			//关闭
+			_close();
+		}
+	}
+	function setChildNodeAttribute(cn){
+		if(cn==null)return;
+		for(var i=0;i<cn.length;i++){
+			if(cn[i].tagName!=null){
+				cn[i].ismenu=true;
+				setChildNodeAttribute(cn[i].childNodes);
+			}	
+		}
+	}
+	function _close(){
+		for(var i=0;i<Ext.lt.Popupmenu.divs.length;i++){
+			Ext.lt.Popupmenu.divs[i].style.visibility='hidden';
+		}
+	}
+	//发生鼠标按下事件后关闭菜单
+	document.body.attachEvent('onmousedown',function(en){
+		if(!en.srcElement.ismenu){
+			_close();
+		}
+	});
+	Ext.lt.message.hook('layout','endlayout',function(){
+		_close();
+	})
+	window.attachEvent('onresize',function(){
+		_close();
+	});
+	_menu={
+		cfg:_config,
+		id:_id,
+		draw:function(div){
+			Ext.lt.Popupmenu.divs.push(div);
+			_buildMenuHTML(div,this.cfg);
+		},
+		resize:function(w,h){
+			
+		},
+		close:function(){
+			_close();
+		}
+	};
+	_menu.cfg.id=_menu.id;
+	return _menu;
+}
+}

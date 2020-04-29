@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 
+		此文件定义上下文内容，各模块需各自按以下指定的文件名在各模块的src文件夹下维护、管理上下文内容。
+		此文件只作管理用途，不允许随意修改！
+	-->
+	<import resource="classpath:datasource.xml"/>
+	<import resource="classpath:common-context.xml"/>
+	<import resource="classpath:FRAMEWORK-context.xml"/>
+	<import resource="classpath:SEC-context.xml"/>
+	<import resource="classpath:CA-context.xml"/>
+	<import resource="classpath:DIC-context.xml"/>
+	<import resource="classpath:RU-context.xml"/>
+	<import resource="classpath:GL-context.xml"/>
+	<import resource="classpath:BC-context.xml"/>
+	<import resource="classpath:WF-context.xml"/>
+	<import resource="classpath:PA-context.xml"/>
+	<import resource="classpath:XCH-context.xml"/>	
+	<import resource="classpath:FM-context.xml"/>
+	<import resource="classpath:RPT-context.xml"/>
+	<import resource="classpath:zlll-context.xml"/>
+	
+	<import resource="classpath:zlll-remote.xml"/>
+	<import resource="classpath:dm-context.xml" />
+	<import resource="classpath:ifmis-longtureport.xml"/> 
+	<import resource="classpath:EX-context.xml"/>
+</beans>

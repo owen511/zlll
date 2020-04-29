@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+	<!-- 支付凭证  begin -->
+	<bean id = "bba.pay.dao.BBAPayDAO" parent="bba.base.dao.BBABaseDAO" class="com.zlll.bba.pay.dao.BBAPayDAO">
+		<property name="associateTag" value="1" />
+		<property name="mainTableName" value="T_BBA_PAY_MAIN" />
+		<property name="subTableName" value="T_BBA_PAY_SUB" />
+		<property name="foreignid" value="mainid" />
+		<property name="dtoClass" value="com.zlll.bba.pay.dto.BBAPayDTO" />
+		<property name="subDtoClass" value="com.zlll.bba.pay.dto.BBAPaySubDTO" />
+		<property name="ctrlDtoClass" value="com.zlll.bba.base.dto.BBABaseDTO" />
+		<property name="paService" ref="fasp.pa.paservice.paSeriviceBPO" />
+	</bean>
+	<bean id = "bba.pay.bo.BBAPayBO" parent="bba.base.bo.BBABaseBO" class="com.zlll.bba.pay.bo.BBAPayBO">
+		<property name="bbaPayDAO" ref="bba.pay.dao.BBAPayDAO" />
+		<property name="bbaBaseDAO" ref="bba.pay.dao.BBAPayDAO" />
+		<property name="vouDAO" ref="bba.pay.dao.BBAPayDAO" />
+		<property name="sourceDAO" ref="bba.pay.dao.BBAPayDAO" />
+		<property name="sourceMainTableName" value="T_BBA_CTRL"/>
+		<!-- 
+		<property name="remoteService" value="bba.util.remoting.httpInvokeFactory"/>
+		--> 
+	</bean>
+	<bean id = "bba.pay.bpo.BBAPayBPO" parent="bba.base.bpo.BBABaseBPO" class="com.zlll.bba.pay.bpo.BBAPayBPO">
+		<property name="bbaPayBO" ref="bba.pay.bo.BBAPayBO" />
+		<property name="bbaBaseBO" ref="bba.pay.bo.BBAPayBO" />
+	</bean>
+	<bean id="bba.pay.bpo.BBAPayBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.pay.bpo.BBAPayBPO"/>
+	</bean>
+	<!-- 支付凭证  end -->
+</beans>

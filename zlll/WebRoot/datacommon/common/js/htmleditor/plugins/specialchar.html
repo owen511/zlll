@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>special character</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+*{
+  font-size:14px;
+}
+
+.tabbar{
+  clear:both;
+  margin:0;
+  padding:0;
+  position:relative;
+  display:block;
+  z-index:100;
+}
+
+.tabbar li{
+  display:block;
+  float:left;
+  width:70px;
+  height:25px;
+  list-style:none;
+  margin:0 2px;
+}
+
+.tabbar li a{
+  border:1px solid #ccc;
+  width:100%;
+  line-height:24px;
+  float:left;
+  display:block;
+  font-size:12px;
+  text-align:center;
+  background:#ccc;
+  color:#555;
+  text-decoration:none;
+  border-bottom:none;
+}
+
+.tabbar li a:hover{
+  background:#eee;
+}
+
+.tabbar li a.sel{
+  background:#fff;
+  line-height:25px;
+}
+
+.tabcontent {
+  border:1px solid #ccc;
+  text-align:center;
+  padding:2px;
+  margin:2px;
+  float:left;
+  width:300px;
+  height:200px;
+  clear:both;
+  margin-top:0px;
+}
+
+.tabcontent span{
+  display:block;
+  float:left;
+  width:21px;
+  height:21px;
+  text-align:center;
+  border:1px solid #ccc;
+  margin:2px;
+  cursor:pointer;
+}
+-->
+</style>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+<!--
+//var examplestr = "āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜ";
+var specialchars={};
+specialchars["pinyin"]="āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜ";
+specialchars["special"]="§№☆★○●◎◇◆□℃‰€■△▲※→←↑↓〓¤°＃＆＠＼︿＿￣―♂♀";
+specialchars["punctuation"]="。，、；：？！…—·ˉ¨‘’“”々～‖∶＂＇｀｜〃〔〕〈〉《》「」『』．〖〗【】（）［］｛｝";
+specialchars["snumber"]="ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ⒈⒉⒊⒋⒌⒍⒎⒏⒐⒑⒒⒓⒔⒕⒖⒗⒘⒙⒚⒛㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩①②③④⑤⑥⑦⑧⑨⑩⑴⑵⑶⑷⑸⑹⑺⑻⑼⑽⑾⑿⒀⒁⒂⒃⒄⒅⒆⒇";
+
+$(document).ready(function(){
+  var editor = window.dialog.context;
+  for(var n in specialchars ) {
+    var examplestr=specialchars[n];
+    for(var i=0;i<examplestr.length;i++){
+      var curTune=examplestr.charAt(i);
+      var f = $("<span>"+curTune+"</span>");
+      $("#"+n+"_examples").append(f);
+  
+      f.bind("click",{"editor":editor,"pytune":curTune},function(event){
+       event.data["editor"].insertHtml(event.data["pytune"]);
+        window.dialog.close();
+      });  
+    }
+  }
+});
+
+function switchTab(tab,divId){
+  $(".tabbar li a:sel").removeClass("sel");
+  $(tab).addClass("sel");
+  $(".tabcontent").css("display","none");
+  $("#"+divId).css("display","");
+}
+
+-->
+</script>
+
+</head>
+<body>
+<div>
+  <ul class="tabbar">
+    <li><a class="sel" href="javascript:void(0)" onclick="switchTab(this,'pinyin_examples')">声调输入</a></li>
+    <li><a href="javascript:void(0)" onclick="switchTab(this,'special_examples')">特殊符号</a></li>
+    <li><a href="javascript:void(0)" onclick="switchTab(this,'punctuation_examples')">标点符号</a></li>
+    <li><a href="javascript:void(0)" onclick="switchTab(this,'snumber_examples')">数字符号</a></li>
+  </ul>
+  <br style="clear:both;" />
+  <div class="tabcontent" id="pinyin_examples"></div>
+  <div class="tabcontent" id="special_examples" style="display:none"></div>
+  <div class="tabcontent" id="punctuation_examples" style="display:none"></div>
+  <div class="tabcontent" id="snumber_examples" style="display:none"></div>
+</div>
+
+</body>
+</html>

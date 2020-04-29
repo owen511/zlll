@@ -1,0 +1,11 @@
+.toolbarcmp .add_btn{width:50px}
+.toolbarcmp .audit_btn{width:80px}
+.toolbarcmp .query_btn{width:50px}
+.toolbarcmp .enabled_btn{width:50px}
+.toolbarcmp .disable_btn{width:50px}
+.toolbarcmp .clearquery_btn{width:100px}
+.toolbarcmp .return_btn{width:50px}
+.toolbarcmp .save_btn{width:50px}
+.return_btn{background:url(../image/toolbar/return.gif) no-repeat center left;padding-left:20px}
+.clearquery_btn{background:url(../image/toolbar/return.gif) no-repeat center left;padding-left:20px}
+.save_btn{background:url(../image/toolbar/save.gif) no-repeat center left;padding-left:20px}

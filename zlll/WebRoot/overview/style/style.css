@@ -1,0 +1,114 @@
+
+
+/*ltext_core 扩展编辑区样式*/
+
+.editpanel .inputbox{font-size:12px; line-height:16px; height:18px; border:1px #357C9D solid;padding:0px 3px 0px 2px;width:70%;float:left}
+.editpanel .lab{text-align: center;padding-right: 5px;}
+.editpanel .btn_list{background-position:0px 0px;}
+.editpanel .btn_list_over{background-position:0px 0px;}
+
+.btns{ border:0; width:64px; height:22px; line-height:22px; background:url(../image/bg/btn.gif) no-repeat left center; cursor:pointer; margin-left:5px;}
+.btn_over{ border:0; width:64px; height:22px; line-height:22px; background:url(../image/bg/btn_over.gif) no-repeat left center; cursor:pointer; margin-left:5px;}
+
+
+.qtree .overlink{color:#000000;text-decoration:none;}
+
+.qlist .overlink{color:#000000;text-decoration:none;}
+
+
+.query_info{
+	background:url(../../ifmis_images/bg/main_bg.gif) repeat-x left top;
+}
+.STYLE1{
+	color:red;
+}
+
+.B3F2FFc{
+	background-color: #B3F2FF;
+	border-top: 0px #fff solid;
+	border-left: 0px #fff solid;
+	border-right: 1px #8ba3da solid;
+	padding-left:2px;
+	text-overflow: ellipsis;
+	height:22px;
+	color:#000;
+	float:left;
+	line-height:20px;
+}
+.E2FFDFc{
+	background-color: #E2FFDF;
+	border-top: 0px #fff solid;
+	border-left: 0px #fff solid;
+	border-right: 1px #8ba3da solid;
+	padding-left:2px;
+	text-overflow: ellipsis;
+	height:22px;
+	color:#000;
+	float:left;
+	line-height:20px;
+}
+.FFBCB3c{
+	background-color: #FFBCB3;
+	border-top: 0px #fff solid;
+	border-left: 0px #fff solid;
+	border-right: 1px #8ba3da solid;
+	padding-left:2px;
+	text-overflow: ellipsis;
+	height:22px;
+	color:#000;
+	float:left;
+	line-height:20px;
+}
+.clockrow{
+	display : none;
+}
+#form_table_title{width:auto;}
+.overview_modeconfig_cols{
+	background-color: #D5E4F2;
+	padding: 5px;
+}
+.overview_modeconfig_cols .info_col{
+	background-color: #fff;
+	height: 145px;
+	width: 300px;
+	overflow: scroll;
+}
+.overview_modeconfig_cols .move{
+	position: absolute;
+	background-color: red;
+	z-index: 99999;
+	width: 125px;
+	height:12px;
+}
+.overview_modeconfig_cols .mousemove{
+	border: #000fff 1px solid;
+}
+.overview_modeconfig_top {
+	overflow: hidden;
+}
+.overview_modeconfig_top_s{
+	white-space: nowrap;
+}
+.overview_modeconfig_top button{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.buttons{ border:0; width:64px; height:22px; line-height:22px; background:url(../image/btn.gif) no-repeat left center; cursor:pointer; margin-left:5px;}
+.buttons_over{ border:0; width:64px; height:22px; line-height:22px; background:url(../image/btn_over.gif) no-repeat left center; cursor:pointer; margin-left:5px;}
+
+.editpanel .lab{width:60px;height:26px;padding-left:2px}
+.editpanel .inputbox{font-size:12px; line-height:20px; height:22px; border:1px #357C9D solid;padding:0px 3px 0px 2px;width:70%;float:left}
+.jumppage{border:0; background:url(../image/jumppage.gif);height:24px;width:33px;padding-left:2px;cursor:pointer;}
+.toolbarcmp{}
+.toolbarcmp button{
+
+}
+#paginationdiv {
+	background-image: url("/ifmis_images/bg/form_table_detail.gif");
+	border: 0px;
+	z-index: 1;
+}
+#tbl-container{
+	border-right: 1px #357C9D solid;
+	z-index: 1;
+}

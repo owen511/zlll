@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+		<!-- 待办事项 start -->
+		<action path="/datacommon/task/showWaitTask"
+			type="gov.mof.fasp.ifmis.datacommon.task.action.ShowWaitTaskAction"
+			parameter="showWaitTaskAction">
+			<forward name="success" path="/datacommon/task/showWaitTask"></forward>
+		</action>
+		<!-- 待办事项 end -->
+	</action-mappings>
+	<message-resources parameter="ApplicationResources" />
+</struts-config>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+
+	<!-- General description of your web application -->
+	<display-name>zlll</display-name>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>fasp.root</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/classes/application-context.xml
+		</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<filter-class>
+			org.acegisecurity.util.FilterToBeanProxy
+		</filter-class>
+		<init-param>
+			<param-name>targetClass</param-name>
+			<param-value>
+				org.acegisecurity.util.FilterChainProxy
+			</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>uiConfig</filter-name>
+		<filter-class>
+			gov.mof.fasp.ifmis.common.MonitorServlet
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>GzipJsFilter</filter-name>
+		<filter-class>
+			com.longtu.framework.util.GzjsSuportListener
+		</filter-class>
+		<init-param>
+			<param-name>headers</param-name>
+			<param-value>Content-Encoding=gzip</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>GzipJsFilter</filter-name>
+		<url-pattern>*.gzjs</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>GzipJsFilter</filter-name>
+		<url-pattern>*.gzcss</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>uiConfig</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			com.longtu.framework.portal.util.PageLoaderListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.apache.axis.transport.http.AxisHTTPSessionListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>
+			org.apache.axis.transport.http.AxisServlet
+		</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			org.apache.struts.action.ActionServlet
+		</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/struts-config.xml,/WEB-INF/struts-config-template.xml,/WEB-INF/struts-config-system.xml,/WEB-INF/struts-config-report.xml,
+				/WEB-INF/struts-config-portal.xml,/WEB-INF/struts-config-ltreport.xml,/WEB-INF/struts-config-ltrptapp.xml,/WEB-INF/struts-config-bba.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>chainConfig</param-name>
+			<param-value>
+				org/apache/struts/tiles/chain-config.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>authservice</servlet-name>
+		<servlet-class>
+			gov.mof.fasp.ifmis.portal.portalmanage.userprogramset.web.AuthService
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>
+			org.jfree.chart.servlet.DisplayChart
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>remoting</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>namespace</param-name>
+			<param-value>classes/zlll-remote</param-value>
+		</init-param>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>portalservlet</servlet-name>
+		<display-name>portalservlet</display-name>
+		<servlet-class>
+			com.longtu.framework.portal.server.PortalServlet
+		</servlet-class>
+		<init-param>
+			<param-name>installdemo</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>autoupdate</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>autoinstall</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>BarcodeServlet</servlet-name>
+		<servlet-class>
+			org.krysalis.barcode4j.servlet.BarcodeServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>JnlpDownloadServlet</servlet-name>
+		<servlet-class>
+			com.sun.javaws.servlet.JnlpDownloadServlet
+		</servlet-class>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logPath</param-name>
+			<param-value>c:\logs\jnlpdownloadservlet.log</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>JasperSqlServlet</servlet-name>
+		<servlet-class>
+			com.longtu.rpt.jasper.servlet.JasperLTDataServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>MakeJasperJnlpServlet</servlet-name>
+		<servlet-class>
+			com.longtu.rpt.jasper.servlet.MakeJasperJnlpServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>MakeJnlpServlet</servlet-name>
+		<servlet-class>
+			com.longtu.rpt.app.ifmis.MakeJnlpServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>JasperSqlServlet</servlet-name>
+		<url-pattern>/servlet/ltrpt/JasperSqlServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>MakeJasperJnlpServlet</servlet-name>
+		<url-pattern>/servlet/ltrpt/MakeJasperJnlpServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>JnlpDownloadServlet</servlet-name>
+		<url-pattern>*.jnlp</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>JnlpDownloadServlet</servlet-name>
+		<url-pattern>*.jar</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>MakeJnlpServlet</servlet-name>
+		<url-pattern>longtu/report</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>BarcodeServlet</servlet-name>
+		<url-pattern>/barcode</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>portalservlet</servlet-name>
+		<url-pattern>*.page</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>portalservlet</servlet-name>
+		<url-pattern>*.rcp</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>portalservlet</servlet-name>
+		<url-pattern>*.script</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/evc/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>*.jws</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>remoting</servlet-name>
+		<url-pattern>/remoting/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>authservice</servlet-name>
+		<url-pattern>security/authservice</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/DisplayChart</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>240</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>rpt</extension>
+		<mime-type>application/rpt</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/rar</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/x-msexcel</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/msword</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>htc</extension>
+		<mime-type>text/x-component</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>default.do</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>demo.html</welcome-file>
+	</welcome-file-list>
+
+	<taglib>
+		<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+		<taglib-location>/WEB-INF/c.tld</taglib-location>
+	</taglib>
+</web-app>

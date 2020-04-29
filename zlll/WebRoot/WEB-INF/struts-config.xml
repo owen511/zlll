@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- This is a FCAS Struts configuration file. Tiles and the Struts Validator 
+	are configured using the factory defaults and are ready-to-use. NOTE: If 
+	you have a generator tool to create the corresponding Java classes for you, 
+	you could include the details in the "form-bean" declarations. Otherwise, 
+	you would only define the "form-bean" element itself, with the corresponding 
+	"name" and "type" attributes, as shown here. -->
+<struts-config>
+	<!-- ==================== Global Exception Definitions ================ -->
+	<global-exceptions>
+		<exception handler="gov.mof.fasp.ifmis.common.AppExceptionHandler"
+			key="error.out" path="/common/error.jsp" scope="request" type="java.lang.Exception" />
+	</global-exceptions>
+
+	<!-- ==================== Global Forward Definitions ================== -->
+	<global-forwards>
+		<forward name="error" path="/common/error.jsp" />
+		<forward name="fails" path="/common/error.jsp" />
+	</global-forwards>
+	<message-resources parameter="ApplicationResources" />
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config"
+			value="
+		/WEB-INF/tiles-defs.xml,
+	    /WEB-INF/tiles-defs-strutsui.xml,
+		/WEB-INF/tiles-defs-ltrptapp.xml,
+		/WEB-INF/tiles-defs-report.xml,
+		/WEB-INF/tiles-defs-bba.xml" />
+		<set-property property="definitions-parser-validate"
+			value="true" />
+	</plug-in>
+</struts-config>

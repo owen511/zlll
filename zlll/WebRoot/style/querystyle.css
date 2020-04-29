@@ -1,0 +1,506 @@
+
+.searchtable {
+   border-top-width: 0px;
+   border-right-width: 1px;
+   border-bottom-width: 1px;
+   border-left-width: 0px;
+   border-style: solid;
+   border-color: #000000;
+   margin: 0px;
+   padding: 5px;
+   font-size: 12px;
+}
+
+.searchtable th {
+   border-top-width: 1px;
+   border-right-width: 0px;
+   border-bottom-width: 0px;
+   border-left-width: 1px;
+   border-style: solid;
+   border-color: #000000;
+   margin: 0px;
+   padding: 3px;
+   background-color:#DDDDDD;
+   color:#000;
+}
+
+.searchtable td {
+   border-top-width: 1px;
+   border-right-width: 0px;
+   border-bottom-width: 0px;
+   border-left-width: 1px;
+   border-style: solid;
+   border-color: #000000;
+   margin: 0px;
+   padding: 3px;
+   text-align: right;
+   word-break: keep-all;
+}
+.graphics {
+	height: 100px;
+	width: 50%;
+	float: left;
+}
+.legend {
+	float: left;
+	height: 100px;
+	width: 100px;
+	margin-left: 10px;
+}
+
+
+
+
+.search {
+    width: 100%;
+    line-height: 28px;
+    margin-left:5px;
+}
+
+.search #TD{
+    text-align: left;
+}
+.search p,div.p {
+    float:left;
+    margin:0;
+    /*height: 28px;*/
+    line-height:15px;
+    width: 18%;
+    white-space:nowrap;
+    text-align: left;
+    margin-left:5px;
+}
+.search a {
+    float:left;
+    margin:0;
+    width: 80px;
+    white-space:nowrap;
+}
+.search b {
+    float:left;
+    margin:0;
+    white-space:nowrap;
+}
+.date p {
+    float:left;
+    margin:0;
+    width: 100%;
+    white-space:nowrap;
+}
+.date a {
+    float:left;
+    margin:0;
+    width: 80px;
+    white-space:nowrap;
+}
+.date b {
+    float:left;
+    margin:0;
+    white-space:nowrap;
+}
+.date input {
+    border: 1px solid #CCCCCC;
+    height: 18px;
+    width: 80px;
+}
+.button {
+    background-image: url(../images/titlebgtop.gif);
+    border: 1px solid #999999;
+}
+.main_input{
+    border: 1px solid #CCCCCC;
+    height: 18px;
+    width: 140px;
+}
+/* 2009-05-19 yuanxin;数据规则中项目使用查询条件列表展示方式*/
+.main_inputprogram{
+    border: 1px solid #CCCCCC;
+    height: 18px;
+    width: 150px;
+}
+.main_input_go{
+    border: 1px solid #CCCCCC;
+    height: 18px;
+    width: 30px;
+}
+.main_input_60{
+    border: 1px solid #CCCCCC;
+}
+.main_input_60_100{
+    border: 1px solid #CCCCCC;
+    height: 100px;
+    width: 100%;
+}
+.main_input_80{
+    border: 1px solid #CCCCCC;
+    height: 18px;
+    width: 80px;
+}
+.main_info {
+    padding-top: 0px;
+    padding-right: 9px;
+    padding-bottom: 9px;
+    padding-left: 9px;
+}
+
+/* 查询结果页面 */
+.table_head_left{
+    float: left;
+    width: 58%;
+    text-align: left;
+    background-image: url(../images/main_table_title_b#g.gif);
+    background-repeat: no-repeat;
+    background-position: left top;
+    font-weight: bold;
+    color: #315F7D;
+}
+.table_head_left_11{
+    float: left;
+    text-align: left;
+    background-image: url(../images/main_table_title_bg_2.gif);
+    background-repeat: repeat-x;
+    background-position: left top;
+    padding-top: 7px;
+    padding-left: 3px;
+    font-weight: bold;
+    color: #315F7D;
+    padding-bottom: 3px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #D1D1D1;
+    border-right-color: #D1D1D1;
+    border-bottom-color: #D1D1D1;
+    border-left-color: #D1D1D1;
+}
+.table_head_left_22{
+    float: left;
+    width: 53px;
+    text-align: left;
+    background-image: url(../images/main_table_title_bg.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
+    padding-top: 7px;
+    padding-left: 3px;
+    font-weight: bold;
+    color: #315F7D;
+    padding-bottom: 3px;
+   
+}
+.table_head_right{
+    float: right;
+    width: 40%;
+    text-align: right;
+}
+
+/* 系统管理页面 */
+.sysfunc_pic{
+    background-image: url(../images/sysfunc_pic.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    height: 500px;
+    color: #999999;
+    width: 400px;
+    vertical-align:middle;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 36px;
+    padding-left: 6px;
+}
+
+/* 数据表格样式 */
+#browser{
+    border-collapse:collapse;
+    margin:0px auto;
+    width:100%;
+}
+#browser thead {
+    border-bottom:2px solid #330099;
+    color:#315F7D;
+    font-weight: bold;
+    background-color: #EBEEF0;
+    height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    background-image: url(../images/table_title_bg.gif);
+}
+#browser td {
+    border:1px solid #cccccc;
+    height: 22px;
+    text-align: center;
+    vertical-align: middle;
+}
+#browser_1{
+    border-collapse:collapse;
+    margin:0px auto;
+    width:100%;
+}
+#browser_1 th {
+    color:#315F7D;
+    font-weight: bold;
+    /*background-color: #EBEEF0;*/
+    height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #8BA3DA;
+}
+#browser_1 td {
+    border:1px solid #8BA3DA;
+    height: 22px;
+    text-align: center;
+    vertical-align: middle;
+}
+/* 保存按钮 */
+.table_foot_b{
+	padding: 9px;
+	width: 240px;
+	text-align: center;
+}
+.table_foot_b a {
+    color: #687B91;
+    text-decoration: none;
+}
+.table_foot_b p a{
+    margin-right: 3px;
+    height: 12px;
+    padding-top: 3px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    background-image: url(../images/butt_1.gif);
+    border: 1px solid #8E9DAE;
+    float: left;
+}
+.table_foot_b p a:hover{
+    margin-right: 3px;
+    height: 12px;
+    padding-top: 3px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    background-image: url(../images/butt_2.gif);
+    border: 1px solid #8E9DAE;
+    color: #FFFFFF;
+}
+#browser_1 textarea {
+    height: 70px;
+    width: 100%;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    clear: both;
+}
+#browser_1 a:hover {
+    display: block;
+    background-color: #FFFFFF;
+}
+#browser_1 LI {
+    line-height: 120%;
+    display: block;
+    text-align: left;
+}
+#browser_1 DIV {
+    line-height: 120%;
+    text-align: left;
+}
+.conditionlist {
+}
+.conditionlist LI {
+    line-height: 120%;
+    text-align: left;
+    width: 150px;
+    list-style-type: none;
+    float: left;
+}
+INPUT.title {
+    width: 300px;
+}
+.gatherlisttitle a {
+    font-family: Webdings;
+    float: right;
+    height: 16px;
+    width: 16px;
+    margin-left: 5px;
+    text-align: center;
+    border: 1px solid #FFFFFF;
+}
+.gatherlisttitle a:hover {
+    padding-top: -10px;
+    border: 1px solid #666666;
+    background-color: #FFFFFF;
+}
+.tableinput {
+    height: 100%;
+    width: 99%;
+    border: 0px solid #FFFFFF;
+}
+
+.gatherlisttitle span {
+    float: left;
+}
+
+.scroll-y {
+    height: 200px;
+    width: 160px;
+    overflow-y: scroll;
+    position: absolute;
+    left: 10px;
+}
+.scroll-x {
+    height: 200px;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    float: left;
+}
+.scroll-y .bar {
+    float: left;
+    height: 2000px;
+    width: 1px;
+}
+.dataarea {
+	width: 98%;
+	height: 200px;
+	display: block;
+	position: relative;
+	visibility: visible;
+	overflow: visible;
+}
+.dataarea_100 {
+	width: 100%;
+	height: 200px;
+	display: block;
+	visibility: visible;
+	overflow: hidden;
+	float:left;
+}
+
+#browser_1 .menu1 {
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+    border-bottom-color: #CCCCCC;
+    padding-top: 5px;
+}
+#browser_1 .menu2 {
+    background-color: #FFFFFF;
+    padding-left: 24px;
+}
+
+.bk2 {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: dashed;
+    border-left-style: none;
+    border-top-color: #89ADDD;
+    border-right-color: #89ADDD;
+    border-bottom-color: #89ADDD;
+    border-left-color: #89ADDD;
+}
+.bk2 a.selected {
+    background-color: #D0DFF2;
+    display: block;
+    border: 1px solid #7DA5DB;
+    padding: 2px;
+}
+.templatelist {
+}
+.templatelist LI {
+	line-height: 120%;
+	text-align: left;
+	width: 300px;
+	list-style-type: none;
+	float: left;
+}
+
+.statcolumnhead {
+	margin-bottom: 3px;
+}
+#statcolumnlist div {
+	border: 1px solid #FFFFFF;
+	display: block;
+	padding: 2px;
+	width: 100%;
+	cursor: hand;
+}
+
+.tableinput {
+	height: 100%;
+	width: 99%;
+	border: 0px solid #FFFFFF;
+}
+
+.gatherlisttitle span {
+	float: left;
+}
+
+<!-- 2008-04-03 -->
+
+#table1 th {
+	background: #0767C3;
+}
+
+#table1 td { 
+	background: #0767C3;
+}
+
+.statecolumnBackColour1{
+	background-color: #FFFFFF;
+	line-height:20px;
+	color:#003399;
+	font-weight:normal;
+
+}
+.statecolumnBackColour{
+	background-color:#095CBC;
+	line-height:20px;
+	color:#FFF;
+	font-weight:normal;
+}
+.statecolumnBackColour2{
+	background-color:#095CBC;
+	line-height:20px;
+	color:#000000;
+	font-weight:normal;
+}
+
+.upDownScroll {
+	overflow: auto;
+	height:10px;
+	width: 100%;
+}
+.button111 a:hover{
+	border-top-color: #404040;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-color: #404040;
+}
+
+.button111 a,.button111 a:visited {
+	border-width: 1px;
+	border-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #404040;
+	border-bottom-color: #404040;
+	border-left-color: #FFFFFF;
+	padding: 2px;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+.resizetd {
+	height:80px;
+}
+/*jl20100818*/
+.queryTemplateName{border:1px #8BA3DA solid; width:98%;}

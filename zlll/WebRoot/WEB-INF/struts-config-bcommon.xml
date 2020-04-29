@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<action-mappings>
+		<action path="/common/querySealList"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.AuditSignatureAction"
+			parameter="querySealListAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/querySealListByRptId"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.AuditSignatureAction"
+			parameter="querySealListByReportIDAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/getSealListByRptId"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.AuditSignatureAction"
+			parameter="getSealListByRptIdAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/querySignature/index"
+			type="gov.mof.fasp.ifmis.bcommon.pay.viewsignature.action.ViewSignatureAction"
+			parameter="QuerySignature">
+			<forward name="success" path="/common/querySignature/index" />
+		</action>
+		<action path="/bcommon/pay/voucher/common/action/isleaf"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="isRepeat">
+		</action>
+		<action path="/common/printvoucherbillid"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="printVoucherBillidAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/indipay/common/queryRptTemp"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="getPrintTemplateNum">
+		</action>
+		<action path="/indipay/common/getRptTemp"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="getPrintTemplateName">
+			<forward name="success" path="/bcommon/common/selectPrintTemplate.jsp" />
+		</action>
+		<action path="/indipay/common/printvoucherQZ"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="printVoucherQZWithTempAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/indipay/common/printvoucherbillid"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="printVoucherBillidWithTempAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/indipay/common/findmodel"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.ReportAction"
+			parameter="findModelAction">
+			<forward name="success" path="/bcommon/common/printmodel_list.jsp">
+			</forward>
+		</action>
+		<action path="/commons/srcandtragetvouinfo"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="showSrcAndTargetVou">
+			<forward name="success" path="/common/srcandtragetvouinfo"></forward>
+		</action>
+		<action path="/commons/showSourceDestinationAction"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="showSourceDestinationAction">
+			<forward name="success" path="/common/showSourceDestinationAction"></forward>
+		</action>
+		<action path="/commons/findtragetvouinfo"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="findTargetVou">
+			<forward name="success" path="/common/ajaxresult.jsp"></forward>
+		</action>
+		<action path="/commons/showAuditInfo"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="showAuditInfoAction">
+			<forward name="success" path="/common/ajaxresult.jsp"></forward>
+		</action>
+		<action path="/commons/showSourcePlanAction"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="showSourcePlanAction">
+			<forward name="success" path="/common/showSourcePlanAction"></forward>
+		</action>
+		<action path="/commons/showAllAssignedIndiAction"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.SrcAndTargetVouAction"
+			parameter="showAllAssignedIndiAction">
+			<forward name="success" path="/common/showAllAssignedIndiAction"></forward>
+		</action>
+		<action path="/indi2exe/common/matchrule/list/index"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="listAction">
+			<forward name="success" path="/indi2exe/common/matchrule/list/index" />
+		</action>
+		<action path="/indi2exe/common/matchrule/list/add/index"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="turnAddAction">
+			<forward name="success" path="/indi2exe/common/matchrule/list/add" />
+		</action>
+		<action path="/indi2exe/common/matchrule/add/savereturn"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="saveAction">
+		</action>
+		<action path="/indi2exe/common/matchrule/list/modify/index"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="turnToModifyAction">
+			<forward name="success" path="/indi2exe/common/matchrule/list/modify" />
+		</action>
+		<action path="/indi2exe/common/matchrule/modify/savereturn"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="saveModifyAction">
+		</action>
+		<action path="/indi2exe/common/matchrule/list/delete"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="delDataAction">
+		</action>
+		<action path="/indi2exe/common/matchrule/list/getDetails"
+			type="gov.mof.fasp.ifmis.bcommon.common.matchrule.action.MatchRuleAction"
+			parameter="getDetailAction">
+			<forward name="success" path="/bcommon/common/matchrule/showDetail.jsp" />
+		</action>
+		<action path="/common/ruscope/list"
+			type="gov.mof.fasp.ifmis.bcommon.common.ruscope.RuScopeAction"
+			parameter="findRuScope">
+			<forward name="success" path="/common/ruscope/list" />
+		</action>
+		<action path="/common/ruscope/add"
+			type="gov.mof.fasp.ifmis.bcommon.common.ruscope.RuScopeAction"
+			parameter="addRuScope">
+			<forward name="success" path="/bcommon/common/ruscope_add.jsp" />
+		</action>
+		<action path="/common/ruscope/add/save"
+			type="gov.mof.fasp.ifmis.bcommon.common.ruscope.RuScopeAction"
+			parameter="saveRuScope">
+		</action>
+		<action path="/common/ruscope/del"
+			type="gov.mof.fasp.ifmis.bcommon.common.ruscope.RuScopeAction"
+			parameter="deleteRuScope">
+		</action>
+		<action path="/common/ruscope/getruscope"
+			type="gov.mof.fasp.ifmis.bcommon.common.ruscope.RuScopeAction"
+			parameter="getRuScopeMap">
+		</action>
+		<action path="/system/autoauditset/query"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="querySetAction">
+			<forward name="success" path="/system/autoauditset/index" />
+		</action>
+		<action path="/system/autoauditset/add/query"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="addSetAction">
+			<forward name="success" path="/system/autoauditset/add/index" />
+		</action>
+		<action path="/system/autoauditset/add/querystep"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="queryStepAction">
+		</action>
+		<action path="/system/autoauditset/add/savereturn"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="savereturnAction">
+		</action>
+		<action path="/system/autoauditset/deleteset"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="delSetAction">
+		</action>
+		<action path="/system/autoauditset/add/modset"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="modSetAction">
+			<forward name="success" path="/system/autoauditset/add/index" />
+		</action>
+		<action path="/system/autoauditset/showlog"
+			type="gov.mof.fasp.ifmis.bcommon.system.autoaudit.action.AutoAuditSetAction"
+			parameter="queryExecLogAction">
+			<forward name="success" path="/system/autoauditset/showlog" />
+		</action>
+		<action path="/system/signaturecheck/manage/index"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="queryAction">
+			<forward name="success" path='/system/signaturecheck/manage/index' />
+		</action>
+		<action path="/system/signaturecheck/manage/add/index"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="turnToSaveAction">
+			<forward name="success" path='/system/signaturecheck/manage/add/index' />
+		</action>
+		<action path="/system/signaturecheck/manage/add/savereturn"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="saveAction" input="/system/signaturecheck/manage/add/index.do">
+			<forward name="success" path='/system/signaturecheck/manage/index.do' />
+		</action>
+		<action path="/system/signaturecheck/add/queryAction"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="queryActionID">
+		</action>
+		<action path="/system/signaturecheck/manage/modify/index"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="turnToModify">
+			<forward name="success" path='/system/signaturecheck/manage/modify/index' />
+		</action>
+		<action path="/system/signaturecheck/manage/modify/savereturn"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="updateAction" input="/system/signaturecheck/manage/add/index.do">
+			<forward name="success" path='/system/signaturecheck/manage/index.do' />
+		</action>
+		<action path="/system/system/signaturecheck/manage/delete"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="deleteAction">
+			<forward name="success" path='/system/signaturecheck/manage/index.do' />
+		</action>
+		<action path="/system/signaturecheck/manage/checkSign"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="checkSignAction">
+		</action>
+		<action path="/system/signaturecheck/manage/checkSignForSend"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="checkSignAction">
+		</action>
+		<action path="/indi/common/checkUniqueness"
+			type="gov.mof.fasp.ifmis.bcommon.indi.common.action.IndiAction"
+			parameter="checkUniqueness">
+		</action>
+		<action path="/common/getClerk"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showClerksAction">
+			<forward name="success" path="/pay/clerk.jsp" />
+		</action>
+		<action path="/common/delClerk"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="deleteClerkAction">
+			<forward name="success" path="/pay/clerk.jsp" />
+		</action>
+		<action path="/common/getDefClerkForUser"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="getDefClerkForUserAction">
+		</action>
+		<action path="/common/setDefClerkForUser"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="setDefClerkForUserAction">
+			<forward name="success" path="/pay/clerk.jsp" />
+		</action>
+		<action path="/common/cancelDefClerkForuser"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="cancelDefClerkForuserAction">
+			<forward name="success" path="/pay/clerk.jsp" />
+		</action>
+		<action path="/voucher/common/bankaccount/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/voucher/common/bankaccount/bankaccountNX"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankByAgencyAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/voucher/realpay/bankaccount/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree_realpay.jsp" />
+		</action>
+		<action
+			path="/voucher/common/getbankaccountByBdgagency/getbankaccountByBdgagency"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action
+			path="/voucher/realpay/getbankaccountByBdgagency/getbankaccountByBdgagencyForRealpay"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyForRealpayAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/voucher/common/bankaccount/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action path="/voucher/realpay/bankaccount/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action path="/voucher/common/paybankaccount/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/voucher/common/paybankaccount/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action path="/voucher/getvoucherPaytrees/getPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showPayTreesAction">
+			<forward name="success" path="/pay/paytrees/paytrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/getPayTreesByRule"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showPayTreesByRuleAction">
+			<forward name="success" path="/pay/paytrees/payruletrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/queryPayRuleByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryPayRuleByConditionsAction">
+			<forward name="success" path="/pay/paytrees/payruletrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayRuleTrees/add"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addAccountAction">
+			<forward name="success" path="/pay/paytrees/addruletrees.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayRuleTrees/mod"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modAccountAction">
+			<forward name="success" path="/pay/paytrees/modruletrees.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherPaytrees/deletePayRuleTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="delPayRuleTreesAction">
+			<forward name="success" path="/pay/paytrees/payruletrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/queryPayByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryPayByConditionsAction">
+			<forward name="success" path="/pay/paytrees/paytrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/deletePayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="delPayTreesAction">
+			<forward name="success" path="/pay/paytrees/paytrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addPayTreesAction">
+		</action>
+		<action path="/voucher/importAccount/importPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="importBatchAction">
+			<forward name="success" path="/pay/paytrees/importtrees.jsp" />
+			<forward name="error" path="/indi/errorsShow.jsp" />
+		</action>
+		<action path="/voucher/importAccount/savePayAccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="savePayAccountAction">
+			<forward name="success" path="/pay/paytrees/importtrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/modPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modPayTreesAction">
+		</action>
+		<action path="/voucher/getvoucherPaytrees/setPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="setPayTreesAction">
+			<forward name="success" path="/pay/paytrees/paytrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayTrees/add"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addAccountAction">
+			<forward name="success" path="/pay/paytrees/addtrees.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayTrees/mod"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modAccountAction">
+			<forward name="success" path="/pay/paytrees/modtrees.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayTrees/getBankTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showBankTreesAction">
+			<forward name="success" path="/pay/paytrees/banktrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherPaytrees/addPayTrees/queryPayByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankByConditionsAction">
+			<forward name="success" path="/pay/paytrees/banktrees.jsp" />
+		</action>
+		<action path="/realpay/common/bankaccount/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/realpay/common/getbankaccountByBdgagency/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/specialaccount/common/bankaccount/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/specialaccount/common/getbankaccountByBdgagency/bankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+		<action path="/realpay/common/bankaccount/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action path="/realpay/common/getbankaccountByBdgagency/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action path="/specialaccount/common/bankaccount/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action
+			path="/specialaccount/common/getbankaccountByBdgagency/querybankaccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAjaxAction">
+		</action>
+		<action
+			path="/realpay/common/getbankaccountByBdgagency/getbankaccountByBdgagency"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/realpay/common/bankaccount/getbankaccountByBdgagency"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyForRealpayAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action
+			path="/specialaccount/common/getbankaccountByBdgagency/getbankaccountByBdgagency"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/specialaccount/common/bankaccount/getbankaccountByBdgagency"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByBdgagencyForRealpayAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/getUse"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="showUsesAction">
+			<forward name="success" path="/pay/use.jsp" />
+		</action>
+		<action path="/common/delUse"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="deleteUseAction">
+			<forward name="success" path="/pay/use.jsp" />
+		</action>
+		<action path="/common/getSummary" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="showSummarysAction">
+			<forward name="success" path="/indi/summary.jsp" />
+		</action>
+		<action path="/common/delSummary" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="deleteSummaryAction">
+			<forward name="success" path="/indi/summary.jsp" />
+		</action>
+		<action path="/bank/confirmvoucher/isModified"
+			type="gov.mof.fasp.ifmis.bcommon.pay.bank.action.BankAction"
+			parameter="isModified">
+		</action>
+		<action path="/system/certificatesignature/manage/checkIcaSign"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.CertificateSignatureAction"
+			parameter="checkSignAction">
+		</action>
+		<action path="/system/certificatesignature/manage/getSignInfo"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.CertificateSignatureAction"
+			parameter="getSignInfo">
+		</action>
+		<action path="/system/certificatesignature/manage/checkMainSubAccordance"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.CertificateSignatureAction"
+			parameter="checkMainSubAccordance">
+		</action>
+		<action path="/common/IndiDocument/showIndiDocument" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="showIndiDocumentAction">
+			<forward name="success" path="/indi2exe/common/bdgdocument.jsp" />
+		</action>
+		<action path="/common/IndiDocument/checkIndiDocument" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="checkIndiDocument">
+		</action>
+		<action path="/common/IndiDocument/queryIndiDocument" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="queryIndiDocumentAction">
+		</action>
+		<action path="/common/IndiDocument/showUrloadbifileno" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="showUrloadbifilenoAction">
+		</action>
+		<action path="/ltinspect/system/monitorlink/query"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findMonitorLinkAction">
+			<forward name="success" path="/ltinspect/system/monitorlink/query" />
+		</action>
+		<action path="/ltinspect/system/monitorlink/addSave"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="saveMonitorLinkAction">
+		</action>
+		<action path="/ltinspect/system/monitorlink/findwfdescid"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findWfdescid">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/ltinspect/system/monitorstart/query"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findMonitorStartAction">
+			<forward name="success" path="/ltinspect/system/monitorstart/query" />
+		</action>
+		<action path="/ltinspect/system/monitorstart/addSave"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="saveMonitorStartAction">
+			<forward name="success" path="/ltinspect/system/monitorstart/query.do" />
+		</action>
+		<action path="/ltinspect/system/dealtype/query"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findDealTypeAction">
+			<forward name="success" path="/ltinspect/system/dealtype/query" />
+		</action>
+		<action path="/ltinspect/system/dealtype/addSave"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="saveDealTypeAction">
+		</action>
+		<action path="/ltinspect/system/dealtype/check"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="checkDealTypeAction">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/ltinspect/system/dealfeedback/query"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findDealFeedbackAction">
+			<forward name="success" path="/ltinspect/system/dealfeedback/query" />
+		</action>
+		<action path="/ltinspect/system/dealfeedback/addSave"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="saveDealFeedbackAction">
+		</action>
+		<action path="/ltinspect/system/dealfeedback/findwfdescid"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.InspectSystemSetAction"
+			parameter="findWfdescid">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/common/getSummaryTree/index" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="showSummaryTreeAction">
+			<forward name="success" path="/indi/summary/summarytree.jsp" />
+		</action>
+		<action path="/common/getSummaryTree/tabquery" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="querySummaryTreeAction">
+		</action>
+		<action path="/common/getSummaryTree/query" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="queryConditionsAction">
+			<forward name="success" path="/indi/summary/summarytree.jsp" />
+		</action>
+		<action path="/common/getSummaryTree/add" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="addSummaryAction">
+			<forward name="success" path="/indi/summary/addtrees.jsp"></forward>
+		</action>
+		<action path="/common/getSummaryTree/mod" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="modSummaryAction">
+			<forward name="success" path="/indi/summary/modtrees.jsp"></forward>
+		</action>
+		<action path="/common/getSummaryTree/delete" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="delSummaryAction">
+		</action>
+		<action path="/common/getSummaryTree/doset" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="dosetSummaryAction">
+		</action>
+		<action path="/common/getSummaryTree/add/addTrees" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="addTreesAction">
+		</action>
+		<action path="/common/getSummaryTree/add/modTrees" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="modTreesAction">
+		</action>
+		<action path="/common/getUseTree/index"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="showUseTreeAction">
+			<forward name="success" path="/indi/summary/usetree.jsp" />
+		</action>
+		<action path="/common/getUseTree/tabquery"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="queryUseTreeAction">
+		</action>
+		<action path="/common/getUseTree/query"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="queryUseConditionsAction">
+			<forward name="success" path="/indi/summary/usetree.jsp" />
+		</action>
+		<action path="/common/getUseTree/add"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="addUseAction">
+			<forward name="success" path="/indi/summary/addtrees_use.jsp"></forward>
+		</action>
+		<action path="/common/getUseTree/mod"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="modUseAction">
+			<forward name="success" path="/indi/summary/modtrees_use.jsp"></forward>
+		</action>
+		<action path="/common/getUseTree/delete"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="delUseAction">
+		</action>
+		<action path="/common/getUseTree/doset"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="dosetUseAction">
+		</action>
+		<action path="/common/getUseTree/add/addTrees"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="addTreesAction">
+		</action>
+		<action path="/common/getUseTree/add/modTrees"
+			type="gov.mof.fasp.ifmis.pay.voucher.common.action.VouAction"
+			parameter="modTreesAction">
+		</action>
+		<action path="/common/getPlanSumTree/index" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="showPlanSumTreeAction">
+			<forward name="success" path="/indi/summary/plansummarytree.jsp" />
+		</action>
+		<action path="/common/getPlanSumTree/tabquery" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="queryPlanSumTreeAction">
+		</action>
+		<action path="/common/getPlanSumTree/query" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="queryPlanConditionsAction">
+			<forward name="success" path="/indi/summary/plansummarytree.jsp" />
+		</action>
+		<action path="/common/getPlanSumTree/add" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="addPlanSummaryAction">
+			<forward name="success" path="/indi/summary/addtrees_plan.jsp"></forward>
+		</action>
+		<action path="/common/getPlanSumTree/mod" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="modPlanSummaryAction">
+			<forward name="success" path="/indi/summary/modtrees_plan.jsp"></forward>
+		</action>
+		<action path="/common/getPlanSumTree/delete" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="delPlanSummaryAction">
+		</action>
+		<action path="/common/getPlanSumTree/doset" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="dosetPlanSummaryAction">
+		</action>
+		<action path="/common/getPlanSumTree/add/addTrees" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="addPlanTreesAction">
+		</action>
+		<action path="/common/getPlanSumTree/add/modTrees" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="modPlanTreesAction">
+		</action>
+		<action path="/system/signaturecheck/manage/checkSelSign"
+			type="gov.mof.fasp.ifmis.bcommon.system.signaturecheck.action.SignatureCheckAction"
+			parameter="checkSelSignAction">
+		</action>
+		<action path="/voucher/getvoucherGathertrees/getGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/gathertrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherGathertrees/queryGatherByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/gathertrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherGathertrees/queryAjaxGatherByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryAjaxGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/gathertrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherGathertrees/deletePayGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="delGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/gathertrees.jsp" />
+		</action>
+		<action path="/voucher/getvoucherGathertrees/addGatherTrees/add"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/editTress.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherGathertrees/addGatherTrees/addPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="saveGatherTreesAction">
+		</action>
+		<action path="/voucher/getvoucherGathertrees/addGatherTrees/mod"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/editModTress.jsp"></forward>
+		</action>
+		<action path="/voucher/getvoucherGathertrees/addGatherTrees/modPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="saveModGatherTreesAction">
+		</action>
+		<action path="/voucher/getvoucherGathertrees/deleteGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="delNewGatherTreesAction">
+			<forward name="success" path="/pay/paytrees/gathertrees.jsp" />
+		</action>
+		<action path="/voucher/importAccount/importGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="importBatchAction">
+			<forward name="success" path="/pay/paytrees/importGathertrees.jsp" />
+			<forward name="error" path="/indi/errorsShow.jsp" />
+		</action>
+		<action path="/voucher/importModAccount/importModGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="importModBatchAction">
+			<forward name="success" path="/pay/paytrees/importModGathertrees.jsp" />
+			<forward name="error" path="/indi/errorsShow.jsp" />
+		</action>
+		<action path="/voucher/importAccount/saveGatherAccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="saveGatherAccountAction">
+			<forward name="success" path="/pay/paytrees/importGathertrees.jsp" />
+		</action>
+		<action path="/voucher/importModAccount/saveModGatherAccount"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="saveModGatherAccountAction">
+			<forward name="success" path="/pay/paytrees/importGathertrees.jsp" />
+		</action>
+		<action path="/indipay/getGobackInfoSelect"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showGobackInfoSelectAction">
+		</action>
+		<action path="/pay/getGobackInfo/findinfo"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showGobackInfoSelectAction">
+			<forward name="success" path="/pay/goBackAuditSelectInfo.jsp" />
+		</action>
+		<action path="/voucher/getAllGatherTrees/getAccountTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="showAllGatherAction">
+			<forward name="success" path="/pay/paytrees/allgathertrees.jsp" />
+		</action>
+		<action path="/voucher/getAllGatherTrees/queryPayByConditions"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryAllGatherByConditionsAction">
+			<forward name="success" path="/pay/paytrees/allgathertrees.jsp" />
+		</action>
+		<action path="/voucher/getAllGatherTrees/addGatherTrees/add"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addPaytemplateAction">
+			<forward name="success" path="/pay/paytrees/allgather_add.jsp"></forward>
+		</action>
+		<action path="/voucher/getAllGatherTrees/addGatherTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="addPayTreesAction">
+		</action>
+		<action path="/voucher/getAllGatherTrees/addGatherTrees/mod"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modPaytemplateAction">
+			<forward name="success" path="/pay/paytrees/allgather_mod.jsp"></forward>
+		</action>
+		<action path="/voucher/getAllGatherTrees/modPayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="modPayTreesAction">
+		</action>
+		<action path="/voucher/getAllGatherTrees/deletePayTrees"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="delPaytemplateAction">
+			<forward name="success" path="/pay/paytrees/allgathertrees.jsp" />
+		</action>
+		<action path="/common/indi/checkDetailCandoIt" type="gov.mof.fasp.ifmis.indi.common.action.IndiAction"
+			parameter="checkDetailCandoItAction">
+		</action>
+		<action path="/common/pay/checkPayeeAcctcodeUniqueness"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="checkPayeeAcctcodeUniqueness">
+		</action>
+		<action path="/bcommon/CommonWorkAction"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.CommonWorkAction"
+			parameter="commonOperateAction">
+		</action>
+		<action path="/bcommon/index_showWaitTask"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.BcommonAction"
+			parameter="showWaitTaskAction">
+			<forward name="success" path="/common/index_showWaitTask" />
+		</action>
+		<action path="/epay/common/readyForSignature"
+			type="gov.mof.fasp.ifmis.epay.common.action.EPayCommonAction"
+			parameter="readyForSignature">
+		</action>
+		<action path="/epay/common/checkIsToEPaySys"
+			type="gov.mof.fasp.ifmis.epay.common.action.EPayCommonAction"
+			parameter="checkIsToEPaySysAction">
+		</action>
+		<action path="/epay/common/auditToEPaySys"
+			type="gov.mof.fasp.ifmis.epay.common.action.EPayCommonAction"
+			parameter="auditToEPaySysAction">
+		</action>
+		<action path="/epay/common/cancelAuditToEPaySys"
+			type="gov.mof.fasp.ifmis.epay.common.action.EPayCommonAction"
+			parameter="cancelAuditToEPaySysAction">
+		</action>
+		<action path="/epay/common/sendToEPaySys"
+			type="gov.mof.fasp.ifmis.epay.common.action.EPayCommonAction"
+			parameter="sendToEPaySysAction">
+		</action>
+		<action path="/common/audit/AuditRemak"
+			type="gov.mof.fasp.ifmis.bcommon.common.action.IPPAction" parameter="getAuidtAction">
+			<forward name="success" path="/indi2exe/common/AuditRemark2.jsp" />
+		</action>
+		<action path="/specialaccount/common/bankaccount/getbankaccountByCondition"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="findBankAcctByCondition">
+			<forward name="success" path="/common/ajaxresult.jsp" />
+		</action>
+		<action path="/specialaccount/common/bankaccount/getPayTreesBycondion"
+			type="gov.mof.fasp.ifmis.bcommon.pay.voucher.common.action.VouAction"
+			parameter="queryBankAcctByConditionAction">
+			<forward name="success" path="/pay/voucher/payeetree.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

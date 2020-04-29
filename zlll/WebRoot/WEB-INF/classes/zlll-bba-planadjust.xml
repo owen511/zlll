@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+ 	<!-- 收入调账 begin -->
+	<bean id = "bba.planadjust.dao.BBAPlanAdjustDAO" parent="bba.plan.dao.BBAPlanDAO" class="com.zlll.bba.planadjust.dao.BBAPlanAdjustDAO">
+		<property name="associateTag" value="1" />
+		<property name="mainTableName" value="T_BBA_PLAN_ADJUST_MAIN" />
+		<property name="subTableName" value="T_BBA_PLAN_ADJUST_SUB" />
+		<property name="foreignid" value="mainid" />
+		<property name="dtoClass" value="com.zlll.bba.planadjust.dto.BBAPlanAdjustDTO" />
+		<property name="subDtoClass" value="com.zlll.bba.planadjust.dto.BBAPlanAdjustSubDTO" />
+	</bean>
+	<bean id = "bba.planadjust.bo.BBAPlanAdjustBO" parent="bba.plan.bo.BBAPlanBO" class="com.zlll.bba.planadjust.bo.BBAPlanAdjustBO">
+		<property name="bbaPlanAdjustDAO" ref="bba.planadjust.dao.BBAPlanAdjustDAO" />
+		<property name="bbaBaseDAO" ref="bba.planadjust.dao.BBAPlanAdjustDAO" />
+		<property name="vouDAO" ref="bba.planadjust.dao.BBAPlanAdjustDAO" />
+		<property name="sourceDAO" ref="bba.planadjust.dao.BBAPlanAdjustDAO" />
+		<property name="sourceMainTableName" value="T_BBA_CTRL"/>
+	</bean>
+	<bean id = "bba.planadjust.bpo.BBAPlanAdjustBPO" parent="bba.plan.bpo.BBAPlanBPO" class="com.zlll.bba.planadjust.bpo.BBAPlanAdjustBPO">
+		<property name="bbaPlanAdjustBO" ref="bba.planadjust.bo.BBAPlanAdjustBO" />
+		<property name="bbaBaseBO" ref="bba.planadjust.bo.BBAPlanAdjustBO" />
+	</bean>
+	<bean id="bba.planadjust.bpo.BBAPlanAdjustBPOTx" parent="hibernateTxProxy">
+	    <property name="target" ref ="bba.planadjust.bpo.BBAPlanAdjustBPO"/>
+	</bean>
+	<!-- 收入调账 end -->
+</beans>

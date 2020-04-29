@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!--数据库连接配置-->
+	<bean id="dataSource" class="gov.mof.framework.dao.MultiDataSource">
+		<!-- 这里是默认连接,value中的值选择map中其中一个entry的key值-->
+		<property name="dsDefault" value="2017;dev;zlll0616;2017年;zlll_runtest"/>
+		<property name="dataSources">
+			<map>
+				<entry key="2017;dev;zlll0616;2017年;zlll_runtest" value-ref="dev2017"/>	
+			</map> 
+		</property>
+	</bean>
+	<bean id="initadepter" class="com.longtu.framework.datasource.InitSystemDataSourceAdapter">
+		<property name="datasource" ref="dataSource" /> 
+    </bean>
+
+	 <bean id="dev2017" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="dev2017"/>
+	</bean>
+
+</beans>

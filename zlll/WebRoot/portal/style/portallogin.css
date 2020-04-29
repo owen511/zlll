@@ -1,0 +1,213 @@
+/**节日在ie6下去掉png背景*/
+#flasho { behavior: url("/portal/images/iepngfix.htc") }
+
+.login_btn{
+	border:0;
+	background-image:url(../../ifmis_images/login/20090930/login_btn_one.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	height:28px;
+	width:78px;
+	text-align:center;
+	font-size:14px;
+	color:#000000;
+	cursor:pointer;
+}
+.reset_btn{
+	border:0;
+	background-image:url(../../ifmis_images/login/20090930/btn_one.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	height:28px;
+	width:78px;
+	text-align:center;
+	font-size:14px;
+	color:#000000;
+	cursor:pointer;
+}
+/**登录类型8样式    开始*/
+#login_button_nomal {
+  	border: 0px;
+    text-align: center;
+    width:54px;
+    height:22px;
+    background-image: url(../../images/login/hljczblue_nomal.gif);
+    cursor:pointer;
+}
+
+#login_button_ca {
+	border: 0px;
+	text-align: center;
+	width:54px;
+	height:22px;
+	background-image: url(../../images/login/hljczblue_ca.gif);
+	cursor:pointer;
+}
+/**登录类型8样式    结束*/
+
+/**登录类型9样式    开始*/
+.renzheng_btn{
+	border:0;
+	background-image:url(../../ifmis_images/login/20090930/renzheng_one.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	height:28px;
+	width:78px;
+	text-align:center;
+	font-size:14px;
+	color:#000000;
+	cursor:pointer;
+}
+.renzhengupdate_btn{
+	border:0;
+	background-image:url(../../portal/images/login/gs/ca_update.jpg);
+	background-position:center center;
+	background-repeat:no-repeat;
+	height:28px;
+	width:78px;
+	text-align:center;
+	font-size:14px;
+	color:#000000;
+	cursor:pointer;
+} 
+.choose_acc{ 
+	color:#FFF; 
+	text-align:center;  
+	font-size:12px; 
+	font-weight:normal; 
+	width:105px; 
+	text-align:center; 
+	float:left;
+}
+.ca_style{
+	width:211px;
+	height:26px;
+	background-image:url(../../images/login/choose_account_CA.gif);
+	background-position:top center; 
+	background-repeat:no-repeat; 
+	color:#FFF;
+	text-align:left; 
+	line-height:26px; 
+	cursor:pointer;
+}
+.nomal_style{
+	width:211px; 
+	height:26px; 
+	background-image:url(../../images/login/choose_account_nomal.gif);
+	background-position:top center; 
+	background-repeat:no-repeat; 
+	color:#FFF; 
+	text-align:left; 
+	line-height:26px; 
+	cursor:pointer;
+}
+/**登录类型9样式    结束*/
+
+/**登录类型10样式    开始*/
+.safe_btn {
+	border: 0;
+	background-image: url(../../ifmis_images/login/fujian/safe_login.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 28px;
+	width: 78px;
+	text-align: center;
+	font-size: 14px;
+	color: #000000;
+	cursor: pointer;
+}
+/**登录类型10样式    结束*/
+
+/**登录类型11样式    开始*/
+.cachange_style{
+	width:211px;
+	height:26px;
+	background-image:url(../../portal/images/login/choose_account_CA.gif);
+	background-position:top center; 
+	background-repeat:no-repeat; 
+	color:#FFF;
+	text-align:left; 
+	line-height:26px; 
+	cursor:pointer;
+}
+.nomalchange_style{
+	width:211px; 
+	height:26px; 
+	background-image:url(../../portal/images/login/choose_account_nomal.gif);
+	background-position:top center; 
+	background-repeat:no-repeat; 
+	color:#FFF; 
+	text-align:left; 
+	line-height:26px; 
+	cursor:pointer;
+}
+.head_title{background:#FFF url(../../ifmis_images/login/chenzhou/head_title.gif) no-repeat left top;width:40px;}
+.head_end{ background:#FFF url(../../ifmis_images/login/chenzhou/hand_end.gif) no-repeat right top;width:80px;}
+.gonggao_div11{
+	z-index:1000;
+	position:absolute;
+	background:#fff;
+	height:25px;
+	line-height:25px;
+	font-size:12px;
+	/*left:10px;
+	top:10px;*/
+	bottom:0; 
+	right:0; 
+}
+.gonggao_div11 div{
+	font-size:12px;
+	height:25px;
+	line-height:25px;
+}
+.gonggao_div11 table{ background:#FFF url(../../ifmis_images/login/chenzhou/gonggao_bg.gif) repeat-x left top; }
+/**登录类型11样式    结束*/
+/**登录类型12样式    开始*/
+.a {
+	background-image: url(../../portal/login/images/bg_leri.jpg);
+	background-repeat: repeat-x;
+}
+.a1 {
+	background-image: url(../../portal/login/images/bg_mid.jpg);
+}
+.body{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	text-align:center;
+	background-color:#40D0E8;
+	background-image:url(../../ifmis_images/login/20090930/body_bg.png);
+	background-repeat:repeat-x;
+	background-position:left top;
+}
+/**登录类型12样式    结束*/
+/**flash版本检测样式开始*/
+#mask2 {
+	visibility: hidden;
+	background-color: black;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	text-align:center;
+	background-image: none;
+	filter: alpha(opacity :70);
+}
+#LoadDown {
+	visibility: hidden;
+	border:#686868 solid 1px;
+	display: none;
+	margin-top:300px;
+	background-color: #f7fcfe;
+	z-index: 100;
+	position: absolute;
+	text-align: center;
+	font-size:15px;
+}
+.loaddown_out{
+ margin:2px 15px 2px 15px;padding-top:2px;width:300px; height:40px;
+}
+.loaddown_in{
+color:#FF0000; font-size:12px; text-align:right; line-height:30px;
+}
+/**flash版本检测样式结束*/

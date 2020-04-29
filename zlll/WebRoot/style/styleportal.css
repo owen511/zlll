@@ -1,0 +1,13 @@
+/*°æ±¾ÑùÊ½*/
+#default_main{
+   height:100%;
+   /* background-image:url(../images/bg/default_mainBg.gif);*/
+   background-repeat:repeat;
+   background-color:#FFFFFF;
+   color:#000000;
+   height:100%;
+   margin-top:0px;
+   margin-bottom:10px;
+   overflow:hidden;
+
+}

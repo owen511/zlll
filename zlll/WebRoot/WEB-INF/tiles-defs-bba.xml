@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions
+PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+	<definition name="template.bba.default" extends="template.default2"></definition>
+	<definition name="/bba/index" extends="template.bba.default">
+		<put name="main" value="/bba/index.jsp" />
+	</definition>
+	<definition name="/bba/baseinfo/user/index" extends="template.bba.default">
+		<put name="main" value="/bba/baseinfo/user/index.jsp" />
+	</definition>
+	<definition name="/bba/baseinfo/projcompare/index" extends="template.bba.default">
+		<put name="main" value="/bba/baseinfo/proj/projcompare.jsp" />
+	</definition>
+	<definition name="/bba/baseinfo/proj/index" extends="template.bba.default">
+		<put name="main" value="/bba/baseinfo/proj/index.jsp" />
+	</definition>
+	<!-- 收入额度 -->
+	<definition name="/bba/plan/index" extends="template.bba.default">
+		<put name="main" value="/bba/plan/index.jsp" />
+	</definition>
+	<definition name="/bba/plan/manage/add" extends="template.bba.default">
+		<put name="main" value="/bba/plan/manage/add.jsp" />
+	</definition>
+	<definition name="/bba/plan/manage/modify" extends="template.bba.default">
+		<put name="main" value="/bba/plan/manage/modify.jsp" />
+	</definition>
+	<definition name="/bba/plan/audit/index" extends="template.bba.default">
+		<put name="main" value="/bba/plan/audit/index.jsp" />
+	</definition>
+	<definition name="/bba/plan/generate/index" extends="template.bba.default">
+		<put name="main" value="/bba/plan/generate/index.jsp" />
+	</definition>
+	<definition name="/bba/plan/generate/add" extends="template.bba.default">
+		<put name="main" value="/bba/plan/generate/add.jsp" />
+	</definition>
+
+	<!-- 收入额度(结转) -->
+	<definition name="/bba/plandown/index" extends="template.bba.default">
+		<put name="main" value="/bba/plandown/index.jsp" />
+	</definition>
+	<definition name="/bba/plandown/manage/add" extends="template.bba.default">
+		<put name="main" value="/bba/plan/manage/add.jsp" />
+	</definition>
+	<definition name="/bba/plandown/manage/modify" extends="template.bba.default">
+		<put name="main" value="/bba/plan/manage/modify.jsp" />
+	</definition>
+	<definition name="/bba/plandown/audit/index" extends="template.bba.default">
+		<put name="main" value="/bba/plandown/audit/index.jsp" />
+	</definition>
+
+	<!-- 支出凭证 -->
+	<definition name="/bba/pay/index" extends="template.bba.default">
+		<put name="main" value="/bba/pay/index.jsp" />
+	</definition>
+	<definition name="/bba/pay/manage/add" extends="template.bba.default">
+		<put name="main" value="/bba/pay/manage/add.jsp" />
+	</definition>
+	<definition name="/bba/pay/manage/modify" extends="template.bba.default">
+		<put name="main" value="/bba/pay/manage/modify.jsp" />
+	</definition>
+	<definition name="/bba/pay/audit/index" extends="template.bba.default">
+		<put name="main" value="/bba/pay/audit/index.jsp" />
+	</definition>
+
+	<!-- 收入调账 -->
+	<definition name="/bba/planadjust/index" extends="template.bba.default">
+		<put name="main" value="/bba/planadjust/index.jsp" />
+	</definition>
+	<definition name="/bba/planadjust/manage/add" extends="template.bba.default">
+		<put name="main" value="/bba/planadjust/manage/add.jsp" />
+	</definition>
+	<definition name="/bba/planadjust/manage/modify" extends="template.bba.default">
+		<put name="main" value="/bba/planadjust/manage/modify.jsp" />
+	</definition>
+	<definition name="/bba/planadjust/audit/index" extends="template.bba.default">
+		<put name="main" value="/bba/planadjust/audit/index.jsp" />
+	</definition>
+
+	<!-- 支出调账 -->
+	<definition name="/bba/payadjust/index" extends="template.bba.default">
+		<put name="main" value="/bba/payadjust/index.jsp" />
+	</definition>
+	<definition name="/bba/payadjust/manage/add" extends="template.bba.default">
+		<put name="main" value="/bba/payadjust/manage/add.jsp" />
+	</definition>
+	<definition name="/bba/payadjust/manage/modify" extends="template.bba.default">
+		<put name="main" value="/bba/payadjust/manage/modify.jsp" />
+	</definition>
+	<definition name="/bba/payadjust/audit/index" extends="template.bba.default">
+		<put name="main" value="/bba/payadjust/audit/index.jsp" />
+	</definition>
+	<definition name="/bba/payadjust/findctrl" extends="template.empty">
+		<put name="main" value="/bba/payadjust/ctrldataInfo.jsp" />
+	</definition>
+
+	<definition name="/bba/common/gatheraccountno" extends="template.empty">
+		<put name="main" value="/bba/common/gatheraccountno.jsp"></put>
+	</definition>
+</tiles-definitions>	

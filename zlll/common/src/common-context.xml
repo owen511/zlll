@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 加入这个以处理Oracle Blod字段到byte[]直接映射 甘华 2006.10.8 加 -->
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">
+		<property name="nativeJdbcExtractor">
+			<ref local="nativeJdbcExtractor" />
+		</property>
+	</bean>
+	<!-- SessionFactory定义 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- 加入这个以处理Oracle Blod字段到byte[]直接映射 甘华 2006.10.8 加 -->
+		<property name="lobHandler">
+			<ref bean="oracleLobHandler" />
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<!-- 以下是各模块的Hibernate配置文件 -->
+				<value>FRAMEWORK.hbm.xml</value>
+				<value>SEC.hbm.xml</value>
+				<value>CA.hbm.xml</value>
+				<value>DIC.hbm.xml</value>
+				<value>WF.hbm.xml</value>
+				<value>XCH.hbm.xml</value>
+				<value>GL.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrlrule/dto/CtrlRuleDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrlrule/dto/FlexRuleDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrlrule/dto/FlexCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrlrule/dto/FlexCtrlDetailDTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/ctrltype/dto/CtrlAccountDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrltype/dto/CtrlTypeDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/ctrltype/dto/GLColumnDTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/ctrlrule/dto/GlComRuleDTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/service/dto/GLVoucherDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/GLRecordDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLBdgCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLBdgRelationDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLConCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLConRelationDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLPlanCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLPlanRelationDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLEncCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLEncRelationDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLIncomeCtrlDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLIncomeRelationDTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl01DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl02DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl03DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl04DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl05DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl06DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl07DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl08DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl09DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLControl10DTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation01DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation02DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation03DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation04DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation05DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation06DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation07DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation08DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation09DTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/service/dto/sub/GLRelation10DTO.hbm.xml</value>
+
+				<value>gov/mof/fasp/gl/stat/dto/GLStatCfgDTO.hbm.xml</value>
+				<value>gov/mof/fasp/gl/stat/dto/GLStatDataDTO.hbm.xml</value>
+
+				<value>PA.hbm.xml</value>
+				<value>BC.hbm.xml</value>
+				<value>RU.hbm.xml</value>
+				<value>FM.hbm.xml</value>
+				<value>RPT.hbm.xml</value>
+				<value>PORTAL.hbm.xml</value>
+				<value>dm.hbm.xml</value>
+				<!-- 龙图报表 -->
+				<value>LTRPT.hbm.xml</value>
+				<!-- portal的hibernate映射 -->
+
+
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<!--props> <prop key="hibernate.dialect">${hibernate.dialect}</prop> <prop 
+				key="hibernate.show_sql">${hibernate.show_sql}</prop> </props -->
+			<props>
+				<prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.cache.provider_class">net.sf.hibernate.cache.OSCacheProvider</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 事务管理定义 ,因这两种不支持多数据源的事务，改为用下面JTA的配置 <bean id="jdbcTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+		<property name="dataSource"><ref bean="dataSource"/></property> </bean> <bean 
+		id="hibernateTxManager" class="org.springframework.orm.hibernate.HibernateTransactionManager"> 
+		<property name="sessionFactory"> <ref bean="sessionFactory" /> </property> 
+		</bean> -->
+	<!-- <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/> -->
+	<bean id="transactionManager"
+		class="org.springframework.transaction.jta.WebLogicJtaTransactionManager">
+		<property name="transactionManagerName" value="javax.transaction.TransactionManager" />
+	</bean>
+
+	<!-- 拦截代理对象，为了给业务逻辑对象增加事务处理 -->
+	<!-- transactionAttributes属性可以设置事务处理的方式，事务隔离级别，是否只读三个属性，用逗号隔开 事务隔离级别各数据库系统不完全支持，一般不设置，用默认的即可 
+		事务处理选项有如下几个：（前面2个常用） PROPAGATION_REQUIRED － 需要事务处理。如果当前不存在事务环境，则创建一个 PROPAGATION_SUPPORTS 
+		－ 如果当前存在事务环境，则作为其中的一部分。如果不存在，则按非事务方式执行 PROPAGATION_REQUIRES_NEW － 需要事务处理。并总是开启一个新事务。如果已经存在事务环境，则挂起之 
+		PROPAGATION_MANDATORY － 执行到指定方法时，必须已经存在事务环境，否则出错 PROPAGATION_NEVER － 不支持事务操作，如果存在事务环境会出错 
+		PROPAGATION_NOT_SUPPORTED － 不支持事务操作。如果存在事务，则挂起 -->
+	<!-- 使用hibernateTxProxy事件代理 <bean id="jdbcTxProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" 
+		abstract="true" lazy-init="true"> <property name="transactionManager"><ref 
+		bean="transactionManager"/></property> <property name="transactionAttributes"> 
+		<props> <prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop> <prop key="*">PROPAGATION_REQUIRED,+NoRollbackException,-Exception</prop> 
+		</props> </property> <property name="preInterceptors"> <ref bean="framework.log.logErrorAdvisor"/> 
+		</property> </bean> -->
+
+	<bean id="hibernateTxProxy" abstract="true" lazy-init="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED,+NoRollbackException,-Exception</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<ref bean="framework.log.logErrorAdvisor" />
+		</property>
+	</bean>
+
+	<!-- 数据访问相关工具类配置信息 -->
+	<bean id="dbUtil" class="gov.mof.framework.util.DBUtil" />
+
+	<!-- 使用同平台相同的spring上下文注入方式 jjy 20090520 -->
+	<bean id="serviceFactory" class="gov.mof.fasp.ifmis.common.ServiceFactory" />
+
+	<!-- 通用的错误日志记录 -->
+	<bean id="framework.log.logHelper" class="gov.mof.framework.log.LogHelper">
+	</bean>
+
+	<bean id="framework.log.logErrorAdvice" class="gov.mof.framework.log.LogErrorAdvice">
+		<property name="logHelper">
+			<ref bean="framework.log.logHelper" />
+		</property>
+		<property name="messageHandler">
+			<ref bean="framework.message.messageHandler" />
+		</property>
+	</bean>
+
+	<bean id="framework.log.logErrorAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<constructor-arg ref="framework.log.logErrorAdvice" />
+		<property name="pattern" value=".*.*" />
+	</bean>
+
+	<!-- 通用消息处理，将代码转换定义好的提示消息 -->
+	<bean id="framework.message.messageHandler" class="gov.mof.framework.message.MessageHandler">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

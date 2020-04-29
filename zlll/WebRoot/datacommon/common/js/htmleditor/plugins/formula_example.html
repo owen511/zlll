@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Math Formula</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link href="../style/plugin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+*{
+  font-size:12px;
+}
+
+#mathformula_examples{
+  
+}
+
+#mathformula_examples div{
+  border:1px solid #ccc;
+  width:80px;
+  height:80px;
+  text-align:center;
+  padding:2px;
+  margin:2px;
+  float:left;
+  cursor:pointer;
+}
+-->
+</style>
+<script type="text/javascript" src="../jquery.js"></script>
+<script type="text/javascript">
+<!--
+var examples = [];
+examples[0] = "{{x + 1} \\over {x - 1}}";
+examples[1] = "{x^{m + n}}";
+examples[2] = "{x_{mn}}";
+examples[3] = "\\sqrt x";
+//examples[4] = "\\root n \\of x";
+examples[4] = "";
+examples[5] = "{{dy} \\over {dx}}";
+examples[6] = "x\\buildrel {\\lim } \\over \\longrightarrow \\infty";
+examples[7] = "\\sum\\limits_{n = 1}^8 {}";
+examples[8] = "\\int\\limits_a^b {f(x)dx}";
+examples[9] = "\\int {}";
+examples[10] = "\\oint {}";
+examples[11] = "\\left[ \\matrix{ ab \\hfill \\cr cd \\hfill \\cr} \\right]";
+examples[12] = "\\left( \\matrix{ n \\hfill \\cr k \\hfill \\cr}  \\right)";
+examples[13] = "\\cdot";
+examples[14] = "\\star";
+examples[15] = "/";
+//examples[16] = "\\\\";
+examples[16] = "";
+examples[17] = "\\times";
+examples[18] = "\\div";
+examples[19] = "\\circ";
+examples[20] = "\\oplus";
+examples[21] = "\\otimes";
+examples[22] = "\\odot";
+examples[23] = "\\sum {}";
+examples[24] = "\\prod {}";
+examples[25] = "\\wedge";
+examples[26] = "\\bigwedge";
+examples[27] = "\\vee";
+examples[28] = "\\ne";
+examples[29] = "\\le";
+examples[30] = "\\ge";
+examples[31] = "\\prec";
+examples[32] = "\\succ";
+examples[33] = "\\in";
+examples[34] = "\\notin";
+examples[35] = "\\subset";
+examples[36] = "\\supset";
+examples[37] = "\\subseteq";
+examples[38] = "\\supseteq";
+examples[39] = "\\emptyset";
+examples[40] = "\\cap";
+examples[41] = "\\bigcap";
+examples[42] = "\\cup";
+examples[43] = "\\bigcup";
+examples[44] = "and";
+examples[45] = "or";
+examples[46] = "\\neg";
+examples[47] = "\\Rightarrow";
+examples[48] = "if";
+examples[49] = "\\Leftrightarrow";
+examples[50] = "\\forall";
+examples[51] = "\\exists";
+examples[52] = "\\bot";
+examples[53] = "\\bigvee";
+examples[54] = "\\top";
+examples[55] = "\\vdash";
+//examples[56] = "\\cong";
+examples[56] = "";
+examples[57] = "\\equiv";
+examples[58] = "\\approx";
+examples[59] = "\\propto";
+//examples[60] = "text$";
+examples[60] = "";
+//examples[61] = "quad$";
+examples[61] = "";
+examples[62] = "\\partial";
+examples[63] = "\\nabla";
+examples[64] = "\\pm";
+examples[65] = "\\infty";
+examples[66] = "\\aleph";
+examples[67] = "\\varepsilon";
+//examples[67] = "\\diamondsuit";
+examples[67] = "";
+examples[68] = "\\boxempty";
+examples[69] = "\\lfloor";
+examples[70] = "\\rfloor";
+examples[71] = "\\lceil";
+examples[72] = "\\rceil";
+examples[73] = "\\left( x \\right)";
+examples[74] = "\\angle";
+examples[75] = "\\therefore";
+examples[76] = "\\uparrow";
+examples[77] = "\\downarrow";
+examples[78] = "\\leftarrow";
+examples[79] = "\\to";
+examples[80] = "\\leftrightarrow";
+examples[81] = "\\Leftarrow";
+examples[82] = "\\hat{a}";
+examples[83] = "\\underline{a}";
+examples[84] = "\\overline{a}";
+examples[85] = "\\dot{a}";
+examples[86] = "\\ddot{a}";
+examples[87] = "\\mathbb{N}";
+examples[88] = "\\mathbb{Z}";
+examples[89] = "\\mathbb{Q}";
+examples[90] = "\\mathbb{R}";
+examples[91] = "\\mathbb{C}";
+examples[92] = "\\mathbf{A}";
+examples[93] = "\\mathbb{A}";
+examples[94] = "\\mathcal{A}";
+examples[95] = "\\mathfrak{A}";
+examples[96] = "\\mathsf{A}";
+examples[97] = "\\mathtt{A}";
+examples[98] = "\\vec{a}";
+examples[99] = "\\stackrel{+}{\\to}";
+examples[100] = "\\upsilon";
+examples[101] = "\\left\\lbrace\\matrix{{1}{\\quad\\text{if}\\quad}{x}\\ge{0}\\\\{0}{\\quad\\text{if}\\quad}{x}<{0}}\\right";
+examples[102] = "\\alpha";
+examples[103] = "\\beta";
+examples[104] = "\\gamma";
+examples[105] = "\\Gamma";
+examples[106] = "\\delta";
+examples[107] = "\\Delta";
+examples[108] = "\\epsilon";
+examples[109] = "\\zeta";
+examples[110] = "\\eta";
+examples[111] = "\\theta";
+examples[112] = "\\Theta";
+examples[113] = "\\iota";
+examples[114] = "\\kappa";
+examples[115] = "\\lambda";
+examples[116] = "\\Lambda";
+examples[117] = "\\mu";
+examples[118] = "\\nu";
+examples[119] = "\\pi";
+examples[120] = "\\Pi";
+examples[121] = "\\rho";
+examples[122] = "\\sigma";
+examples[123] = "\\Sigma";
+examples[124] = "\\tau";
+examples[125] = "\\xi";
+examples[126] = "\\Xi";
+examples[127] = "\\phi";
+examples[128] = "\\Phi";
+examples[129] = "\\chi";
+examples[130] = "\\psi";
+examples[131] = "\\Psi";
+examples[132] = "\\omega";
+examples[133] = "\\Omega";
+$(document).ready(function(){
+  var _mathUrl = window.parent.Dialogs["htmleditor_formulaexample"].context["editor"]._MathUrl;
+  var inputWindow = window.parent.Dialogs["htmleditor_formulaexample"].context["inputWindow"];
+  
+  for(var i=0;i<examples.length;i++){
+    if(examples[i]!=""){
+      var f = $("<div id=\"formula_"+i+"\"><img alt=\""+examples[i]+"\" src=\""+_mathUrl+examples[i]+"\" /></div>");
+      $("#mathformula_examples").append(f);
+      
+      f.bind("click",{"inputWindow":inputWindow,"formula":examples[i]},function(event){
+        event.data["inputWindow"].appendFormula(event.data["formula"]);
+        window.parent.Dialogs["htmleditor_formulaexample"].close();
+      });
+    }  
+  }
+});
+
+-->
+</script>
+</head>
+<body>
+<fieldset>
+  <legend>公式输入</legend>
+  <div id="mathformula_examples"></div>
+</fieldset>
+</body>
+</html>
